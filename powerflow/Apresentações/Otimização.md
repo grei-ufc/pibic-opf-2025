@@ -10,19 +10,22 @@ Uma análise dos conceitos fundamentais
 Daniel K. Molzahn e Ian A. Hiskens
 
 ---
-
 ## Introdução: O Problema das Equações de Fluxo de Potência
 
-As equações de fluxo de potência são a base para a análise e operação de sistemas elétricos de potência, relacionando as injeções de potência e as tensões no sistema.
+<style scoped>
+/* Esta regra CSS centraliza todas as imagens neste slide específico */
+img {
+  display: block;
+  margin: 0 auto;
+}
+</style>
 
 **Desafios:**
 * **Não linearidade:** As equações são inerentemente não lineares, o que resulta em problemas de otimização não convexos.
 * **Complexidade Computacional:** Problemas como o Fluxo de Potência Ótimo (OPF) são geralmente NP-Hard.
 * **Múltiplas Soluções:** Podem existir múltiplas soluções locais, tornando difícil encontrar o ótimo global.
 
-<div align="center">
 <img src="otimos_locais.png" width="300" />
-</div>
 
 *Figura 1: Ilustração de ótimos locais (triângulos azuis) e o ótimo global (estrela verde).*
 
@@ -30,7 +33,12 @@ As equações de fluxo de potência são a base para a análise e operação de 
 
 ## Relaxações vs. Aproximações
 
-Para lidar com a complexidade, duas abordagens principais são utilizadas:
+<style scoped>
+section {
+  font-size: 28px; /* Reduz um pouco a fonte (o padrão é ~30px) */
+  line-height: 1.4; /* Diminui o espaço entre as linhas */
+}
+</style>
 
 **Relaxações Convexas:**
 * Ampliam o espaço de soluções não convexo para um espaço convexo maior que o contém.
@@ -43,6 +51,7 @@ Para lidar com a complexidade, duas abordagens principais são utilizadas:
 * Não oferecem as garantias teóricas das relaxações.
 
 ---
+
 <style>
 img[alt~="center"] {
   display: block;
@@ -68,7 +77,9 @@ As equações de fluxo de potência modelam a relação entre fasores de tensão
 * $S_i = P_i + jQ_i$: Injeção de potência complexa no barramento $i$.
 * $Y = G + jB$: Matriz de admitância nodal do sistema.
 
-### Formulação I-V:
+---
+
+## Formulação I-V:
 Esta formulação se baseia na relação linear entre os fasores de tensão e as injeções de corrente, e na definição de potência complexa:
 
 $$I_i = \sum_{k=1}^{n} Y_{ik}V_k $$
@@ -90,6 +101,13 @@ Dependendo da representação (coordenadas polares ou retangulares), obtemos dif
 ---
 
 ## Equações DistFlow (Fluxo de Ramo)
+
+<style scoped>
+section {
+  font-size: 24px; /* Reduz um pouco a fonte (o padrão é ~30px) */
+  line-height: 1.2; /* Diminui o espaço entre as linhas */
+}
+</style>
 
 Propostas por Baran e Wu, são válidas para sistemas radiais e focam nas grandezas que fluem nas linhas. Para uma linha entre as barras $i$ e $k$:
 
@@ -124,6 +142,13 @@ Para criar relaxações e aproximações, são utilizadas ferramentas de otimiza
 ---
 
 ## Programação Cônica de Segunda Ordem (SOCP)
+
+<style scoped>
+section {
+  font-size: 26px; /* Reduz um pouco a fonte (o padrão é ~30px) */
+  line-height: 1.2; /* Diminui o espaço entre as linhas */
+}
+</style>
 
 Generaliza a LP, permitindo restrições de cone de segunda ordem:
 $$||E_i x + b_i||_2 \le g_i^T x + d_i$$
