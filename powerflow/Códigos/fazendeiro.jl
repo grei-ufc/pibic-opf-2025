@@ -1,7 +1,6 @@
 #=
 import Pkg
 Pkg.add("JuMP")
-import Pkg
 Pkg.add("HiGHS")
 =#
 #import packages if needed
@@ -9,6 +8,8 @@ Pkg.add("HiGHS")
 
 using JuMP
 using HiGHS
+
+print("\033c") #Clear Terminal
 
 # 1 e 2: Criar o modelo e anexar o solver
 model = Model(HiGHS.Optimizer)

@@ -1,13 +1,14 @@
 #=
 import Pkg
 Pkg.add("JuMP")
-import Pkg
 Pkg.add("HiGHS")
 =#
 #import packages if needed
 
 using JuMP
 using HiGHS
+
+print("\033c") #Clear Terminal
 
 model = Model(HiGHS.Optimizer) #Type of model used
 @variable(model, x >= 0) #Variable declared
