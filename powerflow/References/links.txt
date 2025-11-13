@@ -1,0 +1,5 @@
+Julia: https://docs.julialang.org/en/v1/
+
+Jump: https://jump.dev/JuMP.jl/stable/
+
+PowerModels: https://lanl-ansi.github.io/PowerModels.jl/stable/
