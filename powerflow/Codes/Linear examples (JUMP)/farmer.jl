@@ -1,11 +1,3 @@
-#=
-import Pkg
-Pkg.add("JuMP")
-Pkg.add("HiGHS")
-=#
-#import packages if needed
-
-
 using JuMP
 using HiGHS
 

@@ -1,10 +1,3 @@
-import Pkg
-Pkg.add("JuMP")
-Pkg.add("HiGHS")
-Pkg.add("JSON")
-Pkg.add("Test")
-
-
 using JuMP
 import HiGHS
 import JSON

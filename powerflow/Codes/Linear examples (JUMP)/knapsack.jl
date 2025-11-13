@@ -1,8 +1,3 @@
-import Pkg
-Pkg.add("JuMP")
-Pkg.add("HiGHS")
-
-
 using JuMP
 import HiGHS
 
