@@ -1,3 +1,7 @@
+---
+marp: true
+theme: default
+---
 
 ## What is PowerModels.jl?
 
@@ -66,11 +70,11 @@ result = solve_ac_opf(case_file, optimizer)
 # Step 6: Display the results
 println("\n--- Optimization Results ---")
 
-# 'print_summary' gives a human-readable table [6]
+# 'print_summary' gives a human-readable table
 println("Solution Summary:")
 print_summary(result["solution"])
 
-# Access specific data points from the result dictionary [6]
+# Access specific data points from the result dictionary
 println("\nSolver solve_time: ", result["solve_time"], " seconds")
 println("Final objective value: ", result["objective"])
 ```
@@ -83,7 +87,7 @@ println("Final objective value: ", result["objective"])
 
 ## Supported Formats
 
-The library provides robust support for common power system formats. [7]
+The library provides robust support for common power system formats. 
 
   * **Matpower (`.m`)**:
 
@@ -240,9 +244,9 @@ The `SOCWRPowerModel` can *prove* infeasibility in a way the "exact" `ACPPowerMo
 
 | Formulation | Model Type | Convexity | Speed | Accuracy | Typical Use Case |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **`ACPPowerModel`** | Non-Linear | **Non-Convex** | Slow | **Exact** | Final "ground truth" analysis. [8, 9] |
-| **`DCPPowerModel`** | Linear | **Convex** | Very Fast | **Approximate**| Quick checks, large-scale studies. [10] |
-| **`SOCWRPowerModel`**| Second-Order Cone | **Convex** | Fast | **Relaxation** | Getting a *lower bound*; proving infeasibility. [9] |
+| **`ACPPowerModel`** | Non-Linear | **Non-Convex** | Slow | **Exact** | Final "ground truth" analysis.  |
+| **`DCPPowerModel`** | Linear | **Convex** | Very Fast | **Approximate**| Quick checks, large-scale studies. |
+| **`SOCWRPowerModel`**| Second-Order Cone | **Convex** | Fast | **Relaxation** | Getting a *lower bound*; proving infeasibility. |
 
 -----
 
@@ -254,7 +258,7 @@ The `SOCWRPowerModel` can *prove* infeasibility in a way the "exact" `ACPPowerMo
 
 ## Workflow 1: The High-Level API
 
-  * **Functions:** `solve_ac_opf`, `solve_dc_pf`, etc. [10]
+  * **Functions:** `solve_ac_opf`, `solve_dc_pf`, etc. 
   * **Description:** These are *convenience wrappers* for the most common problem/formulation pairings.
   * **Example:** `solve_ac_opf(file, solver)` is just a shorthand for the low-level call:
     `solve_model(file, ACPPowerModel, solver, build_opf)`
@@ -273,7 +277,7 @@ The `SOCWRPowerModel` can *prove* infeasibility in a way the "exact" `ACPPowerMo
   * **When to Use:**
       * **For research (i.e., most of the time).**
       * To compare different formulations (see next slide).
-      * To run advanced problems (like `build_tnep` or `build_ots`) that have no high-level wrappers. [4]
+      * To run advanced problems (like `build_tnep` or `build_ots`) that have no high-level wrappers.
       * To build *custom* models.
 
 -----
@@ -281,8 +285,6 @@ The `SOCWRPowerModel` can *prove* infeasibility in a way the "exact" `ACPPowerMo
 ## Code: Comparing Formulations
 
 This example uses the **low-level API** to run the *exact same* OPF problem against three different mathematical models.
-
-This is the "apples-to-apples" comparison that `PowerModels.jl` was designed for.
 
 -----
 
@@ -342,7 +344,7 @@ println("is a provable *lower bound* for the AC objective (", result_ac["objecti
 
 ## The `result` Dictionary Structure
 
-Every `solve_...` call returns a `result` dictionary. This structure is essential for extracting your solution. [6]
+Every `solve_...` call returns a `result` dictionary. This structure is essential for extracting your solution.
 
 | Key | Data Type | Description |
 | :--- | :--- | :--- |
@@ -350,6 +352,11 @@ Every `solve_...` call returns a `result` dictionary. This structure is essentia
 | `"termination_status"`| Enum | The *solver's* final status (e.g., `OPTIMAL`, `INFEASIBLE`). |
 | `"primal_status"` | Enum | Status of the primal solution (e.g., `FEASIBLE_POINT`). |
 | `"solve_time"` | Float | The time (in seconds) the solver reported. |
+
+-----
+
+| Key | Data Type | Description |
+| :--- | :--- | :--- |
 | `"objective"` | Float | The final objective function value (e.g., total cost). |
 | `"objective_lb"` | Float | The best-known lower bound on the objective (if available). |
 | `"solution"` | Dict | A **nested dictionary** containing all solution data. |
@@ -358,10 +365,9 @@ Every `solve_...` call returns a `result` dictionary. This structure is essentia
 
 ## Code: Accessing Solution Data
 
-The solution values are inside `result["solution"]`. This dictionary *mirrors* the structure of your input data. [6]
+The solution values are inside `result["solution"]`. This dictionary *mirrors* the structure of your input data. 
 
 ```julia
-# --- Assume `result` is from a successful solve ---
 println("--- Accessing Solution Data ---")
 
 # 1. Get simple top-level data
@@ -403,13 +409,40 @@ print_summary(result["solution"])
 
 -----
 
+## 9\. Conclusions
+
+-----
+
+## Conclusions
+
+1.  **Core Philosophy:** `PowerModels.jl` is a research platform built on the **decoupling** of **Problems** ("what") from **Formulations** ("how").
+
+2.  **Two APIs:**
+
+      * **High-Level (`solve_...`):** For simple, standard applications.
+      * **Low-Level (`solve_model`):** For research, comparing formulations, and advanced problems.
+
+3.  **Formulations Matter:** The choice of formulation (`ACP`, `DC`, `SOC`) is a trade-off between **Accuracy**, **Speed**, and **Convexity**.
+
+4.  **Diagnostic Power:** Convex relaxations (`SOCWRPowerModel`) are powerful diagnostic tools for *proving* network infeasibility.
+
+
+-----
+## Conclusions
+
+5.  **Data-Centric:** The entire workflow is based on Julia `Dict`s, making data parsing, modification (for scenarios), and result extraction simple and robust.
+
+-----
+
+-----
+
 ## 8\. Advanced Examples
 
 -----
 
 ## Advanced Example 1: TNEP
 
-This example shows how to use the **low-level API** to solve an advanced problem (`build_tnep`) that has no high-level `solve_...` wrapper. [4]
+This example shows how to use the **low-level API** to solve an advanced problem (`build_tnep`) that has no high-level `solve_...` wrapper. 
 
 We will solve a *relaxed* TNEP problem using `DCPPowerModel` for speed. A true TNEP is a Mixed-Integer problem and would require a solver like Juniper or Gurobi.
 
@@ -538,26 +571,3 @@ end
 # result = solve_model(case_file, ACPPowerModel, solver, 
 #                      build_my_custom_opf)
 ```
-
------
-
-## 9\. Conclusions
-
------
-
-## Conclusions
-
-1.  **Core Philosophy:** `PowerModels.jl` is a research platform built on the **decoupling** of **Problems** ("what") from **Formulations** ("how").
-
-2.  **Two APIs:**
-
-      * **High-Level (`solve_...`):** For simple, standard applications.
-      * **Low-Level (`solve_model`):** For research, comparing formulations, and advanced problems.
-
-3.  **Formulations Matter:** The choice of formulation (`ACP`, `DC`, `SOC`) is a trade-off between **Accuracy**, **Speed**, and **Convexity**.
-
-4.  **Diagnostic Power:** Convex relaxations (`SOCWRPowerModel`) are powerful diagnostic tools for *proving* network infeasibility.
-
-5.  **Data-Centric:** The entire workflow is based on Julia `Dict`s, making data parsing, modification (for scenarios), and result extraction simple and robust.
-
------
