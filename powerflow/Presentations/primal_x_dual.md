@@ -72,9 +72,9 @@ No JuMP, isso é feito principalmente através de duas funções:
   * **Exemplo Prático:**
       * Você tem a restrição: `@constraint(model, c_madeira, ... <= 100)`
       * Você roda `optimize!(model)` e descobre que:
-      * `shadow_price(c_madeira)` é **$15**.
+      * `shadow_price(c_madeira)` é **$30**.
   * **Significado:**
-      * Isso quer dizer que, se você conseguir +1 unidade de madeira (mudando a restrição para `<= 101`), seu lucro total **aumentará em $15**.
+      * Isso quer dizer que, se você conseguir +1 unidade de madeira (mudando a restrição para `<= 101`), seu lucro total **aumentará em $30**.
       * Se o preço sombra for **0**, significa que essa restrição não está te limitando (você já tem madeira de sobra).
 
 -----
@@ -84,14 +84,14 @@ No JuMP, isso é feito principalmente através de duas funções:
   * **O que é:** Focado nas **variáveis** (ex: produtos). Se uma variável é **zero** na solução ótima (ex: o modelo decidiu "não produzir o Produto Z"), o custo reduzido informa quanto o coeficiente dela na função objetivo (ex: seu lucro) precisa **melhorar** para que valha a pena produzi-la.
   * **Função no JuMP:** `reduced_cost(sua_variavel)`
   * **Exemplo Prático:**
-      * Você tem a variável `@variable(model, z >= 0)` e o objetivo é `Max, ... + 50z`.
+      * Você tem a variável `@variable(model, z >= 0)` e o objetivo é `Max, ... + 40z`.
       * Você roda `optimize!(model)` e descobre que `value(z)` é **0** (o modelo não quis produzir `z`).
-      * Você consulta `reduced_cost(z)` e o valor é **-10**.
+      * Você consulta `reduced_cost(z)` e o valor é **-20**.
 
 -----
 
   * **Significado:**
-      * O lucro do produto `z` (que era $50) precisa aumentar em $10 (ou seja, ir para $60) antes que o modelo considere produzir `z` (antes que `value(z)` se torne positivo).
+      * O lucro do produto `z` (que era $40) precisa aumentar em $20 (ou seja, ir para $60) antes que o modelo considere produzir `z` (antes que `value(z)` se torne positivo).
 
 <!-- end list -->
 
