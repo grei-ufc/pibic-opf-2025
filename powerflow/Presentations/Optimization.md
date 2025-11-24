@@ -25,7 +25,7 @@ img {
 * **Complexidade Computacional:** Problemas como o Fluxo de Potência Ótimo (OPF) são geralmente NP-Hard.
 * **Múltiplas Soluções:** Podem existir múltiplas soluções locais, tornando difícil encontrar o ótimo global.
 
-<img src="otimos_locais.png" width="300" />
+<img src="local_opt.png" width="300" />
 
 *Figura 1: Ilustração de ótimos locais (triângulos azuis) e o ótimo global (estrela verde).*
 
@@ -61,7 +61,7 @@ img[alt~="center"] {
 
 ## Visualizando Relaxações e Aproximações
 
-![center](relaxacao_aproximacao.png)
+![center](relaxation_approximation.png)
 
 *Figura 2: Ilustração conceitual de uma relaxação convexa (à esquerda) e uma aproximação (à direita) para um espaço não convexo.*
 

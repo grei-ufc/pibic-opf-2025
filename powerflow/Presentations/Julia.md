@@ -57,11 +57,12 @@ O objetivo é encontrar os valores de `x` e `y` que resolvem:
 **Maximizar (Lucro):**
 $$ 150x + 220y $$
 
+
 **Sujeito a (Restrições):**
-1.  **Terra:** $$ x + y \le 100 $$
-2.  **Fertilizante:** $$ 20x + 35y \le 2500 $$
-3.  **Pesticida:** $$ 5x + 3y \le 400 $$
-4.  **Não-negatividade:** $$ x \ge 0, y \ge 0 $$
+1.  **Terra:** $x + y \le 100$
+2.  **Fertilizante:** $20x + 35y \le 2500$
+3.  **Pesticida:** $5x + 3y \le 400$
+4.  **Não-negatividade:** $x, y \ge 0$
 
 Este é um problema clássico de **Programação Linear (PL)**.
 
@@ -74,8 +75,6 @@ Vamos traduzir o problema para o código JuMP.
 **Passo 1: Preparar o ambiente**
 Primeiro, importamos os pacotes e criamos o modelo, já conectando-o a um solver. Usaremos o **HiGHS**, um excelente solver de código aberto para PL.
 
-*(No REPL do Julia, instale com `]add JuMP, HiGHS`)*
-
 ```julia
 # Importa os pacotes necessários
 using JuMP
@@ -84,3 +83,42 @@ using HiGHS
 # 1. Cria um modelo vazio
 # 2. Anexa o solver HiGHS
 model = Model(HiGHS.Optimizer)
+```
+---
+
+## Adicionar a formulação matemática (2/3)
+Após ter o modelo instalado, criamos 
+
+```julia
+# 3: Declarar variáveis
+@variable(model, x >= 0, base_name = "trigo")
+@variable(model, y >= 0, base_name = "cevada")
+
+# 4: Definir a função objetivo
+@objective(model, Max, 150x + 220y)
+
+# 5: Adicionar as restrições
+@constraint(model, c_terra, x + y <= 100)
+@constraint(model, c_fertilizante, 20x + 35y <= 2500)
+@constraint(model, c_pesticida, 5x + 3y <= 400)
+```
+
+---
+
+## Otimizar modelo e observar resultados (3/3)
+
+```julia
+# Imprime o modelo para visualização (opcional)
+print(model)
+
+# 6: Otimizar
+optimize!(model)
+
+# 7: Analisar os resultados
+println("--- Resultados da Otimização ---")
+println("Status da solução: ", termination_status(model))
+println("Lucro Máximo: ", objective_value(model))
+println("\n--- Plano de Plantio ---")
+println("Hectares de Trigo (x): ", value(x))
+println("Hectares de Cevada (y): ", value(y))
+```
