@@ -3,6 +3,7 @@ import HiGHS
 import JSON
 import Test
 
+print("\033c") # Clear Terminal
 
 data = JSON.parse("""
 {
