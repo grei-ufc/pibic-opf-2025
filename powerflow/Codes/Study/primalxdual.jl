@@ -9,7 +9,7 @@ model = Model(HiGHS.Optimizer)
 # 'c_madeira' é uma restrição PRIMAL
 @constraint(model, c_madeira, 2x + y <= 100) 
 
-@objective(model, Max, 40x + 30y)
+@objective(model, Max, 60x + 30y)
 
 optimize!(model)
 
