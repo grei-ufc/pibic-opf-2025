@@ -1,26 +1,15 @@
-using Pkg
-using PWF, PowerModels, Ipopt, Printf, PowerPlots
+import Pkg
+Pkg.add(url="https://github.com/LAMPSPUC/ControlPowerFlow.jl.git")
+
+using Pkg, PWF, PowerModels, Ipopt, Printf, PowerPlots, ControlPowerFlow
 
 print("\033c")
 
-# --- Carregar o arquivo ---
-file = joinpath(@__DIR__, "30_PD 2034 - MÁXIMA DIURNA.PWF")
+file = joinpath(@__DIR__, "3bus.pwf")
+network_data = PWF.parse_pwf_to_powermodels(file; add_control_data = true)
 
-# 1. Parse do arquivo PWF para o dicionário do PowerModels
-network_data = PWF.parse_pwf_to_powermodels(file)
-
-# 2. Verificar e corrigir a topologia
-println("Removendo ilhas isoladas e componentes desconectados...")
-PowerModels.select_largest_component!(network_data)
-PowerModels.propagate_topology_status!(network_data)
-
-# 3. Ajuste de Solver
-optimizer = optimizer_with_attributes(Ipopt.Optimizer, "print_level"=>0, "max_iter"=>3000)
-
-println("Executando Fluxo de Potência AC...")
-
-# 4. Rodar o Fluxo de Potência
-result = run_ac_pf(network_data, optimizer)
+# Run the optimization
+result = ControlPowerFlow.run_control_pf(network_data, optimizer = Ipopt.Optimizer )
 
 # --- Verificação de Convergência ---
 if result["termination_status"] == LOCALLY_SOLVED || result["termination_status"] == OPTIMAL
