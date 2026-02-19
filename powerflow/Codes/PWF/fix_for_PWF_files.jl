@@ -1,5 +1,6 @@
-using Pkg
-using PWF, PowerModels, Ipopt, Printf, PowerPlots
+# Esse codigo eu tento remover ilhas isoladas e componentes desconectados para tentar rodar a simulação
+
+using Pkg, PWF, PowerModels, Ipopt, Printf, PowerPlots
 
 print("\033c")
 
@@ -25,7 +26,7 @@ optimizer = optimizer_with_attributes(Ipopt.Optimizer, "print_level"=>0, "max_it
 println("Executando Fluxo de Potência AC...")
 
 # 4. Rodar o Fluxo de Potência
-result = run_ac_pf(network_data, optimizer)
+result = run_ac_pf(network_data, optimizer, setting=Dict("output" => Dict("branch_flows" => true)))
 
 # --- Verificação de Convergência ---
 if result["termination_status"] == LOCALLY_SOLVED || result["termination_status"] == OPTIMAL

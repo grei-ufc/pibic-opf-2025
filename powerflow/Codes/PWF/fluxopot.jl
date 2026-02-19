@@ -1,15 +1,14 @@
+#Esse codigo gera uma tabela do fluxo de potencia calculado
+
 #---------------------------PWF INIT-------------------------------
 
-using Pkg
+using Pkg, PWF, PowerModels, Ipopt, Printf, PowerPlots
 
 print("\033c")
 
-using PWF, PowerModels, Ipopt, Printf, PowerPlots
-
-file = joinpath(@__DIR__, "30_PD 2034 - MÁXIMA DIURNA.PWF")
+file = joinpath(@__DIR__, "3bus.pwf")
 
 file_m = PWF.parse_pwf_to_powermodels(file)
-
 
 #----------------------Optimization Part---------------------------
 

@@ -2,7 +2,7 @@
 
 julia_version = "1.8.3"
 manifest_format = "2.0"
-project_hash = "06e66675658016e2439db66ecdcc60713709918c"
+project_hash = "6a660fd7d12eeacac36ff35262a9c4a213fd9e47"
 
 [[deps.ASL_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -60,6 +60,12 @@ deps = ["Artifacts", "JLLWrappers", "Libdl"]
 git-tree-sha1 = "1b96ea4a01afe0ea4090c5c8039690672dd13f2e"
 uuid = "6e34b625-4abd-537c-b88f-471c36dfa7a0"
 version = "1.0.9+0"
+
+[[deps.CSV]]
+deps = ["CodecZlib", "Dates", "FilePathsBase", "InlineStrings", "Mmap", "Parsers", "PooledArrays", "PrecompileTools", "SentinelArrays", "Tables", "Unicode", "WeakRefStrings", "WorkerUtilities"]
+git-tree-sha1 = "deddd8725e5e1cc49ee205a1964256043720a6c3"
+uuid = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
+version = "0.10.15"
 
 [[deps.Calculus]]
 deps = ["LinearAlgebra"]
@@ -137,6 +143,14 @@ deps = ["LinearAlgebra"]
 git-tree-sha1 = "76219f1ed5771adbb096743bff43fb5fdd4c1157"
 uuid = "187b0558-2788-49d3-abe0-74a17ed4e7c9"
 version = "1.5.8"
+
+[[deps.ControlPowerFlow]]
+deps = ["InfrastructureModels", "JuMP", "Memento", "PWF", "PowerModels"]
+git-tree-sha1 = "c581da352321f2738f9643f0a9634a2335b4fb3f"
+repo-rev = "main"
+repo-url = "https://github.com/LAMPSPUC/ControlPowerFlow.jl.git"
+uuid = "437be1c9-48e7-4aae-afd3-8e19dd3ac5b9"
+version = "0.1.0"
 
 [[deps.Crayons]]
 git-tree-sha1 = "249fe38abf76d48563e2f4556bebd215aa317e15"
@@ -827,6 +841,17 @@ deps = ["Base64", "BufferedStreams", "DataStructures", "DataValues", "Dates", "F
 git-tree-sha1 = "79115432a0a40955f071bccc6e5574ae5567a7b0"
 uuid = "112f6efa-9a02-5b7d-90c0-432ed331239a"
 version = "3.3.0"
+
+[[deps.WeakRefStrings]]
+deps = ["DataAPI", "InlineStrings", "Parsers"]
+git-tree-sha1 = "b1be2855ed9ed8eac54e5caff2afcdb442d52c23"
+uuid = "ea10d353-3f73-51f8-a26c-33c1cb351aa5"
+version = "1.4.2"
+
+[[deps.WorkerUtilities]]
+git-tree-sha1 = "cd1659ba0d57b71a464a29e64dbc67cfe83d54e7"
+uuid = "76eceee3-57b5-4d4a-8e66-0e911cebbf60"
+version = "1.6.1"
 
 [[deps.Zlib_jll]]
 deps = ["Libdl"]
