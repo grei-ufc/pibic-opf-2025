@@ -1,0 +1,4 @@
+ID_Carga,Barra,Q_Original_pu,Q_Final_pu,Slack_VLIM_Atuacao_pu
+1,2,0.9861,0.9861,-0.000000
+2,3,0.9861,0.9861,-0.000000
+3,4,1.3147,1.3147,-0.000002
