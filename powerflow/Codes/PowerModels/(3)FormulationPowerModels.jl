@@ -7,7 +7,7 @@ using Ipopt
 # 0. INICIALIZAÇÃO
 # =========================================================================
 data = PowerModels.parse_file("./powerflow/Codes/PowerModels/case5.m")
-pm = InitializeInfrastructureModel(ACPPowerModel, data, Set(["per_unit"]), :pm)
+pm = InitializeInfrastructureModel(ACPPowerModel, data, Set(["per_unit"]), :pm) # Cria a estrutura do modelo de otimização matemática.
 ref_add_core!(pm.ref)
 
 nw = PowerModels.nw_id_default 
@@ -28,13 +28,13 @@ PowerModels.variable_branch_power(pm)
 # =========================================================================
 # 2. RECUPERANDO VARIÁVEIS
 # =========================================================================
-vm   = PowerModels.var(pm, n, :vm)
-va   = PowerModels.var(pm, n, :va)
-p    = get(PowerModels.var(pm, n), :p, Dict())
-q    = get(PowerModels.var(pm, n), :q, Dict())
-pg   = get(PowerModels.var(pm, n), :pg, Dict())
-qg   = get(PowerModels.var(pm, n), :qg, Dict())
-ps   = get(PowerModels.var(pm, n), :ps, Dict())
+vm   = PowerModels.var(pm, n, :vm) #Magnitude de tensão
+va   = PowerModels.var(pm, n, :va) #Ângulo de tensão
+p    = get(PowerModels.var(pm, n), :p, Dict()) #Potência Ativa
+q    = get(PowerModels.var(pm, n), :q, Dict()) #Potência Reatiava
+pg   = get(PowerModels.var(pm, n), :pg, Dict()) #Potência Ativa Gerada
+qg   = get(PowerModels.var(pm, n), :qg, Dict()) #Potência Reativa Gerada
+ps   = get(PowerModels.var(pm, n), :ps, Dict()) #Potência...
 qs   = get(PowerModels.var(pm, n), :qs, Dict())
 psw  = get(PowerModels.var(pm, n), :psw, Dict())
 qsw  = get(PowerModels.var(pm, n), :qsw, Dict())
@@ -58,6 +58,7 @@ for (i, bus) in PowerModels.ref(pm, nw, :bus)
     bus_gs = sum(PowerModels.ref(pm, nw, :shunt, k, "gs") for k in bus_shunts; init=0.0)
     bus_bs = sum(PowerModels.ref(pm, nw, :shunt, k, "bs") for k in bus_shunts; init=0.0)
 
+    # Equação 8.1 (Potência Ativa)
     JuMP.@constraint(pm.model,
         sum(p[a] for a in bus_arcs)
         + sum(p_dc[a_dc] for a_dc in bus_arcs_dc)
@@ -69,6 +70,7 @@ for (i, bus) in PowerModels.ref(pm, nw, :bus)
         - bus_gs * vm[i]^2
     )
 
+    # Equação 8.2 (Potência Reativa)   
     JuMP.@constraint(pm.model,
         sum(q[a] for a in bus_arcs)
         + sum(q_dc[a_dc] for a_dc in bus_arcs_dc)
@@ -90,13 +92,13 @@ for (i, branch) in PowerModels.ref(pm, nw, :branch)
     f_idx = (i, f_bus, t_bus)
     t_idx = (i, t_bus, f_bus)
 
-    g, b = PowerModels.calc_branch_y(branch)
+    g, b = PowerModels.calc_branch_y(branch) #Condutância e Susceptância da linha (parte real e imaginária da Admitância Y_ij)
     tr, ti = PowerModels.calc_branch_t(branch)
     
     # É boa prática extrair os parâmetros para variáveis locais simples 
     # para garantir que o JuMP capture o valor numérico, não a referência.
-    g_fr = branch["g_fr"]
-    b_fr = branch["b_fr"]
+    g_fr = branch["g_fr"] #Admitância shunt (capacitância/perdas para terra) no lado de origem "From" Y_{ij}^c)
+    b_fr = branch["b_fr"] #///
     g_to = branch["g_to"]
     b_to = branch["b_to"]
     tm   = branch["tap"]
@@ -105,7 +107,7 @@ for (i, branch) in PowerModels.ref(pm, nw, :branch)
     # O uso de dicionários p[...] dentro da macro NL às vezes requer cuidado,
     # mas geralmente funciona se os índices forem números.
     
-    # Equações de Fluxo Ativo e Reativo (Origem -> Destino)
+    # Equações de Fluxo Ativo e Reativo (Origem -> Destino) (Equação 9)
     JuMP.@NLconstraint(pm.model, p[f_idx] ==  
         (g+g_fr)/tm^2 * vm[f_bus]^2 + 
         (-g*tr+b*ti)/tm^2 * (vm[f_bus]*vm[t_bus]*cos(va[f_bus]-va[t_bus])) + 
@@ -118,7 +120,7 @@ for (i, branch) in PowerModels.ref(pm, nw, :branch)
         (-g*tr+b*ti)/tm^2 * (vm[f_bus]*vm[t_bus]*sin(va[f_bus]-va[t_bus])) 
     )
 
-    # Equações de Fluxo Ativo e Reativo (Destino -> Origem)
+    # Equações de Fluxo Ativo e Reativo (Destino -> Origem) (Equação 10)
     JuMP.@NLconstraint(pm.model, p[t_idx] ==  
         (g+g_to) * vm[t_bus]^2 + 
         (-g*tr-b*ti)/tm^2 * (vm[t_bus]*vm[f_bus]*cos(va[t_bus]-va[f_bus])) + 
@@ -133,13 +135,14 @@ for (i, branch) in PowerModels.ref(pm, nw, :branch)
 
     # Limite Térmico (Aparente) - Isso é quadrático, então @constraint funciona,
     # mas @NLconstraint também aceita. Manteremos @constraint por ser mais eficiente se for convexo.
+    # Equação 11 e 12
     if haskey(branch, "rate_a")
         rate_a = branch["rate_a"] 
         JuMP.@constraint(pm.model, p[f_idx]^2 + q[f_idx]^2 <= rate_a^2)
         JuMP.@constraint(pm.model, p[t_idx]^2 + q[t_idx]^2 <= rate_a^2)
     end
 
-    # Limites Angulares (Lineares) - Use @constraint
+    # Limites Angulares (Lineares) - Use @constraint (Equação 13)
     JuMP.@constraint(pm.model, branch["angmin"] <= va[f_bus] - va[t_bus])
     JuMP.@constraint(pm.model, va[f_bus] - va[t_bus] <= branch["angmax"])
 end
