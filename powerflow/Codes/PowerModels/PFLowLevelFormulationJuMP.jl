@@ -41,7 +41,7 @@ qsw  = get(var(pm, n),  :qsw, Dict()); _check_var_keys(qsw, bus_arcs_sw, "reacti
 p_dc = get(var(pm, n), :p_dc, Dict()); _check_var_keys(p_dc, bus_arcs_dc, "active power", "dcline")
 q_dc = get(var(pm, n), :q_dc, Dict()); _check_var_keys(q_dc, bus_arcs_dc, "reactive power", "dcline")
 
-# 1. Restrição de Balanço de Potência
+# 1. Restrição de Balanço de Potência (Equação 8)
 cstr_p = JuMP.@constraint(pm.model,
     sum(p[a] for a in bus_arcs)
     + sum(p_dc[a_dc] for a_dc in bus_arcs_dc)
@@ -64,9 +64,16 @@ cstr_q = JuMP.@constraint(pm.model,
     + sum(bs for (i,bs) in bus_bs)*vm^2
 )
 
+#=
+if _IM.report_duals(pm)
+        sol(pm, n, :bus, i)[:lam_kcl_r] = cstr_p
+        sol(pm, n, :bus, i)[:lam_kcl_i] = cstr_q
+    end
+=#
+
 # 2. Restrições de Lei de Ohm
 
-# 2.1 Ohms yt from
+# 2.1 Ohms yt [from] (Equação 9)
 branch = ref(pm, nw, :branch, i)
 f_bus = branch["f_bus"]
 t_bus = branch["t_bus"]
@@ -90,7 +97,7 @@ JuMP.@constraint(pm.model, p_fr ==  (g+g_fr)/tm^2*vm_fr^2 + (-g*tr+b*ti)/tm^2*(v
 JuMP.@constraint(pm.model, q_fr == -(b+b_fr)/tm^2*vm_fr^2 - (-b*tr-g*ti)/tm^2*(vm_fr*vm_to*cos(va_fr-va_to)) + (-g*tr+b*ti)/tm^2*(vm_fr*vm_to*sin(va_fr-va_to)) )
 
 
-# 2.2 Ohms yt to
+# 2.2 Ohms yt [to] (Equação 10)
 branch = ref(pm, nw, :branch, i)
 f_bus = branch["f_bus"]
 t_bus = branch["t_bus"]
@@ -113,3 +120,77 @@ va_to = var(pm, n, :va, t_bus)
 JuMP.@constraint(pm.model, p_to ==  (g+g_to)*vm_to^2 + (-g*tr-b*ti)/tm^2*(vm_to*vm_fr*cos(va_to-va_fr)) + (-b*tr+g*ti)/tm^2*(vm_to*vm_fr*sin(va_to-va_fr)) )
 JuMP.@constraint(pm.model, q_to == -(b+b_to)*vm_to^2 - (-b*tr+g*ti)/tm^2*(vm_to*vm_fr*cos(va_to-va_fr)) + (-g*tr-b*ti)/tm^2*(vm_to*vm_fr*sin(va_to-va_fr)) )
 
+
+
+# 3.1 Restrições de limite térmico [from](Equação 11)
+branch = ref(pm, nw, :branch, i)
+f_bus = branch["f_bus"]
+t_bus = branch["t_bus"]
+f_idx = (i, f_bus, t_bus)
+
+if haskey(branch, "rate_a")
+    p_fr = var(pm, n, :p, f_idx)
+    q_fr = var(pm, n, :q, f_idx)
+
+    JuMP.@constraint(pm.model, p_fr^2 + q_fr^2 <= rate_a^2)
+end
+
+# 3.2 Restrições de limite térmico [to](Equação 11)
+branch = ref(pm, nw, :branch, i)
+f_bus = branch["f_bus"]
+t_bus = branch["t_bus"]
+t_idx = (i, t_bus, f_bus)
+
+if haskey(branch, "rate_a")
+    p_to = var(pm, n, :p, t_idx)
+    q_to = var(pm, n, :q, t_idx)
+
+    JuMP.@constraint(pm.model, p_to^2 + q_to^2 <= rate_a^2)
+end
+
+
+# 4.1 Restrições de limite de corrente [from] (Equação 12)
+branch = ref(pm, nw, :branch, i)
+f_bus = branch["f_bus"]
+t_bus = branch["t_bus"]
+f_idx = (i, f_bus, t_bus)
+
+if haskey(branch, "c_rating_a")
+    l,i,j = f_idx
+
+    vm_fr = var(pm, n, :vm, i)
+
+    p_fr = var(pm, n, :p, f_idx)
+    q_fr = var(pm, n, :q, f_idx)
+    JuMP.@constraint(pm.model, p_fr^2 + q_fr^2 <= vm_fr^2*c_rating_a^2)
+end
+
+# 4.1 Restrições de limite de corrente [to] (Equação 12)
+branch = ref(pm, nw, :branch, i)
+f_bus = branch["f_bus"]
+t_bus = branch["t_bus"]
+t_idx = (i, t_bus, f_bus)
+
+if haskey(branch, "c_rating_a")
+    l,j,i = t_idx
+
+    vm_to = var(pm, n, :vm, j)
+
+    p_to = var(pm, n, :p, t_idx)
+    q_to = var(pm, n, :q, t_idx)
+    JuMP.@constraint(pm.model, p_to^2 + q_to^2 <= vm_to^2*c_rating_a^2)
+end
+
+
+# 5 Restrições de diferença de ângulo de tensão (Equação 13)
+branch = ref(pm, nw, :branch, i)
+f_bus = branch["f_bus"]
+t_bus = branch["t_bus"]
+f_idx = (i, f_bus, t_bus)
+pair = (f_bus, t_bus)
+buspair = ref(pm, nw, :buspairs, pair)
+
+if buspair["branch"] == i
+    i, f_bus, t_bus = f_idx
+    va_fr = var(pm, n, :va, f_bus)
+end
