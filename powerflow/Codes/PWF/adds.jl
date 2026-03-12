@@ -9,6 +9,7 @@ Pkg.add(Pkg.PackageSpec(name="JuMP", version="0.21"))
 Pkg.add(Pkg.PackageSpec(name="PowerModels", version="0.18"))
 Pkg.add("Printf")
 Pkg.add("PowerPlots")
+Pkg.add("ControlPowerFlow")
 
 # 3. Finally, add your local package
 Pkg.add("PWF")

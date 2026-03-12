@@ -8,8 +8,8 @@ print("\033c")
 file = joinpath(@__DIR__, "3bus.pwf")
 network_data = PWF.parse_pwf_to_powermodels(file; add_control_data = true)
 
-# Run the optimization
-result = ControlPowerFlow.run_control_pf(network_data, optimizer = Ipopt.Optimizer )
+# Signature is run_control_pf(data, optimizer)
+result = ControlPowerFlow.run_control_pf(file, Ipopt.Optimizer)
 
 # --- Verificação de Convergência ---
 if result["termination_status"] == LOCALLY_SOLVED || result["termination_status"] == OPTIMAL

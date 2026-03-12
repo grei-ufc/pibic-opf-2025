@@ -8,22 +8,22 @@ print("\033c")
 # =========================================================================
 # DICA: Para testar QLIM/VLIM, use um caso onde os limites sejam "apertados".
 data = PowerModels.parse_file("./powerflow/Codes/PowerModels/case5.m") # Certifique-se que o caminho está correto
-PowerModels.standardize_cost_terms!(data, order=2)
-PowerModels.calc_thermal_limits!(data)
-ref = PowerModels.build_ref(data)[:it][:pm][:nw][0]
+PowerModels.standardize_cost_terms!(data, order=2) #Modifica a variavel data para que os dados a funcao de otimizacao tenham ordem 2
+PowerModels.calc_thermal_limits!(data) #Verifica se as linhas de transmissão possuem o parâmetro rate_a (limite de fluxo de potência aparente)
+ref = PowerModels.build_ref(data)[:it][:pm][:nw][0] #O índice 0 indica a rede base (snapshot único ou tempo t=0).
 
 # Inicializa o modelo JuMP vazio
-model = Model(Ipopt.Optimizer)
+model = Model(Ipopt.Optimizer) #Define o Ipopt como solver.
 
 # =========================================================================
 # 1. VARIÁVEIS DE ESTADO DO SISTEMA (Tensão e Geração)
 # =========================================================================
 # Tensão (Magnitude e Ângulo)
 # Nota: Definimos limites base, mas o VLIM/QLIM atuará sobre eles
-vm = @variable(model, ref[:bus][i]["vmin"] <= vm[i in keys(ref[:bus])] <= ref[:bus][i]["vmax"], start=1.0)
-va = @variable(model, va[i in keys(ref[:bus])], start=0.0)
+vm = @variable(model, ref[:bus][i]["vmin"] <= vm[i in keys(ref[:bus])] <= ref[:bus][i]["vmax"], start=1.0) #Garante os limites de tensao e inicia a tensao em 1 p.u
+va = @variable(model, va[i in keys(ref[:bus])], start=0.0) #Inicializa todos os ângulos em 0 graus
 
-# Geração Ativa e Reativa
+# Limites de Geração Ativa e Reativa 
 pg = @variable(model, ref[:gen][i]["pmin"] <= pg[i in keys(ref[:gen])] <= ref[:gen][i]["pmax"])
 qg = @variable(model, ref[:gen][i]["qmin"] <= qg[i in keys(ref[:gen])] <= ref[:gen][i]["qmax"])
 
@@ -56,7 +56,7 @@ for (l, branch) in ref[:branch]
     f_bus = branch["f_bus"]
     t_bus = branch["t_bus"]
     
-    g, b = PowerModels.calc_branch_y(branch)
+    g, b = PowerModels.calc_branch_y(branch) #Condutância e Susceptância da linha (parte real e imaginária da Admitância Y_ij)
     tr, ti = PowerModels.calc_branch_t(branch)
     tm = branch["tap"]
     
@@ -65,7 +65,7 @@ for (l, branch) in ref[:branch]
     g_to = branch["g_to"]
     b_to = branch["b_to"]
 
-    # Fluxo Ativo e Reativo (From -> To) 
+    # Fluxo Ativo e Reativo (From -> To) (Equação 9)
     p[(l, f_bus, t_bus)] = @NLexpression(model,
         (g+g_fr)/tm^2 * vm[f_bus]^2 + 
         (-g*tr+b*ti)/tm^2 * (vm[f_bus]*vm[t_bus]*cos(va[f_bus]-va[t_bus])) + 
@@ -77,7 +77,7 @@ for (l, branch) in ref[:branch]
         (-g*tr+b*ti)/tm^2 * (vm[f_bus]*vm[t_bus]*sin(va[f_bus]-va[t_bus]))
     )
 
-    # Fluxo Ativo e Reativo (To -> From) 
+    # Fluxo Ativo e Reativo (To -> From) (Equação 10)
     p[(l, t_bus, f_bus)] = @NLexpression(model,
         (g+g_to) * vm[t_bus]^2 + 
         (-g*tr-b*ti)/tm^2 * (vm[t_bus]*vm[f_bus]*cos(va[t_bus]-va[f_bus])) + 

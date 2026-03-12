@@ -6,7 +6,7 @@ using Pkg, PWF, PowerModels, Ipopt, Printf, PowerPlots
 
 print("\033c")
 
-file = joinpath(@__DIR__, "3bus.pwf")
+file = joinpath(@__DIR__, "01 MAXIMA NOTURNA_DEZ25.PWF")
 
 file_m = PWF.parse_pwf_to_powermodels(file)
 
@@ -18,7 +18,7 @@ optimizer = Ipopt.Optimizer
 
 
 # Step 2: Run the optimization
-result = run_ac_pf(file_m, optimizer) #result = solve_pf(case_file, ACPPowerModel, Ipopt.Optimizer)
+result = run_dc_pf(file_m, optimizer) #result = solve_pf(case_file, ACPPowerModel, Ipopt.Optimizer)
 
 
 # Step 3: Display the results

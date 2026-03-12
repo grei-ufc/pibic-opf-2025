@@ -150,8 +150,8 @@ end
 # =========================================================================
 # 5. RESTRIÇÃO DA BARRA DE REFERÊNCIA (SLACK BUS) - MUITO IMPORTANTE!
 # =========================================================================
-for (i, bus) in PowerModels.ref(pm, nw, :ref_buses)
-    JuMP.@constraint(pm.model, va[i] == bus["va"])
+for (i, bus) in PowerModels.ref(pm, nw, :ref_buses) #Esta função busca dentro dos dados do modelo quais barras foram marcadas como "tipo 3" (código padrão para Slack Bus no formato MATPOWER/IEEE)
+    JuMP.@constraint(pm.model, va[i] == bus["va"]) #Cria uma restrição de igualdade.
 end
 
 # =========================================================================
