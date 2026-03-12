@@ -1,7 +1,8 @@
-#---------------------------PWF INIT-------------------------------
+# Esse codigo eu crio uma função objetivo e tento otimizar ela
 
+#---------------------------PWF INIT-------------------------------
+print("\033c")
 using Pkg
-# print("\033c") # Optional clear screen
 
 using PWF, PowerModels, Ipopt, Printf, PowerPlots
 

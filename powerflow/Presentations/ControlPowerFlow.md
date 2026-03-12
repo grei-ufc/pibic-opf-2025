@@ -40,7 +40,7 @@ Iago Sichinel Chávarry
 É um pacote em Julia desenvolvido para realizar análises de fluxo de carga considerando ajustes automáticos da rede.
 
 * **Fundação:** Construído sobre o **PowerModels.jl** e **JuMP**.
-* **Abordagem Matemática:** Transforma o problema de equações algébricas em um problema de **otimização**.
+* **Abordagem Matemática:** Transforma o problema de equações algébricas em um problema de otimização.
     * Ao invés de falhar quando um limite é atingido, o solver penaliza desvios na função objetivo.
 * **Integração:** Funciona em conjunto com o `PWF.jl` (leitor de arquivos ANAREDE).
 

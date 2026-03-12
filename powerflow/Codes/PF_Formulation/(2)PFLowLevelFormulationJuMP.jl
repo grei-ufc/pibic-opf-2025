@@ -2,6 +2,7 @@ using PowerModels
 using JuMP
 using InfrastructureModels
 using Ipopt
+print("\033c")
 
 data = PowerModels.parse_file("./powerflow/Codes/PowerModels/case5.m")
 
