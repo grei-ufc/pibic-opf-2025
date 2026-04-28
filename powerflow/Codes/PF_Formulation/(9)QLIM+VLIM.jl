@@ -13,7 +13,9 @@ print("\033c") # Limpa o terminal
 # 0. LEITURA DE DADOS (O Sistema Interligado Nacional)
 # =========================================================================
 println("1. Lendo arquivo PWF...")
-caminho_arquivo = joinpath(@__DIR__, "01 MAXIMA NOTURNA_DEZ25.PWF")
+#caminho_arquivo = joinpath(@__DIR__, "01 MAXIMA NOTURNA_DEZ25.PWF")
+caminho_arquivo = joinpath(@__DIR__, "..", "data_CPF", "anarede", "5busfrank_csca.pwf")
+
 
 # Lemos o arquivo com o PWF.jl
 data = PWF.parse_file(caminho_arquivo) # Lê o arquivo .pwf

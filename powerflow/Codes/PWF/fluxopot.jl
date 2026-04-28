@@ -6,7 +6,8 @@ using Pkg, PWF, PowerModels, Ipopt, Printf, PowerPlots
 
 print("\033c")
 
-file = joinpath(@__DIR__, "01 MAXIMA NOTURNA_DEZ25.PWF")
+# file = joinpath(@__DIR__, "01 MAXIMA NOTURNA_DEZ25.PWF")
+file = joinpath(@__DIR__, "..", "data", "pwf", "3bus.pwf")
 
 file_m = PWF.parse_pwf_to_powermodels(file)
 
