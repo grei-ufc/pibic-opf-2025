@@ -1,0 +1,65 @@
+\providecommand{\abntreprintinfo}[1]{%
+ \citeonline{#1}}
+\setlength{\labelsep}{0pt}\begin{thebibliography}{}
+\providecommand{\abntrefinfo}[3]{}
+\providecommand{\abntbstabout}[1]{}
+\abntbstabout{v-1.9.7 }
+
+\bibitem[{A}dministra{\c{c}}{\~a}o{ }{N}acional{ }do{ }{E}spa{\c{c}}o{ }e{ }{A}eron{\'a}utica 2016]{NASA2016}
+\abntrefinfo{{A}dministra{\c{c}}{\~a}o{ }{N}acional{ }do{ }{E}spa{\c{c}}o{ }e{ }{A}eron{\'a}utica}{{A}DMINISTRA{\c{C}}{\~A}O{ }{N}ACIONAL{ }DO{ }{E}SPA{\c{C}}O{ }E{ }{A}ERON{\'A}UTICA}{2016}
+{{A}DMINISTRA{\c{C}}{\~A}O{ }{N}ACIONAL{ }DO{ }{E}SPA{\c{C}}O{ }E{ }{A}ERON{\'A}UTICA. \textbf{{G}ráfico{ }da{ }{A}tmosfera{ }{S}uperior}. 2016.
+Dispon{\'\i}vel em: \url{http://www.nasa.gov/mission\_pages/sunearth/science/upper-atmosphere-graphic.html}. Acesso em: 28 jul. 2016.}
+
+\bibitem[ALMEIDA 2018]{Almeida2018}
+\abntrefinfo{ALMEIDA}{ALMEIDA}{2018}
+{ALMEIDA, M. M.~R.
+\textbf{Avaliação de métodos de estimativa da capacidade de carga de fundações diretas em solos não saturados. \text{\normalfont\ 2018. 144 f}}.
+Disserta\c{c}\~{a}o (Mestrado em Engenharia Civil) --- Centro de Tecnologia, Programa de Pós-Graduação em Engenharia Civil: Geotecnia, Universidade Federal do Ceará, Fortaleza, 2018.}
+
+\bibitem[ASSOCIAÇÃO{ }BRASILEIRA{ }DE{ }NORMAS{ }TÉCNICAS 2002]{NBR10520:2002}
+\abntrefinfo{ASSOCIAÇÃO{ }BRASILEIRA{ }DE{ }NORMAS{ }TÉCNICAS}{ASSOCIAÇÃO{ }BRASILEIRA{ }DE{ }NORMAS{ }TÉCNICAS}{2002}
+{ASSOCIAÇÃO{ }BRASILEIRA{ }DE{ }NORMAS{ }TÉCNICAS. \textbf{{NBR} 10520}: Informação e documentação: citações em documentos: apresentação.
+Rio de Janeiro, 2002.}
+
+\bibitem[Feitosa 2016]{feitosa2016}
+\abntrefinfo{Feitosa}{FEITOSA}{2016}
+{FEITOSA, L. Complexas mediações: transdisciplinaridade e incertezas nas recepções informacionais.
+\textbf{Informação em Pauta}, Fortaleza, v.~1, n.~1, p. 98--117, 2016.}
+
+\bibitem[GONDIM 2018]{Gondim2017}
+\abntrefinfo{GONDIM}{GONDIM}{2018}
+{GONDIM, D.~R.
+\textbf{Seleção de materiais com potencial aplicação na purificação de IgG humana. \text{\normalfont\ 2017. 164 f}}.
+Tese (Doutorado em Engenharia Química) --- Centro de Tecnologia, Programa de Pós-Graduação em Engenharia Civil: Geotecnia, Universidade Federal do Ceará, Fortaleza, 2018.}
+
+\bibitem[GRUPO{ }DE{ }{E}LETRICIDADE{ }{A}TMOSFÉRICA 2015]{elat2015densidade}
+\abntrefinfo{GRUPO{ }DE{ }{E}LETRICIDADE{ }{A}TMOSFÉRICA}{GRUPO{ }DE{ }{E}LETRICIDADE{ }{A}TMOSFÉRICA}{2015}
+{GRUPO{ }DE{ }{E}LETRICIDADE{ }{A}TMOSFÉRICA. \textbf{Densidade de descargas atmosféricas para a terra (Ng)}. 2015.
+Dados publicados na ABNT NBR 5419-2:2015 -- Proteção contra descargas atmosféricas – Parte 2: Gerenciamento de risco.
+Dispon{\'\i}vel em: \url{http://www.inpe.br/webelat/ABNT\_NBR5419\_Ng/}. Acesso em: 28 jun. 2016.}
+
+\bibitem[Langtangen e Logg 2017]{LangtangenLogg2017}
+\abntrefinfo{Langtangen e Logg}{LANGTANGEN; LOGG}{2017}
+{LANGTANGEN, H.~P.; LOGG, A. \textbf{Solving PDEs in Python}. [\textit{S. l.}]: Springer, 2017.
+ISBN 978-3-319-52461-0.}
+
+\bibitem[Rakov e Uman 2003]{rakov2003lightning}
+\abntrefinfo{Rakov e Uman}{RAKOV; UMAN}{2003}
+{RAKOV, V.~A.; UMAN, M.~A. \textbf{Lightning}: physics and effects. [\textit{S. l.}]: Cambridge University Press, 2003.}
+
+\bibitem[{S}{\~a}o{ }{P}aulo{ }{(Estado)} 1989]{manuais1989}
+\abntrefinfo{{S}{\~a}o{ }{P}aulo{ }{(Estado)}}{{S}{\~A}O{ }{P}AULO{ }{(Estado)}}{1989}
+{{S}{\~A}O{ }{P}AULO{ }{(Estado)}. \textbf{{\normalfont Secretaria do Meio Ambiente. Coordenadoria de Planejamento Ambiental. } Estudo de impacto ambiental – EIA, Relatório de impacto ambiental – RIMA}: manual de orientação.
+São Paulo, 1989. 48~p.  (Séries Manuais).}
+
+\bibitem[{S}{\~a}o{ }{P}aulo{ }{(Estado)} 1999]{secretaria1999}
+\abntrefinfo{{S}{\~a}o{ }{P}aulo{ }{(Estado)}}{{S}{\~A}O{ }{P}AULO{ }{(Estado)}}{1999}
+{{S}{\~A}O{ }{P}AULO{ }{(Estado)}. \textbf{{\normalfont Secretaria do Meio Ambiente.} Tratados e organizações ambientais em matéria de meio ambiente}. \textit{In}:\underline{\hspace{0.45in}}, 1999.
+Dispon{\'\i}vel em: \url{http://www.bdt.org.br/sma/entendendo/atual.htm}. Acesso em: 8 mar. 1999.}
+
+\bibitem[{U}niversidade{ }{F}ederal{ }do{ }{C}ear{\'a} 2012]{UFC2012}
+\abntrefinfo{{U}niversidade{ }{F}ederal{ }do{ }{C}ear{\'a}}{{U}NIVERSIDADE{ }{F}EDERAL{ }DO{ }{C}EAR{\'A}}{2012}
+{{U}NIVERSIDADE{ }{F}EDERAL{ }DO{ }{C}EAR{\'A}. \textbf{Reitoria da {U}niversidade {F}ederal do {C}ear{\'a}}. 2012.
+Dispon{\'\i}vel em: \url{http://www.ufc.br/contatos/2-a-universidade}. Acesso em: 28 jul. 2016.}
+
+\end{thebibliography}

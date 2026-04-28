@@ -38,7 +38,8 @@ model = Model(optimizer_with_attributes(Ipopt.Optimizer,
 # =========================================================================
 println("2. Criando variáveis de estado...")
 
-@variable(model, ref[:bus][i]["vmin"] <= vm[i in keys(ref[:bus])] <= ref[:bus][i]["vmax"], start=ref[:bus][i]["vm"])
+# Limite global de Tensão (0.95 a 1.05 p.u.)
+@variable(model, 0.95 <= vm[i in keys(ref[:bus])] <= 1.05, start=ref[:bus][i]["vm"])
 @variable(model, va[i in keys(ref[:bus])], start=ref[:bus][i]["va"])
 
 @variable(model, ref[:gen][i]["pmin"] <= pg[i in keys(ref[:gen])] <= ref[:gen][i]["pmax"], start=ref[:gen][i]["pg"])
