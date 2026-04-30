@@ -1,0 +1,21 @@
+note-1: Modelagem de Elos de Corrente Contínua (HVDC)
+
+O código cria variáveis para os fluxos ativos e reativos nas extremidades das linhas DC (p_dc e q_dc).
+fix(...): Note que, logo em seguida é usado o comando fix com o parâmetro force=true. O motivo técnico para isso é que, na formulação adotada 
+no PowerModels, as linhas DC são frequentemente aproximadas pelo modelo de dois geradores fictícios acoplados ("dummy generator model"). 
+Como as injeções ativas já vêm especificadas do fluxo de base, cravá-las evita a inclusão de variáveis desnecessárias no Jacobiano, reduzindo o 
+tamanho do problema.
+
+O gerador na barra retificadora é configurado para ter uma geração ativa negativa (ou seja, ele atua como uma carga, consumindo os MWs que entram 
+no elo DC).  
+
+O gerador na barra inversora é configurado para ter uma geração ativa positiva (injetando os MWs na rede CA).
+
+
+
+
+
+
+note-2: CSCA
+Estamos dizendo ao otimizador: "A partir de agora, a susceptância (em p.u.) de cada banco de capacitores/reatores é uma variável livre que você 
+pode alterar para buscar a convergência".

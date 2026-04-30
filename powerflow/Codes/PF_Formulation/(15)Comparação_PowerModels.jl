@@ -1,3 +1,5 @@
+# Roda run_ac_pf oficial e exporta CSVs. Útil para benchmark contra suas formulações.
+
 using PWF
 using PowerModels
 using Ipopt
