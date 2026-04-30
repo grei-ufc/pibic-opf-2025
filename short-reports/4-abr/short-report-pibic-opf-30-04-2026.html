@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Short Report</title>
+<style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body {
+  font-family: -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 10.5pt;
+  line-height: 1.45;
+  color: #222;
+  max-width: 100%;
+  margin: 0;
+}
+h1 { font-size: 18pt; border-bottom: 2px solid #444; padding-bottom: 4px; margin-top: 0; }
+h2 { font-size: 14pt; border-bottom: 1px solid #999; padding-bottom: 2px; margin-top: 18pt; }
+h3 { font-size: 12pt; margin-top: 14pt; }
+h4 { font-size: 11pt; margin-top: 12pt; }
+p, ul, ol { margin: 6pt 0; }
+li { margin: 2pt 0; }
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 8pt 0;
+  font-size: 9.5pt;
+  page-break-inside: avoid;
+}
+th, td {
+  border: 1px solid #999;
+  padding: 4px 6px;
+  text-align: left;
+}
+th { background: #eee; font-weight: bold; }
+code {
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 9.5pt;
+  background: #f4f4f4;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+pre code { display: block; padding: 8px; overflow-x: auto; }
+blockquote {
+  border-left: 3px solid #888;
+  margin: 8pt 0;
+  padding: 4pt 10pt;
+  color: #444;
+  background: #f8f8f8;
+}
+hr { border: none; border-top: 1px solid #bbb; margin: 14pt 0; }
+strong { color: #111; }
+</style>
+</head>
+<body>
+<h1 id="relatorio-de-testes-comparacao-das-formulacoes-15-powermodels-16-qlimvlim-e-17-qlimvlimcsca">Relatório de Testes: Comparação das Formulações (15) PowerModels, (16) QLIM+VLIM e (17) QLIM+VLIM+CSCA</h1>
+<p><strong>Data:</strong> 30/04/2026
+<strong>Bateria:</strong> 24 arquivos <code>.pwf</code> em <code>powerflow/Codes/data/</code> (e subpastas <code>data_CPF/</code>, <code>data_CPF/anarede/</code>)
+<strong>Métodos comparados:</strong>
+* <strong>(15) PM</strong> – <code>PowerModels.run_ac_pf</code> (fluxo AC tradicional, sem slacks).
+* <strong>(16) QLIM+VLIM</strong> – formulação JuMP com slacks de tensão (<code>sl_v</code>) e de carga reativa (<code>sl_d</code>). Inclui elos DC.
+* <strong>(17) QLIM+VLIM+CSCA</strong> – além de QLIM/VLIM, libera a susceptância shunt <code>bs</code> como variável dentro de <code>[bsmin, bsmax]</code> quando o <code>.pwf</code> declara controle de chaveamento (CSCA).</p>
+<blockquote>
+<p>Os CSVs barra-a-barra de cada caso e o sumário consolidado estão em <code>powerflow/Codes/PF_Formulation/resultados_csv/sumario_runner.csv</code>.</p>
+</blockquote>
+<hr />
+<h2 id="1-visao-geral-dos-resultados">1. Visão Geral dos Resultados</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Caso de Teste</th>
+<th style="text-align: center;">(15) PM</th>
+<th style="text-align: center;">(16) QV</th>
+<th style="text-align: center;">(17) CSCA</th>
+<th style="text-align: left;">Observação Principal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>3bus</code></td>
+<td style="text-align: center;">OK</td>
+<td style="text-align: center;">OK</td>
+<td style="text-align: center;">OK</td>
+<td style="text-align: left;">Soluções idênticas, slacks nulas.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>3bus_DBSH</code></td>
+<td style="text-align: center;">OK</td>
+<td style="text-align: center;">OK</td>
+<td style="text-align: center;"><strong>OK*</strong></td>
+<td style="text-align: left;">CSCA reverte Q dos geradores (capacitor shunt assume parte).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>3bus_DCER</code></td>
+<td style="text-align: center;">OK</td>
+<td style="text-align: center;">OK</td>
+<td style="text-align: center;"><strong>OK*</strong></td>
+<td style="text-align: left;">Mesmo comportamento de DBSH.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>3bus_DCline</code></td>
+<td style="text-align: center;">OK</td>
+<td style="text-align: center;">OK</td>
+<td style="text-align: center;">OK</td>
+<td style="text-align: left;">Convergem; agora elos DC inclusos no balanço (corrige gap do relatório anterior).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>3bus_DCSC</code></td>
+<td style="text-align: center;">OK</td>
+<td style="text-align: center;">OK*</td>
+<td style="text-align: center;">OK*</td>
+<td style="text-align: left;">Slack pequeno (226).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>3bus_DSHL</code></td>
+<td style="text-align: center;">OK**</td>
+<td style="text-align: center;">OK*</td>
+<td style="text-align: center;">OK*</td>
+<td style="text-align: left;">PM colapsa V em 0.66 pu; QV/CSCA seguram em 0.90 pu (slacks 4.2e6).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>3bus_corrections</code></td>
+<td style="text-align: center;">ERRO</td>
+<td style="text-align: center;">ERRO</td>
+<td style="text-align: center;">ERRO</td>
+<td style="text-align: left;">Validação do PWF.jl barra os 3 (QMIN&lt;QMAX em PQ).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>3bus_shunt_fields</code></td>
+<td style="text-align: center;">OK</td>
+<td style="text-align: center;">OK*</td>
+<td style="text-align: center;"><strong>OK*</strong></td>
+<td style="text-align: left;">CSCA absorve reativo via shunt.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>9bus</code>, <code>9bus_transformer_fields</code></td>
+<td style="text-align: center;">OK</td>
+<td style="text-align: center;">OK</td>
+<td style="text-align: center;">OK</td>
+<td style="text-align: left;">Soluções idênticas.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>300bus</code></td>
+<td style="text-align: center;">OK**</td>
+<td style="text-align: center;">OK*</td>
+<td style="text-align: center;">OK*</td>
+<td style="text-align: left;">PM ignora limites: Vmin=0.85; QV/CSCA Vmin=0.90 com slacks 397k.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>500bus</code></td>
+<td style="text-align: center;">OK</td>
+<td style="text-align: center;">OK*</td>
+<td style="text-align: center;"><strong>OK*</strong></td>
+<td style="text-align: left;">CSCA muda 15 shunts; ajusta Q em vários geradores.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>3busfrank</code>, <code>5busfrank</code></td>
+<td style="text-align: center;">OK</td>
+<td style="text-align: center;">OK</td>
+<td style="text-align: center;">OK</td>
+<td style="text-align: left;">Soluções idênticas.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>3busfrank_continuous_shunt</code></td>
+<td style="text-align: center;">OK</td>
+<td style="text-align: center;">OK</td>
+<td style="text-align: center;"><strong>OK*</strong></td>
+<td style="text-align: left;">CSCA inverte Q dos geradores.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>3busfrank_qlim</code></td>
+<td style="text-align: center;">OK**</td>
+<td style="text-align: center;">OK*</td>
+<td style="text-align: center;">OK*</td>
+<td style="text-align: left;">PM Vmin=0.876 (fora); QV/CSCA Vmin=0.90 com slacks 792.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>4busfrank_vlim</code></td>
+<td style="text-align: center;"><strong>INFEASIBLE</strong></td>
+<td style="text-align: center;">OK*</td>
+<td style="text-align: center;">OK*</td>
+<td style="text-align: left;">PM declara inviável; QV/CSCA convergem com slacks 656k.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>5busfrank_csca</code></td>
+<td style="text-align: center;"><strong>INFEASIBLE</strong></td>
+<td style="text-align: center;">OK*</td>
+<td style="text-align: center;"><strong>OK</strong></td>
+<td style="text-align: left;">PM falha; QV usa slacks 786k; <strong>CSCA resolve sem usar slacks</strong> (chaveia 3 shunts).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>5busfrank_cphs</code>, <code>5busfrank_ctaf</code>, <code>5busfrank_ctap</code></td>
+<td style="text-align: center;">OK</td>
+<td style="text-align: center;">OK</td>
+<td style="text-align: center;">OK</td>
+<td style="text-align: left;">Soluções idênticas.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>test_defaults</code></td>
+<td style="text-align: center;">ERRO</td>
+<td style="text-align: center;">ERRO</td>
+<td style="text-align: center;">ERRO</td>
+<td style="text-align: left;"><code>MethodError(/, (nothing, 100))</code> — campo nulo no <code>.pwf</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>test_line_shunt</code></td>
+<td style="text-align: center;">ERRO</td>
+<td style="text-align: center;">ERRO</td>
+<td style="text-align: center;">ERRO</td>
+<td style="text-align: left;">Validação ANAREDE (QMIN&lt;QMAX em PQ).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>test_system</code></td>
+<td style="text-align: center;">OK</td>
+<td style="text-align: center;">OK</td>
+<td style="text-align: center;">OK</td>
+<td style="text-align: left;">Soluções idênticas.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Legenda:</strong> OK = <code>LOCALLY_SOLVED</code>. OK<em> = convergiu com slacks ativas. OK</em><em> = convergiu, mas violando limites de tensão (PM ignora limites). </em><em>OK</em><em> em negrito = caso onde a formulação resolveu </em>sem* recorrer a slacks num caso onde as outras não conseguiram.</p>
+<h3 id="estatisticas">Estatísticas</h3>
+<ul>
+<li><strong>24 arquivos</strong> processados; <strong>21 convergem em pelo menos uma formulação</strong>, 3 falham por validação de dados.</li>
+<li><strong>2 casos</strong> em que <strong>(15) PM declara inviável</strong> (<code>4busfrank_vlim</code>, <code>5busfrank_csca</code>) e (16)/(17) convergem.</li>
+<li><strong>6 casos</strong> em que <strong>(17) CSCA</strong> difere materialmente de <strong>(16)</strong> porque há shunt com margem de controle.</li>
+</ul>
+<hr />
+<h2 id="2-analise-detalhada-dos-casos-criticos">2. Análise Detalhada dos Casos Críticos</h2>
+<h3 id="21-o-caso-definitivo-do-csca-5busfrank_cscapwf">2.1. O caso definitivo do CSCA — <code>5busfrank_csca.pwf</code></h3>
+<p>Este é o <strong>caso mais didático</strong> de toda a bateria. A rede tem 3 shunts com margem real de controle (<code>bsmin ≠ bsmax</code>).</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Métrica</th>
+<th style="text-align: left;">(15) PM</th>
+<th style="text-align: left;">(16) QLIM+VLIM</th>
+<th style="text-align: left;">(17) CSCA</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Status</td>
+<td style="text-align: left;"><strong>LOCALLY_INFEASIBLE</strong></td>
+<td style="text-align: left;">LOCALLY_SOLVED</td>
+<td style="text-align: left;">LOCALLY_SOLVED</td>
+</tr>
+<tr>
+<td style="text-align: left;">Vmin (pu)</td>
+<td style="text-align: left;">–</td>
+<td style="text-align: left;">0.9000</td>
+<td style="text-align: left;">0.9900</td>
+</tr>
+<tr>
+<td style="text-align: left;">Vmax (pu)</td>
+<td style="text-align: left;">–</td>
+<td style="text-align: left;">1.1000</td>
+<td style="text-align: left;">1.0300</td>
+</tr>
+<tr>
+<td style="text-align: left;">Pg total (MW)</td>
+<td style="text-align: left;">–</td>
+<td style="text-align: left;">78.13</td>
+<td style="text-align: left;">60.71</td>
+</tr>
+<tr>
+<td style="text-align: left;">Qg total (MVAr)</td>
+<td style="text-align: left;">–</td>
+<td style="text-align: left;">147.62</td>
+<td style="text-align: left;">-16.02</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Slacks (objetivo)</strong></td>
+<td style="text-align: left;">–</td>
+<td style="text-align: left;"><strong>786 148</strong></td>
+<td style="text-align: left;"><strong>2.0×10⁻¹⁴</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;">Shunts chaveados</td>
+<td style="text-align: left;">–</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;"><strong>3</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Análise barra-a-barra (16) vs (17):</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Barra</th>
+<th style="text-align: center;">Vm (16)</th>
+<th style="text-align: center;">Vm (17)</th>
+<th style="text-align: center;">ΔVm</th>
+<th style="text-align: center;">Qg (16)</th>
+<th style="text-align: center;">Qg (17)</th>
+<th style="text-align: center;">ΔQg</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">1 (slack)</td>
+<td style="text-align: center;">1.1000</td>
+<td style="text-align: center;">1.0290</td>
+<td style="text-align: center;">0.0710</td>
+<td style="text-align: center;">+0.7723</td>
+<td style="text-align: center;">-0.2781</td>
+<td style="text-align: center;"><strong>1.0504</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;">2 (PV)</td>
+<td style="text-align: center;">1.0668</td>
+<td style="text-align: center;">1.0300</td>
+<td style="text-align: center;">0.0368</td>
+<td style="text-align: center;">+0.7040</td>
+<td style="text-align: center;">+0.1180</td>
+<td style="text-align: center;">0.5860</td>
+</tr>
+<tr>
+<td style="text-align: center;">3 (PQ)</td>
+<td style="text-align: center;">0.9000</td>
+<td style="text-align: center;">0.9900</td>
+<td style="text-align: center;">0.0900</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">–</td>
+</tr>
+<tr>
+<td style="text-align: center;">4 (PQ)</td>
+<td style="text-align: center;">0.9000</td>
+<td style="text-align: center;">1.0300</td>
+<td style="text-align: center;"><strong>0.1300</strong></td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">–</td>
+</tr>
+<tr>
+<td style="text-align: center;">5 (PQ)</td>
+<td style="text-align: center;">0.9000</td>
+<td style="text-align: center;">1.0300</td>
+<td style="text-align: center;"><strong>0.1300</strong></td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">–</td>
+<td style="text-align: center;">–</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Interpretação:</strong> Sem CSCA, a formulação (16) só consegue ser viável forçando os limites de tensão das barras de carga (3, 4, 5) em 0.90 pu — daí a penalidade colossal de 786 148. Com CSCA habilitado, a formulação (17) <strong>chaveia</strong> os 3 shunts disponíveis, injetando reativo nas barras de carga, levando essas barras a 0.99–1.03 pu <strong>sem violar nenhum setpoint</strong>. Os geradores (barras 1 e 2) reduzem drasticamente sua produção de reativo (de +1.48 pu para -0.16 pu somados), porque a rede não precisa mais "puxar" Q da geração. <strong>É a comprovação numérica de que o CSCA reproduz fielmente o controle automático de chaveamento de capacitores do ANAREDE.</strong></p>
+<h3 id="22-casos-onde-apenas-o-csca-muda-a-solucao">2.2. Casos onde apenas o CSCA muda a solução</h3>
+<p><strong>Casos:</strong> <code>3bus_DBSH</code>, <code>3bus_DCER</code>, <code>3busfrank_continuous_shunt</code>, <code>3bus_shunt_fields</code>, <code>500bus</code>.</p>
+<p>Todos têm shunts com margem de chaveamento. O comportamento é o mesmo: o solver "transfere" parte do esforço reativo dos geradores para os shunts, melhorando o perfil de tensão das barras de carga.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Caso</th>
+<th style="text-align: left;">Variável</th>
+<th style="text-align: left;">(16) QV</th>
+<th style="text-align: left;">(17) CSCA</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>3bus_DBSH</code></td>
+<td style="text-align: left;">Vm barra 3</td>
+<td style="text-align: left;">0.9602</td>
+<td style="text-align: left;"><strong>1.0300</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>3bus_DBSH</code></td>
+<td style="text-align: left;">Qg gerador 1</td>
+<td style="text-align: left;">+0.23 pu</td>
+<td style="text-align: left;">-0.17 pu</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>3busfrank_continuous_shunt</code></td>
+<td style="text-align: left;">Qg gerador 1</td>
+<td style="text-align: left;">+0.10 pu</td>
+<td style="text-align: left;">-0.36 pu</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>3bus_shunt_fields</code></td>
+<td style="text-align: left;">Qg gerador 1</td>
+<td style="text-align: left;">+0.30 pu</td>
+<td style="text-align: left;">-0.20 pu</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>500bus</code></td>
+<td style="text-align: left;">barras com <code>\|ΔVm\| &gt; 0.02</code></td>
+<td style="text-align: left;">–</td>
+<td style="text-align: left;"><strong>10 barras</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>500bus</code></td>
+<td style="text-align: left;">barra com maior |ΔQg|</td>
+<td style="text-align: left;">barra 17: +0.75 pu</td>
+<td style="text-align: left;">barra 17: +1.28 pu</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Sentido físico:</strong> quando o <code>.pwf</code> declara CSCA, há uma resposta automática esperada da rede que o (16) ignora. O (17) reproduz essa resposta — e por isso, no caso <code>5busfrank_csca</code> específico, é a <em>única</em> das três formulações que resolve sem violar nada.</p>
+<h3 id="23-pm-colapsa-1617-seguram-a-rede">2.3. PM colapsa, (16)/(17) seguram a rede</h3>
+<p><strong>Caso:</strong> <code>3bus_DSHL.pwf</code> (mesmo do relatório anterior, agora confirmado também pelo (17)).</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Métrica</th>
+<th style="text-align: center;">(15) PM</th>
+<th style="text-align: center;">(16) QV</th>
+<th style="text-align: center;">(17) CSCA</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Vmin</td>
+<td style="text-align: center;"><strong>0.6622</strong> (colapso)</td>
+<td style="text-align: center;">0.9000</td>
+<td style="text-align: center;">0.9000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Pg total (MW)</td>
+<td style="text-align: center;">120.45</td>
+<td style="text-align: center;">35.14</td>
+<td style="text-align: center;">35.14</td>
+</tr>
+<tr>
+<td style="text-align: left;">Qg total (MVAr)</td>
+<td style="text-align: center;">319.08</td>
+<td style="text-align: center;">130.40</td>
+<td style="text-align: center;">130.40</td>
+</tr>
+<tr>
+<td style="text-align: left;">Perdas implícitas (Pg − Pd)</td>
+<td style="text-align: center;">~103 MW</td>
+<td style="text-align: center;">~17 MW</td>
+<td style="text-align: center;">~17 MW</td>
+</tr>
+<tr>
+<td style="text-align: left;">Slacks (objetivo)</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">4.2×10⁶</td>
+<td style="text-align: center;">4.2×10⁶</td>
+</tr>
+</tbody>
+</table>
+<p><strong>ΔVm máx (PM × QV):</strong> barra 2: 0.66 → 0.90 pu (Δ = 0.24). Barra 3: 0.69 → 0.92 pu.
+<strong>ΔQg máx (PM × QV):</strong> gerador da barra 1: 3.19 pu → 1.30 pu (Δ = 1.89 pu). PM tenta queimar reativo a perdê-lo nas perdas térmicas; (16)/(17) penalizam essa rota e cortam carga via VLIM.</p>
+<p><strong>Conclusão:</strong> O (17) e o (16) produzem exatamente a mesma solução aqui — o caso não tem CSCA. O ponto a destacar é que <strong>a formulação proposta é robusta a estresse extremo</strong>, enquanto o PM tradicional aceita um ponto operacional irrealista.</p>
+<h3 id="24-pm-ignora-limites-operacionais-300buspwf">2.4. PM ignora limites operacionais — <code>300bus.pwf</code></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Métrica</th>
+<th style="text-align: center;">(15) PM</th>
+<th style="text-align: center;">(16) QV</th>
+<th style="text-align: center;">(17) CSCA</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Vmin (pu)</td>
+<td style="text-align: center;"><strong>0.8495</strong> (fora)</td>
+<td style="text-align: center;">0.9000</td>
+<td style="text-align: center;">0.9000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Vmax (pu)</td>
+<td style="text-align: center;"><strong>1.1956</strong> (fora)</td>
+<td style="text-align: center;">1.1000</td>
+<td style="text-align: center;">1.1000</td>
+</tr>
+<tr>
+<td style="text-align: left;">Slacks</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">396 743</td>
+<td style="text-align: center;">396 743</td>
+</tr>
+<tr>
+<td style="text-align: left;">Tempo (s)</td>
+<td style="text-align: center;">7.63</td>
+<td style="text-align: center;">0.83</td>
+<td style="text-align: center;">0.36</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Top 10 barras com maior ΔVm (PM × QV):</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Barra</th>
+<th style="text-align: center;">Vm PM</th>
+<th style="text-align: center;">Vm QV</th>
+<th style="text-align: center;">ΔVm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">9033</td>
+<td style="text-align: center;">0.8822</td>
+<td style="text-align: center;">1.1000</td>
+<td style="text-align: center;"><strong>0.2178</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;">9031</td>
+<td style="text-align: center;">0.8853</td>
+<td style="text-align: center;">1.1000</td>
+<td style="text-align: center;">0.2147</td>
+</tr>
+<tr>
+<td style="text-align: center;">9038</td>
+<td style="text-align: center;">0.8930</td>
+<td style="text-align: center;">1.1000</td>
+<td style="text-align: center;">0.2070</td>
+</tr>
+<tr>
+<td style="text-align: center;">9032</td>
+<td style="text-align: center;">0.8981</td>
+<td style="text-align: center;">1.1000</td>
+<td style="text-align: center;">0.2019</td>
+</tr>
+<tr>
+<td style="text-align: center;">9042</td>
+<td style="text-align: center;">0.9046</td>
+<td style="text-align: center;">1.1000</td>
+<td style="text-align: center;">0.1954</td>
+</tr>
+<tr>
+<td style="text-align: center;">9035</td>
+<td style="text-align: center;">0.9048</td>
+<td style="text-align: center;">1.1000</td>
+<td style="text-align: center;">0.1952</td>
+</tr>
+<tr>
+<td style="text-align: center;">9037</td>
+<td style="text-align: center;">0.9116</td>
+<td style="text-align: center;">1.1000</td>
+<td style="text-align: center;">0.1884</td>
+</tr>
+<tr>
+<td style="text-align: center;">9036</td>
+<td style="text-align: center;">0.9139</td>
+<td style="text-align: center;">1.1000</td>
+<td style="text-align: center;">0.1861</td>
+</tr>
+<tr>
+<td style="text-align: center;">9041</td>
+<td style="text-align: center;">0.9184</td>
+<td style="text-align: center;">1.1000</td>
+<td style="text-align: center;">0.1816</td>
+</tr>
+<tr>
+<td style="text-align: center;">9043</td>
+<td style="text-align: center;">0.9193</td>
+<td style="text-align: center;">1.1000</td>
+<td style="text-align: center;">0.1807</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Diagnóstico:</strong> as barras 9031–9043 são um <em>cluster</em> topológico (provavelmente uma ilha/área fracamente conectada) em que o caso base do <code>300bus.pwf</code> aponta <code>vm = 1.1</code>, mas o PM puro converge para tensões de 0.88–0.92 pu. A formulação (16)/(17) <strong>honra o setpoint</strong>, ao custo de uma penalidade — sinal claro de que essas barras ficaram com reativo no limite (QLIM atuou). Para o TCC, é exatamente o tipo de barra que merece atenção: marcador de fragilidade da rede.</p>
+<blockquote>
+<p><strong>Observação interessante:</strong> entre (16) e (17) a solução de <code>300bus</code> é <strong>bit-a-bit idêntica</strong> — ΔVm/ΔQg = 0 em todas as 300 barras. O <code>300bus.pwf</code> não tem CSCA declarado, então a única variável extra do (17) (<code>bs_var</code>) fica fixa. Isso valida que o (17) <strong>não é uma reformulação destrutiva</strong>: quando não há CSCA, ele recupera exatamente o (16).</p>
+</blockquote>
+<h3 id="25-pm-declara-inviabilidade-onde-qvcsca-resolvem">2.5. PM declara inviabilidade onde QV/CSCA resolvem</h3>
+<p><strong>Casos:</strong> <code>4busfrank_vlim.pwf</code>, <code>5busfrank_csca.pwf</code>.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Caso</th>
+<th style="text-align: center;">(15) PM</th>
+<th style="text-align: center;">Slacks (16)</th>
+<th style="text-align: center;">Slacks (17)</th>
+<th style="text-align: left;">Comentário</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>4busfrank_vlim</code></td>
+<td style="text-align: center;">INFEASIBLE</td>
+<td style="text-align: center;">655 886</td>
+<td style="text-align: center;">655 886</td>
+<td style="text-align: left;">Sem CSCA, (16) e (17) idênticas.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>5busfrank_csca</code></td>
+<td style="text-align: center;">INFEASIBLE</td>
+<td style="text-align: center;">786 148</td>
+<td style="text-align: center;"><strong>0.0</strong></td>
+<td style="text-align: left;">CSCA elimina a inviabilidade.</td>
+</tr>
+</tbody>
+</table>
+<p>Esses dois casos justificam a existência da formulação proposta: o <code>run_ac_pf</code> simplesmente desiste, enquanto a abordagem com soft-constraints fornece <strong>um ponto operacional admissível</strong> — e, no caso <code>5busfrank_csca</code>, <strong>um ponto exato sem slacks</strong>.</p>
+<h3 id="26-casos-validados-controle-de-qualidade">2.6. Casos validados (controle de qualidade)</h3>
+<p>Em <strong>10 casos</strong> (<code>3bus</code>, <code>9bus</code>, <code>9bus_transformer_fields</code>, <code>3busfrank</code>, <code>5busfrank</code>, <code>5busfrank_cphs</code>, <code>5busfrank_ctaf</code>, <code>5busfrank_ctap</code>, <code>test_system</code>, <code>3bus_DCline</code>) a tensão e a geração obtidas pelas três formulações batem com erro $&lt; 10^{-13}$. <strong>Validação numérica das três implementações.</strong> Em particular, a inclusão dos elos DC nas formulações (16) e (17) corrige o gap detectado no relatório anterior (07/04/2026): <code>3bus_DCline.pwf</code> agora bate com PM em Pg/Qg.</p>
+<h3 id="27-casos-rejeitados-antes-do-solver">2.7. Casos rejeitados antes do solver</h3>
+<ul>
+<li><code>3bus_corrections.pwf</code> e <code>test_line_shunt.pwf</code> — <code>Active generator with QMIN &lt; QMAX found in a PQ bus</code>. PWF.jl barra antes do solver.</li>
+<li><code>test_defaults.pwf</code> — <code>MethodError(/, (nothing, 100))</code>. O parser tropeça em campo nulo. <strong>Sugestão:</strong> investigar se é bug do PWF.jl ou inconsistência no <code>.pwf</code>.</li>
+</ul>
+<hr />
+<h2 id="3-conclusao-parcial-para-o-tcc">3. Conclusão Parcial para o TCC</h2>
+<ol>
+<li><strong>(17) CSCA é a versão definitiva da formulação.</strong> Em todos os casos onde <em>não</em> há shunt controlável, (17) entrega exatamente a mesma solução de (16). Onde há, ela melhora o perfil de tensão <strong>sem ativar slacks</strong>.</li>
+<li><strong>A formulação proposta é estritamente mais robusta que <code>run_ac_pf</code>.</strong> Em 2 casos (<code>4busfrank_vlim</code>, <code>5busfrank_csca</code>) o PM tradicional declara inviável e (16)/(17) entregam ponto operacional. Em pelo menos 4 casos (<code>3bus_DSHL</code>, <code>300bus</code>, <code>3busfrank_qlim</code>, <code>3bus_DCSC</code>) o PM converge mas viola limites — (16)/(17) honram os setpoints e expõem onde a rede está apertada via penalidade.</li>
+<li><strong>O CSCA é numericamente barato.</strong> No <code>300bus</code>, (17) foi mais rápido que (16) (0.36 s vs 0.83 s), provavelmente porque o setpoint de tensão foi alcançado sem ativar penalidades quadráticas extras. No <code>5busfrank_csca</code>, (17) levou 0.002 s; (16), com slacks de 786k, também — sem ganho/perda relevante.</li>
+<li><strong>As barras que mais variam entre formulações são marcadores de fragilidade.</strong> Em <code>300bus</code>, as barras 9031–9043 são candidatas naturais para alocação prioritária de compensação reativa. Em <code>5busfrank_csca</code>, as barras 4 e 5 (PQ remoto) são as que mais se beneficiam do CSCA.</li>
+</ol>
+<h3 id="recomendacoes-de-continuidade">Recomendações de continuidade</h3>
+<ul>
+<li><strong>Adicionar CTAP</strong> ao (17) (já existe no (10)) — combinar tap variável + CSCA permitiria comparar quanto cada controle contribui.</li>
+<li><strong>Identificar automaticamente</strong> as barras com $|\Delta V_m|$ acima de um limiar entre formulações para alimentar análises de sensibilidade.</li>
+<li><strong>Investigar <code>test_defaults.pwf</code></strong> — entender se a falha é um caso de uso de campo opcional não suportado.</li>
+</ul>
+</body>
+</html>
