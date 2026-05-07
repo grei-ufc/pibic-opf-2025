@@ -5,7 +5,7 @@ print("\033c") # Limpa o terminal
 
 # 1. Leitura dos Dados
 println("Lendo arquivo PWF para análise topológica...")
-caminho_arquivo = joinpath(@__DIR__, "01 MAXIMA NOTURNA_DEZ25.PWF")
+caminho_arquivo = joinpath(@__DIR__, "..", "data_CPF", "anarede", "5busfrank_csca.pwf")
 data = PWF.parse_file(caminho_arquivo)
 
 

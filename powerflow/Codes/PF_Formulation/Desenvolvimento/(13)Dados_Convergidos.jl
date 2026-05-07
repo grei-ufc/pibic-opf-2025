@@ -1,3 +1,6 @@
+# Lê o .PWF já convergido e imprime resumo (Vmin/Vmax, Pg total, perdas estimadas). Útil de manter como baseline.
+
+
 using PowerModels
 using PWF
 using Printf

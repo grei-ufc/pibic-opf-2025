@@ -343,6 +343,5 @@ end
 # -------------------------------------------------------------
 # EXECUÇÃO PRINCIPAL
 # -------------------------------------------------------------
-#arquivo = joinpath(@__DIR__, "..", "data_CPF", "anarede", "5busfrank_csca.pwf") # Ajuste o caminho se necessário
 arquivo = joinpath(@__DIR__, "..", "data_CPF", "anarede", "5busfrank_csca.pwf")
 resolver_fluxo_controlado(arquivo)

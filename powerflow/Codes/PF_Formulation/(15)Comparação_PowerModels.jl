@@ -1,4 +1,4 @@
-# Roda run_ac_pf oficial e exporta CSVs. Útil para benchmark contra suas formulações.
+# Roda solve_ac_opf oficial e exporta CSVs. Útil para benchmark contra suas formulações.
 
 using PWF
 using PowerModels
@@ -12,7 +12,7 @@ print("\033c") # Limpa o terminal
 # 0. LEITURA DE DADOS
 # =========================================================================
 println("1. Lendo arquivo PWF...")
-caminho_arquivo = joinpath(@__DIR__, "..", "data_CPF", "anarede", "5busfrank_csca.pwf") # Ajuste o caminho se necessário
+caminho_arquivo = joinpath(@__DIR__, "..", "data", "data_CPF", "anarede", "4busfrank_vlim.pwf")# Ajuste o caminho se necessário
 
 data = PWF.parse_file(caminho_arquivo)
 base_mva = data["baseMVA"]
@@ -36,7 +36,7 @@ println("\n5. Resolvendo o Fluxo de Potência do PowerModels (AC Polar)...\n")
 
 # A macro @elapsed mede o tempo total da chamada da função
 tempo_total_execucao = @elapsed begin
-    resultado_pm = run_ac_pf(data, optimizer)
+    resultado_pm = solve_ac_opf(data, optimizer)
 end
 
 status_convergencia = resultado_pm["termination_status"]
@@ -178,3 +178,8 @@ println("\n--- RESUMO EM UNIDADES REAIS (Base = $base_mva MVA) ---")
 println("Geração Ativa Total (MW):   ", round(geracao_p_total * base_mva, digits=2))
 println("Geração Reativa Total (MVAr):", round(geracao_q_total * base_mva, digits=2))
 println("Perdas Ativas Totais (MW):  ", round(perda_p_total * base_mva, digits=2))
+
+
+for (i, bus) in data["bus"]
+    println("Barra $i: Vmin=$(bus["vmin"]), Vmax=$(bus["vmax"])")
+end
