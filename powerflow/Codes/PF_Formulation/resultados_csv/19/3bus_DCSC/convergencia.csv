@@ -1,0 +1,2 @@
+caso,script,termination_status,solve_time_s,objective,iteracoes,p_loss_total_pu
+3bus_DCSC.pwf,19,LOCALLY_SOLVED,2.6389498710632324,-0.09990212756390497,NaN,0.002882538710532234

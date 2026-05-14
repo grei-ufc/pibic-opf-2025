@@ -1,0 +1,32 @@
+[variant_14] case=test_line_shunt.pwf  out=/Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/PF_Formulation/resultados_csv/14/test_line_shunt
+1. Lendo arquivo PWF: /Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/data/test_line_shunt.pwf
+[info | PWF]: Populating defaults
+[warn | PWF]: DGER not found, setting pmin as 0.0 MW and pmax as 99999.0 MW
+[warn | PWF]: DC line will not be parsed due to the absence of at least one those sections: DCBA, DCLI, DCNV, DCCV, DELO
+┌ Warning: [variant_14] OTHER_ERROR
+│   exception =
+│    ANAREDE: Active generator with QMIN < QMAX found in a PQ bus. Verify data from Bus 2.
+│    Stacktrace:
+│      [1] error(s::String)
+│        @ Base ./error.jl:35
+│      [2] _pwf2pm_corrections_PQ!(pm_data::Dict{String, Any}, software::ANAREDE)
+│        @ PWF ~/.julia/dev/PWF/src/pwf2pm/correct/anarede.jl:74
+│      [3] _pwf2pm_corrections!
+│        @ ~/.julia/dev/PWF/src/pwf2pm/correct/correct.jl:50 [inlined]
+│      [4] _parse_pwf_to_powermodels(pwf_data::Dict{String, Any}; validate::Bool, software::Type{ANAREDE}, add_control_data::Bool)
+│        @ PWF ~/.julia/dev/PWF/src/pwf2pm/pwf2pm.jl:52
+│      [5] #parse_pwf_to_powermodels#117
+│        @ ~/.julia/dev/PWF/src/pwf2pm/pwf2pm.jl:73 [inlined]
+│      [6] #parse_file#121
+│        @ ~/.julia/dev/PWF/src/PWF.jl:41 [inlined]
+│      [7] parse_file(filename::String)
+│        @ PWF ~/.julia/dev/PWF/src/PWF.jl:40
+│      [8] top-level scope
+│        @ ~/pibic-opf-2025/powerflow/Codes/PF_Formulation/runner/variant_14_OPF_PM.jl:32
+│      [9] include(mod::Module, _path::String)
+│        @ Base ./Base.jl:419
+│     [10] exec_options(opts::Base.JLOptions)
+│        @ Base ./client.jl:303
+│     [11] _start()
+│        @ Base ./client.jl:522
+└ @ Main ~/pibic-opf-2025/powerflow/Codes/PF_Formulation/runner/variant_14_OPF_PM.jl:144

@@ -1,0 +1,2 @@
+caso,script,termination_status,solve_time_s,objective,iteracoes,p_loss_total_pu
+9bus_transformer_fields.pwf,14,LOCALLY_SOLVED,2.7574961185455322,317.3092660934878,NaN,0.0230926865814165

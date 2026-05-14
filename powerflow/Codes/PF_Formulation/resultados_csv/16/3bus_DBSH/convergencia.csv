@@ -1,0 +1,2 @@
+caso,script,termination_status,solve_time_s,objective,iteracoes,p_loss_total_pu
+3bus_DBSH.pwf,16,LOCALLY_SOLVED,2.668415069580078,1.301414633034177e-17,NaN,0.029185215729453873

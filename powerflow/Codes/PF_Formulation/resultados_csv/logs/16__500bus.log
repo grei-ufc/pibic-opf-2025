@@ -1,0 +1,194 @@
+[variant_16] case=500bus.pwf  out=/Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/PF_Formulation/resultados_csv/16/500bus
+1. Lendo arquivo PWF: /Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/data/500bus.pwf
+[info | PWF]: Populating defaults
+[warn | PWF]: Only one limit voltage group definded, each bus will be considered as part of the group  A, regardless of its defined group
+[warn | PWF]: Only one base voltage group definded, each bus will be considered as part of the group  A, regardless of its defined group
+[warn | PWF]: DC line will not be parsed due to the absence of at least one those sections: DCBA, DCLI, DCNV, DCCV, DELO
+[warn | PowerModels]: removing zero rate_a limit on branch 407
+[warn | PowerModels]: removing zero rate_b limit on branch 407
+[warn | PowerModels]: removing zero rate_c limit on branch 407
+[warn | PowerModels]: removing zero rate_a limit on branch 416
+[warn | PowerModels]: removing zero rate_b limit on branch 416
+[warn | PowerModels]: removing zero rate_c limit on branch 416
+[warn | PowerModels]: removing zero rate_a limit on branch 300
+[warn | PowerModels]: removing zero rate_b limit on branch 300
+[warn | PowerModels]: removing zero rate_c limit on branch 300
+[warn | PowerModels]: removing zero rate_a limit on branch 35
+[warn | PowerModels]: removing zero rate_b limit on branch 35
+[warn | PowerModels]: removing zero rate_c limit on branch 35
+[warn | PowerModels]: removing zero rate_a limit on branch 461
+[warn | PowerModels]: removing zero rate_b limit on branch 461
+[warn | PowerModels]: removing zero rate_c limit on branch 461
+[warn | PowerModels]: removing zero rate_a limit on branch 4
+[warn | PowerModels]: removing zero rate_b limit on branch 4
+[warn | PowerModels]: removing zero rate_c limit on branch 4
+[warn | PowerModels]: removing zero rate_a limit on branch 382
+[warn | PowerModels]: removing zero rate_b limit on branch 382
+[warn | PowerModels]: removing zero rate_c limit on branch 382
+[warn | PowerModels]: removing zero rate_a limit on branch 313
+[warn | PowerModels]: removing zero rate_b limit on branch 313
+[warn | PowerModels]: removing zero rate_c limit on branch 313
+[warn | PowerModels]: removing zero rate_a limit on branch 156
+[warn | PowerModels]: removing zero rate_b limit on branch 156
+[warn | PowerModels]: removing zero rate_c limit on branch 156
+[info | PowerModels]: updated generator 32 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 29 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 1 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 54 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 78 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 81 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 2 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 74 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 41 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 65 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 51 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 53 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 27 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 75 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 42 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 33 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 28 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 50 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 52 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 63 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 88 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 26 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 10 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 77 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 24 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 87 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 58 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 25 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 23 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 49 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 59 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 5 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 31 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 89 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 62 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 43 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 90 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 39 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 34 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 44 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 55 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 86 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 17 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 71 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 37 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 47 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 9 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 73 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 82 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 12 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 79 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 20 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 6 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 84 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 80 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 70 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 14 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 7 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 57 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 8 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 64 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 19 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 69 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 60 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 4 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 22 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 11 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 35 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 13 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 15 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 61 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 67 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 16 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 40 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 21 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 38 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 46 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 72 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 83 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 45 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 68 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 56 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 36 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 66 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 76 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 85 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 48 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 18 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 30 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 3 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+
+******************************************************************************
+This program contains Ipopt, a library for large-scale nonlinear optimization.
+ Ipopt is released as open source code under the Eclipse Public License (EPL).
+         For more information visit https://github.com/coin-or/Ipopt
+******************************************************************************
+
+This is Ipopt version 3.14.4, running with linear solver MUMPS 5.4.1.
+
+Number of nonzeros in equality constraint Jacobian...:     7314
+Number of nonzeros in inequality constraint Jacobian.:        0
+Number of nonzeros in Lagrangian Hessian.............:    19836
+
+Total number of variables............................:     1555
+                     variables with only lower bounds:        0
+                variables with lower and upper bounds:      555
+                     variables with only upper bounds:        0
+Total number of equality constraints.................:     1090
+Total number of inequality constraints...............:        0
+        inequality constraints with only lower bounds:        0
+   inequality constraints with lower and upper bounds:        0
+        inequality constraints with only upper bounds:        0
+
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+   0  0.0000000e+00 9.03e+00 0.00e+00  -1.0 0.00e+00    -  0.00e+00 0.00e+00   0
+   1  1.3148077e+00 8.50e+00 4.70e+01  -1.0 2.58e+00    -  8.29e-02 5.92e-02f  1
+   2  7.5702813e+00 7.56e+00 1.10e+02  -1.0 2.41e+00    -  6.43e-02 1.10e-01h  1
+   3  7.7644755e+00 7.54e+00 8.62e+02  -1.0 2.11e+00    -  2.22e-01 2.77e-03h  1
+   4  9.3258616e+00 7.39e+00 4.59e+03  -1.0 2.10e+00    -  4.88e-01 1.99e-02h  1
+   5  3.0279790e+01 6.63e+00 8.10e+03  -1.0 2.06e+00    -  5.31e-01 1.03e-01h  1
+   6  1.5103121e+02 4.97e+00 6.83e+03  -1.0 1.82e+00    -  4.55e-01 2.51e-01h  1
+   7  2.6331683e+02 3.92e+00 6.13e+03  -1.0 1.32e+00    -  1.00e+00 2.11e-01h  1
+   8  5.6354521e+02 1.79e+00 3.42e+03  -1.0 1.02e+00    -  1.00e+00 5.43e-01h  1
+   9  8.2410445e+02 9.16e-03 1.15e+03  -1.0 4.42e-01    -  1.00e+00 1.00e+00h  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  10  8.0492360e+02 4.17e-06 1.37e+00  -1.0 2.08e-02    -  1.00e+00 1.00e+00f  1
+  11  8.0379677e+02 2.71e-07 3.60e-02  -1.7 5.25e-03    -  1.00e+00 1.00e+00f  1
+  12  8.0337732e+02 1.27e-07 1.60e-02  -2.5 3.76e-03    -  1.00e+00 1.00e+00f  1
+  13  8.0329960e+02 1.43e-08 6.40e-01  -3.8 1.28e-03    -  9.46e-01 1.00e+00f  1
+  14  8.0329687e+02 2.11e-09 8.20e-04  -3.8 1.71e-04    -  1.00e+00 1.00e+00f  1
+  15  8.0329396e+02 7.23e-10 3.35e-02  -5.7 9.89e-05    -  9.78e-01 1.00e+00f  1
+  16  8.0329391e+02 1.81e-10 7.08e-05  -5.7 4.99e-05    -  1.00e+00 1.00e+00f  1
+  17  8.0329390e+02 3.93e-11 1.54e-05  -5.7 2.32e-05    -  1.00e+00 1.00e+00h  1
+
+Number of Iterations....: 17
+
+                                   (scaled)                 (unscaled)
+Objective...............:   8.0329390142613192e+02    8.0329390142613192e+02
+Dual infeasibility......:   1.5429614891801183e-05    1.5429614891801183e-05
+Constraint violation....:   3.9256924100339319e-11    3.9256924100339319e-11
+Variable bound violation:   9.8346595062571290e-09    9.8346595062571290e-09
+Complementarity.........:   9.5961258818782644e-06    9.5961258818782644e-06
+Overall NLP error.......:   9.5961258818782644e-06    1.5429614891801183e-05
+
+
+Number of objective function evaluations             = 18
+Number of objective gradient evaluations             = 18
+Number of equality constraint evaluations            = 18
+Number of inequality constraint evaluations          = 0
+Number of equality constraint Jacobian evaluations   = 18
+Number of inequality constraint Jacobian evaluations = 0
+Number of Lagrangian Hessian evaluations             = 17
+Total seconds in IPOPT                               = 4.486
+
+EXIT: Optimal Solution Found.
+2. Criando variáveis...
+3. Montando equações de fluxo (AC Polar)...
+4. Montando balanço nodal (Kirchhoff)...
+5. Resolvendo...
+Status=LOCALLY_SOLVED  solve_time=4.487036943435669
+[variant_16] OK  barras=500  ramos=597  p_loss_total=0.8636592472819676

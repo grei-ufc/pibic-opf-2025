@@ -1,0 +1,90 @@
+[variant_16] case=3bus_DCline.pwf  out=/Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/PF_Formulation/resultados_csv/16/3bus_DCline
+1. Lendo arquivo PWF: /Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/data/3bus_DCline.pwf
+[info | PWF]: Populating defaults
+[warn | PWF]: DGER not found, setting pmin as 0.0 MW and pmax as 99999.0 MW
+[info | PowerModels]: removing 3 cost terms from dcline 1: Float64[]
+-> Demovendo 1 barras slack para PV.
+[info | PowerModels]: updated generator 1 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 2 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated dcline 1 cost function with order 0 to a function of order 3: [0.0, 0.0, 0.0]
+
+******************************************************************************
+This program contains Ipopt, a library for large-scale nonlinear optimization.
+ Ipopt is released as open source code under the Eclipse Public License (EPL).
+         For more information visit https://github.com/coin-or/Ipopt
+******************************************************************************
+
+This is Ipopt version 3.14.4, running with linear solver MUMPS 5.4.1.
+
+Number of nonzeros in equality constraint Jacobian...:       32
+Number of nonzeros in inequality constraint Jacobian.:        0
+Number of nonzeros in Lagrangian Hessian.............:       61
+
+Total number of variables............................:       11
+                     variables with only lower bounds:        0
+                variables with lower and upper bounds:        5
+                     variables with only upper bounds:        0
+Total number of equality constraints.................:        8
+Total number of inequality constraints...............:        0
+        inequality constraints with only lower bounds:        0
+   inequality constraints with lower and upper bounds:        0
+        inequality constraints with only upper bounds:        0
+
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+   0  0.0000000e+00 6.31e+00 0.00e+00  -1.0 0.00e+00    -  0.00e+00 0.00e+00   0
+   1  1.3076711e-05 5.28e+00 3.62e+00  -1.0 6.53e+00    -  1.96e-01 1.67e-01h  1
+   2  5.6538405e-05 5.27e+00 1.56e+02  -1.0 5.22e+00    -  1.72e-01 2.16e-03h  1
+   3  1.0212774e-01 5.27e+00 5.23e+04  -1.0 3.21e+00    -  9.03e-02 2.73e-04h  1
+   4  9.9171054e+03 4.87e+00 1.02e+05  -1.0 3.04e+00    -  1.74e-01 8.01e-02h  1
+   5  1.0090386e+04 4.87e+00 2.73e+05  -1.0 3.24e+00    -  3.81e-01 7.83e-04h  1
+   6  1.0306640e+04 4.87e+00 3.76e+05  -1.0 4.38e+00    -  9.78e-02 8.93e-04h  1
+   7  2.2572259e+04 4.70e+00 1.94e+06  -1.0 4.39e+00    -  4.80e-01 3.57e-02h  1
+   8  2.2739469e+04 4.70e+00 2.58e+06  -1.0 4.70e+00    -  1.35e-01 3.72e-04h  1
+   9  2.6802010e+04 4.67e+00 1.48e+07  -1.0 6.18e+00    -  2.50e-01 6.13e-03h  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  10  2.9283134e+06 3.42e+00 1.68e+07  -1.0 6.09e+00    -  4.37e-01 2.68e-01h  1
+  11  2.1132414e+07 1.02e+00 1.61e+07  -1.0 3.71e+00    -  9.92e-01 1.00e+00h  1
+  12  1.9269624e+07 9.04e-01 1.42e+07  -1.0 2.67e+00    -  1.82e-01 1.18e-01f  1
+  13  1.9252402e+07 9.03e-01 1.42e+07  -1.0 2.59e+00    -  1.71e-03 1.18e-03f  1
+  14  1.9252231e+07 9.03e-01 1.42e+07  -1.0 2.61e+00    -  1.75e-05 1.17e-05f  1
+  15  1.9252228e+07 9.03e-01 3.19e+07  -1.0 1.11e+00    -  1.00e+00 3.99e-07f  1
+  16  1.9252227e+07 9.03e-01 2.14e+07  -1.0 1.32e+00    -  1.92e-08 1.22e-07f  1
+  17  1.9251825e+07 9.03e-01 3.09e+07  -1.0 1.16e+00    -  1.16e-07 9.16e-05f  1
+  18  1.5779655e+07 2.82e-01 2.56e+07  -1.0 1.16e+00    -  9.10e-05 8.38e-01f  1
+  19  1.5896877e+07 2.55e-01 8.01e+06  -1.0 3.92e-01    -  1.00e+00 9.53e-02h  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  20  1.5898053e+07 2.55e-01 7.90e+06  -1.0 3.55e-01    -  1.00e+00 1.05e-03h  1
+  21  1.5898064e+07 2.55e-01 5.65e+07  -1.0 3.55e-01    -  6.51e-03 1.05e-05h  1
+  22  1.5898096e+07 2.55e-01 6.82e+06  -1.0 3.16e-01    -  1.81e-07 1.80e-05h  1
+  23  1.6400465e+07 1.83e-01 1.10e+08  -1.0 3.17e-01    -  1.77e-05 2.83e-01h  1
+  24  1.7718267e+07 8.90e-04 5.80e+06  -1.0 2.28e-01    -  3.28e-01 1.00e+00h  1
+  25  1.7732196e+07 2.53e-07 1.06e+02  -1.0 1.65e-03    -  1.00e+00 1.00e+00h  1
+  26  1.7732199e+07 6.22e-15 8.27e-07  -5.7 4.03e-07    -  1.00e+00 1.00e+00h  1
+
+Number of Iterations....: 26
+
+                                   (scaled)                 (unscaled)
+Objective...............:   1.7732199067919560e+07    1.7732199067919560e+07
+Dual infeasibility......:   8.2701444625854492e-07    8.2701444625854492e-07
+Constraint violation....:   6.2172489379008766e-15    6.2172489379008766e-15
+Variable bound violation:   1.0999982258397267e-08    1.0999982258397267e-08
+Complementarity.........:   2.1118843024691678e-06    2.1118843024691678e-06
+Overall NLP error.......:   9.5566766783770688e-12    2.1118843024691678e-06
+
+
+Number of objective function evaluations             = 27
+Number of objective gradient evaluations             = 27
+Number of equality constraint evaluations            = 27
+Number of inequality constraint evaluations          = 0
+Number of equality constraint Jacobian evaluations   = 27
+Number of inequality constraint Jacobian evaluations = 0
+Number of Lagrangian Hessian evaluations             = 26
+Total seconds in IPOPT                               = 2.502
+
+EXIT: Optimal Solution Found.
+2. Criando variáveis...
+3. Montando equações de fluxo (AC Polar)...
+4. Montando balanço nodal (Kirchhoff)...
+5. Resolvendo...
+Status=LOCALLY_SOLVED  solve_time=2.5027689933776855
+[variant_16] OK  barras=3  ramos=2  p_loss_total=6.134444049100388

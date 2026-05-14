@@ -1,0 +1,2 @@
+caso,script,termination_status,solve_time_s,objective,iteracoes,p_loss_total_pu
+3bus_DSHL.pwf,18,LOCALLY_SOLVED,2.7391090393066406,4.207140539791801e6,NaN,0.17741921868352417

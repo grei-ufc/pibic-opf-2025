@@ -1,0 +1,2 @@
+caso,script,termination_status,solve_time_s,objective,iteracoes,p_loss_total_pu
+5busfrank_cphs.pwf,16,LOCALLY_SOLVED,3.3824710845947266,9.660950253178973e-15,NaN,0.045905898969778924

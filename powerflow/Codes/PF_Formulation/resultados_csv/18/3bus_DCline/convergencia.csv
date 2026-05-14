@@ -1,0 +1,2 @@
+caso,script,termination_status,solve_time_s,objective,iteracoes,p_loss_total_pu
+3bus_DCline.pwf,18,LOCALLY_SOLVED,2.667741060256958,1.772225806489378e7,NaN,6.134444049100377

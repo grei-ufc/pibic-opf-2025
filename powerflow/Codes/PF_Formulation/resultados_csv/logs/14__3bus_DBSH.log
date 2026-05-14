@@ -1,0 +1,18 @@
+[variant_14] case=3bus_DBSH.pwf  out=/Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/PF_Formulation/resultados_csv/14/3bus_DBSH
+1. Lendo arquivo PWF: /Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/data/3bus_DBSH.pwf
+[info | PWF]: Populating defaults
+[warn | PWF]: DGER not found, setting pmin as 0.0 MW and pmax as 99999.0 MW
+[warn | PWF]: DC line will not be parsed due to the absence of at least one those sections: DCBA, DCLI, DCNV, DCCV, DELO
+[info | PowerModels]: updated generator 1 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 2 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+
+******************************************************************************
+This program contains Ipopt, a library for large-scale nonlinear optimization.
+ Ipopt is released as open source code under the Eclipse Public License (EPL).
+         For more information visit https://github.com/coin-or/Ipopt
+******************************************************************************
+
+-> Demovendo 1 barras slack para PV.
+2. Resolvendo AC OPF...
+Status=LOCALLY_SOLVED  solve_time=1.1879069805145264  obj=33.20925798391717  iters=NaN
+[variant_14] OK  barras=3  ramos=3  p_loss_total=0.028192581522291427

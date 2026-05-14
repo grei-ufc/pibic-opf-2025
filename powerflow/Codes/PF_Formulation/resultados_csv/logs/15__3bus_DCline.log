@@ -1,0 +1,19 @@
+[variant_15] case=3bus_DCline.pwf  out=/Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/PF_Formulation/resultados_csv/15/3bus_DCline
+1. Lendo arquivo PWF: /Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/data/3bus_DCline.pwf
+[info | PWF]: Populating defaults
+[warn | PWF]: DGER not found, setting pmin as 0.0 MW and pmax as 99999.0 MW
+[info | PowerModels]: removing 3 cost terms from dcline 1: Float64[]
+[info | PowerModels]: updated generator 1 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 2 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated dcline 1 cost function with order 0 to a function of order 3: [0.0, 0.0, 0.0]
+
+******************************************************************************
+This program contains Ipopt, a library for large-scale nonlinear optimization.
+ Ipopt is released as open source code under the Eclipse Public License (EPL).
+         For more information visit https://github.com/coin-or/Ipopt
+******************************************************************************
+
+-> Demovendo 1 barras slack para PV.
+2. Resolvendo AC PF...
+Status=LOCALLY_INFEASIBLE  solve_time=2.0074219703674316  obj=0.0  iters=NaN
+[variant_15] não convergiu (status=LOCALLY_INFEASIBLE); somente convergencia.csv gravado.

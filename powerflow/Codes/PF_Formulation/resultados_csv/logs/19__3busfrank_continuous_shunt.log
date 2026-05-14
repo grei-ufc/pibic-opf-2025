@@ -1,0 +1,84 @@
+[variant_19] case=3busfrank_continuous_shunt.pwf  out=/Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/PF_Formulation/resultados_csv/19/3busfrank_continuous_shunt
+1. Lendo arquivo PWF: /Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/data/3busfrank_continuous_shunt.pwf
+[warn | PWF]: Currently there is no support for BASE   100. DASE   100. TEPA     .1 EXST     .4 TETP     5. TBPA     5. parsing
+[info | PWF]: Populating defaults
+[warn | PWF]: Parser doesn't have default values for section BASE   100. DASE   100. TEPA     .1 EXST     .4 TETP     5. TBPA     5.
+[warn | PWF]: DGER not found, setting pmin as 0.0 MW and pmax as 99999.0 MW
+[warn | PWF]: DC line will not be parsed due to the absence of at least one those sections: DCBA, DCLI, DCNV, DCCV, DELO
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 3. Adding generator power to load power and changing generator status to off
+[info | PowerModels]: updated generator 1 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 2 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 3 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+
+******************************************************************************
+This program contains Ipopt, a library for large-scale nonlinear optimization.
+ Ipopt is released as open source code under the Eclipse Public License (EPL).
+         For more information visit https://github.com/coin-or/Ipopt
+******************************************************************************
+
+This is Ipopt version 3.14.4, running with linear solver MUMPS 5.4.1.
+
+Number of nonzeros in equality constraint Jacobian...:       44
+Number of nonzeros in inequality constraint Jacobian.:       12
+Number of nonzeros in Lagrangian Hessian.............:       90
+
+Total number of variables............................:       24
+                     variables with only lower bounds:        6
+                variables with lower and upper bounds:        8
+                     variables with only upper bounds:        0
+Total number of equality constraints.................:        9
+Total number of inequality constraints...............:        6
+        inequality constraints with only lower bounds:        3
+   inequality constraints with lower and upper bounds:        0
+        inequality constraints with only upper bounds:        3
+
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+   0  4.4999901e+04 6.04e-01 4.34e+01  -1.0 0.00e+00    -  0.00e+00 0.00e+00   0
+   1  1.1887791e+03 5.96e-01 4.23e+01  -1.0 5.05e-01    -  6.60e-01 1.37e-02f  1
+   2  5.1562299e+04 4.46e-02 3.21e+01  -1.0 1.87e-01    -  5.85e-01 1.00e+00f  1
+   3  5.6284437e+04 2.40e-03 5.12e-01  -1.0 6.85e-02    -  1.00e+00 1.00e+00h  1
+   4  1.7266800e+04 1.58e-05 6.95e-04  -1.7 4.29e-02    -  1.00e+00 1.00e+00f  1
+   5  4.1592749e+03 1.46e-04 6.01e-04  -2.5 4.24e-02    -  1.00e+00 1.00e+00f  1
+   6  8.9413104e+02 2.78e-04 3.80e-04  -3.8 4.87e-02    -  1.00e+00 1.00e+00f  1
+   7  2.4979795e+02 6.51e-05 5.12e-05  -3.8 1.91e-02    -  1.00e+00 1.00e+00h  1
+   8  5.7749821e+01 3.06e-06 3.64e-06  -5.7 3.93e-03    -  1.00e+00 1.00e+00h  1
+   9  1.4750427e+01 1.90e-08 1.15e-08  -5.7 1.65e-03    -  1.00e+00 1.00e+00h  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  10  4.0358114e+00 5.83e-06 1.57e-08  -5.7 2.72e-03    -  1.00e+00 1.00e+00h  1
+  11  8.8685313e-01 1.27e-08 3.10e-09  -8.6 5.06e-04    -  1.00e+00 1.00e+00h  1
+  12  1.4726680e-01 4.56e-09 3.53e-12  -8.6 2.24e-04    -  1.00e+00 1.00e+00h  1
+  13 -3.7621413e-02 5.32e-08 3.09e-13  -8.6 3.48e-04    -  1.00e+00 1.00e+00h  1
+  14 -8.3840526e-02 9.95e-11 2.51e-14  -8.6 5.86e-05    -  1.00e+00 1.00e+00h  1
+  15 -9.5388101e-02 4.22e-11 2.51e-14  -8.6 3.09e-05    -  1.00e+00 1.00e+00h  1
+  16 -9.8887380e-02 1.28e-11 1.39e-13 -10.0 1.68e-05    -  1.00e+00 1.00e+00h  1
+  17 -9.9701434e-02 3.15e-12 9.09e-16 -10.0 8.29e-06    -  1.00e+00 1.00e+00h  1
+  18 -9.9904385e-02 6.79e-13 9.09e-16 -10.0 3.95e-06    -  1.00e+00 1.00e+00h  1
+
+Number of Iterations....: 18
+
+                                   (scaled)                 (unscaled)
+Objective...............:  -9.9904384582909427e-07   -9.9904384582909414e-02
+Dual infeasibility......:   9.0911707415625154e-16    9.0911707415625141e-11
+Constraint violation....:   6.7867933495335819e-13    6.7867933495335819e-13
+Variable bound violation:   9.9990909090909101e-09    9.9990909090909101e-09
+Complementarity.........:   3.0789435805172562e-10    3.0789435805172561e-05
+Overall NLP error.......:   3.0789435805172562e-10    3.0789435805172561e-05
+
+
+Number of objective function evaluations             = 19
+Number of objective gradient evaluations             = 19
+Number of equality constraint evaluations            = 19
+Number of inequality constraint evaluations          = 19
+Number of equality constraint Jacobian evaluations   = 19
+Number of inequality constraint Jacobian evaluations = 19
+Number of Lagrangian Hessian evaluations             = 18
+Total seconds in IPOPT                               = 2.631
+
+EXIT: Optimal Solution Found.
+2. Criando variáveis...
+Criando variáveis de Corte de Carga (DERA)...
+3. Montando equações de fluxo (AC Polar com CTAP)...
+4. Montando balanço nodal com DERA...
+5. Resolvendo...
+Status=LOCALLY_SOLVED  solve_time=2.6322200298309326
+[variant_19] OK  barras=3  ramos=6  p_loss_total=0.01817086009699942

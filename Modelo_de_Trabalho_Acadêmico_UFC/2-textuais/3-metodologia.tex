@@ -1,199 +1,170 @@
 \chapter{Metodologia}
 \label{chap:metodologia}
 
-Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto.
+Este capítulo descreve o pipeline de software construído para implementar e comparar as seis formulações de fluxo de potência consideradas neste trabalho. A \autoref{sec:ambiente} apresenta o ambiente computacional em Julia e os pacotes utilizados. A \autoref{sec:pipeline} descreve o pipeline de execução, desde a leitura do arquivo PWF até a exportação dos resultados. A \autoref{sec:formulacoes} é o núcleo do capítulo: nela, é detalhada a formulação matemática de cada uma das seis variantes \textemdash duas baseadas em \textit{PowerModels.jl} e quatro \textit{hand-built} em JuMP \textemdash que, juntas, formam a progressão (14)$\rightarrow$(19) usada no \autoref{chap:resultados}. Por fim, a \autoref{sec:bateria-casos} descreve a bateria de vinte e cinco casos de teste e os critérios de comparação adotados.
 
-Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto.
+\section{Ambiente computacional}
+\label{sec:ambiente}
 
-\section{Exemplo de alíneas}\label{sec:exemplo-de-algoritmos-e-figuras}
+Toda a implementação foi realizada na linguagem Julia (versão 1.x, série estável), escolhida por aliar uma sintaxe de alto nível, voltada para computação científica, a um desempenho computacional comparável ao de linguagens compiladas. O ambiente de pacotes utilizado, definido em \texttt{Project.toml} e \texttt{Manifest.toml} na raiz do repositório, agrega:
 
-    Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto.
+\begin{alineascomponto}
+    \item \textit{PWF.jl} \textemdash leitura e parsing de arquivos no formato ANAREDE PWF, com extração de estruturas de controle (registros DOPC e DLIN) habilitada via \verb|add_control_data = true|;
+    \item \textit{PowerModels.jl} \textemdash construção da estrutura de referência (\verb|build_ref|) sobre os dados parseados e oferta das funções \verb|solve_ac_opf| e \verb|solve_ac_pf| que implementam as duas formulações de referência;
+    \item \textit{JuMP.jl} \textemdash linguagem de modelagem matemática usada para escrever, à mão, as quatro formulações controladas;
+    \item \textit{Ipopt.jl} \textemdash interface Julia para o \textit{solver} de programação não linear baseado em método de pontos interiores;
+    \item \textit{CSV.jl} e \textit{DataFrames.jl} \textemdash exportação dos resultados para arquivos CSV.
+\end{alineascomponto}
 
-    %\begin{algorithm}[h!]
-    %	\SetSpacedAlgorithm
-    %	\caption{\label{exemplo-de-algoritmo}Como escrever algoritmos no \LaTeX2e}
-    %	\Entrada{o proprio texto}
-    %	\Saida{como escrever algoritmos com  Latex:}% \LaTeX2e }
-    %	\Inicio{
-    %		inicialização;
-    %		\Repita{fim do texto}{
-    %			leia o atual;
-    %			\Se{entendeu}{
-    %				vá para o proximo\;
-    %				próximo se torna o atual;}
-    %			\Senao{volte ao início da seção;}
-    %		}
-    %	}	
-    %\end{algorithm}
+A escolha do Ipopt como \textit{solver} se justifica por três fatores: (i) é \textit{open-source} e amplamente utilizado em problemas NLP de SEP; (ii) suporta nativamente expressões não lineares no JuMP via \verb|@NLexpression| e \verb|@NLconstraint|; e (iii) é o \textit{solver} adotado por padrão pelo \textit{PowerModels.jl} em suas formulações AC, garantindo uma comparação justa entre as referências e as formulações \textit{hand-built}. As opções utilizadas são \verb|max_iter = 3000|, \verb|tol = 1e-5| e \verb|print_level = 5|. Esses valores foram escolhidos de forma permissiva por causa do porte do caso \textit{01 MAXIMA NOTURNA\_DEZ25} (cerca de seis mil barras), no qual tolerâncias mais apertadas comprometem a convergência.
 
-    Texto texto texto texto texto texto texto texto texto texto texto.
+\section{Pipeline de execução}
+\label{sec:pipeline}
 
-    %\begin{algorithm}[H]
-    %	\Entrada{o proprio texto}
-    %	\Saida{como escrever algoritmos com \LaTeX2e }
-    %	\Inicio{
-    %		inicialização\;
-    %		\Repita{fim do texto}{
-    %			leia o atual\;
-    %			\Se{entendeu}{
-    %				vá para o próximo\;
-    %				próximo se torna o atual\;}
-    %			\Senao{volte ao início da seção\;}
-    %		}
-    %	}
-    %	\caption{Exemplo de Algoritmo Versao 02}
-    %\end{algorithm}
+Cada uma das seis formulações está implementada como um \textit{script} Julia auto-contido em \verb|powerflow/Codes/PF_Formulation/|, seguindo a mesma estrutura sequencial:
 
-    %\begin{algorithm}
-    %	\begin{algorithmic}
-    %	\Entrada{o proprio texto}
-    %	\Saida{como escrever algoritmos com \LaTeX2e }	
-    %	\end{algorithmic}
-    %\end{algorithm}
+\begin{alineascomnumero}
+    \item \textbf{Leitura do PWF}: \verb|PWF.parse_file(caminho; add_control_data = true)| produz um dicionário com a topologia da rede, os dados de gerador, carga e ramo, além das estruturas de controle DOPC/DLIN;
+    \item \textbf{Saneamento topológico}: \verb|PowerModels.select_largest_component!(data)| descarta ilhas isoladas, mantendo apenas a rede principal conectada. Em seguida, se múltiplas barras forem marcadas como referência (\verb|bus_type == 3|), as excedentes são rebaixadas para PV (\verb|bus_type == 2|), preservando uma única barra \textit{slack}. Esse passo é necessário para o caso SIN, em que a leitura inicial pode marcar várias barras como referência;
+    \item \textbf{Padronização de custos}: \verb|standardize_cost_terms!(data, order=2)| garante que todos os geradores tenham curvas de custo quadráticas;
+    \item \textbf{Construção da estrutura de referência}: \verb|ref = PowerModels.build_ref(data)[:it][:pm][:nw][0]| materializa a estrutura indexada usada para iterar sobre barras, geradores, ramos e cargas;
+    \item \textbf{Construção do modelo}: criação das variáveis, expressões de fluxo e restrições no JuMP, conforme descrito na \autoref{sec:formulacoes};
+    \item \textbf{Resolução}: \verb|optimize!(model)|, com tempo de execução medido por \verb|@elapsed|;
+    \item \textbf{Exportação}: dois arquivos CSV são produzidos em \verb|resultados_csv/|: \verb|resultados_barras_SIN.csv|, com $V_i$, $\theta_i$, $p^g_i$, $q^g_i$, $p^d_i$, $q^d_i$ e os \textit{slacks} de cada barra, e \verb|resultados_fluxos_linhas_SIN.csv|, com $p_{ij}, q_{ij}, p_{ji}, q_{ji}$, perdas e \textit{tap} de cada ramo.
+\end{alineascomnumero}
 
-    Exemplo de alíneas com números:
+Os elos HVDC, presentes em vários casos de teste, têm um tratamento particular nas formulações baseadas em \textit{PowerModels} e nas \textit{hand-built}: as injeções $(p^{dc}_{ft}, q^{dc}_{ft})$ em cada extremidade são lidas do PWF e \textbf{fixadas} via \verb|JuMP.fix(...; force=true)|. Essa decisão segue a recomendação do CEPEL \textemdash documentada nas notas em \verb|powerflow/Codes/PF_Formulation/notes| \textemdash de tratar elos HVDC como condições de contorno do FP AC: as injeções já vêm pré-especificadas pelo fluxo base e liberá-las apenas amplia o Jacobiano sem trazer informação nova. O retificador recebe $p^g$ negativo e o inversor $p^g$ positivo.
 
-    \begin{alineascomnumero}
-	    \item Texto texto texto texto texto texto texto texto texto texto texto texto .
-	    \item Texto texto texto texto texto texto texto texto texto texto texto texto .
-	    \item Texto texto texto texto texto texto texto texto texto texto texto texto .
-	    \item Texto texto texto texto texto texto texto texto texto texto texto texto .
-	    \item Texto texto texto texto texto texto texto texto texto texto texto texto .
-	    \item Texto texto texto texto texto texto texto texto texto texto texto texto .
-    \end{alineascomnumero}
+\section{Formulações implementadas}
+\label{sec:formulacoes}
 
-    Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto.
+A progressão de seis formulações é nomeada por uma numeração ordinal, herdada da nomenclatura interna dos arquivos do repositório, conforme resume a \autoref{tab:progressao-formulacoes}.
 
-    Ou então figuras podem ser incorporadas de arquivos externos, como é o caso da \autoref{fig-grafico-1}. Se a figura que ser incluída se tratar de um diagrama, um gráfico ou uma ilustração que você mesmo produza, priorize o uso de imagens vetoriais no formato PDF. Com isso, o tamanho do arquivo final do trabalho será menor, e as imagens terão uma apresentação melhor, principalmente quando impressas, uma vez que imagens vetorias são perfeitamente escaláveis para qualquer dimensão. Nesse caso, se for utilizar o Microsoft Excel para produzir gráficos, ou o Microsoft Word para produzir ilustrações, exporte-os como PDF e os incorpore ao documento conforme o exemplo abaixo. No entanto, para manter a coerência no uso de software livre (já que você está usando LaTeX e abnTeX),  teste a ferramenta InkScape\index{InkScape}. ao CorelDraw\index{CorelDraw} ou ao Adobe Illustrator\index{Adobe! Illustrator}.  De todo modo, caso não seja possível  utilizar arquivos de imagens como PDF, utilize qualquer outro formato, como JPEG, GIF, BMP, etc.  Nesse caso, você pode tentar aprimorar as imagens incorporadas com o software livre \index{Gimp}Gimp. Ele é uma alternativa livre ao Adobe Photoshop\index{Adobe! Photoshop}.
+\begin{table}[!h]
+\captionsetup{width=15cm}
+\Caption{\label{tab:progressao-formulacoes} Progressão das formulações implementadas}
+\IBGEtab{}{
+    \begin{tabular}{cllll}
+        \toprule
+        \# & Arquivo & Engine & Tipo & Acrescenta \\
+        \midrule \midrule
+        14 & \texttt{(14)OPF\_PM.jl} & PowerModels & FPO AC & baseline FPO \\
+        15 & \texttt{(15)PF\_PM.jl.jl} & PowerModels & FP AC & baseline FP \\
+        16 & \texttt{(16)QLIM+VLIM.jl} & JuMP \textit{hand-built} & FP controlado & QLIM + VLIM \\
+        17 & \texttt{(17)QLIM+VLIM+CSCA.jl} & JuMP \textit{hand-built} & FP controlado & + CSCA \\
+        18 & \texttt{(18)QLIM+VLIM+CSCA+CTAP.jl} & JuMP \textit{hand-built} & FP controlado & + CTAP \\
+        19 & \texttt{(19)+DERA.jl} & JuMP \textit{hand-built} & FP controlado & + DERA \\
+        \bottomrule
+    \end{tabular}
+}{
+    \Fonte{elaborado pelo autor.}
+}
+\end{table}
 
-\section{Usando Fórmulas Matemáticas}
+A progressão é estritamente \emph{aditiva}: cada arquivo numerado parte do anterior e acrescenta um único bloco de variáveis e restrições. A leitura no \autoref{chap:resultados} fica simplificada porque qualquer divergência entre dois \textit{scripts} consecutivos pode ser atribuída exclusivamente ao novo controle introduzido.
 
-Para escrever um símbolo matemático no texto, escreva símbolo entre cifrões, por exemplo, $\alpha$, $\beta$ e $\gamma$ são símbolo do alfabeto grego. Se você quiser inserir equações enumeradas, siga a estrutura de
+\subsection{Formulação (14): FPO AC de referência}
+\label{subsec:f14}
+
+A formulação (14) é uma chamada direta a \verb|PowerModels.solve_ac_opf(data, optimizer)|, sem reconstrução manual de variáveis ou restrições. O modelo subjacente é exatamente o FPO AC canônico descrito na Equação \eqref{eq:fpo}: minimiza $\sum_k c_k(p^g_k)$ sujeito ao balanço nodal e aos limites caixa em $V$, $p^g$, $q^g$ e $|s_{ij}|$. Esta formulação serve como \textit{baseline} de FPO \textemdash não incorpora nenhuma das ações de controle ANAREDE da \autoref{sec:acoes-controle}, mas oferece o ponto de operação economicamente ótimo da rede tal como definido pela literatura clássica.
+
+\subsection{Formulação (15): FP AC clássico}
+\label{subsec:f15}
+
+A formulação (15) é uma chamada a \verb|PowerModels.solve_ac_pf(data, optimizer)|. Diferentemente de (14), não há otimização: a função objetivo é vazia e o problema reduz-se à resolução do sistema algébrico de FP do tipo Newton, com $V$ e $\theta$ como incógnitas em barras PQ, $\theta$ em barras PV e nada em barras \textit{slack}. (15) representa o ponto de operação ``puro'' da rede, sem qualquer otimização de custos ou ação de controle.
+
+\subsection{Formulação (16): FP controlado QLIM + VLIM}
+\label{subsec:f16}
+
+A partir de (16), o trabalho abandona o \textit{PowerModels.jl} como motor de resolução e passa a construir o modelo diretamente em JuMP. As variáveis primárias são as mesmas do FP clássico:
+
 \begin{equation}
-    \label{eq:indices}
-	k_{n+1} = n^2 + k_n^2 - k_{n-1}.
+\label{eq:vars-base}
+V_i \in [V^{\min}_i, V^{\max}_i], \quad \theta_i \in \mathbb{R}, \quad p^g_k \in [p^{g,\min}_k, p^{g,\max}_k], \quad q^g_k \in [q^{g,\min}_k, q^{g,\max}_k],
 \end{equation}
-Observe a pontuação, pois a equação faz parte da frase e do parágrafo. Como a equação faz parte da frase, não se utiliza o \textit{label} numérico \ref{eq:indices}. 
 
-Quando for citar a Equação \ref{eq:indices} novamente no texto, utiliza-se o \textit{label} numérico. Repare que a palavra ``Equação'' foi escrita com ``E'' maiúsculo. 
+\noindent inicializadas com os valores do PWF (\verb|start = ref[:bus][i]["vm"]|, etc.). Os fluxos $p_{ij}, q_{ij}$ são definidos como \verb|@NLexpression| sobre as Equações \eqref{eq:p-ramo}--\eqref{eq:q-ramo}, e as Equações \eqref{eq:balanco-p}--\eqref{eq:balanco-q} são impostas via \verb|@NLconstraint|.
 
-Um exemplo de equações com frações é dado por
+A novidade de (16) está na introdução das variáveis de folga:
+
 \begin{equation}
-	\label{eq:fracao}
-		\begin{aligned}
-			x = a_0 + \cfrac{1}{a_1
-				+ \cfrac{1}{a_2
-					+ \cfrac{1}{a_3 + \cfrac{1}{a_4} } } }.
-		\end{aligned}
-	\end{equation}
+\label{eq:slacks-vlim-qlim}
+s^v_i \in \mathbb{R}, \;\; \forall i \in \mathcal{N}^{gen}, \qquad s^q_l \in \mathbb{R}, \;\; \forall l \in \mathcal{L},
+\end{equation}
 
-Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto
-	\begin{equation}
-		\begin{aligned}
-			k_{n+1} = n^2 + k_n^2 - k_{n-1}.
-		\end{aligned}
-	\end{equation}
-	
-Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto
-	\begin{equation}
-	\label{eq:trigo}
-		\begin{aligned}
-			\cos (2\theta) = \cos^2 \theta - \sin^2 \theta
-		\end{aligned}.
-	\end{equation}
-	
-Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto
-	\begin{equation}
-	\label{eq:matriz}
-		\begin{aligned}
-			A_{m,n} =
-			\begin{pmatrix}
-			a_{1,1} & a_{1,2} & \cdots & a_{1,n} \\
-			a_{2,1} & a_{2,2} & \cdots & a_{2,n} \\
-			\vdots  & \vdots  & \ddots & \vdots  \\
-			a_{m,1} & a_{m,2} & \cdots & a_{m,n}
-			\end{pmatrix}
-		\end{aligned}.
-	\end{equation}
+\noindent e da restrição de \textit{setpoint} de tensão para cada barra de geração:
 
-Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto
-	\begin{equation}
-	\label{eq:sistema}
-		\begin{aligned}
-			f(n) = \left\{ 
-			\begin{array}{l l}
-			n/2 & \quad \text{if $n$ is even}\\
-			-(n+1)/2 & \quad \text{if $n$ is odd}
-			\end{array} \right.
-		\end{aligned}.
-	\end{equation}
-Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto
+\begin{equation}
+\label{eq:setpoint-vlim}
+V_i = V^{ref}_i + s^v_i, \qquad \forall i \in \mathcal{N}^{gen},
+\end{equation}
 
-%\section{Usando Algoritmos}
+\noindent onde $V^{ref}_i$ é o valor de tensão lido do PWF. O slack $s^q_l$ entra subtraindo no balanço reativo da Equação \eqref{eq:balanco-q}, atuando como ``corte de reativo'' quando o gerador associado satura. Em barras \textit{slack}, $\theta_i$ é fixado em zero via \verb|fix(va[i], 0.0; force=true)|. Em geradores \textit{slack}, os limites de $p^g_k$ são removidos para acomodar o balanço global de potência ativa.
 
-%\begin{algorithm}[h!]
-%	\SetSpacedAlgorithm
-%	\caption{\label{alg:algoritmo_de_colonica_de_formigas}Algoritmo de Otimização por Colônia de Formiga}
-%	\Entrada{Entrada do Algoritmo}
-%	\Saida{Saida do Algoritmo}
-%	\Inicio{
-%		Atribua os valores dos parâmetros\;
-%		Inicialize as trilhas de feromônios\;
-%		\Enqto{não atingir o critério de parada}{
-%			\Para{cada formiga}{
-%				Construa as Soluções\;
-%			}
-%			Aplique Busca Local (Opcional)\;
-%			Atualize o Feromônio\;
-%		}	
-%	}		
-%\end{algorithm}
+A função objetivo é puramente de penalidade quadrática:
 
-\section{Usando Código-fonte}
+\begin{equation}
+\label{eq:obj-16}
+\min \;\; \rho \, \sum_{i \in \mathcal{N}^{gen}} (s^v_i)^2 \;+\; \rho \, \sum_{l \in \mathcal{L}} (s^q_l)^2,
+\end{equation}
 
-Um exemplo de código-fonte, ou código de programação encontra-se no Apendice \ref{ap:A}
+\noindent com $\rho = 10^6$. Esse valor de penalidade é alto o suficiente para que, sempre que o problema for factível com $s^v = s^q = 0$, a solução ótima respeite os \textit{setpoints}, mas baixo o suficiente para não comprometer o condicionamento numérico do problema.
 
- 
-\section{Usando Teoremas, Proposições, etc}
+\subsection{Formulação (17): adiciona CSCA}
+\label{subsec:f17}
 
- Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto.
+A formulação (17) parte de (16) e introduz o controle de bancos \textit{shunt} chaveados. Para cada banco $s \in \mathcal{S}$, é criada a variável contínua
 
-\begin{teo}[Pitágoras]
-	Em todo triângulo retângulo o quadrado do comprimento da
-	hipotenusa é igual a soma dos quadrados dos comprimentos dos catetos. Usando o Apêndice \ref{ap:C}
-\end{teo}
+\begin{equation}
+\label{eq:csca-var}
+b^{sh}_s \in [b^{sh,\min}_s, b^{sh,\max}_s],
+\end{equation}
 
+\noindent e o termo $b^{sh}_s V_i^2$ é adicionado ao balanço reativo da Equação \eqref{eq:balanco-q} na barra $i$ hospedeira. A função objetivo continua sendo a Equação \eqref{eq:obj-16}; nenhum novo termo de penalidade é introduzido, porque $b^{sh}_s$ é uma variável de decisão livre dentro do intervalo, não uma folga. O efeito é que o \textit{solver} ajusta o valor de cada banco \textit{shunt} para minimizar o desvio das tensões em relação aos \textit{setpoints} \textemdash exatamente o papel que o CSCA do ANAREDE desempenha por meio de chaveamentos discretos. O caráter discreto do controle real é deixado para uma etapa de discretização posterior, fora do escopo deste trabalho.
 
-Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto.
+\subsection{Formulação (18): adiciona CTAP}
+\label{subsec:f18}
 
-\begin{teo}[Fermat]
-	Não existem inteiros $n > 2$, e $x, y, z$ tais que $x^n + y^n = z$
-\end{teo}
+A formulação (18) acrescenta a (17) o controle automático de \textit{tap} de transformadores. Para cada ramo $(i,j) \in \mathcal{B}^{tap}$ classificado no PWF como transformador com OLTC, a razão $t_{ij}$, antes constante, passa a ser variável:
 
-Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto.
+\begin{equation}
+\label{eq:ctap-var}
+t_{ij} \in [t^{\min}_{ij}, t^{\max}_{ij}],
+\end{equation}
 
-\begin{prop}
-	Para demonstrar o Teorema de Pitágoras...
-\end{prop}
+\noindent e as expressões de fluxo \eqref{eq:p-ramo}--\eqref{eq:q-ramo} são reescritas com $t_{ij}$ no denominador como variável \textemdash o que adiciona um fator não linear adicional às equações já não lineares do balanço. Adicionalmente, uma restrição de \textit{setpoint} análoga à Equação \eqref{eq:setpoint-vlim} é imposta na barra controlada pelo \textit{tap}, com sua própria folga $s^t_{ij}$ que é incluída na função objetivo. O resultado é que o \textit{solver} encontra simultaneamente os \textit{taps} e os pontos de operação compatíveis, em uma única resolução NLP \textemdash em contraste com o ANAREDE, que itera externamente entre o FP e o ajuste dos \textit{taps}.
 
-Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto.
+\subsection{Formulação (19): adiciona DERA}
+\label{subsec:f19}
 
-\begin{exem}
-	Este é um exemplo do uso do ambiente exem definido acima.
-\end{exem}
+A formulação (19) acrescenta a (18) os agregadores de geração distribuída. No PWF, cada DERA $d \in \mathcal{D}$ é descrito por uma barra hospedeira $i_d$ e por injeções $(p^{der}_d, q^{der}_d)$ que podem ser fixadas ou tratadas como variáveis. Na implementação adotada, $(p^{der}_d, q^{der}_d)$ são lidas do PWF e adicionadas como termos constantes positivos ao lado direito das Equações \eqref{eq:balanco-p}--\eqref{eq:balanco-q} na barra $i_d$. Não há decisão de despacho própria: o DERA contribui apenas como injeção fixa, refletindo a representação minimalista descrita na \autoref{subsec:dera}.
 
-Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto.
+\section{Bateria de casos e critérios de comparação}
+\label{sec:bateria-casos}
 
+\subsection{Casos de teste}
+\label{subsec:casos-teste}
 
-\begin{xdefinicao}
-	Definimos o produto de ...
-\end{xdefinicao}
+A bateria de testes utilizada nas comparações do \autoref{chap:resultados} é composta por vinte e cinco arquivos PWF localizados em \verb|powerflow/Codes/data/|, agrupados em três faixas de porte:
 
-Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto.
+\begin{alineascomponto}
+    \item \textbf{Redes pedagógicas (3 a 9 barras)}: \texttt{3bus.pwf} e suas variantes (\texttt{3bus\_DBSH}, \texttt{3bus\_DCER}, \texttt{3bus\_DCSC}, \texttt{3bus\_DCline}, \texttt{3bus\_DSHL}, \texttt{3bus\_corrections}, \texttt{3bus\_shunt\_fields}), os \texttt{3busfrank}, \texttt{4busfrank\_vlim}, \texttt{5busfrank} e variantes (\texttt{5busfrank\_cphs}, \texttt{5busfrank\_csca}, \texttt{5busfrank\_ctaf}, \texttt{5busfrank\_ctap}), \texttt{9bus} e \texttt{9bus\_transformer\_fields};
+    \item \textbf{Redes de médio porte}: \texttt{300bus.pwf} (300 barras, baseado no IEEE 300-bus) e \texttt{500bus.pwf};
+    \item \textbf{\textit{Snapshot} do SIN}: \texttt{01 MAXIMA NOTURNA\_DEZ25.PWF}, com cerca de 6.000 barras, representando a condição operativa de máxima noturna do SIN em dezembro de 2025;
+    \item \textbf{Casos sintéticos de \textit{stress}}: \texttt{test\_defaults.pwf}, \texttt{test\_line\_shunt.pwf} e \texttt{test\_system.pwf}, projetados para isolar comportamentos específicos do parser e dos controles.
+\end{alineascomponto}
 
-\section{Usando Questões} 
+Para cada caso, todas as seis formulações são executadas com a mesma configuração de \textit{solver}, a mesma versão do parser \textit{PWF.jl} e a mesma máquina, garantindo a comparabilidade dos tempos e dos status de convergência.
 
-Um exemplo de questionário encontra-se no Apêndice \ref{ap:B}.
+\subsection{Critérios de comparação}
+\label{subsec:criterios}
 
-%Movido para o Apêndice
+Para cada par (caso, formulação), três informações são registradas:
 
+\begin{alineascomnumero}
+    \item \textbf{Status de convergência}: codificado em sete categorias \textemdash \textbf{OK} (LOCALLY\_SOLVED), \textbf{INF} (INFEASIBLE/LOCALLY\_INFEASIBLE), \textbf{ITL} (ITERATION\_LIMIT), \textbf{TIM} (TIME\_LIMIT), \textbf{KIL} (TIMEOUT\_KILLED), \textbf{CRA} (SUBPROCESS\_CRASH), \textbf{INV} (INVALID\_MODEL) e \textbf{ERR} (OTHER\_ERROR);
+    \item \textbf{\textit{Cluster} de equivalência numérica}: para cada caso, as formulações que convergiram são particionadas em grupos onde duas formulações estão no mesmo grupo se, para todas as barras, $|\Delta V| \le 10^{-4}$ e $|\Delta \theta| \le 10^{-4}$ \textemdash além de equivalência análoga em $p^g, q^g$ e nos fluxos de ramos. \textit{Clusters} distintos representam soluções numericamente diferentes da mesma rede;
+    \item \textbf{Análise barra a barra}: para os casos em que pelo menos uma das referências (14) ou (15) convergiu, são identificadas as barras nas quais as formulações (16)--(19) divergem de \emph{ambas} as referências por mais de $10^{-4}$ em módulo, em $V$ ou $\theta$. Essa análise mostra \emph{onde} as ações de controle deslocam o ponto de operação em relação à referência sem controles.
+\end{alineascomnumero}
+
+Os \textit{scripts} responsáveis por executar a bateria, agregar os resultados e gerar os \textit{relatórios} de convergência e de divergência barra a barra estão em \verb|powerflow/Codes/PF_Formulation/runner/|. As tabelas e análises do \autoref{chap:resultados} são extraídas dos relatórios diários gerados nessa pipeline (vide \verb|short-reports/| no repositório).

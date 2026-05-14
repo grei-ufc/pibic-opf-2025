@@ -1,155 +1,112 @@
-\chapter{Título do segundo capítulo}
+\chapter{Fundamentação Teórica}
 \label{cap:fundamentacao-teorica}
 
-Alguns autores preferem fazer uma ``fundamentação teórica'' no segundo capítulo, outros, preferem fazer uma ``revisão da literatura''. Entretanto, isto é particular de cada trabalho e o autor deve escolher o título mais adequado para o capítulo. Consultar o orientador é importante para determinar o título apropriado.
+Este capítulo apresenta a base conceitual sobre a qual todo o restante do trabalho está construído. A \autoref{sec:rede-eletrica} define o modelo $\pi$ de rede e fixa a notação utilizada. A \autoref{sec:fp-ac} introduz o problema de Fluxo de Potência (FP) AC em coordenadas polares. A \autoref{sec:fpo-ac} estende o FP ao Fluxo de Potência Ótimo (FPO) e discute brevemente as principais relaxações disponíveis na literatura. Por fim, a \autoref{sec:acoes-controle} revisa as ações de controle do programa ANAREDE que motivam a construção das formulações \textit{hand-built} apresentadas no \autoref{chap:metodologia}.
 
-Evite começar da seção secundária, ou seja, não passe direto do título do capítulo para o título da seção secundária. Escreva um texto para introduzir as seções subsequentes. Lembre-se de utilizar primeira letra maiúscula quando estiver se referindo a um objeto com numeração específica como capítulo, seção, subseção, figura, tabela, quadro, equação, normalmente, se escreve a primeira letra maiúscula da palavra do objeto seguido do \textit{label}. Por exemplo, a Seção \ref{sec:citacoes} explica como fazer citações bibliográficas. Observe no código fonte deste texto como foi feita a referência cruzada. Isso permite enumerar a seção do modo automático o que facilita caso novas seções sejam criadas.  
+\section{Modelagem da rede elétrica}
+\label{sec:rede-eletrica}
 
-\section{Citações bibliográficas}\label{sec:citacoes}
+A rede elétrica é representada por um grafo $\mathcal{G} = (\mathcal{N}, \mathcal{B})$, em que o conjunto de nós $\mathcal{N}$ corresponde às barras do sistema e o conjunto de arestas $\mathcal{B}$ aos ramos AC, abrangendo tanto linhas de transmissão quanto transformadores em fase. Adicionalmente, $\mathcal{B}_{dc}$ representa elos HVDC, $\mathcal{G}$ o conjunto de geradores, $\mathcal{L}$ o conjunto de cargas e $\mathcal{S}$ o conjunto de bancos \textit{shunt}, cada elemento associado a uma barra de $\mathcal{N}$.
 
-    Esta frase mostra como citar um livro sobre descargas atmosféricas \cite{rakov2003lightning}. Também podem ser citados \textit{sites} como \citeonline{elat2015densidade}. Você precisa escrever o código da referência no arquivo "referencia.bib" dentro da pasta "elementos-pos-textuais". Veja esse, onde estão alguns exemplos que já foram testados.        
+Cada ramo $(i,j) \in \mathcal{B}$ é descrito pelo modelo $\pi$ clássico, com admitância série $y_{ij} = g_{ij} + j b_{ij}$, susceptâncias \textit{shunt} de extremidade $b^{fr}_{ij}$ e $b^{to}_{ij}$, condutâncias \textit{shunt} de extremidade $g^{fr}_{ij}$ e $g^{to}_{ij}$ e uma razão de transformação complexa $\bar{t}_{ij} = t_{ij} \, e^{j \phi_{ij}}$ que generaliza linhas e transformadores. Para uma linha simples, $t_{ij} = 1$ e $\phi_{ij} = 0$.
 
-    Referenciando outro livro \cite{LangtangenLogg2017}. Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto. Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto. Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto. Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto.
+A tensão complexa em cada barra é representada na forma fasorial $\bar{V}_i = V_i \, e^{j\theta_i}$, onde $V_i$ é a magnitude (em p.u.) e $\theta_i$ é o ângulo (em radianos). Esta é a representação polar adotada em todas as formulações deste trabalho. A representação complementar em coordenadas retangulares, $\bar{V}_i = e_i + j f_i$, embora útil em algumas relaxações, não será utilizada na implementação.
 
-    Referenciando outro site \cite{secretaria1999}. Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto. Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto. Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto. Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto. Citando uma norma \cite{NBR10520:2002}.
-        
-    Citação de duas referências que concordam entre si \cite{Almeida2018,Gondim2017}. Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto. Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto. Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto. Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto. Citando um manual \cite{manuais1989}. 
-        
-    Outro tipo de citação é a citação literal ou direta com mais de três linhas. Este tipo de citação deve ser destacada com recuo de $4~cm$ da margem esquerda com letra menor (tamanho 10), sem aspas e com espaçamento simples.  Para exemplificar esse tipo de citação, considere a afirmação de \citeonline{feitosa2016}:
-    \begin{citacao}
-        A cultura é o processo através do qual o homem cria o algo onde antes imperava o nada. Esse algo é toda complexidade de criações simbólicas, de sentidos e significados que damos às coisas e ao mundo. Um ``algo'' que não se sustenta se não se entender os processos culturais como mecanismos de mediação entre nós e os fenômenos. Assim, mais do que apenas um elemento da comunicação, a mediação é, por excelência, cultural. As diversas modalidades de mediação são apenas sotaques diferenciados dessa mediação cultural. Assim é a mediação informacional.
-    \end{citacao}
-        
-    A afirmação do parágrafo anterior também pode ser reproduzida com a citação na final como mostra o exemplo a seguir: 
-    \begin{citacao}
-        A cultura é o processo através do qual o homem cria o algo onde antes imperava o nada. Esse algo é toda complexidade de criações simbólicas, de sentidos e significados que damos às coisas e ao mundo. Um “algo” que não se sustenta se não se entender os processos culturais como mecanismos de mediação entre nós e os fenômenos. Assim, mais do que apenas um elemento da comunicação, a mediação é, por excelência, cultural. As diversas modalidades de mediação são apenas sotaques diferenciados dessa mediação cultural. Assim é a mediação informacional. \cite{feitosa2016}.
-    \end{citacao}
-        
-%Mais exemplos e opções de citações podem ser encontradas em:
-%        https://en.wikibooks.org/wiki/LaTeX/Bibliography_Management
-%        https://github.com/cfgnunes/latex-cefetmg/blob/master/latex-cefetmg/03-elementos-pos-textuais/apendices.tex            
+\section{Fluxo de Potência AC}
+\label{sec:fp-ac}
 
-\section{Inserindo figuras}\label{sec:figuras}
-    
-    A Figura \ref{fig:reitoria} apresenta a fotografia da reitoria da Universidade Federal do Ceará. Observe a estrutura do código para ver como inserir figuras. No título, comece especificando o tipo de figura. Por exemplo, fotografia, desenho, diagrama, fluxograma, gráfico e etc. O espaçamento entre linhas no título é de $1~pt$ (espaçamento simples), apenas a primeira letra da frase é maiúscula. As demais palavras são escritas com letra maiúsculas somente quando são nomes próprios e não há ponto final. 
-    
-    As margens do título da figura são delimitadas pelo tamanho da figura. Por isso, procure ajustar o tamanho da figura para preencher a largura delimitada pelas margens esquerda e direita da página que possui $16~cm$ de largura. Não esqueça de indicar fonte da figura. O autor deve evitar deixar figuras pequenas menores do que $7~cm$ de largura.
-    
-    A posição da figura deve ser o mais próximo logo após ter sido chamada no texto (a figura nunca deve aparecer antes de ter sido anunciada no texto). 
-    
-    %troque h pelo b ou t para mudar a posição da figura.
- 	\begin{figure}[h!] 
-   	    \captionsetup{width=16cm}%Da mesma largura que a figura
-		\Caption{\label{fig:reitoria} Fotografia da reitoria da Universidade Federal do Ceará}
-		\UFCfig{}{
-			\includegraphics[width=16cm]{figuras/exemplo-1}
-		}{
-			\Fonte{\citeonline{UFC2012}.}
-		}	
-	\end{figure}
-	
-    Texto1 texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto1.
+O problema de FP consiste em determinar o estado da rede $(V_i, \theta_i)_{i \in \mathcal{N}}$ a partir de injeções e tensões especificadas em cada barra. Classicamente, as barras são tipadas em três categorias: \textit{slack} (referência de ângulo, com $V$ e $\theta$ fixados), PV (com $V$ e $p^g$ especificados) e PQ (com $p^g$ e $q^g$ especificados, sendo $V$ e $\theta$ as incógnitas) \cite{vonMeier2006powersystems,gloverSarma2012power}.
 
-    Texto2 texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto. Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto2.
+Aplicando-se a Lei das Correntes de Kirchhoff em cada barra $i \in \mathcal{N}$ e expressando-se as injeções em termos da matriz de admitâncias nodais $\bar{Y}$, obtêm-se as duas equações de balanço de potência \textit{ativa} e \textit{reativa}:
 
-    Texto3 texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto. Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto3.
+\begin{equation}
+\label{eq:balanco-p}
+\sum_{(i,j) \in \mathcal{B}_i} p_{ij} \;=\; \sum_{k \in \mathcal{G}_i} p^g_k \;-\; \sum_{l \in \mathcal{L}_i} p^d_l \;-\; g^{sh}_i V_i^2,
+\end{equation}
 
-    Texto4 texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto. Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto4.
+\begin{equation}
+\label{eq:balanco-q}
+\sum_{(i,j) \in \mathcal{B}_i} q_{ij} \;=\; \sum_{k \in \mathcal{G}_i} q^g_k \;-\; \sum_{l \in \mathcal{L}_i} q^d_l \;+\; b^{sh}_i V_i^2,
+\end{equation}
 
-    A Figura \ref{fig:sondas} Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto. Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto3.
+onde $\mathcal{B}_i$ denota o conjunto de arcos incidentes à barra $i$, $\mathcal{G}_i$ e $\mathcal{L}_i$ os geradores e cargas conectados a $i$, e $g^{sh}_i$, $b^{sh}_i$ as condutância e susceptância \textit{shunt} agregadas na barra. Os fluxos $p_{ij}$ e $q_{ij}$ no terminal de envio do ramo $(i,j)$ são dados, no modelo $\pi$ com transformador, por:
 
-	\begin{figure}[h!]
-		\centering
-		\captionsetup{width=14cm}%Da mesma largura que a figura
-		\Caption{\label{fig:sondas} Gráfico da Atmosfera Superior}	
-		\UFCfig{}{
-			\includegraphics[width=14cm]{figuras/sondas}
-		}{
-			\Fonte{adaptado da \citeonline{NASA2016}.}}	
-	\end{figure}
+\begin{equation}
+\label{eq:p-ramo}
+p_{ij} \;=\; \frac{g_{ij} + g^{fr}_{ij}}{t_{ij}^2} \, V_i^2 \;-\; \frac{1}{t_{ij}} \Big[ g_{ij} \cos(\theta_i - \theta_j - \phi_{ij}) + b_{ij} \sin(\theta_i - \theta_j - \phi_{ij}) \Big] V_i V_j,
+\end{equation}
 
-    Texto5 texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto5.
+\begin{equation}
+\label{eq:q-ramo}
+q_{ij} \;=\; -\frac{b_{ij} + b^{fr}_{ij}}{t_{ij}^2} \, V_i^2 \;-\; \frac{1}{t_{ij}} \Big[ g_{ij} \sin(\theta_i - \theta_j - \phi_{ij}) - b_{ij} \cos(\theta_i - \theta_j - \phi_{ij}) \Big] V_i V_j.
+\end{equation}
 
-    Texto6 texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto5.
+Expressões análogas valem para o terminal $(j,i)$, com a respectiva troca de subscritos e a substituição de $g^{fr}, b^{fr}$ por $g^{to}, b^{to}$. As Equações \ref{eq:balanco-p}--\ref{eq:q-ramo} formam um sistema algébrico não linear em $(V_i, \theta_i)$, tradicionalmente resolvido por métodos iterativos do tipo Newton-Raphson ou Gauss-Seidel.
 
-    Texto7 texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto6.
+\section{Fluxo de Potência Ótimo}
+\label{sec:fpo-ac}
 
-    Evite terminar seções, capítulos e etc com figura. Procure escrever mais.
+O FPO estende o FP transformando $(V_i, \theta_i, p^g_k, q^g_k)$ em variáveis de decisão, sujeitas às equações de balanço (\ref{eq:balanco-p})--(\ref{eq:balanco-q}) como restrições de igualdade, e adicionando restrições de desigualdade que codificam os limites operacionais dos equipamentos. Em sua forma canônica AC \cite{molzahn2019survey}, o problema escreve-se como:
 
-\section{Inserindo tabelas}\label{sec:tabelas}
-    
-    A Tabela \ref{tab:exemplo-1}... texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto. Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto.
-	
-	\begin{table}[!h]
-	\captionsetup{width=7cm}%Deixe da mesma largura que a tabela
-	\Caption{\label{tab:exemplo-1} Um Exemplo de tabela alinhada que pode ser longa ou curta}%
-	\IBGEtab{}{%
-		\begin{tabular}{ccc}
-			\toprule
-			Nome & Nascimento & Documento \\
-			\midrule \midrule
-			Maria da Silva & 11/11/1111 & 111.111.111-11 \\
-			Maria da Silva & 11/11/1111 & 111.111.111-11 \\
-			Maria da Silva & 11/11/1111 & 111.111.111-11 \\
-			\bottomrule
-		\end{tabular}%
-	}{%
-	\Fonte{o autor.}%
-	\Nota{esta é uma nota, que diz que os dados são baseados na
-		regressão linear.}%
-	\Nota[Anotações]{uma anotação adicional, seguida de várias outras.}%
-    }
-    \end{table}
+\begin{equation}
+\label{eq:fpo}
+\begin{aligned}
+\min_{V,\theta,p^g,q^g} \quad & \sum_{k \in \mathcal{G}} c_k(p^g_k) \\
+\text{s.a.} \quad & \text{Equações de balanço } \eqref{eq:balanco-p}, \eqref{eq:balanco-q}, \\
+& V^{\min}_i \le V_i \le V^{\max}_i, & \forall i \in \mathcal{N}, \\
+& p^{g,\min}_k \le p^g_k \le p^{g,\max}_k, & \forall k \in \mathcal{G}, \\
+& q^{g,\min}_k \le q^g_k \le q^{g,\max}_k, & \forall k \in \mathcal{G}, \\
+& |s_{ij}| \le s^{\max}_{ij}, & \forall (i,j) \in \mathcal{B}, \\
+& \theta_{slack} = 0,
+\end{aligned}
+\end{equation}
 
-	%\begin{table}[h!]	
-	%	\centering
-	%	\Caption{\label{tab:exemplo-1} Exemplo de tabela}	
-	%	\UFCtab{}{
-	%		\begin{tabular}{cll}
-	%			\toprule
-	%			Ranking & Exon Coverage & Splice Site Support \\
-	%			\midrule \midrule
-	%			E1 & Complete coverage by a single transcript & Both splice sites\\
-	%			E2 & Complete coverage by more than a single transcript & Both splice sites\\
-	%			E3 & Partial coverage & Both splice sites\\
-	%			E4 & Partial coverage & One splice site\\
-	%			E5 & Complete or partial coverage & No splice sites\\
-	%			E6 & No coverage & No splice sites\\
-	%			\bottomrule
-	%		\end{tabular}
-	%	}{
-	%	\Fonte{elaborado pelo autor.}
-	%}
-	%\end{table}
+onde $c_k(\cdot)$ é a curva de custo do gerador $k$ \textemdash em geral quadrática, $c_k(p^g_k) = a_k (p^g_k)^2 + b_k p^g_k + c_k^0$ \textemdash e $s^{\max}_{ij}$ é o limite de aparente do ramo. O ponto a destacar é que o FPO AC, devido à presença das equações \eqref{eq:p-ramo}--\eqref{eq:q-ramo}, é um problema de programação não linear (NLP) \emph{não convexo}, o que abre espaço para múltiplos ótimos locais e exige cuidados na escolha do \textit{solver} e das condições iniciais.
 
-\subsection{Exemplo de subseção} \label{sec:ex_sec}
-	
-    Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto.
+\subsection{Relaxações do FPO}
+\label{subsec:relaxacoes-fpo}
 
-    %acrlong{DATASUS},\acrlong{DNV},\acrlong{DO},\acrlong{ESF},\acrlong{IBGE},\acrlong{MFC},\acrlong{MI},\acrlong{MS},\acrlong{NV},\acrlong{ODM},\acrlong{OI},\acrlong{OMS},\acrlong{ONU},\acrlong{PNI},\acrlong{PSF},\acrlong{RIPSA},\acrlong{RN},\acrlong{SIM},\acrlong{SINASC},\acrlong{SUS},\acrlong{TMI},\acrlong{TMMFC}
+A não convexidade do FPO motivou, ao longo das últimas duas décadas, uma extensa literatura sobre relaxações e aproximações que tornam o problema tratável, com destaque para três famílias \cite{molzahn2019survey}:
 
+\begin{alineascomponto}
+    \item \textbf{Aproximação DC} \textemdash linearização das equações de fluxo sob as hipóteses de tensões próximas a 1\,p.u., ângulos pequenos e perdas desprezíveis. Resulta em um problema de programação linear (LP) de baixíssimo custo computacional, amplamente utilizado em planejamento de longo prazo;
+    \item \textbf{Relaxação SOC} \textemdash reformulação do FPO em termos de variáveis $W_{ij} = V_i V_j \cos(\theta_i - \theta_j)$ e $T_{ij} = V_i V_j \sin(\theta_i - \theta_j)$, na qual as restrições não convexas são substituídas por desigualdades de cone de segunda ordem. É exata em redes radiais e fornece bons \textit{lower bounds} em redes malhadas;
+    \item \textbf{Relaxação SDP} \textemdash reformulação como problema de programação semidefinida sobre a matriz $W = V V^H$, mais apertada que a SOC mas computacionalmente mais cara.
+\end{alineascomponto}
 
-    \begin{alineascomponto}
-	    \item Integer non lacinia magna. Aenean tempor lorem tellus, non sodales nisl commodo ut
-	    \item Proin mattis placerat risus sit amet laoreet. Praesent sapien arcu, maximus ac fringilla efficitur, vulputate faucibus sem. Donec aliquet velit eros, sit amet elementum dolor pharetra eget
-	    \item Integer eget mattis libero. Praesent ex velit, pulvinar at massa vel, fermentum dictum mauris. Ut feugiat accumsan augue, et ultrices ipsum euismod vitae
-	    \begin{subalineascomponto}
-		    \item Integer non lacinia magna. Aenean tempor lorem tellus, non sodales nisl commodo ut
-		    \item Proin mattis placerat risus sit amet laoreet.
-	    \end{subalineascomponto}
-    \end{alineascomponto}
+Embora o presente trabalho não utilize as relaxações DC, SOC ou SDP em sua progressão principal de formulações \textemdash que mantém a formulação AC polar não convexa \textemdash uma comparação isolada entre as três famílias é apresentada em script auxiliar (\textit{CodeComparing.jl}) sobre o caso \texttt{case5.m}, com o objetivo didático de evidenciar o \textit{gap} entre a relaxação e a solução AC.
 
-\subsection{Uso de siglas} \label{sec:siglas}
+\section{Ações de controle do programa ANAREDE}
+\label{sec:acoes-controle}
 
-    Para utilizar siglas, primeiro defina a sigla no arquivo "lista-de-abreviaturas-e-siglas"~ dentro da pasta "1-pre-textuais" com o comando 
-    \begin{verbatim}
-        \newacronym{ABNT}{ABNT}{Associação Brasileira de Normas Técnicas}
-    \end{verbatim}
-    Depois chame a sigla com o comando:
-    \begin{verbatim}
-        \gls{ABNT}
-    \end{verbatim}
-    Fica assim: \gls{ABNT}. A primeira vez que o comando é usado para uma determinada sigla, aparece o significado por extenso da sigla com a sua abreviação em seguida. A partir da segunda vez que o comando para uma determinada sigla é usado, aparace apenas a sigla. Por exemplo: \gls{ABNT}.  
-    
-    Veja o código fonte de outros exemplos: Teste de siglas \gls{TEST}, outros exemplos de siglas: \gls{DA}, \gls{MCEG}. 
-    Repare que sempre as siglas estão sendo definidas primeiramente no arquivo ``lista-de-abreviaturas-e-siglas''.
+As formulações clássicas de FP e FPO descritas nas seções anteriores tratam $V_i$, $\theta_i$, $p^g_k$ e $q^g_k$ como variáveis livres dentro de seus limites caixa. A operação real de um SEP, no entanto, envolve um conjunto de \textbf{ações de controle} que se acoplam a essas variáveis e que, no programa ANAREDE \cite{chavarry2024} \textemdash referência da indústria brasileira \textemdash são tratadas por meio de heurísticas e laços iterativos específicos. Este trabalho considera cinco dessas ações, nomeadas a seguir conforme a sigla utilizada nos arquivos PWF.
+
+\subsection{QLIM \textemdash limites de geração reativa}
+\label{subsec:qlim}
+
+Em uma barra PV, a tensão $V_i$ é mantida em um \textit{setpoint} $V^{ref}_i$ enquanto o gerador associado é capaz de prover a potência reativa necessária. Quando $q^g_k$ atinge $q^{g,\max}_k$ (ou $q^{g,\min}_k$), a barra é convertida em PQ, $q^g_k$ é fixado no limite e $V_i$ passa a flutuar. Esse comportamento de \textit{type-switching} é central para a operação realista, mas é \emph{descontínuo} e, quando codificado diretamente, conflita com solvers NLP suaves como o Ipopt. Uma forma comum de contorná-lo, adotada neste trabalho, é introduzir uma variável de folga $s^q_l$ no balanço reativo da carga e penalizá-la na função objetivo, mantendo $q^g_k$ dentro dos limites caixa originais.
+
+\subsection{VLIM \textemdash limites de magnitude de tensão}
+\label{subsec:vlim}
+
+De forma análoga, o controle VLIM trata $V_i$ como variável dentro dos limites caixa $[V^{\min}_i, V^{\max}_i]$, mas adiciona uma restrição de igualdade entre $V_i$ e o \textit{setpoint} $V^{ref}_i$ por meio de uma variável de folga $s^v_i$, também penalizada. Combinado com QLIM, o par de slacks $(s^v_i, s^q_l)$ implementa, na linguagem do otimizador, a mesma lógica que o ANAREDE expressa no laço de \textit{type-switching}.
+
+\subsection{CSCA \textemdash bancos \textit{shunt} chaveados}
+\label{subsec:csca}
+
+Os bancos \textit{shunt} (capacitivos ou indutivos) chaveáveis são representados, no PWF, por uma susceptância $b^{sh}_s$ que pode assumir um conjunto discreto de valores entre $b^{sh,\min}_s$ e $b^{sh,\max}_s$. No ANAREDE, o controle CSCA promove o chaveamento dos passos para manter $V_i$ próxima do \textit{setpoint}. Em uma formulação NLP, $b^{sh}_s$ é tipicamente relaxada para variável contínua dentro do intervalo $[b^{sh,\min}_s, b^{sh,\max}_s]$ \textemdash representação que será mantida nesta dissertação \textemdash e o discretização posterior é tratada via \textit{rounding} ou em formulação MINLP.
+
+\subsection{CTAP \textemdash \textit{tap} ajustável de transformadores}
+\label{subsec:ctap}
+
+Transformadores em carga (\textit{on-load tap-changer}, OLTC) possuem razão de transformação $t_{ij}$ ajustável, em geral para regulação de tensão na barra do lado de baixa. No PWF, $t_{ij}$ é dada com um valor inicial e limites $[t^{\min}_{ij}, t^{\max}_{ij}]$. O controle CTAP é, novamente, discreto na operação real (passos de 0,5\% a 1\%), mas a relaxação contínua é a representação adotada na formulação NLP utilizada neste trabalho, com uma restrição adicional ligando $V_i$ ao \textit{setpoint} via folga.
+
+\subsection{DERA \textemdash agregação de geração distribuída}
+\label{subsec:dera}
+
+DERA (\textit{Distributed Energy Resource Aggregator}) é a representação ANAREDE para conjuntos de geração distribuída \textemdash tipicamente fotovoltaica ou eólica em distribuição \textemdash agregados em uma barra de transmissão. Cada DERA aporta uma injeção $(p^{der}_d, q^{der}_d)$ que pode ser fixada ou tratada como variável adicional. Neste trabalho, a representação adotada é minimalista: o DERA acrescenta termos de injeção ao balanço de potência da barra hospedeira, sem decisões de despacho próprias.
+
+\subsection{Síntese das ações de controle}
+\label{subsec:sintese-controles}
+
+As cinco ações descritas nas Seções \ref{subsec:qlim}--\ref{subsec:dera} compõem o conjunto de controles que serão sucessivamente adicionados, no \autoref{chap:metodologia}, sobre uma formulação base de FP em JuMP. A cada controle adicionado, a função objetivo \textit{soft-constraint} ganha um novo termo de penalidade, e o conjunto de variáveis de decisão cresce em $|\mathcal{S}|$ (CSCA), $|\mathcal{B}_{tap}|$ (CTAP) ou $|\mathcal{D}|$ (DERA), conforme o caso. Esta organização incremental permite isolar, no \autoref{chap:resultados}, o impacto de cada controle sobre a convergência e sobre o ponto de operação calculado.

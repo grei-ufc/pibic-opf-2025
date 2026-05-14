@@ -1,0 +1,2 @@
+caso,script,termination_status,solve_time_s,objective,iteracoes,p_loss_total_pu
+3bus_DCER.pwf,19,LOCALLY_SOLVED,2.6223878860473633,-0.09988668382347558,NaN,0.030322298592705188

@@ -1,0 +1,2 @@
+caso,script,termination_status,solve_time_s,objective,iteracoes,p_loss_total_pu
+4busfrank_vlim.pwf,14,LOCALLY_INFEASIBLE,NaN,NaN,NaN,NaN

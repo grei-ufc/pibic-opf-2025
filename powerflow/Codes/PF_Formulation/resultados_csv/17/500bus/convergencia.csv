@@ -1,0 +1,2 @@
+caso,script,termination_status,solve_time_s,objective,iteracoes,p_loss_total_pu
+500bus.pwf,17,LOCALLY_SOLVED,4.978157043457031,472.8530457715625,NaN,0.9043109272910566

@@ -1,0 +1,2 @@
+caso,script,termination_status,solve_time_s,objective,iteracoes,p_loss_total_pu
+300bus.pwf,14,INVALID_MODEL,NaN,NaN,NaN,NaN

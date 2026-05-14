@@ -1,0 +1,34 @@
+[variant_15] case=test_defaults.pwf  out=/Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/PF_Formulation/resultados_csv/15/test_defaults
+1. Lendo arquivo PWF: /Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/data/test_defaults.pwf
+[info | PWF]: Populating defaults
+[warn | PWF]: Only one base voltage group definded, each bus will be considered as part of the group  0, regardless of its defined group
+┌ Warning: [variant_15] OTHER_ERROR
+│   exception =
+│    MethodError: no method matching /(::Nothing, ::Int64)
+│    Closest candidates are:
+│      /(!Matched::Union{Int128, Int16, Int32, Int64, Int8, UInt128, UInt16, UInt32, UInt64, UInt8}, ::Union{Int128, Int16, Int32, Int64, Int8, UInt128, UInt16, UInt32, UInt64, UInt8}) at int.jl:97
+│      /(!Matched::StridedArray{P}, ::Real) where P<:Dates.Period at ~/.julia/juliaup/julia-1.8.3+0.aarch64.apple.darwin14/share/julia/stdlib/v1.8/Dates/src/deprecated.jl:44
+│      /(!Matched::Union{SparseArrays.SparseVector{Tv, Ti}, SubArray{Tv, 1, <:SparseArrays.AbstractSparseMatrixCSC{Tv, Ti}, Tuple{Base.Slice{Base.OneTo{Int64}}, Int64}, false}, SubArray{Tv, 1, <:SparseArrays.AbstractSparseVector{Tv, Ti}, Tuple{Base.Slice{Base.OneTo{Int64}}}, false}} where {Tv, Ti}, ::Number) at ~/.julia/juliaup/julia-1.8.3+0.aarch64.apple.darwin14/share/julia/stdlib/v1.8/SparseArrays/src/sparsevector.jl:1519
+│      ...
+│    Stacktrace:
+│      [1] _pwf2pm_branch!(pm_data::Dict{String, Any}, pwf_data::Dict{String, Any}, branch::Dict{String, Any}; add_control_data::Bool)
+│        @ PWF ~/.julia/dev/PWF/src/pwf2pm/branch.jl:51
+│      [2] _pwf2pm_branch!(pm_data::Dict{String, Any}, pwf_data::Dict{String, Any}; add_control_data::Bool)
+│        @ PWF ~/.julia/dev/PWF/src/pwf2pm/branch.jl:186
+│      [3] _parse_pwf_to_powermodels(pwf_data::Dict{String, Any}; validate::Bool, software::Type{ANAREDE}, add_control_data::Bool)
+│        @ PWF ~/.julia/dev/PWF/src/pwf2pm/pwf2pm.jl:35
+│      [4] #parse_pwf_to_powermodels#117
+│        @ ~/.julia/dev/PWF/src/pwf2pm/pwf2pm.jl:73 [inlined]
+│      [5] #parse_file#121
+│        @ ~/.julia/dev/PWF/src/PWF.jl:41 [inlined]
+│      [6] parse_file(filename::String)
+│        @ PWF ~/.julia/dev/PWF/src/PWF.jl:40
+│      [7] top-level scope
+│        @ ~/pibic-opf-2025/powerflow/Codes/PF_Formulation/runner/variant_15_PF_PM.jl:29
+│      [8] include(mod::Module, _path::String)
+│        @ Base ./Base.jl:419
+│      [9] exec_options(opts::Base.JLOptions)
+│        @ Base ./client.jl:303
+│     [10] _start()
+│        @ Base ./client.jl:522
+└ @ Main ~/pibic-opf-2025/powerflow/Codes/PF_Formulation/runner/variant_15_PF_PM.jl:138

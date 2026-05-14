@@ -1,0 +1,210 @@
+[variant_16] case=300bus.pwf  out=/Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/PF_Formulation/resultados_csv/16/300bus
+1. Lendo arquivo PWF: /Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/data/300bus.pwf
+[info | PWF]: Populating defaults
+[warn | PWF]: Only one limit voltage group definded, each bus will be considered as part of the group  A, regardless of its defined group
+[warn | PWF]: Only one base voltage group definded, each bus will be considered as part of the group  A, regardless of its defined group
+[warn | PowerModels]: this code only supports loss0 values which are consistent with the line flow bounds, changing the value on dcline 1 from 0.0 to 0.0
+[info | PowerModels]: removing 3 cost terms from dcline 1: Float64[]
+[info | PowerModels]: updated generator 32 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 29 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 1 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 54 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 2 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 41 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 65 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 51 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 53 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 27 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 42 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 33 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 28 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 50 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 52 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 63 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 26 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 10 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 24 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 58 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 25 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 23 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 49 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 59 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 5 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 31 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 62 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 43 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 39 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 34 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 44 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 55 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 17 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 37 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 47 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 9 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 12 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 20 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 6 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 14 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 7 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 57 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 8 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 64 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 19 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 69 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 60 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 4 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 22 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 11 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 35 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 13 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 15 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 61 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 67 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 16 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 40 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 21 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 38 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 46 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 45 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 68 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 56 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 36 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 66 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 48 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 18 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 30 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 3 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated dcline 1 cost function with order 0 to a function of order 3: [0.0, 0.0, 0.0]
+
+******************************************************************************
+This program contains Ipopt, a library for large-scale nonlinear optimization.
+ Ipopt is released as open source code under the Eclipse Public License (EPL).
+         For more information visit https://github.com/coin-or/Ipopt
+******************************************************************************
+
+This is Ipopt version 3.14.4, running with linear solver MUMPS 5.4.1.
+
+Number of nonzeros in equality constraint Jacobian...:     4938
+Number of nonzeros in inequality constraint Jacobian.:        0
+Number of nonzeros in Lagrangian Hessian.............:    13568
+
+Total number of variables............................:     1000
+                     variables with only lower bounds:        0
+                variables with lower and upper bounds:      368
+                     variables with only upper bounds:        0
+Total number of equality constraints.................:      669
+Total number of inequality constraints...............:        0
+        inequality constraints with only lower bounds:        0
+   inequality constraints with lower and upper bounds:        0
+        inequality constraints with only upper bounds:        0
+
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+   0  0.0000000e+00 9.52e+00 0.00e+00  -1.0 0.00e+00    -  0.00e+00 0.00e+00   0
+   1  3.3244906e-03 9.40e+00 7.37e-01  -1.0 1.10e+01    -  1.72e-02 1.25e-02h  1
+   2  6.5950099e-03 9.37e+00 5.60e+01  -1.0 1.08e+01    -  4.91e-02 3.07e-03h  1
+   3  8.3387156e-03 9.37e+00 1.72e+04  -1.0 1.07e+01    -  7.15e-02 2.85e-04h  1
+   4  2.5107648e+00 9.26e+00 4.16e+04  -1.0 1.06e+01    -  1.06e-01 1.18e-02h  1
+   5  3.5460391e+00 9.24e+00 4.46e+04  -1.0 1.06e+01    -  9.11e-03 2.09e-03h  1
+   6  1.9452225e+01 9.10e+00 5.24e+04  -1.0 1.06e+01    -  3.31e-02 1.44e-02h  1
+   7  3.0052089e+02 8.49e+00 4.71e+04  -1.0 1.04e+01    -  6.35e-02 6.77e-02h  1
+   8  3.5095421e+02 8.42e+00 1.95e+05  -1.0 9.41e+00    -  3.63e-01 7.56e-03h  1
+   9  1.3084836e+03 7.64e+00 1.86e+05  -1.0 9.32e+00    -  1.28e-01 9.33e-02h  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  10  1.5251597e+03 7.51e+00 2.34e+05  -1.0 8.14e+00    -  2.36e-01 1.60e-02h  1
+  11  3.3317053e+03 6.74e+00 3.13e+05  -1.0 7.98e+00    -  6.90e-01 1.02e-01h  1
+  12  5.5340850e+03 6.12e+00 2.91e+05  -1.0 6.91e+00    -  2.22e-01 9.30e-02h  1
+  13  5.6624000e+03 6.09e+00 3.05e+05  -1.0 6.09e+00    -  3.95e-01 4.93e-03h  1
+  14  1.2408533e+04 4.88e+00 2.49e+05  -1.0 6.05e+00    -  3.42e-01 1.97e-01h  1
+  15  1.2540268e+04 4.87e+00 2.53e+05  -1.0 4.76e+00    -  3.52e-01 3.37e-03h  1
+  16  1.8235345e+04 4.24e+00 2.24e+05  -1.0 4.89e+00    -  5.94e-01 1.29e-01h  1
+  17  1.8500228e+04 4.22e+00 2.23e+05  -1.0 6.00e+00    -  3.60e-01 5.70e-03h  1
+  18  2.1403476e+04 3.97e+00 2.09e+05  -1.0 6.82e+00    -  6.96e-01 5.89e-02h  1
+  19  2.6328784e+04 3.61e+00 1.90e+05  -1.0 7.12e+00    -  3.61e-01 9.00e-02h  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  20  3.1897476e+04 3.28e+00 1.72e+05  -1.0 6.12e+00    -  2.73e-01 9.22e-02h  1
+  21  3.8401874e+04 2.95e+00 1.51e+05  -1.0 2.81e+00    -  1.00e+00 9.88e-02h  1
+  22  4.2074182e+04 2.79e+00 1.43e+05  -1.0 2.49e+00    -  3.38e-01 5.37e-02h  1
+  23  5.3110637e+04 2.38e+00 1.21e+05  -1.0 2.33e+00    -  5.38e-01 1.49e-01h  1
+  24  6.2240641e+04 2.09e+00 1.05e+05  -1.0 2.14e+00    -  7.30e-01 1.19e-01h  1
+  25  6.2945501e+04 2.07e+00 1.04e+05  -1.0 1.66e+00    -  1.58e-01 9.50e-03h  1
+  26  6.5142120e+04 2.01e+00 1.03e+05  -1.0 1.65e+00    -  3.31e-01 2.92e-02h  1
+  27  7.3572180e+04 1.80e+00 9.23e+04  -1.0 1.59e+00    -  1.12e-01 1.07e-01h  1
+  28  7.5101042e+04 1.76e+00 1.07e+05  -1.0 1.38e+00    -  6.30e-01 1.99e-02h  1
+  29  7.7213799e+04 1.71e+00 1.10e+05  -1.0 2.36e+00    -  5.65e-02 2.70e-02h  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  30  8.1067986e+04 1.64e+00 8.10e+05  -1.0 2.13e+00    -  4.43e-01 4.54e-02h  1
+  31  8.2834610e+04 1.60e+00 8.02e+05  -1.0 2.37e+00    -  6.30e-02 1.98e-02h  1
+  32  9.0442967e+04 1.48e+00 7.96e+05  -1.0 2.40e+00    -  1.10e-02 7.61e-02h  1
+  33  9.0770870e+04 1.48e+00 1.10e+06  -1.0 2.65e+00    -  1.21e-01 3.22e-03h  1
+  34  9.4932402e+04 1.42e+00 5.66e+05  -1.0 2.95e+00    -  5.31e-04 3.88e-02h  1
+  35  9.7250444e+04 1.39e+00 5.54e+05  -1.0 3.03e+00    -  5.54e-02 2.10e-02h  1
+  36  9.8443393e+04 1.37e+00 9.01e+05  -1.0 3.64e+00    -  4.05e-01 1.07e-02h  1
+  37  1.0477041e+05 1.30e+00 8.39e+05  -1.0 3.80e+00    -  3.74e-02 5.36e-02h  1
+  38  1.0545975e+05 1.29e+00 8.31e+05  -1.0 4.37e+00    -  7.90e-04 5.82e-03h  1
+  39  1.0859489e+05 1.26e+00 9.04e+05  -1.0 4.42e+00    -  1.54e-01 2.59e-02h  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  40  1.0996703e+05 1.25e+00 9.08e+05  -1.0 5.03e+00    -  3.02e-02 1.13e-02h  1
+  41  1.2661786e+05 1.09e+00 9.75e+05  -1.0 5.18e+00    -  3.63e-01 1.24e-01h  1
+  42  1.2716057e+05 1.09e+00 1.10e+06  -1.0 6.18e+00    -  2.38e-01 4.20e-03h  1
+  43  1.3188385e+05 1.05e+00 1.75e+06  -1.0 4.44e+00    -  9.41e-01 3.59e-02h  1
+  44  1.3995569e+05 9.85e-01 1.64e+06  -1.0 5.58e+00    -  5.16e-02 5.92e-02h  1
+  45  1.4531347e+05 9.47e-01 1.57e+06  -1.0 7.93e+00    -  5.32e-03 3.87e-02h  1
+  46  1.4937460e+05 9.19e-01 1.56e+06  -1.0 9.80e+00    -  1.34e-01 2.92e-02h  1
+  47  1.5127923e+05 9.06e-01 1.54e+06  -1.0 1.35e+01    -  1.69e-02 1.37e-02h  1
+  48  1.5936146e+05 8.55e-01 1.45e+06  -1.0 1.46e+01    -  4.53e-02 5.61e-02h  1
+  49  1.6088655e+05 8.46e-01 1.46e+06  -1.0 1.90e+01    -  3.24e-01 1.09e-02h  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  50  1.6409753e+05 8.27e-01 1.46e+06  -1.0 2.55e+00    -  1.31e-01 2.27e-02h  1
+  51  1.7017478e+05 7.92e-01 1.61e+06  -1.0 2.45e+00    -  8.66e-01 4.26e-02h  1
+  52  1.8149653e+05 7.30e-01 1.52e+06  -1.0 2.12e+00    -  1.88e-01 7.77e-02h  1
+  53  1.9954327e+05 6.40e-01 1.50e+06  -1.0 2.45e+00    -  6.24e-01 1.22e-01h  1
+  54  2.1090803e+05 5.89e-01 1.37e+06  -1.0 3.11e+00    -  1.57e-02 7.98e-02h  1
+  55  2.1670839e+05 5.64e-01 1.34e+06  -1.0 3.41e+00    -  4.08e-01 4.22e-02h  1
+  56  2.2179195e+05 5.42e-01 1.29e+06  -1.0 9.51e-01    -  8.31e-02 3.77e-02h  1
+  57  2.4346459e+05 4.56e-01 1.14e+06  -1.0 8.94e-01    -  7.81e-01 1.57e-01h  1
+  58  2.5143523e+05 4.27e-01 1.07e+06  -1.0 4.06e-01    -  1.78e-01 6.44e-02h  1
+  59  2.8364225e+05 3.16e-01 8.02e+05  -1.0 3.87e-01    -  8.27e-01 2.59e-01h  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  60  3.0332058e+05 2.54e-01 6.45e+05  -1.0 3.18e-01    -  1.89e-01 1.96e-01h  1
+  61  3.0437526e+05 2.51e-01 6.48e+05  -1.0 2.65e-01    -  3.71e-01 1.27e-02h  1
+  62  3.3223635e+05 1.69e-01 4.44e+05  -1.0 2.50e-01    -  5.81e-01 3.26e-01h  1
+  63  3.3306654e+05 1.67e-01 4.49e+05  -1.0 2.08e-01    -  1.00e+00 1.39e-02h  1
+  64  3.4051016e+05 1.46e-01 3.95e+05  -1.0 1.31e-01    -  2.64e-01 1.25e-01h  1
+  65  3.6024364e+05 9.27e-02 2.61e+05  -1.0 1.18e-01    -  1.00e+00 3.65e-01h  1
+  66  3.9623858e+05 1.60e-03 5.14e+03  -1.0 1.28e-01    -  1.00e+00 9.83e-01h  1
+  67  3.9686411e+05 1.04e-03 2.77e+01  -1.0 1.08e-01    -  1.00e+00 1.00e+00h  1
+  68  3.9674309e+05 6.45e-07 7.85e+00  -3.8 1.21e-03    -  9.93e-01 1.00e+00f  1
+  69  3.9674297e+05 4.70e-08 6.19e-02  -3.8 4.16e-04    -  1.00e+00 1.00e+00f  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  70  3.9674294e+05 1.11e-08 1.47e-02  -5.7 2.03e-04    -  1.00e+00 1.00e+00f  1
+  71  3.9674294e+05 2.12e-09 2.79e-03  -5.7 8.83e-05    -  1.00e+00 1.00e+00f  1
+  72  3.9674294e+05 1.99e-10 2.62e-04  -6.0 2.70e-05    -  1.00e+00 1.00e+00f  1
+  73  3.9674294e+05 2.65e-12 3.49e-06  -6.0 3.12e-06    -  1.00e+00 1.00e+00h  1
+
+Number of Iterations....: 73
+
+                                   (scaled)                 (unscaled)
+Objective...............:   3.9674294297638402e+05    3.9674294297638402e+05
+Dual infeasibility......:   3.4910193976653292e-06    3.4910193976653292e-06
+Constraint violation....:   2.6510564576920359e-12    2.6510564576920359e-12
+Variable bound violation:   4.1949117957074122e-08    4.1949117957074122e-08
+Complementarity.........:   3.0271828249871089e-06    3.0271828249871089e-06
+Overall NLP error.......:   1.8199362880570829e-08    3.4910193976653292e-06
+
+
+Number of objective function evaluations             = 74
+Number of objective gradient evaluations             = 74
+Number of equality constraint evaluations            = 74
+Number of inequality constraint evaluations          = 0
+Number of equality constraint Jacobian evaluations   = 74
+Number of inequality constraint Jacobian evaluations = 0
+Number of Lagrangian Hessian evaluations             = 73
+Total seconds in IPOPT                               = 3.515
+
+EXIT: Optimal Solution Found.
+2. Criando variáveis...
+3. Montando equações de fluxo (AC Polar)...
+4. Montando balanço nodal (Kirchhoff)...
+5. Resolvendo...
+Status=LOCALLY_SOLVED  solve_time=3.516569137573242
+[variant_16] OK  barras=300  ramos=411  p_loss_total=5.665722925027106

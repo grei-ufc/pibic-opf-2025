@@ -22,6 +22,18 @@ function resolver_fluxo_controlado(caminho_arquivo)
     PowerModels.select_largest_component!(data)
     println("-> Ilhas isoladas removidas! Mantendo apenas a rede principal conectada.")
 
+    # Identifica todas as barras definidas como referência (bus_type == 3)
+    ref_buses = [b_dict for (b_id, b_dict) in data["bus"] if b_dict["bus_type"] == 3]
+
+    # Se houver mais de 1, mantemos apenas a primeira e convertemos o resto para PV (Tipo 2)
+    if length(ref_buses) > 1
+        println("-> Aviso: Múltiplas barras de referência detectadas. Convertendo excedentes para PV (Tipo 2)...")
+        for i in 2:length(ref_buses)
+            ref_buses[i]["bus_type"] = 2
+        end
+    end
+    # ----------------------------------------
+
     PowerModels.standardize_cost_terms!(data, order=2) 
  
     # ---> PATCH DE LIMPEZA <---
@@ -81,25 +93,27 @@ function resolver_fluxo_controlado(caminho_arquivo)
     @variable(model, bs_var[i in keys(ref[:shunt])]) 
     @variable(model, sl_bsh[i in keys(ref[:shunt])], start=0.0) 
     for (i, shunt) in ref[:shunt]
-        bmin = shunt["bs"] 
-        bmax = shunt["bs"]
+        bs_nom = shunt["bs"]
+        bmin, bmax = bs_nom, bs_nom
         
-        if haskey(shunt, "control_data") && haskey(shunt["control_data"], "bsmin")
-            bmin = shunt["control_data"]["bsmin"]
-            bmax = shunt["control_data"]["bsmax"]
+        # Proteção contra valores nulos (nothing)
+        if haskey(shunt, "control_data")
+            ctrl = shunt["control_data"]
+            bmin = isnothing(get(ctrl, "bsmin", nothing)) ? bs_nom : ctrl["bsmin"]
+            bmax = isnothing(get(ctrl, "bsmax", nothing)) ? bs_nom : ctrl["bsmax"]
         end
         
-        real_bmin = min(bmin, bmax, shunt["bs"])
-        real_bmax = max(bmin, bmax, shunt["bs"])
+        real_bmin = min(bmin, bmax, bs_nom)
+        real_bmax = max(bmin, bmax, bs_nom)
         
         set_lower_bound(bs_var[i], real_bmin) 
         set_upper_bound(bs_var[i], real_bmax)
-        set_start_value(bs_var[i], shunt["bs"]) 
+        set_start_value(bs_var[i], bs_nom) 
 
-        @constraint(model, bs_var[i] == shunt["bs"] + sl_bsh[i])  
+        @constraint(model, bs_var[i] == bs_nom + sl_bsh[i])  
         
         if real_bmin == real_bmax
-            fix(bs_var[i], shunt["bs"]; force=true)
+            fix(bs_var[i], bs_nom; force=true)
         end
     end
 
@@ -107,13 +121,13 @@ function resolver_fluxo_controlado(caminho_arquivo)
     @variable(model, tm_var[l in keys(ref[:branch])])
     for (l, branch) in ref[:branch]
         tap_nominal = branch["tap"]
-        tmin = tap_nominal
-        tmax = tap_nominal
+        tmin, tmax = tap_nominal, tap_nominal
 
-        # Extrai os limites de controle do tap, se existirem
-        if haskey(branch, "control_data") && haskey(branch["control_data"], "tapmin")
-            tmin = branch["control_data"]["tapmin"]
-            tmax = branch["control_data"]["tapmax"]
+        # Extrai os limites de controle do tap com proteção contra 'nothing'
+        if haskey(branch, "control_data")
+            ctrl = branch["control_data"]
+            tmin = isnothing(get(ctrl, "tapmin", nothing)) ? tap_nominal : ctrl["tapmin"]
+            tmax = isnothing(get(ctrl, "tapmax", nothing)) ? tap_nominal : ctrl["tapmax"]
         end
 
         real_tmin = min(tmin, tmax, tap_nominal)
@@ -129,7 +143,6 @@ function resolver_fluxo_controlado(caminho_arquivo)
             fix(tm_var[l], tap_nominal; force=true)
         end
     end
-
     # =========================================================================
     # 3. LÓGICA DO FLUXO DE POTÊNCIA NAS MÁQUINAS
     # =========================================================================
@@ -183,9 +196,9 @@ function resolver_fluxo_controlado(caminho_arquivo)
     end
 
     @variable(model, sl_d[i in keys(ref[:load])], start=0.0)
-
+    
     # =========================================================================
-    # 5. EQUAÇÕES DE FLUXO NOS RAMOS AC (CTAP Integrado)
+    # 5. EQUAÇÕES DE FLUXO NOS RAMOS AC (CTAP Físicamente Consistente)
     # =========================================================================
     println("3. Montando equações de fluxo de potência (AC Polar)...")
     p = Dict(); q = Dict()
@@ -193,17 +206,38 @@ function resolver_fluxo_controlado(caminho_arquivo)
     for (l, branch) in ref[:branch]
         f = branch["f_bus"]; t = branch["t_bus"]
         g, b = PowerModels.calc_branch_y(branch)
-        tr, ti = PowerModels.calc_branch_t(branch)
         
         g_fr = branch["g_fr"]; b_fr = branch["b_fr"]
         g_to = branch["g_to"]; b_to = branch["b_to"]
 
-        # Note que substituimos `tm` pela variável do modelo `tm_var[l]`
-        p[(l, f, t)] = @NLexpression(model, (g+g_fr)/tm_var[l]^2 * vm[f]^2 + (-g*tr+b*ti)/tm_var[l]^2 * (vm[f]*vm[t]*cos(va[f]-va[t])) + (-b*tr-g*ti)/tm_var[l]^2 * (vm[f]*vm[t]*sin(va[f]-va[t])))
-        q[(l, f, t)] = @NLexpression(model, -(b+b_fr)/tm_var[l]^2 * vm[f]^2 - (-b*tr-g*ti)/tm_var[l]^2 * (vm[f]*vm[t]*cos(va[f]-va[t])) + (-g*tr+b*ti)/tm_var[l]^2 * (vm[f]*vm[t]*sin(va[f]-va[t])))
+        # O defasamento (shift angular) nominal é constante. CTAP muda apenas magnitude.
+        shift = branch["shift"]
+        cos_phi = cos(shift)
+        sin_phi = sin(shift)
+
+        # Fluxos do lado 'from' (f -> t)
+        p[(l, f, t)] = @NLexpression(model, 
+            (g + g_fr) / tm_var[l]^2 * vm[f]^2 + 
+            (-g * cos_phi + b * sin_phi) / tm_var[l] * (vm[f] * vm[t] * cos(va[f] - va[t])) + 
+            (-b * cos_phi - g * sin_phi) / tm_var[l] * (vm[f] * vm[t] * sin(va[f] - va[t]))
+        )
+        q[(l, f, t)] = @NLexpression(model, 
+            -(b + b_fr) / tm_var[l]^2 * vm[f]^2 - 
+            (-b * cos_phi - g * sin_phi) / tm_var[l] * (vm[f] * vm[t] * cos(va[f] - va[t])) + 
+            (-g * cos_phi + b * sin_phi) / tm_var[l] * (vm[f] * vm[t] * sin(va[f] - va[t]))
+        )
         
-        p[(l, t, f)] = @NLexpression(model, (g+g_to) * vm[t]^2 + (-g*tr-b*ti)/tm_var[l]^2 * (vm[t]*vm[f]*cos(va[t]-va[f])) + (-b*tr+g*ti)/tm_var[l]^2 * (vm[t]*vm[f]*sin(va[t]-va[f])))
-        q[(l, t, f)] = @NLexpression(model, -(b+b_to) * vm[t]^2 - (-b*tr+g*ti)/tm_var[l]^2 * (vm[t]*vm[f]*cos(va[t]-va[f])) + (-g*tr-b*ti)/tm_var[l]^2 * (vm[t]*vm[f]*sin(va[t]-va[f])))
+        # Fluxos do lado 'to' (t -> f)
+        p[(l, t, f)] = @NLexpression(model, 
+            (g + g_to) * vm[t]^2 + 
+            (-g * cos_phi - b * sin_phi) / tm_var[l] * (vm[t] * vm[f] * cos(va[t] - va[f])) + 
+            (-b * cos_phi + g * sin_phi) / tm_var[l] * (vm[t] * vm[f] * sin(va[t] - va[f]))
+        )
+        q[(l, t, f)] = @NLexpression(model, 
+            -(b + b_to) * vm[t]^2 - 
+            (-b * cos_phi + g * sin_phi) / tm_var[l] * (vm[t] * vm[f] * cos(va[t] - va[f])) + 
+            (-g * cos_phi - b * sin_phi) / tm_var[l] * (vm[t] * vm[f] * sin(va[t] - va[f]))
+        )
     end
 
     # =========================================================================
@@ -346,5 +380,5 @@ end
 # -------------------------------------------------------------
 # EXECUÇÃO PRINCIPAL
 # -------------------------------------------------------------
-arquivo = joinpath(@__DIR__, "..", "data_CPF", "anarede", "5busfrank_csca.pwf")
+arquivo = joinpath(@__DIR__, "..", "data", "05 MAXIMA DIURNA DE DOMINGO_DEZ25.PWF")
 resolver_fluxo_controlado(arquivo)

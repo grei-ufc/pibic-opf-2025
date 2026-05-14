@@ -1,0 +1,39 @@
+[variant_15] case=test_system.pwf  out=/Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/PF_Formulation/resultados_csv/15/test_system
+1. Lendo arquivo PWF: /Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/data/test_system.pwf
+[info | PWF]: Populating defaults
+[warn | PWF]: DGER not found, setting pmin as 0.0 MW and pmax as 99999.0 MW
+[warn | PWF]: DC line will not be parsed due to the absence of at least one those sections: DCBA, DCLI, DCNV, DCCV, DELO
+[warn | PowerModels]: active generator 1 is connected to inactive bus 21
+[info | PowerModels]: found 2 components
+[info | PowerModels]: largest component has 4 buses
+[info | PowerModels]: deactivating bus 27 due to small connected component
+[info | PowerModels]: deactivating bus 25 due to small connected component
+[info | PowerModels]: deactivating bus 22 due to small connected component
+[info | PowerModels]: deactivating bus 28 due to small connected component
+[info | PowerModels]: updated generator 1 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 2 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 3 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+
+******************************************************************************
+This program contains Ipopt, a library for large-scale nonlinear optimization.
+ Ipopt is released as open source code under the Eclipse Public License (EPL).
+         For more information visit https://github.com/coin-or/Ipopt
+******************************************************************************
+
+┌ Warning: [variant_15] OTHER_ERROR
+│   exception =
+│    KeyError: key "25" not found
+│    Stacktrace:
+│     [1] getindex(h::Dict{String, Any}, key::String)
+│       @ Base ./dict.jl:498
+│     [2] top-level scope
+│       @ ~/pibic-opf-2025/powerflow/Codes/PF_Formulation/runner/variant_15_PF_PM.jl:107
+│     [3] include(mod::Module, _path::String)
+│       @ Base ./Base.jl:419
+│     [4] exec_options(opts::Base.JLOptions)
+│       @ Base ./client.jl:303
+│     [5] _start()
+│       @ Base ./client.jl:522
+└ @ Main ~/pibic-opf-2025/powerflow/Codes/PF_Formulation/runner/variant_15_PF_PM.jl:138
+2. Resolvendo AC PF...
+Status=LOCALLY_SOLVED  solve_time=3.3147590160369873  obj=0.0  iters=NaN

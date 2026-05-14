@@ -1,0 +1,74 @@
+[variant_17] case=5busfrank.pwf  out=/Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/PF_Formulation/resultados_csv/17/5busfrank
+1. Lendo arquivo PWF: /Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/data/5busfrank.pwf
+[info | PWF]: Populating defaults
+[warn | PWF]: DGER not found, setting pmin as 0.0 MW and pmax as 99999.0 MW
+[warn | PWF]: DC line will not be parsed due to the absence of at least one those sections: DCBA, DCLI, DCNV, DCCV, DELO
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 3. Adding generator power to load power and changing generator status to off
+[info | PowerModels]: updated generator 1 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 2 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 3 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+
+******************************************************************************
+This program contains Ipopt, a library for large-scale nonlinear optimization.
+ Ipopt is released as open source code under the Eclipse Public License (EPL).
+         For more information visit https://github.com/coin-or/Ipopt
+******************************************************************************
+
+This is Ipopt version 3.14.4, running with linear solver MUMPS 5.4.1.
+
+Number of nonzeros in equality constraint Jacobian...:       60
+Number of nonzeros in inequality constraint Jacobian.:        8
+Number of nonzeros in Lagrangian Hessian.............:      151
+
+Total number of variables............................:       21
+                     variables with only lower bounds:        4
+                variables with lower and upper bounds:        7
+                     variables with only upper bounds:        0
+Total number of equality constraints.................:       10
+Total number of inequality constraints...............:        4
+        inequality constraints with only lower bounds:        2
+   inequality constraints with lower and upper bounds:        0
+        inequality constraints with only upper bounds:        2
+
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+   0  3.9999920e+02 5.26e-01 2.00e+04  -1.0 0.00e+00    -  0.00e+00 0.00e+00   0
+   1  4.0142326e-02 3.85e-02 1.88e+02  -1.0 2.03e-01    -  1.00e+00 9.91e-01f  1
+   2  9.1716051e-01 2.13e-03 6.08e-03  -1.0 1.64e-01    -  1.00e+00 1.00e+00h  1
+   3  2.4956725e-01 2.04e-07 2.02e-04  -1.7 2.85e-03    -  1.00e+00 1.00e+00f  1
+   4  6.5229246e-02 1.42e-08 1.11e-05  -2.5 4.93e-04    -  1.00e+00 1.00e+00f  1
+   5  1.9259292e-02 1.10e-06 3.96e-08  -2.5 3.22e-03    -  1.00e+00 1.00e+00f  1
+   6  4.9647093e-03 9.29e-11 2.69e-07  -3.8 3.99e-05    -  1.00e+00 1.00e+00f  1
+   7  1.3957967e-03 4.87e-12 1.50e-09  -3.8 1.89e-05    -  1.00e+00 1.00e+00f  1
+   8  3.5059319e-04 6.58e-12 4.08e-09  -5.7 1.09e-05    -  1.00e+00 1.00e+00f  1
+   9  8.9407494e-05 1.56e-12 1.84e-11  -5.7 5.41e-06    -  1.00e+00 1.00e+00f  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  10  2.4183732e-05 3.76e-13 1.84e-11  -5.7 2.65e-06    -  1.00e+00 1.00e+00f  1
+  11  6.9608613e-06 9.94e-14 9.09e-12  -6.0 1.33e-06    -  1.00e+00 1.00e+00f  1
+
+Number of Iterations....: 11
+
+                                   (scaled)                 (unscaled)
+Objective...............:   6.9608612549540987e-06    6.9608612549540987e-06
+Dual infeasibility......:   9.0918383932603319e-12    9.0918383932603319e-12
+Constraint violation....:   9.9378838491759325e-14    9.9378838491759325e-14
+Variable bound violation:   0.0000000000000000e+00    0.0000000000000000e+00
+Complementarity.........:   3.5121550385069392e-06    3.5121550385069392e-06
+Overall NLP error.......:   3.5121550385069392e-06    3.5121550385069392e-06
+
+
+Number of objective function evaluations             = 12
+Number of objective gradient evaluations             = 12
+Number of equality constraint evaluations            = 12
+Number of inequality constraint evaluations          = 12
+Number of equality constraint Jacobian evaluations   = 12
+Number of inequality constraint Jacobian evaluations = 12
+Number of Lagrangian Hessian evaluations             = 11
+Total seconds in IPOPT                               = 3.084
+
+EXIT: Optimal Solution Found.
+2. Criando variáveis...
+3. Montando equações de fluxo (AC Polar)...
+4. Montando balanço nodal (Kirchhoff)...
+5. Resolvendo...
+Status=LOCALLY_SOLVED  solve_time=3.085692882537842
+[variant_17] OK  barras=5  ramos=5  p_loss_total=0.029528702891802094

@@ -22,9 +22,20 @@ function resolver_fluxo_controlado(caminho_arquivo)
     # Lemos o arquivo forçando a extração dos dados de controle (CSCA)
     data = PWF.parse_file(caminho_arquivo, add_control_data=true)
     base_mva = data["baseMVA"] # Geralmente 100 MVA
-    println(data)
     PowerModels.select_largest_component!(data)
     println("-> Ilhas isoladas removidas! Mantendo apenas a rede principal conectada.")
+
+    # Identifica todas as barras definidas como referência (bus_type == 3)
+    ref_buses = [b_dict for (b_id, b_dict) in data["bus"] if b_dict["bus_type"] == 3]
+
+    # Se houver mais de 1, mantemos apenas a primeira e convertemos o resto para PV (Tipo 2)
+    if length(ref_buses) > 1
+        println("-> Aviso: Múltiplas barras de referência detectadas. Convertendo excedentes para PV (Tipo 2)...")
+        for i in 2:length(ref_buses)
+            ref_buses[i]["bus_type"] = 2
+        end
+    end
+    # ----------------------------------------
 
     PowerModels.standardize_cost_terms!(data, order=2) # Padroniza as funções de custo dos geradores para polinômios de segunda ordem. Embora o foco seja minimizar slacks de controle, o PowerModels exige essa padronização interna para evitar erros durante a montagem do modelo.
  
@@ -90,13 +101,15 @@ function resolver_fluxo_controlado(caminho_arquivo)
     @variable(model, bs_var[i in keys(ref[:shunt])]) # Cria um vetor de variáveis de decisão contínuas, indexado pelos IDs de todos os elementos shunt da rede.
     @variable(model, sl_bsh[i in keys(ref[:shunt])], start=0.0) # Slack de variação do shuntn do seu valor padrão
     for (i, shunt) in ref[:shunt]
-        bmin = shunt["bs"] # primeiro assumimos os valores do shunt fixos e iguais ao valor inicial caso não exista a informação no arquivo PWF sobre min e max.
-        bmax = shunt["bs"]
+        bs_nom = shunt["bs"]
+        bmin, bmax = bs_nom, bs_nom # primeiro assumimos os valores do shunt fixos e iguais ao valor inicial caso não exista a informação no arquivo PWF sobre min e max.
         
         # Se os dados de controle do ANAREDE existirem, nós atualizamos os limites!
         if haskey(shunt, "control_data") && haskey(shunt["control_data"], "bsmin")
-            bmin = shunt["control_data"]["bsmin"]
-            bmax = shunt["control_data"]["bsmax"]
+
+            ctrl = shunt["control_data"]
+            bmin = isnothing(get(ctrl, "bsmin", nothing)) ? bs_nom : ctrl["bsmin"]
+            bmax = isnothing(get(ctrl, "bsmax", nothing)) ? bs_nom : ctrl["bsmax"]
         end
         
         real_bmin = min(bmin, bmax, shunt["bs"])
@@ -343,5 +356,5 @@ end
 # -------------------------------------------------------------
 # EXECUÇÃO PRINCIPAL
 # -------------------------------------------------------------
-arquivo = joinpath(@__DIR__, "..", "data_CPF", "anarede", "5busfrank_csca.pwf")
+arquivo = joinpath(@__DIR__, "..", "data", "01 MAXIMA NOTURNA_DEZ25.PWF")
 resolver_fluxo_controlado(arquivo)

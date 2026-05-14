@@ -1,0 +1,2 @@
+caso,script,termination_status,solve_time_s,objective,iteracoes,p_loss_total_pu
+test_defaults.pwf,16,OTHER_ERROR,NaN,NaN,NaN,NaN

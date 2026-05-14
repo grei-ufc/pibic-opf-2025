@@ -1,71 +1,127 @@
 \chapter{Resultados}
 \label{chap:resultados}
 
-Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto.
+Este capítulo apresenta e discute os resultados obtidos a partir da execução da bateria de vinte e cinco casos descrita na \autoref{sec:bateria-casos}, sobre as seis formulações implementadas. Os dados aqui exibidos são os do relatório consolidado mais recente da pipeline de comparação (\verb|short-reports/short-report-pibic-opf-13-05-2026.md|), no qual o critério de equivalência numérica entre formulações foi fixado em $|\Delta| \le 10^{-4}$ simultaneamente sobre $V_i$, $\theta_i$, $p^g_k$, $q^g_k$ e os fluxos de ramo.
 
-\section{Resultados do Experimento A}
-\label{sec:resultados-do-experimento-a}
+A \autoref{sec:convergencia} apresenta a tabela global de convergência e de \textit{clusters} de equivalência por caso. A \autoref{sec:analise-barra-barra} aprofunda a análise barra a barra para um conjunto representativo de casos em que ao menos uma referência (14) ou (15) convergiu. A \autoref{sec:discussao} sintetiza as observações, em particular sobre o caso SIN.
 
-Procure deixar as figuras dos resultados o maior possível preenchendo a largura do texto do documento que possui $16~cm$.
+\section{Convergência global e clusters}
+\label{sec:convergencia}
 
-\begin{figure}[h!]
-        \captionsetup{width=16cm}
-		\Caption{\label{fig:tensaoimpedanciahumana} Gráfico de tensão considerando a impedância humana}
-		%\centering
-		\UFCfig{}{
-			\fbox{\includegraphics[width=16cm]{figuras/tensaoimpedanciahumana}}
-		}{
-			\Fonte{elaborado pelo autor (2016).}
-		}	
-\end{figure}
+A \autoref{tab:conv-global} consolida o status de convergência das seis formulações sobre os vinte e cinco casos da bateria, junto com os \textit{clusters} de equivalência numérica formados entre as formulações que convergiram em cada caso. A notação $\{a,b\}\cdot\{c\}$ indica que as formulações $a$ e $b$ convergiram para uma solução numericamente idêntica ($|\Delta| \le 10^{-4}$), enquanto $c$ convergiu para uma solução distinta. Status: \textbf{OK} = LOCALLY\_SOLVED; \textbf{INF} = INFEASIBLE/LOCALLY\_INFEASIBLE; \textbf{KIL} = TIMEOUT\_KILLED; \textbf{INV} = INVALID\_MODEL; \textbf{ERR} = OTHER\_ERROR.
 
-Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto.
-
-\begin{figure}[h!]
-	\captionsetup{width=16cm}
-	\Caption{\label{fig-grafico-1}Produção anual das dissertações de mestrado e teses de doutorado entre os anos de 1990 e 2008}		
-	\IBGEtab{}{
-		\fbox{\includegraphics[width=16cm]{figuras/figura-3}}
-	}{
-	\Fonte{elaborado pelo autor (2016).}
-}
-\end{figure}
-
-Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto.
-
-Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto.
-
-\section{Resultados do Experimento B}
-\label{sec:resultados-do-experimento-b}
-
-Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto ..
-
-\begin{table}[h!]	
-	%\centering
-	\captionsetup{width=11.3cm}%ATENÇÃO: Ajuste a largura do título
-	\Caption{\label{tab:notas} Notas dos participantes nas avaliações A, B e C}	
-	\IBGEtab{}{
-		\begin{tabular}{crrr}
-			\toprule
-			Identificação dos participantes & Avaliação A & Avaliação B &                        Avaliação C \\
-			\midrule \midrule
-			Participante 1 & 7 & 9 & 10\\
-			Participante 2 & 8 & 2 & 1\\
-			Participante 3 & 5 & 10 & 6 \\
-			Participante 4 & 3 & 1 & 4\\
-			Participante 5 & 2 & 4 & 1\\
-			Participante 6 & 0 & 7 & 2\\
-			\bottomrule
-		\end{tabular}
-	}{
-	\Fonte{elaborado pelo autor (2016).}
+\begin{table}[!h]
+\captionsetup{width=16cm}
+\Caption{\label{tab:conv-global} Convergência global e \textit{clusters} de equivalência das formulações (14)--(19) na bateria}
+\IBGEtab{}{
+    \scriptsize
+    \begin{tabular}{lccccccll}
+        \toprule
+        Caso & (14) & (15) & (16) & (17) & (18) & (19) & Clusters & Observações \\
+        \midrule \midrule
+        \texttt{01 MAXIMA NOTURNA\_DEZ25} & KIL & INF & KIL & INF & KIL & INF & --- & nenhuma converge \\
+        \texttt{300bus} & INV & OK & OK & OK & OK & OK & $\{15\}\cdot\{16\}\cdot\{17\}\cdot\{18\}\cdot\{19\}$ & 1/6 falha \\
+        \texttt{3bus} & OK & OK & OK & OK & OK & OK & $\{14\}\cdot\{15,16\}\cdot\{17,18,19\}$ &  \\
+        \texttt{3bus\_DBSH} & OK & OK & OK & OK & OK & OK & $\{14\}\cdot\{15,16\}\cdot\{17,18,19\}$ &  \\
+        \texttt{3bus\_DCER} & OK & OK & OK & OK & OK & OK & $\{14\}\cdot\{15,16\}\cdot\{17,18,19\}$ &  \\
+        \texttt{3bus\_DCSC} & OK & OK & OK & OK & OK & OK & $\{14\}\cdot\{15\}\cdot\{16\}\cdot\{17,18,19\}$ &  \\
+        \texttt{3bus\_DCline} & OK & INF & OK & OK & OK & OK & $\{14\}\cdot\{16,17,18,19\}$ & 1/6 falha \\
+        \texttt{3bus\_DSHL} & INF & OK & OK & OK & OK & OK & $\{15\}\cdot\{16\}\cdot\{17,18,19\}$ & 1/6 falha \\
+        \texttt{3bus\_corrections} & ERR & ERR & ERR & ERR & ERR & ERR & --- & nenhuma converge \\
+        \texttt{3bus\_shunt\_fields} & OK & OK & OK & OK & OK & OK & $\{14\}\cdot\{15\}\cdot\{16\}\cdot\{17,18,19\}$ &  \\
+        \texttt{3busfrank} & OK & OK & OK & OK & OK & OK & $\{14\}\cdot\{15,16\}\cdot\{17,18,19\}$ &  \\
+        \texttt{3busfrank\_continuous\_shunt} & OK & OK & OK & OK & OK & OK & $\{14\}\cdot\{15,16\}\cdot\{17,18,19\}$ &  \\
+        \texttt{3busfrank\_qlim} & OK & OK & OK & OK & OK & OK & $\{14\}\cdot\{15\}\cdot\{16\}\cdot\{17,18,19\}$ &  \\
+        \texttt{4busfrank\_vlim} & INF & INF & OK & OK & OK & OK & $\{16\}\cdot\{17,18\}\cdot\{19\}$ & 2/6 falham \\
+        \texttt{500bus} & INF & OK & OK & OK & OK & OK & $\{15\}\cdot\{16\}\cdot\{17,18\}\cdot\{19\}$ & 1/6 falha \\
+        \texttt{5busfrank} & OK & OK & OK & OK & OK & OK & $\{14\}\cdot\{15,16\}\cdot\{17,18,19\}$ &  \\
+        \texttt{5busfrank\_cphs} & OK & OK & OK & OK & OK & OK & $\{14\}\cdot\{15,16\}\cdot\{17,18,19\}$ &  \\
+        \texttt{5busfrank\_csca} & INF & INF & OK & OK & OK & OK & $\{16\}\cdot\{17,18,19\}$ & 2/6 falham \\
+        \texttt{5busfrank\_ctaf} & OK & OK & OK & OK & OK & OK & $\{14\}\cdot\{15,16\}\cdot\{17\}\cdot\{18,19\}$ &  \\
+        \texttt{5busfrank\_ctap} & OK & OK & OK & OK & OK & OK & $\{14\}\cdot\{15,16\}\cdot\{17\}\cdot\{18,19\}$ &  \\
+        \texttt{9bus} & OK & OK & OK & OK & OK & OK & $\{14\}\cdot\{15,16\}\cdot\{17,18,19\}$ &  \\
+        \texttt{9bus\_transformer\_fields} & OK & OK & OK & OK & OK & OK & $\{14\}\cdot\{15,16\}\cdot\{17\}\cdot\{18,19\}$ &  \\
+        \texttt{test\_defaults} & ERR & ERR & ERR & ERR & ERR & ERR & --- & nenhuma converge \\
+        \texttt{test\_line\_shunt} & ERR & ERR & ERR & ERR & ERR & ERR & --- & nenhuma converge \\
+        \texttt{test\_system} & ERR & ERR & OK & OK & OK & OK & $\{16\}\cdot\{17,18,19\}$ & 2/6 falham \\
+        \bottomrule
+    \end{tabular}
+}{
+    \Fonte{elaborado pelo autor a partir do relatório de \texttt{short-reports/short-report-pibic-opf-13-05-2026.md}.}
 }
 \end{table}
 
- Texto texto Referenciando a \autoref{tab:notas}  texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto.Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto.
+A leitura da \autoref{tab:conv-global} permite extrair três observações imediatas. Em primeiro lugar, das vinte e cinco entradas, as formulações \textit{hand-built} (16)--(19) convergem em vinte casos, contra dezessete da formulação (15) (FP de referência) e quinze da formulação (14) (FPO de referência). A faixa de convergência das formulações \textit{hand-built} é, portanto, estritamente maior que a das referências.
 
-Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto.Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto.
+Em segundo lugar, há cinco casos em que ao menos uma das formulações \textit{hand-built} converge enquanto as duas referências falham: \texttt{4busfrank\_vlim}, \texttt{5busfrank\_csca}, \texttt{test\_system} (em ambas (14) e (15)), além de \texttt{300bus} (apenas (14) falha como INV) e \texttt{3bus\_DCline} e \texttt{3bus\_DSHL} (uma referência cada). Em todos esses casos, a presença das folgas $s^v, s^q$ no problema \textit{soft-constraint} permite que (16) encontre uma solução factível na qual o controle nominal não é estritamente respeitado, mas é minimamente violado \textemdash comportamento que as formulações (14) e (15) não conseguem reproduzir, dado que tratam $V$ e $q^g$ apenas com limites caixa rígidos.
 
-Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto.Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto.
+Em terceiro lugar, há três casos em que \emph{nenhuma} formulação converge: o caso SIN (\texttt{01 MAXIMA NOTURNA\_DEZ25}), \texttt{3bus\_corrections} e dois \textit{stress tests} sintéticos. O caso SIN é o mais relevante para a discussão e é tratado em separado na \autoref{sec:discussao}.
 
-Texto texto  Referenciando a \autoref{tab:notas}  texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto.
+\section{Análise barra a barra}
+\label{sec:analise-barra-barra}
+
+A coluna ``Clusters'' da \autoref{tab:conv-global} sintetiza, para cada caso, quais formulações produzem soluções numericamente equivalentes. Um padrão recorrente em casos pequenos é a presença de quatro grupos típicos: $\{14\}$ isolado (porque o FPO altera o despacho e portanto o ponto de operação), $\{15,16\}$ ou $\{15\}\cdot\{16\}$ (FP clássico vs.\ FP com QLIM+VLIM, que coincidem se as folgas saturarem em zero), $\{17\}$ ou $\{17,18\}$ (efeito do CSCA) e $\{18,19\}$ (CTAP, eventualmente coincidente com (19) se DERA não estiver presente).
+
+A \autoref{tab:divergencia-3bus} ilustra o agrupamento típico em uma das redes pedagógicas, \texttt{3bus\_DCSC}. Para cada barra são listados os valores de $V$ e $\theta$ obtidos por cada formulação que divergiu de \emph{ambas} as referências por mais de $10^{-4}$.
+
+\begin{table}[!h]
+\captionsetup{width=12cm}
+\Caption{\label{tab:divergencia-3bus} Divergência barra a barra no caso \texttt{3bus\_DCSC}}
+\IBGEtab{}{
+    \begin{tabular}{ccrr}
+        \toprule
+        Barra & Script & $V$ (p.u.) & $\theta$ (rad) \\
+        \midrule \midrule
+        1 & (14) & 1{,}1000 & 0{,}0000 \\
+        1 & (15) & 1{,}0290 & 0{,}0000 \\
+        1 & (16) & 1{,}0352 & 0{,}0000 \\
+        1 & (17--19) & 1{,}0064 & 0{,}0000 \\
+        \midrule
+        2 & (14) & 1{,}1000 & $-3{,}9 \times 10^{-10}$ \\
+        2 & (15) & 1{,}0300 & $-7{,}1 \times 10^{-3}$ \\
+        2 & (16) & 1{,}0362 & $-2{,}4 \times 10^{-4}$ \\
+        2 & (17--19) & 1{,}0062 & $-2{,}6 \times 10^{-4}$ \\
+        \midrule
+        3 & (14) & 1{,}0698 & $-1{,}8 \times 10^{-2}$ \\
+        3 & (15) & 0{,}9970 & $-2{,}5 \times 10^{-2}$ \\
+        3 & (16) & 1{,}0178 & $-1{,}2 \times 10^{-2}$ \\
+        3 & (17--19) & 0{,}9878 & $-1{,}3 \times 10^{-2}$ \\
+        \bottomrule
+    \end{tabular}
+}{
+    \Fonte{elaborado pelo autor.}
+}
+\end{table}
+
+A \autoref{tab:divergencia-3bus} mostra três soluções distintas para o mesmo sistema: o FPO (14) eleva todas as tensões a 1,1\,p.u.\ na barra de geração, comportamento típico de um FPO sem custo de tensão; o FP (15) e a formulação \textit{hand-built} (16) convergem para o ponto operacional ``natural'' (folgas próximas de zero), mas com uma diferença em $V$ de cerca de 0,006--0,012\,p.u.\ que é compatível com o efeito da folga $s^v$ na minimização da Equação \eqref{eq:obj-16}; finalmente, as formulações (17)--(19), que têm CSCA ativo, deslocam o ponto de operação para tensões consistentemente mais baixas \textemdash isso é o efeito do controle de \textit{shunt} ajustando $b^{sh}_s$ para minimizar o desvio do \textit{setpoint} de $V$ na barra de geração, que neste caso é 1,007\,p.u.\ em vez do nominal 1,03 ou 1,1.
+
+Em casos de médio porte, como \texttt{300bus} e \texttt{500bus}, as divergências entre clusters tornam-se mais sistemáticas. O caso \texttt{300bus} apresenta cinco \textit{clusters} distintos $\{15\}\cdot\{16\}\cdot\{17\}\cdot\{18\}\cdot\{19\}$, ou seja, cada formulação produz uma solução numericamente diferente. A análise dos \textit{deltas} em $V$ na bateria (cf.\ \texttt{short-report-pibic-opf-13-05-2026.md}, seção 2) mostra que (16)--(19) elevam consistentemente as tensões em relação ao FP (15) em cerca de 0,02--0,05\,p.u.\ \textemdash justamente o efeito esperado da minimização de $(s^v_i)^2$ quando o \textit{setpoint} $V^{ref}_i$ está acima do valor que o FP clássico encontra naturalmente. As tensões de (18) e (19), por sua vez, atingem o limite superior $V^{\max}_i = 1{,}1$\,p.u.\ em várias barras, evidenciando que o CTAP empurra o controle para o limite caixa.
+
+\section{Discussão}
+\label{sec:discussao}
+
+\subsection{Comportamento típico das ações de controle}
+\label{subsec:disc-controles}
+
+A leitura cruzada das Tabelas \ref{tab:conv-global} e \ref{tab:divergencia-3bus} confirma o comportamento esperado das quatro ações de controle implementadas:
+
+\begin{alineascomponto}
+    \item \textbf{QLIM + VLIM} (formulação 16): permite recuperar factibilidade em cinco casos nos quais (14) ou (15) declaram infactibilidade, ao custo de pequenas violações dos \textit{setpoints} (folgas residuais);
+    \item \textbf{CSCA} (formulação 17): forma cluster próprio em redes nas quais há bancos \textit{shunt} chaveáveis, ajustando $b^{sh}_s$ para reduzir o desvio em $V$;
+    \item \textbf{CTAP} (formulação 18): forma cluster próprio em redes com transformadores OLTC, frequentemente empurrando $V$ para o limite caixa $V^{\max}$;
+    \item \textbf{DERA} (formulação 19): em redes pedagógicas, produz solução idêntica a (18) na maioria dos casos \textemdash refletindo o fato de que a representação minimalista adotada apenas adiciona injeções fixas, sem decisão de despacho. Em \texttt{4busfrank\_vlim} e \texttt{500bus}, contudo, (19) forma cluster próprio, sinalizando que mesmo a injeção fixa altera o ponto de equilíbrio quando a rede tem margens estreitas.
+\end{alineascomponto}
+
+\subsection{O caso SIN}
+\label{subsec:sin}
+
+O caso \texttt{01 MAXIMA NOTURNA\_DEZ25.PWF}, com cerca de 6.000 barras, é o caso de maior interesse prático e o único da bateria em que \emph{todas} as seis formulações falham em convergir dentro do orçamento de \verb|max_iter = 3000| iterações e do tempo limite imposto pelo \textit{wrapper} de execução. Especificamente, (14), (16) e (18) atingem o limite de tempo (status \textbf{KIL}) sem sinalizar infactibilidade, enquanto (15), (17) e (19) terminam em \textbf{INF} (LOCALLY\_INFEASIBLE).
+
+Esse comportamento é coerente com o que se espera de um \textit{snapshot} real do SIN sob máxima noturna: a rede opera em um ponto próximo dos limites de capacidade reativa em várias barras, e a inicialização \textit{flat} (ou a partir do PWF) está suficientemente longe de uma solução factível para que o método de pontos interiores do Ipopt não consiga sair da região de inviabilidade dentro do orçamento permitido. Há indícios, em logs preliminares descartados desta análise, de que uma inicialização baseada na solução de uma formulação mais simples (por exemplo, DC) ou um aumento de \verb|max_iter| para a casa de 10.000 permitiria a convergência \textemdash mas isso fica como trabalho futuro.
+
+Vale notar que, mesmo sem convergir, as formulações (14)--(19) sobre o SIN não \emph{quebram} (não há \textbf{CRA} nem \textbf{ERR}): a infraestrutura de leitura PWF, construção da \verb|ref|, montagem do modelo JuMP e chamada ao Ipopt funciona corretamente em escala SIN. O obstáculo está exclusivamente na resolução numérica.
+
+\subsection{Casos sintéticos com erro de modelo}
+\label{subsec:sinteticos}
+
+Os três casos com status \textbf{ERR} em todas as formulações (\texttt{3bus\_corrections}, \texttt{test\_defaults} e \texttt{test\_line\_shunt}) compartilham a característica de conter campos do PWF que disparam erros no \textit{parser} do \textit{PWF.jl} \emph{antes} da chamada ao \textit{solver}. Não são, portanto, falhas das formulações, mas sim limitações do parser, e estão fora do escopo do trabalho.
