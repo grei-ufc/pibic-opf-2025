@@ -158,8 +158,8 @@ function resolver_fluxo_controlado(caminho_arquivo)
     # =========================================================================
     # 4. VARIÁVEIS E RESTRIÇÕES DE CONTROLE (QLIM e VLIM)
     # =========================================================================
-    PENALIDADE = 1e6 
-    PENALIDADE_MENOR = 1e4 
+    PENALIDADE = 1e5 
+    PENALIDADE_MENOR = 1e3 
 
     gen_buses = [gen["gen_bus"] for (i,gen) in ref[:gen]]
     shunt_buses = [
@@ -218,11 +218,11 @@ function resolver_fluxo_controlado(caminho_arquivo)
         base_kv = get(ref[:bus][bus_id], "base_kv", 1.0)
         
         if base_kv < 69.0
-            peso_corte[l] = 1e7 # Subtransmissão e Distribuição (Prioridade de Corte)
+            peso_corte[l] = 1e3 # Subtransmissão e Distribuição (Prioridade de Corte)
         elseif base_kv <= 230.0
-            peso_corte[l] = 5e7 # Transmissão (Maior peso)
+            peso_corte[l] = 5e3 # Transmissão (Maior peso)
         else
-            peso_corte[l] = 1e8 # Extra Alta Tensão - EAT (Último recurso de corte)
+            peso_corte[l] = 1e4 # Extra Alta Tensão - EAT (Último recurso de corte)
         end
     end
 

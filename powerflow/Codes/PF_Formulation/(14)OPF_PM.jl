@@ -13,7 +13,7 @@ print("\033c") # Limpa o terminal
 # 0. LEITURA DE DADOS
 # =========================================================================
 println("1. Lendo arquivo PWF...")
-caminho_arquivo = joinpath(@__DIR__, "..", "data", "500bus.pwf")
+caminho_arquivo = joinpath(@__DIR__, "..", "data", "5busfrank_csca.pwf")
 
 data = PWF.parse_file(caminho_arquivo)
 base_mva = data["baseMVA"]
@@ -39,7 +39,7 @@ end
 optimizer = optimizer_with_attributes(Ipopt.Optimizer, 
     "max_iter" => 3000, 
     "tol" => 1e-5,
-    "print_level" => 0 # Mudei para 0 para o terminal ficar limpo igual ao seu exemplo
+    "print_level" => 5 # Mudei para 0 para o terminal ficar limpo igual ao seu exemplo
 )
 
 # =========================================================================

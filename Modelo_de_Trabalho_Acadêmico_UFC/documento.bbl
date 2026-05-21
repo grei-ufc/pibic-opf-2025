@@ -5,6 +5,19 @@
 \providecommand{\abntbstabout}[1]{}
 \abntbstabout{v-1.9.7 }
 
+\bibitem[BEZANSON \textit{et al.} 2017]{bezanson2017julia}
+\abntrefinfo{BEZANSON \textit{et al.}}{BEZANSON \textit{et al.}}{2017}
+{BEZANSON, J.; EDELMAN, A.; KARPINSKI, S.; SHAH, V.~B. Julia: a fresh approach
+  to numerical computing.
+\textbf{SIAM Review}, SIAM, v.~59, n.~1, p. 65--98, 2017.}
+
+\bibitem[{CENTRO DE PESQUISAS DE ENERGIA EL{\'E}TRICA} 2023]{cepel2023anarede}
+\abntrefinfo{{CENTRO DE PESQUISAS DE ENERGIA EL{\'E}TRICA}}{{CENTRO DE
+  PESQUISAS DE ENERGIA EL{\'E}TRICA}}{2023}
+{{CENTRO DE PESQUISAS DE ENERGIA EL{\'E}TRICA}. \textbf{Programa ANAREDE}:
+  an{\'a}lise de redes el{\'e}tricas.
+Rio de Janeiro, 2023.}
+
 \bibitem[CH{\'A}VARRY 2024]{chavarry2024}
 \abntrefinfo{CH{\'A}VARRY}{CH{\'A}VARRY}{2024}
 {CH{\'A}VARRY, I.~S.
@@ -14,10 +27,24 @@ Disserta\c{c}\~{a}o (Trabalho de Conclus{\~a}o de Curso (Engenharia
   El{\'e}trica)) --- Universidade Federal do Cear{\'a}, Centro de Tecnologia,
   Departamento de Engenharia El{\'e}trica, Fortaleza, 2024.}
 
+\bibitem[COFFRIN \textit{et al.} 2018]{coffrin2018powermodels}
+\abntrefinfo{COFFRIN \textit{et al.}}{COFFRIN \textit{et al.}}{2018}
+{COFFRIN, C.; BENT, R.; SUNDAR, K.; NG, Y.; LUBIN, M. {PowerModels.jl}: an
+  open-source framework for exploring power flow formulations. In:
+  \textbf{2018 Power Systems Computation Conference (PSCC)}. Dublin, Ireland:
+  IEEE, 2018. p.~1--8.}
+
 \bibitem[GLOVER \textit{et al.} 2012]{gloverSarma2012power}
 \abntrefinfo{GLOVER \textit{et al.}}{GLOVER \textit{et al.}}{2012}
 {GLOVER, J.~D.; SARMA, M.~S.; OVERBYE, T.~J. \textbf{Power system analysis and
   design}. 6. ed. Stamford, CT: Cengage Learning, 2012.}
+
+\bibitem[LUBIN \textit{et al.} 2023]{lubin2023jump}
+\abntrefinfo{LUBIN \textit{et al.}}{LUBIN \textit{et al.}}{2023}
+{LUBIN, M.; DOWSON, O.; GARCIA, J. D.; HUCHETTE, J.; LEGAT, B.; VIELMA, J.~P.
+  {JuMP} 1.0: recent improvements to a modeling language for mathematical
+  optimization.
+\textbf{Mathematical Programming Computation}, v.~15, p. 581--589, 2023.}
 
 \bibitem[MEIER 2006]{vonMeier2006powersystems}
 \abntrefinfo{MEIER}{MEIER}{2006}
@@ -31,5 +58,11 @@ ISBN 978-0-471-17859-0.}
   the power flow equations.
 \textbf{Foundations and Trends in Electric Energy Systems}, Now Publishers,
   v.~4, n.~1-2, p. 1--221, 2019.}
+
+\bibitem[W{\"A}CHTER e BIEGLER 2006]{wachterBiegler2006ipopt}
+\abntrefinfo{W{\"A}CHTER e BIEGLER}{W{\"A}CHTER; BIEGLER}{2006}
+{W{\"A}CHTER, A.; BIEGLER, L.~T. On the implementation of an interior-point
+  filter line-search algorithm for large-scale nonlinear programming.
+\textbf{Mathematical Programming}, Springer, v.~106, n.~1, p. 25--57, 2006.}
 
 \end{thebibliography}

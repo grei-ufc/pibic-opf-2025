@@ -1,7 +1,7 @@
 # Roda solve_ac_pf oficial e exporta CSVs. Útil para benchmark contra suas formulações.
-
 using PWF
 using PowerModels
+using PowerModelsRestoration
 using Ipopt
 using CSV
 using DataFrames
@@ -12,7 +12,7 @@ print("\033c") # Limpa o terminal
 # 0. LEITURA DE DADOS
 # =========================================================================
 println("1. Lendo arquivo PWF...")
-caminho_arquivo = joinpath(@__DIR__, "..", "data", "test_system.pwf")
+caminho_arquivo = joinpath(@__DIR__, "..", "data", "01 MAXIMA NOTURNA_DEZ25.PWF")
 
 data = PWF.parse_file(caminho_arquivo)
 base_mva = data["baseMVA"]
@@ -22,7 +22,7 @@ PowerModels.select_largest_component!(data)
 # Salva todas as barras tipo3 (slack)
 ref_buses = [i for (i, bus) in data["bus"] if bus["bus_type"] == 3]
 
-#=
+
 # Mantém a primeira como Slack (Tipo 3) e transforma as demais em PV (Tipo 2)
 if length(ref_buses) > 1
     println("Ajustando múltiplas barras Slack...")
@@ -31,7 +31,8 @@ if length(ref_buses) > 1
         data["bus"][bus_id]["bus_type"] = 2 
     end
 end
-=#
+
+
 PowerModels.standardize_cost_terms!(data, order=2)
 
 # =========================================================================
@@ -40,6 +41,7 @@ PowerModels.standardize_cost_terms!(data, order=2)
 optimizer = optimizer_with_attributes(Ipopt.Optimizer, 
     "max_iter" => 3000, 
     "tol" => 1e-5,
+    "mu_strategy" => "adaptive",
     "print_level" => 5 # Mudei para 0 para o terminal ficar limpo igual ao seu exemplo
 )
 
@@ -50,7 +52,7 @@ println("\n5. Resolvendo o Fluxo de Potência Ótimo do PowerModels (AC Polar)..
 
 # A macro @elapsed mede o tempo total da chamada da função
 tempo_total_execucao = @elapsed begin
-    resultado_pm = solve_ac_pf(data, optimizer)
+    resultado_pm = PowerModelsRestoration.run_mld(data, ACPPowerModel, optimizer)
 end
 
 status_convergencia = resultado_pm["termination_status"]

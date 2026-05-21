@@ -8,7 +8,40 @@ Este capítulo apresenta a base conceitual sobre a qual todo o restante do traba
 
 A rede elétrica é representada por um grafo $\mathcal{G} = (\mathcal{N}, \mathcal{B})$, em que o conjunto de nós $\mathcal{N}$ corresponde às barras do sistema e o conjunto de arestas $\mathcal{B}$ aos ramos AC, abrangendo tanto linhas de transmissão quanto transformadores em fase. Adicionalmente, $\mathcal{B}_{dc}$ representa elos HVDC, $\mathcal{G}$ o conjunto de geradores, $\mathcal{L}$ o conjunto de cargas e $\mathcal{S}$ o conjunto de bancos \textit{shunt}, cada elemento associado a uma barra de $\mathcal{N}$.
 
-Cada ramo $(i,j) \in \mathcal{B}$ é descrito pelo modelo $\pi$ clássico, com admitância série $y_{ij} = g_{ij} + j b_{ij}$, susceptâncias \textit{shunt} de extremidade $b^{fr}_{ij}$ e $b^{to}_{ij}$, condutâncias \textit{shunt} de extremidade $g^{fr}_{ij}$ e $g^{to}_{ij}$ e uma razão de transformação complexa $\bar{t}_{ij} = t_{ij} \, e^{j \phi_{ij}}$ que generaliza linhas e transformadores. Para uma linha simples, $t_{ij} = 1$ e $\phi_{ij} = 0$.
+Cada ramo $(i,j) \in \mathcal{B}$ é descrito pelo modelo $\pi$ clássico (\autoref{fig:modelo-pi}), com admitância série $y_{ij} = g_{ij} + j b_{ij}$, susceptâncias \textit{shunt} de extremidade $b^{fr}_{ij}$ e $b^{to}_{ij}$, condutâncias \textit{shunt} de extremidade $g^{fr}_{ij}$ e $g^{to}_{ij}$ e uma razão de transformação complexa $\bar{t}_{ij} = t_{ij} \, e^{j \phi_{ij}}$ que generaliza linhas e transformadores. Para uma linha simples, $t_{ij} = 1$ e $\phi_{ij} = 0$.
+
+\begin{figure}[!htb]
+\Caption{\label{fig:modelo-pi} Modelo $\pi$ de um ramo com transformador}
+\IBGEtab{}{
+\begin{tikzpicture}[>=Latex, line width=0.9pt, font=\small]
+  \node[circle,fill=black,inner sep=1.7pt,label=above:{Barra $i$}] (i) at (0,0) {};
+  \node[circle,fill=black,inner sep=1.7pt,label=above:{Barra $j$}] (j) at (11,0) {};
+  \node[draw,rounded corners,minimum width=1.3cm,minimum height=0.8cm] (tr) at (2,0) {$\bar t_{ij}$};
+  \coordinate (a) at (4.3,0);
+  \coordinate (b) at (8,0);
+  \node[draw,minimum width=2.4cm,minimum height=0.8cm] (y) at (6.15,0) {$y_{ij}=g_{ij}+j\,b_{ij}$};
+  \draw (i) -- (tr);
+  \draw (tr) -- (a);
+  \draw (a) -- (y.west);
+  \draw (y.east) -- (b);
+  \draw (b) -- (j);
+  \node[draw,minimum width=2.2cm,minimum height=0.75cm,anchor=north] (sfr) at (4.3,-1.4) {$g^{fr}_{ij}+j\,b^{fr}_{ij}$};
+  \draw (a) -- (sfr.north);
+  \draw (sfr.south) -- ++(0,-0.35) coordinate (gfr);
+  \draw ([xshift=-0.34cm]gfr) -- ([xshift=0.34cm]gfr);
+  \draw ([xshift=-0.22cm,yshift=-0.13cm]gfr) -- ([xshift=0.22cm,yshift=-0.13cm]gfr);
+  \draw ([xshift=-0.10cm,yshift=-0.26cm]gfr) -- ([xshift=0.10cm,yshift=-0.26cm]gfr);
+  \node[draw,minimum width=2.2cm,minimum height=0.75cm,anchor=north] (sto) at (8,-1.4) {$g^{to}_{ij}+j\,b^{to}_{ij}$};
+  \draw (b) -- (sto.north);
+  \draw (sto.south) -- ++(0,-0.35) coordinate (gto);
+  \draw ([xshift=-0.34cm]gto) -- ([xshift=0.34cm]gto);
+  \draw ([xshift=-0.22cm,yshift=-0.13cm]gto) -- ([xshift=0.22cm,yshift=-0.13cm]gto);
+  \draw ([xshift=-0.10cm,yshift=-0.26cm]gto) -- ([xshift=0.10cm,yshift=-0.26cm]gto);
+\end{tikzpicture}
+}{
+\Fonte{elaborado pelo autor.}
+}
+\end{figure}
 
 A tensão complexa em cada barra é representada na forma fasorial $\bar{V}_i = V_i \, e^{j\theta_i}$, onde $V_i$ é a magnitude (em p.u.) e $\theta_i$ é o ângulo (em radianos). Esta é a representação polar adotada em todas as formulações deste trabalho. A representação complementar em coordenadas retangulares, $\bar{V}_i = e_i + j f_i$, embora útil em algumas relaxações, não será utilizada na implementação.
 
@@ -94,7 +127,7 @@ De forma análoga, o controle VLIM trata $V_i$ como variável dentro dos limites
 \subsection{CSCA \textemdash bancos \textit{shunt} chaveados}
 \label{subsec:csca}
 
-Os bancos \textit{shunt} (capacitivos ou indutivos) chaveáveis são representados, no PWF, por uma susceptância $b^{sh}_s$ que pode assumir um conjunto discreto de valores entre $b^{sh,\min}_s$ e $b^{sh,\max}_s$. No ANAREDE, o controle CSCA promove o chaveamento dos passos para manter $V_i$ próxima do \textit{setpoint}. Em uma formulação NLP, $b^{sh}_s$ é tipicamente relaxada para variável contínua dentro do intervalo $[b^{sh,\min}_s, b^{sh,\max}_s]$ \textemdash representação que será mantida nesta dissertação \textemdash e o discretização posterior é tratada via \textit{rounding} ou em formulação MINLP.
+Os bancos \textit{shunt} (capacitivos ou indutivos) chaveáveis são representados, no PWF, por uma susceptância $b^{sh}_s$ que pode assumir um conjunto discreto de valores entre $b^{sh,\min}_s$ e $b^{sh,\max}_s$. No ANAREDE, o controle CSCA promove o chaveamento dos passos para manter $V_i$ próxima do \textit{setpoint}. Em uma formulação NLP, $b^{sh}_s$ é tipicamente relaxada para variável contínua dentro do intervalo $[b^{sh,\min}_s, b^{sh,\max}_s]$ \textemdash representação que será mantida neste trabalho \textemdash e a discretização posterior é tratada via \textit{rounding} ou em formulação MINLP.
 
 \subsection{CTAP \textemdash \textit{tap} ajustável de transformadores}
 \label{subsec:ctap}

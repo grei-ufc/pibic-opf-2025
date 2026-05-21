@@ -9,7 +9,7 @@ Status abreviados: **OK**=LOCALLY_SOLVED · **INF**=INFEASIBLE/LOCALLY_INFEASIBL
 
 | Caso | (14) | (15) | (16) | (17) | (18) | (19) | Grupos equivalentes | Observações |
 |---|---|---|---|---|---|---|---|---|
-| `01 MAXIMA NOTURNA_DEZ25.PWF` | KIL | INF | KIL | INF | KIL | INF | — | Nenhuma formulação convergiu |
+| `01 MAXIMA NOTURNA_DEZ25.PWF` | INF | INF | INF | INF | INF | INF | — | Nenhuma formulação convergiu |
 | `300bus.pwf` | INV | OK | OK | OK | OK | OK | {15}·{16}·{17}·{18}·{19} | 1/6 não convergiram |
 | `3bus.pwf` | OK | OK | OK | OK | OK | OK | {14}·{15,16}·{17,18,19} |  |
 | `3bus_DBSH.pwf` | OK | OK | OK | OK | OK | OK | {14}·{15,16}·{17,18,19} |  |

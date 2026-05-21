@@ -2,7 +2,7 @@
 
 julia_version = "1.8.3"
 manifest_format = "2.0"
-project_hash = "6f5fdec9bf284eff1e382ad76699c7544bc04061"
+project_hash = "288bded0cd5bab2b4327a59780e4bacf8e2bfb58"
 
 [[deps.ASL_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -608,6 +608,12 @@ deps = ["InfrastructureModels", "JSON", "JuMP", "LinearAlgebra", "Memento", "NLs
 git-tree-sha1 = "a9fe7c23e80743e4a1c79e1a920f56b7b8e3f9f9"
 uuid = "c36e90e8-916a-50a6-bd94-075b64ef4655"
 version = "0.19.10"
+
+[[deps.PowerModelsRestoration]]
+deps = ["InfrastructureModels", "JuMP", "Memento", "PowerModels"]
+git-tree-sha1 = "4321e9ca712f12c403899b56fc309b60b0497664"
+uuid = "23adbb12-a187-11e9-26a2-eb4d4e6e68fb"
+version = "0.7.0"
 
 [[deps.PowerPlots]]
 deps = ["ColorSchemes", "Colors", "DataFrames", "FileIO", "GeometryBasics", "Graphs", "InfrastructureModels", "LinearAlgebra", "Memento", "NLopt", "NetworkLayout", "OrderedCollections", "PowerModels", "Random", "RecursiveArrayTools", "Setfield", "Statistics", "VegaLite"]

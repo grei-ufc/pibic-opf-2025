@@ -11,43 +11,18 @@ print("\033c") # Limpa o terminal
 PASTA_CSV = joinpath(@__DIR__, "resultados_csv") 
 mkpath(PASTA_CSV) 
 
-function resolver_fluxo_controlado(caminho_arquivo)
+function resolver_fluxo_controlado_mld(caminho_arquivo)
     # =========================================================================
     # 0. LEITURA DE DADOS E TOPOLOGIA
     # =========================================================================
-    println("1. Lendo arquivo PWF...")
+    println("1. Lendo arquivo PWF e extraindo dados de controle...")
     
+    # Habilitando add_control_data para ler limites operacionais reais do ANAREDE
     data = PWF.parse_file(caminho_arquivo, add_control_data=true)
     base_mva = data["baseMVA"] 
+    
     PowerModels.select_largest_component!(data)
     println("-> Ilhas isoladas removidas! Mantendo apenas a rede principal conectada.")
-
-    tolerancia_x = 1e-4
-    println("-> Pré-processando dados: Corrigindo reatâncias quase nulas...")
-    ramos_corrigidos = 0
-
-    for (i, branch) in data["branch"]
-        x_val = branch["br_x"]
-        if abs(x_val) < tolerancia_x
-            # Mantém o sinal original, mas aplica o valor da tolerância
-            novo_sinal = x_val >= 0.0 ? 1.0 : -1.0
-            branch["br_x"] = novo_sinal * tolerancia_x
-            ramos_corrigidos += 1
-        end
-    end
-    println("-> $ramos_corrigidos ramos tiveram suas reatâncias ajustadas para $tolerancia_x pu.")
-
-    for (i, bus) in data["bus"]
-        bus["vm_start"] = bus["vm"]
-        bus["va_start"] = bus["va"]
-    end
-
-    # Se quiser aplicar o mesmo para os taps dos transformadores:
-    for (i, branch) in data["branch"]
-        if haskey(branch, "tap")
-            branch["tap_start"] = branch["tap"]
-        end
-    end
 
     # Identifica todas as barras definidas como referência (bus_type == 3)
     ref_buses = [b_dict for (b_id, b_dict) in data["bus"] if b_dict["bus_type"] == 3]
@@ -82,17 +57,18 @@ function resolver_fluxo_controlado(caminho_arquivo)
     # =========================================================================
     # 1. INICIALIZAÇÃO DO MODELO E SOLVER
     # =========================================================================
+    # Configurando mu_strategy para auxiliar em regiões difíceis (ill-conditioned)
     model = Model(optimizer_with_attributes(Ipopt.Optimizer, 
         "max_iter" => 3000, 
         "tol" => 1e-5,
-        "print_level" => 5,
-        "output_file" => "log_solver_ipopt.txt"
+        "mu_strategy" => "adaptive",
+        "print_level" => 5
     ))
 
     # =========================================================================
     # 2. VARIÁVEIS DE ESTADO FÍSICO, ELOS DC, SHUNTS E TAPS (CTAP)
     # =========================================================================
-    println("2. Criando variáveis de estado e controle...")
+    println("2. Criando variáveis de estado, controle e folgas (MLD)...")
 
     @variable(model, ref[:bus][i]["vmin"] <= vm[i in keys(ref[:bus])] <= ref[:bus][i]["vmax"], start=ref[:bus][i]["vm"]) 
     @variable(model, va[i in keys(ref[:bus])], start=ref[:bus][i]["va"]) 
@@ -184,10 +160,10 @@ function resolver_fluxo_controlado(caminho_arquivo)
     end
 
     # =========================================================================
-    # 4. VARIÁVEIS E RESTRIÇÕES DE CONTROLE (QLIM e VLIM)
+    # 4. VARIÁVEIS DE FOLGA GLOBAIS (VLIM e Corte de Carga Ativa)
     # =========================================================================
-    PENALIDADE = 1e5 
-    PENALIDADE_MENOR = 1e3 
+    PENALIDADE = 1e6 
+    PENALIDADE_MENOR = 1e4 
 
     gen_buses = [gen["gen_bus"] for (i,gen) in ref[:gen]]
     shunt_buses = [
@@ -219,41 +195,12 @@ function resolver_fluxo_controlado(caminho_arquivo)
         end
     end
 
+    # Folga Reativa (VLIM)
     @variable(model, sl_d[i in keys(ref[:load])], start=0.0)
     
-    # =========================================================================
-    # 4.1 VARIÁVEIS DE CORTE DE CARGA (DERA)
-    # =========================================================================
-    println("Criando variáveis de Corte de Carga (DERA)...")
+    # NOVA VARIÁVEL: Folga Ativa (Corte de Carga / Fictício)
+    @variable(model, sl_p[i in keys(ref[:bus])], start=0.0)
     
-    @variable(model, 0.0 <= corte_p[l in keys(ref[:load])] <= max(0.0, ref[:load][l]["pd"]), start=0.0) 
-    @variable(model, corte_q[l in keys(ref[:load])], start=0.0)
-
-    # Restrição para manter o fator de potência da carga constante durante o corte
-    for (l, load) in ref[:load]
-        if load["pd"] > 1e-4
-            @constraint(model, corte_q[l] == corte_p[l] * (load["qd"] / load["pd"]))
-        else
-            fix(corte_p[l], 0.0; force=true)
-            fix(corte_q[l], 0.0; force=true)
-        end
-    end
-
-    # Estrutura de penalidade baseada no nível de tensão (kV) da barra
-    peso_corte = Dict()
-    for (l, load) in ref[:load]
-        bus_id = load["load_bus"]
-        base_kv = get(ref[:bus][bus_id], "base_kv", 1.0)
-        
-        if base_kv < 69.0
-            peso_corte[l] = 1e3 # Subtransmissão e Distribuição (Prioridade de Corte)
-        elseif base_kv <= 230.0
-            peso_corte[l] = 5e3 # Transmissão (Maior peso)
-        else
-            peso_corte[l] = 1e4 # Extra Alta Tensão - EAT (Último recurso de corte)
-        end
-    end
-
     # =========================================================================
     # 5. EQUAÇÕES DE FLUXO NOS RAMOS AC
     # =========================================================================
@@ -271,7 +218,6 @@ function resolver_fluxo_controlado(caminho_arquivo)
         cos_phi = cos(shift)
         sin_phi = sin(shift)
 
-        # Fluxos do lado 'from' (f -> t)
         p[(l, f, t)] = @NLexpression(model, 
             (g + g_fr) / tm_var[l]^2 * vm[f]^2 + 
             (-g * cos_phi + b * sin_phi) / tm_var[l] * (vm[f] * vm[t] * cos(va[f] - va[t])) + 
@@ -283,7 +229,6 @@ function resolver_fluxo_controlado(caminho_arquivo)
             (-g * cos_phi + b * sin_phi) / tm_var[l] * (vm[f] * vm[t] * sin(va[f] - va[t]))
         )
         
-        # Fluxos do lado 'to' (t -> f)
         p[(l, t, f)] = @NLexpression(model, 
             (g + g_to) * vm[t]^2 + 
             (-g * cos_phi - b * sin_phi) / tm_var[l] * (vm[t] * vm[f] * cos(va[t] - va[f])) + 
@@ -297,9 +242,9 @@ function resolver_fluxo_controlado(caminho_arquivo)
     end
 
     # =========================================================================
-    # 6. LEIS DE KIRCHHOFF DOS NÓS COM DERA
+    # 6. LEIS DE KIRCHHOFF DOS NÓS 
     # =========================================================================
-    println("4. Montando balanço nodal (Leis de Kirchhoff)...")
+    println("4. Montando balanço nodal (Leis de Kirchhoff com slacks)...")
     for (i, bus) in ref[:bus]
         bus_arcs = ref[:bus_arcs][i]
         bus_arcs_dc = ref[:bus_arcs_dc][i] 
@@ -310,10 +255,6 @@ function resolver_fluxo_controlado(caminho_arquivo)
         pd_nominal = sum(load["pd"] for (k,load) in ref[:load] if load["load_bus"] == i; init=0.0)
         qd_nominal = sum(load["qd"] for (k,load) in ref[:load] if load["load_bus"] == i; init=0.0)
 
-        # Integração das variáveis do DERA no balanço nodal
-        corte_p_total = isempty(bus_loads) ? 0.0 : sum(corte_p[l] for l in bus_loads)
-        corte_q_total = isempty(bus_loads) ? 0.0 : sum(corte_q[l] for l in bus_loads)
-
         p_gen_total = isempty(bus_gens) ? 0.0 : sum(pg[g] for g in bus_gens)
         q_gen_total = isempty(bus_gens) ? 0.0 : sum(qg[g] for g in bus_gens)
         
@@ -323,131 +264,94 @@ function resolver_fluxo_controlado(caminho_arquivo)
         slack_vlim  = isempty(bus_loads) ? 0.0 : sum(sl_d[l] for l in bus_loads)
         gs_total = isempty(bus_shunts) ? 0.0 : sum(ref[:shunt][k]["gs"] for k in bus_shunts)
 
-        # Balanço Ativo
+        # Balanço Ativo MODIFICADO (Inclusão de sl_p para garantir viabilidade)
         @NLconstraint(model, 
-            sum(p[a] for a in bus_arcs) + p_dcline_total == p_gen_total - (pd_nominal - corte_p_total) - gs_total*vm[i]^2 
+            sum(p[a] for a in bus_arcs) + p_dcline_total == p_gen_total - pd_nominal - gs_total*vm[i]^2 + sl_p[i]
         )
 
         # Balanço Reativo 
         if isempty(bus_shunts)
             @NLconstraint(model, 
-                sum(q[a] for a in bus_arcs) + q_dcline_total == q_gen_total - (qd_nominal - corte_q_total + slack_vlim)
+                sum(q[a] for a in bus_arcs) + q_dcline_total == q_gen_total - (qd_nominal + slack_vlim)
             )
         else
             @NLconstraint(model, 
-                sum(q[a] for a in bus_arcs) + q_dcline_total == q_gen_total - (qd_nominal - corte_q_total + slack_vlim) + sum(bs_var[k]*vm[i]^2 for k in bus_shunts) 
+                sum(q[a] for a in bus_arcs) + q_dcline_total == q_gen_total - (qd_nominal + slack_vlim) + sum(bs_var[k]*vm[i]^2 for k in bus_shunts) 
             )
         end
     end
 
     # =========================================================================
-    # 7. FUNÇÃO OBJETIVO COM PENALIZAÇÃO HIERÁRQUICA
+    # 7. FUNÇÃO OBJETIVO DE SOFT-CONSTRAINTS
     # =========================================================================
-    println("Montando a Função Objetivo...")
-    
     @objective(model, Min, 
-        PENALIDADE * sum(sl_v[i]^2 for i in controlled_buses) + 
-        PENALIDADE * sum(sl_v_upp[i]^2 + sl_v_low[i]^2 for i in controlled_buses) +
-        PENALIDADE * sum(sl_d[l]^2 for l in keys(ref[:load])) +
-        PENALIDADE_MENOR * sum(sl_bsh[k]^2 for k in keys(ref[:shunt])) +
-        # Penalidade hierárquica baseada nos níveis de tensão (linear)
-        sum(peso_corte[l] * corte_p[l] for l in keys(ref[:load]))
+        PENALIDADE * sum(sl_v[i]^2 for i in keys(sl_v)) + 
+        PENALIDADE * sum(sl_v_upp[i]^2 + sl_v_low[i]^2 for i in keys(sl_v_upp)) +
+        PENALIDADE * sum(sl_d[l]^2 for l in keys(sl_d)) +
+        PENALIDADE * sum(sl_p[i]^2 for i in keys(sl_p)) + # NOVA PENALIDADE ATIVA
+        PENALIDADE_MENOR * sum(sl_bsh[k]^2 for k in keys(sl_bsh)) 
     )
 
     # =========================================================================
     # 8. RESOLUÇÃO 
     # =========================================================================
-    println("5. Resolvendo o Fluxo de Potência Controlado...\n")
+    println("5. Resolvendo o Fluxo de Potência Robusto (MLD)...\n")
     tempo_total_execucao = @elapsed optimize!(model)
 
     println("\n--- ESTATÍSTICAS DE RESOLUÇÃO ---")
     println("Status da Convergência: ", termination_status(model))
     println("Tempo interno do Solver (Ipopt): ", round(solve_time(model), digits=4), " segundos")
     println("Tempo total da execução da função: ", round(tempo_total_execucao, digits=4), " segundos")
-    println("Valor da Função Objetivo: ", objective_value(model))
+    println("Erro de Controle Global (Min. Função Objetivo): ", objective_value(model))
 
     # =========================================================================
-    # 9. RESUMO OPERACIONAL E FÍSICO
-    # =========================================================================
-    vetor_tensoes = [value(vm[i]) for i in keys(ref[:bus])]
-    tensao_min = minimum(vetor_tensoes)
-    tensao_max = maximum(vetor_tensoes)
-
-    geracao_p_total = sum(value(pg[g]) for g in keys(ref[:gen]); init=0.0)
-    geracao_q_total = sum(value(qg[g]) for g in keys(ref[:gen]); init=0.0)
-    
-    corte_p_global = sum(value(corte_p[l]) for l in keys(corte_p); init=0.0)
-    
-    perda_p_total = sum(
-        value(p[(l, b["f_bus"], b["t_bus"])]) + value(p[(l, b["t_bus"], b["f_bus"])]) 
-        for (l, b) in ref[:branch]; init=0.0
-    )
-
-    println("\n--- RESUMO OPERACIONAL GLOBAL ---")
-    println("Tensão Mínima (pu):         ", round(tensao_min, digits=4))
-    println("Tensão Máxima (pu):         ", round(tensao_max, digits=4))
-    println("Geração Ativa Total (pu):   ", round(geracao_p_total, digits=4))
-    println("Geração Reativa Total (pu): ", round(geracao_q_total, digits=4))
-    println("Perdas Ativas (Total pu):   ", round(perda_p_total, digits=4))
-    println("Corte de Carga DERA (pu):   ", round(corte_p_global, digits=4))
-
-    println("\n--- RESUMO EM UNIDADES REAIS (Base = $base_mva MVA) ---")
-    println("Geração Ativa Total (MW):   ", round(geracao_p_total * base_mva, digits=2))
-    println("Geração Reativa Total (MVAr):", round(geracao_q_total * base_mva, digits=2))
-    println("Perdas Ativas Totais (MW):  ", round(perda_p_total * base_mva, digits=2))
-    println("Corte de Carga Total (MW):  ", round(corte_p_global * base_mva, digits=2))
-
-    #=
-    tolerancia_x = 1e-4
-    linhas_problematicas = String[] # Vetor para guardar os IDs
-
-    println("--- Verificando Linhas Problemáticas ---")
-    for (i, branch) in data["branch"] # Corrigido para 'data'
-        if abs(branch["br_x"]) < tolerancia_x
-            push!(linhas_problematicas, i)
-            # Opcional: branch["br_x"] = sign(branch["br_x"]) * tolerancia_x 
-        end
-    end
-
-    if !isempty(linhas_problematicas)
-        println("Atenção: Foram encontrados $(length(linhas_problematicas)) ramos com reatância série quase nula.")
-    end
-    println("--- Verificação Concluída ---")
-    =#
-
-    # =========================================================================
-    # 10. EXPORTAÇÃO DOS RESULTADOS PARA CSV
+    # 9. EXPORTAÇÃO DOS RESULTADOS E BARRAS PROBLEMÁTICAS PARA CSV
     # =========================================================================
     println("\n6. Estruturando dados e gerando arquivos CSV...")
 
     df_barras = DataFrame(
-        ID_Barra = Int[], Tipo_Barra = Int[], Tensao_Base_kV = Float64[],
+        ID_Barra = Int[], Tipo_Barra = Int[],
         Tensao_Mag_pu = Float64[], Tensao_Ang_graus = Float64[],
         P_Geracao_pu = Float64[], Q_Geracao_pu = Float64[],
         P_Carga_pu = Float64[], Q_Carga_pu = Float64[],
-        Desvio_Tensao_QLIM_pu = Float64[], Corte_Reativo_VLIM_pu = Float64[],
-        Corte_Ativo_DERA_pu = Float64[], Corte_Reativo_DERA_pu = Float64[]
+        Desvio_Tensao_QLIM_pu = Float64[], 
+        Corte_Reativo_VLIM_pu = Float64[],
+        Folga_Ativa_SLP_pu = Float64[] # Nova coluna
     )
 
     for (i, bus) in ref[:bus]
         bus_gens = ref[:bus_gens][i]
         bus_loads = ref[:bus_loads][i]
+        
         push!(df_barras, (
-            i, bus["bus_type"], get(bus, "base_kv", 1.0),
-            value(vm[i]), value(va[i]) * (180.0 / pi),
+            i, bus["bus_type"], value(vm[i]), value(va[i]) * (180.0 / pi),
             isempty(bus_gens) ? 0.0 : sum(value(pg[g]) for g in bus_gens),
             isempty(bus_gens) ? 0.0 : sum(value(qg[g]) for g in bus_gens),
             isempty(bus_loads) ? 0.0 : sum(ref[:load][l]["pd"] for l in bus_loads),
             isempty(bus_loads) ? 0.0 : sum(ref[:load][l]["qd"] for l in bus_loads),
             (i in keys(sl_v)) ? value(sl_v[i]) : 0.0,
             isempty(bus_loads) ? 0.0 : sum(value(sl_d[l]) for l in bus_loads),
-            isempty(bus_loads) ? 0.0 : sum(value(corte_p[l]) for l in bus_loads),
-            isempty(bus_loads) ? 0.0 : sum(value(corte_q[l]) for l in bus_loads)
+            value(sl_p[i]) # Salva o valor exato da folga ativa na barra
         ))
     end
     sort!(df_barras, :ID_Barra)
     CSV.write(joinpath(PASTA_CSV, "resultados_barras_SIN.csv"), df_barras)
 
+    # --- FILTRO PARA BARRAS PROBLEMÁTICAS ---
+    # Consideramos "problemática" qualquer barra onde a folga (ativa ou reativa) atuou além de 1e-4 pu
+    TOLERANCIA_FOLGA = 1e-4
+    df_problemas = filter(row -> abs(row.Folga_Ativa_SLP_pu) > TOLERANCIA_FOLGA || 
+                                 abs(row.Corte_Reativo_VLIM_pu) > TOLERANCIA_FOLGA, df_barras)
+    
+    if nrow(df_problemas) > 0
+        println("⚠️ ATENÇÃO: Foram identificadas $(nrow(df_problemas)) barras com problemas de escoamento/carga!")
+        CSV.write(joinpath(PASTA_CSV, "barras_problematicas_SIN.csv"), df_problemas)
+        println("-> Detalhes exportados para: barras_problematicas_SIN.csv")
+    else
+        println("✅ Sucesso: Nenhuma barra apresentou corte de carga ou injeção fictícia ativa/reativa.")
+    end
+
+    # Exportação do fluxo das linhas (mantido)
     df_linhas = DataFrame(
         ID_Linha = Int[], Barra_De = Int[], Barra_Para = Int[],
         P_Fluxo_De_Para_pu = Float64[], Q_Fluxo_De_Para_pu = Float64[],
@@ -464,11 +368,12 @@ function resolver_fluxo_controlado(caminho_arquivo)
     end
     sort!(df_linhas, :ID_Linha)
     CSV.write(joinpath(PASTA_CSV, "resultados_fluxos_linhas_SIN.csv"), df_linhas)
-    println("-> Arquivos CSV gerados em $PASTA_CSV")
+    
+    println("-> Arquivos CSV completos gerados na pasta: $PASTA_CSV")
 end
 
 # -------------------------------------------------------------
 # EXECUÇÃO PRINCIPAL
 # -------------------------------------------------------------
 arquivo = joinpath(@__DIR__, "..", "data", "03 MINIMA NOTURNA_DEZ25.PWF")
-resolver_fluxo_controlado(arquivo)
+resolver_fluxo_controlado_mld(arquivo)

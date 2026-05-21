@@ -1,7 +1,7 @@
 \chapter{Resultados}
 \label{chap:resultados}
 
-Este capítulo apresenta e discute os resultados obtidos a partir da execução da bateria de vinte e cinco casos descrita na \autoref{sec:bateria-casos}, sobre as seis formulações implementadas. Os dados aqui exibidos são os do relatório consolidado mais recente da pipeline de comparação (\verb|short-reports/short-report-pibic-opf-13-05-2026.md|), no qual o critério de equivalência numérica entre formulações foi fixado em $|\Delta| \le 10^{-4}$ simultaneamente sobre $V_i$, $\theta_i$, $p^g_k$, $q^g_k$ e os fluxos de ramo.
+Este capítulo apresenta e discute os resultados obtidos a partir da execução da bateria de vinte e cinco casos descrita na \autoref{sec:bateria-casos}, sobre as seis formulações implementadas. Os dados aqui exibidos são os do relatório consolidado mais recente da pipeline de comparação, no qual o critério de equivalência numérica entre formulações foi fixado em $|\Delta| \le 10^{-4}$ simultaneamente sobre $V_i$, $\theta_i$, $p^g_k$, $q^g_k$ e os fluxos de ramo.
 
 A \autoref{sec:convergencia} apresenta a tabela global de convergência e de \textit{clusters} de equivalência por caso. A \autoref{sec:analise-barra-barra} aprofunda a análise barra a barra para um conjunto representativo de casos em que ao menos uma referência (14) ou (15) convergiu. A \autoref{sec:discussao} sintetiza as observações, em particular sobre o caso SIN.
 
@@ -47,13 +47,67 @@ A \autoref{tab:conv-global} consolida o status de convergência das seis formula
         \bottomrule
     \end{tabular}
 }{
-    \Fonte{elaborado pelo autor a partir do relatório de \texttt{short-reports/short-report-pibic-opf-13-05-2026.md}.}
+    \Fonte{elaborado pelo autor a partir do relatório consolidado da pipeline de comparação.}
 }
 \end{table}
 
-A leitura da \autoref{tab:conv-global} permite extrair três observações imediatas. Em primeiro lugar, das vinte e cinco entradas, as formulações \textit{hand-built} (16)--(19) convergem em vinte casos, contra dezessete da formulação (15) (FP de referência) e quinze da formulação (14) (FPO de referência). A faixa de convergência das formulações \textit{hand-built} é, portanto, estritamente maior que a das referências.
+\definecolor{statusok}{RGB}{198,239,206}
+\definecolor{statusinf}{RGB}{255,235,156}
+\definecolor{statuskil}{RGB}{255,199,206}
+\definecolor{statusinv}{RGB}{244,176,132}
+\definecolor{statuserr}{RGB}{217,217,217}
+\newcommand{\stOK}{\cellcolor{statusok}OK}
+\newcommand{\stINF}{\cellcolor{statusinf}INF}
+\newcommand{\stKIL}{\cellcolor{statuskil}KIL}
+\newcommand{\stINV}{\cellcolor{statusinv}INV}
+\newcommand{\stERR}{\cellcolor{statuserr}ERR}
 
-Em segundo lugar, há cinco casos em que ao menos uma das formulações \textit{hand-built} converge enquanto as duas referências falham: \texttt{4busfrank\_vlim}, \texttt{5busfrank\_csca}, \texttt{test\_system} (em ambas (14) e (15)), além de \texttt{300bus} (apenas (14) falha como INV) e \texttt{3bus\_DCline} e \texttt{3bus\_DSHL} (uma referência cada). Em todos esses casos, a presença das folgas $s^v, s^q$ no problema \textit{soft-constraint} permite que (16) encontre uma solução factível na qual o controle nominal não é estritamente respeitado, mas é minimamente violado \textemdash comportamento que as formulações (14) e (15) não conseguem reproduzir, dado que tratam $V$ e $q^g$ apenas com limites caixa rígidos.
+\begin{figure}[!htb]
+\captionsetup{width=15cm}
+\Caption{\label{fig:heatmap} Mapa de calor da convergência das formulações (14)--(19) na bateria de testes}
+\IBGEtab{}{
+\footnotesize
+\setlength{\tabcolsep}{4.5pt}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{lcccccc}
+\toprule
+Caso & (14) & (15) & (16) & (17) & (18) & (19) \\
+\midrule
+\texttt{01 MAXIMA NOTURNA} & \stKIL & \stINF & \stKIL & \stINF & \stKIL & \stINF \\
+\texttt{300bus} & \stINV & \stOK & \stOK & \stOK & \stOK & \stOK \\
+\texttt{3bus} & \stOK & \stOK & \stOK & \stOK & \stOK & \stOK \\
+\texttt{3bus\_DBSH} & \stOK & \stOK & \stOK & \stOK & \stOK & \stOK \\
+\texttt{3bus\_DCER} & \stOK & \stOK & \stOK & \stOK & \stOK & \stOK \\
+\texttt{3bus\_DCSC} & \stOK & \stOK & \stOK & \stOK & \stOK & \stOK \\
+\texttt{3bus\_DCline} & \stOK & \stINF & \stOK & \stOK & \stOK & \stOK \\
+\texttt{3bus\_DSHL} & \stINF & \stOK & \stOK & \stOK & \stOK & \stOK \\
+\texttt{3bus\_corrections} & \stERR & \stERR & \stERR & \stERR & \stERR & \stERR \\
+\texttt{3bus\_shunt\_fields} & \stOK & \stOK & \stOK & \stOK & \stOK & \stOK \\
+\texttt{3busfrank} & \stOK & \stOK & \stOK & \stOK & \stOK & \stOK \\
+\texttt{3busfrank\_continuous\_shunt} & \stOK & \stOK & \stOK & \stOK & \stOK & \stOK \\
+\texttt{3busfrank\_qlim} & \stOK & \stOK & \stOK & \stOK & \stOK & \stOK \\
+\texttt{4busfrank\_vlim} & \stINF & \stINF & \stOK & \stOK & \stOK & \stOK \\
+\texttt{500bus} & \stINF & \stOK & \stOK & \stOK & \stOK & \stOK \\
+\texttt{5busfrank} & \stOK & \stOK & \stOK & \stOK & \stOK & \stOK \\
+\texttt{5busfrank\_cphs} & \stOK & \stOK & \stOK & \stOK & \stOK & \stOK \\
+\texttt{5busfrank\_csca} & \stINF & \stINF & \stOK & \stOK & \stOK & \stOK \\
+\texttt{5busfrank\_ctaf} & \stOK & \stOK & \stOK & \stOK & \stOK & \stOK \\
+\texttt{5busfrank\_ctap} & \stOK & \stOK & \stOK & \stOK & \stOK & \stOK \\
+\texttt{9bus} & \stOK & \stOK & \stOK & \stOK & \stOK & \stOK \\
+\texttt{9bus\_transformer\_fields} & \stOK & \stOK & \stOK & \stOK & \stOK & \stOK \\
+\texttt{test\_defaults} & \stERR & \stERR & \stERR & \stERR & \stERR & \stERR \\
+\texttt{test\_line\_shunt} & \stERR & \stERR & \stERR & \stERR & \stERR & \stERR \\
+\texttt{test\_system} & \stERR & \stERR & \stOK & \stOK & \stOK & \stOK \\
+\bottomrule
+\end{tabular}
+}{
+\Fonte{elaborado pelo autor. Verde: convergiu (OK); amarelo: infactível (INF); vermelho: limite de tempo (KIL); laranja: modelo inválido (INV); cinza: erro de \textit{parser} (ERR).}
+}
+\end{figure}
+
+A \autoref{fig:heatmap} resume visualmente esses status. A leitura da \autoref{tab:conv-global} permite extrair três observações imediatas. Em primeiro lugar, das vinte e cinco entradas, as formulações \textit{hand-built} (16)--(19) convergem em vinte casos, contra dezessete da formulação (15) (FP de referência) e quinze da formulação (14) (FPO de referência). A faixa de convergência das formulações \textit{hand-built} é, portanto, estritamente maior que a das referências.
+
+Em segundo lugar, há seis casos em que ao menos uma das formulações \textit{hand-built} converge enquanto ao menos uma das referências falha. Em três deles \textemdash \texttt{4busfrank\_vlim}, \texttt{5busfrank\_csca} e \texttt{test\_system} \textemdash \emph{ambas} as referências falham; nos outros três \textemdash \texttt{300bus} (apenas (14), como INV), \texttt{3bus\_DCline} (apenas (15)) e \texttt{3bus\_DSHL} (apenas (14)) \textemdash apenas uma referência falha. Em todos esses casos, a presença das folgas $s^v, s^q$ no problema \textit{soft-constraint} permite que as formulações \textit{hand-built} encontrem uma solução factível na qual o controle nominal não é estritamente respeitado, mas é minimamente violado \textemdash comportamento que as formulações (14) e (15) não conseguem reproduzir, dado que tratam $V$ e $q^g$ apenas com limites caixa rígidos.
 
 Em terceiro lugar, há três casos em que \emph{nenhuma} formulação converge: o caso SIN (\texttt{01 MAXIMA NOTURNA\_DEZ25}), \texttt{3bus\_corrections} e dois \textit{stress tests} sintéticos. O caso SIN é o mais relevante para a discussão e é tratado em separado na \autoref{sec:discussao}.
 
@@ -62,7 +116,30 @@ Em terceiro lugar, há três casos em que \emph{nenhuma} formulação converge: 
 
 A coluna ``Clusters'' da \autoref{tab:conv-global} sintetiza, para cada caso, quais formulações produzem soluções numericamente equivalentes. Um padrão recorrente em casos pequenos é a presença de quatro grupos típicos: $\{14\}$ isolado (porque o FPO altera o despacho e portanto o ponto de operação), $\{15,16\}$ ou $\{15\}\cdot\{16\}$ (FP clássico vs.\ FP com QLIM+VLIM, que coincidem se as folgas saturarem em zero), $\{17\}$ ou $\{17,18\}$ (efeito do CSCA) e $\{18,19\}$ (CTAP, eventualmente coincidente com (19) se DERA não estiver presente).
 
-A \autoref{tab:divergencia-3bus} ilustra o agrupamento típico em uma das redes pedagógicas, \texttt{3bus\_DCSC}. Para cada barra são listados os valores de $V$ e $\theta$ obtidos por cada formulação que divergiu de \emph{ambas} as referências por mais de $10^{-4}$.
+A \autoref{fig:rede-3bus} mostra a topologia da rede pedagógica \texttt{3bus\_DCSC}, e a \autoref{tab:divergencia-3bus} ilustra o agrupamento típico de soluções nessa rede. Para cada barra são listados os valores de $V$ e $\theta$ obtidos por cada formulação que divergiu de \emph{ambas} as referências por mais de $10^{-4}$.
+
+\begin{figure}[!htb]
+\Caption{\label{fig:rede-3bus} Topologia da rede-exemplo \texttt{3bus\_DCSC}}
+\IBGEtab{}{
+\begin{tikzpicture}[>=Latex, line width=0.9pt, font=\small]
+  \node[draw,fill=black,minimum width=1.3cm,minimum height=3pt,label=above:{Barra 1}] (b1) at (0,3) {};
+  \node[draw,fill=black,minimum width=1.3cm,minimum height=3pt,label=above:{Barra 2}] (b2) at (7,3) {};
+  \node[draw,fill=black,minimum width=1.3cm,minimum height=3pt,label=below:{Barra 3}] (b3) at (3.5,0) {};
+  \node[draw,circle,minimum size=0.8cm] (g1) at (-1.7,3) {$\sim$};
+  \draw (g1) -- (b1.west);
+  \node[draw,circle,minimum size=0.8cm] (g2) at (8.7,3) {$\sim$};
+  \draw (g2) -- (b2.east);
+  \draw[->] (b3.south) -- ++(0,-1.1) node[below] {Carga};
+  \draw (b1.south) -- (b3.north west) node[midway,sloped,above] {Linha};
+  \draw (b2.south) -- (b3.north east) node[midway,sloped,above] {Linha};
+  \node[draw,minimum width=1.5cm,minimum height=0.7cm] (dcsc) at (3.5,3) {DCSC};
+  \draw (b1.east) -- (dcsc.west);
+  \draw (dcsc.east) -- (b2.west);
+\end{tikzpicture}
+}{
+\Fonte{elaborado pelo autor.}
+}
+\end{figure}
 
 \begin{table}[!h]
 \captionsetup{width=12cm}
@@ -93,9 +170,37 @@ A \autoref{tab:divergencia-3bus} ilustra o agrupamento típico em uma das redes 
 }
 \end{table}
 
-A \autoref{tab:divergencia-3bus} mostra três soluções distintas para o mesmo sistema: o FPO (14) eleva todas as tensões a 1,1\,p.u.\ na barra de geração, comportamento típico de um FPO sem custo de tensão; o FP (15) e a formulação \textit{hand-built} (16) convergem para o ponto operacional ``natural'' (folgas próximas de zero), mas com uma diferença em $V$ de cerca de 0,006--0,012\,p.u.\ que é compatível com o efeito da folga $s^v$ na minimização da Equação \eqref{eq:obj-16}; finalmente, as formulações (17)--(19), que têm CSCA ativo, deslocam o ponto de operação para tensões consistentemente mais baixas \textemdash isso é o efeito do controle de \textit{shunt} ajustando $b^{sh}_s$ para minimizar o desvio do \textit{setpoint} de $V$ na barra de geração, que neste caso é 1,007\,p.u.\ em vez do nominal 1,03 ou 1,1.
+A \autoref{tab:divergencia-3bus} mostra quatro soluções distintas para o mesmo sistema: o FPO (14) eleva todas as tensões a 1,1\,p.u.\ na barra de geração, comportamento típico de um FPO sem custo de tensão; o FP (15) converge para o ponto operacional ``natural'' da rede; a formulação \textit{hand-built} (16) fica próxima desse ponto, mas com uma diferença em $V$ de cerca de 0,006--0,012\,p.u.\ compatível com o efeito da folga $s^v$ na minimização da Equação \eqref{eq:obj-16}; e, finalmente, as formulações (17)--(19), que têm CSCA ativo, deslocam o ponto de operação para tensões consistentemente mais baixas \textemdash isso é o efeito do controle de \textit{shunt} ajustando $b^{sh}_s$ para minimizar o desvio do \textit{setpoint} de $V$ na barra de geração, que neste caso é 1,007\,p.u.\ em vez do nominal 1,03 ou 1,1. A \autoref{fig:perfil-tensao} apresenta esses valores graficamente.
 
-Em casos de médio porte, como \texttt{300bus} e \texttt{500bus}, as divergências entre clusters tornam-se mais sistemáticas. O caso \texttt{300bus} apresenta cinco \textit{clusters} distintos $\{15\}\cdot\{16\}\cdot\{17\}\cdot\{18\}\cdot\{19\}$, ou seja, cada formulação produz uma solução numericamente diferente. A análise dos \textit{deltas} em $V$ na bateria (cf.\ \texttt{short-report-pibic-opf-13-05-2026.md}, seção 2) mostra que (16)--(19) elevam consistentemente as tensões em relação ao FP (15) em cerca de 0,02--0,05\,p.u.\ \textemdash justamente o efeito esperado da minimização de $(s^v_i)^2$ quando o \textit{setpoint} $V^{ref}_i$ está acima do valor que o FP clássico encontra naturalmente. As tensões de (18) e (19), por sua vez, atingem o limite superior $V^{\max}_i = 1{,}1$\,p.u.\ em várias barras, evidenciando que o CTAP empurra o controle para o limite caixa.
+\begin{figure}[!htb]
+\Caption{\label{fig:perfil-tensao} Perfil de tensão por barra no caso \texttt{3bus\_DCSC}}
+\IBGEtab{}{
+\begin{tikzpicture}
+\begin{axis}[
+  width=12cm, height=7cm,
+  xlabel={Barra}, ylabel={Magnitude de tensão $V$ (p.u.)},
+  xtick={1,2,3}, xmin=0.8, xmax=3.2,
+  ymin=0.96, ymax=1.12,
+  legend pos=south west, legend cell align=left,
+  grid=both, grid style={gray!22},
+  mark size=2.6pt,
+]
+\addplot+[thick] coordinates {(1,1.1000) (2,1.1000) (3,1.0698)};
+\addlegendentry{(14) --- FPO}
+\addplot+[thick] coordinates {(1,1.0290) (2,1.0300) (3,0.9970)};
+\addlegendentry{(15) --- FP}
+\addplot+[thick] coordinates {(1,1.0352) (2,1.0362) (3,1.0178)};
+\addlegendentry{(16) --- QLIM+VLIM}
+\addplot+[thick] coordinates {(1,1.0064) (2,1.0062) (3,0.9878)};
+\addlegendentry{(17)--(19) --- +CSCA}
+\end{axis}
+\end{tikzpicture}
+}{
+\Fonte{elaborado pelo autor a partir da \autoref{tab:divergencia-3bus}.}
+}
+\end{figure}
+
+Em casos de médio porte, como \texttt{300bus} e \texttt{500bus}, as divergências entre clusters tornam-se mais sistemáticas. O caso \texttt{300bus} apresenta cinco \textit{clusters} distintos $\{15\}\cdot\{16\}\cdot\{17\}\cdot\{18\}\cdot\{19\}$, ou seja, cada formulação produz uma solução numericamente diferente. A análise dos \textit{deltas} em $V$ na bateria mostra que (16)--(19) elevam consistentemente as tensões em relação ao FP (15) em cerca de 0,02--0,05\,p.u.\ \textemdash justamente o efeito esperado da minimização de $(s^v_i)^2$ quando o \textit{setpoint} $V^{ref}_i$ está acima do valor que o FP clássico encontra naturalmente. As tensões de (18) e (19), por sua vez, atingem o limite superior $V^{\max}_i = 1{,}1$\,p.u.\ em várias barras, evidenciando que o CTAP empurra o controle para o limite caixa.
 
 \section{Discussão}
 \label{sec:discussao}

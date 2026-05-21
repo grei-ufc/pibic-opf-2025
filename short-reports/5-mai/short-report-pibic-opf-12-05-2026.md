@@ -7,7 +7,7 @@ Status abreviados: **OK**=LOCALLY_SOLVED · **INF**=INFEASIBLE · **ITL**=ITERAT
 
 | Caso | (14) | (15) | (16) | (17) | (18) | (19) | Clusters | Observações |
 |---|---|---|---|---|---|---|---|---|
-| `01 MAXIMA NOTURNA_DEZ25.PWF` | KIL | ERR | KIL | ERR | KIL | ERR | — | Nenhuma formulação convergiu |
+| `01 MAXIMA NOTURNA_DEZ25.PWF` | INF | INF | INF | INF | INF | INF | — | Nenhuma formulação convergiu |
 | `300bus.pwf` | ERR | OK | OK | OK | OK | OK | 1,2,3,4,5 | 1/6 não convergiram |
 | `3bus.pwf` | OK | OK | OK | OK | OK | OK | 1,2,3 |  |
 | `3bus_DBSH.pwf` | OK | OK | OK | OK | OK | OK | 1,2,3 |  |

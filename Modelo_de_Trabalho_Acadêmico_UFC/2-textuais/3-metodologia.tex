@@ -6,13 +6,13 @@ Este capítulo descreve o pipeline de software construído para implementar e co
 \section{Ambiente computacional}
 \label{sec:ambiente}
 
-Toda a implementação foi realizada na linguagem Julia (versão 1.x, série estável), escolhida por aliar uma sintaxe de alto nível, voltada para computação científica, a um desempenho computacional comparável ao de linguagens compiladas. O ambiente de pacotes utilizado, definido em \texttt{Project.toml} e \texttt{Manifest.toml} na raiz do repositório, agrega:
+Toda a implementação foi realizada na linguagem Julia~\cite{bezanson2017julia} (versão 1.x, série estável), escolhida por aliar uma sintaxe de alto nível, voltada para computação científica, a um desempenho computacional comparável ao de linguagens compiladas. O ambiente de pacotes utilizado, definido em \texttt{Project.toml} e \texttt{Manifest.toml} na raiz do repositório, agrega:
 
 \begin{alineascomponto}
     \item \textit{PWF.jl} \textemdash leitura e parsing de arquivos no formato ANAREDE PWF, com extração de estruturas de controle (registros DOPC e DLIN) habilitada via \verb|add_control_data = true|;
-    \item \textit{PowerModels.jl} \textemdash construção da estrutura de referência (\verb|build_ref|) sobre os dados parseados e oferta das funções \verb|solve_ac_opf| e \verb|solve_ac_pf| que implementam as duas formulações de referência;
-    \item \textit{JuMP.jl} \textemdash linguagem de modelagem matemática usada para escrever, à mão, as quatro formulações controladas;
-    \item \textit{Ipopt.jl} \textemdash interface Julia para o \textit{solver} de programação não linear baseado em método de pontos interiores;
+    \item \textit{PowerModels.jl}~\cite{coffrin2018powermodels} \textemdash construção da estrutura de referência (\verb|build_ref|) sobre os dados parseados e oferta das funções \verb|solve_ac_opf| e \verb|solve_ac_pf| que implementam as duas formulações de referência;
+    \item \textit{JuMP.jl}~\cite{lubin2023jump} \textemdash linguagem de modelagem matemática usada para escrever, à mão, as quatro formulações controladas;
+    \item \textit{Ipopt.jl}~\cite{wachterBiegler2006ipopt} \textemdash interface Julia para o \textit{solver} de programação não linear baseado em método de pontos interiores;
     \item \textit{CSV.jl} e \textit{DataFrames.jl} \textemdash exportação dos resultados para arquivos CSV.
 \end{alineascomponto}
 
@@ -33,7 +33,35 @@ Cada uma das seis formulações está implementada como um \textit{script} Julia
     \item \textbf{Exportação}: dois arquivos CSV são produzidos em \verb|resultados_csv/|: \verb|resultados_barras_SIN.csv|, com $V_i$, $\theta_i$, $p^g_i$, $q^g_i$, $p^d_i$, $q^d_i$ e os \textit{slacks} de cada barra, e \verb|resultados_fluxos_linhas_SIN.csv|, com $p_{ij}, q_{ij}, p_{ji}, q_{ji}$, perdas e \textit{tap} de cada ramo.
 \end{alineascomnumero}
 
-Os elos HVDC, presentes em vários casos de teste, têm um tratamento particular nas formulações baseadas em \textit{PowerModels} e nas \textit{hand-built}: as injeções $(p^{dc}_{ft}, q^{dc}_{ft})$ em cada extremidade são lidas do PWF e \textbf{fixadas} via \verb|JuMP.fix(...; force=true)|. Essa decisão segue a recomendação do CEPEL \textemdash documentada nas notas em \verb|powerflow/Codes/PF_Formulation/notes| \textemdash de tratar elos HVDC como condições de contorno do FP AC: as injeções já vêm pré-especificadas pelo fluxo base e liberá-las apenas amplia o Jacobiano sem trazer informação nova. O retificador recebe $p^g$ negativo e o inversor $p^g$ positivo.
+A \autoref{fig:pipeline} resume graficamente esse fluxo sequencial.
+
+\begin{figure}[!htb]
+\Caption{\label{fig:pipeline} Fluxograma do pipeline de execução das formulações}
+\IBGEtab{}{
+\begin{tikzpicture}[
+   >=Latex, node distance=5.5mm,
+   etapa/.style={draw, rounded corners, align=center, text width=9.6cm,
+                 inner sep=4pt, font=\small}]
+  \node[etapa] (e1) {1. Leitura do PWF com \texttt{PWF.parse\_file} (\texttt{add\_control\_data = true})};
+  \node[etapa, below=of e1] (e2) {2. Saneamento topológico: maior componente conexa e barra \textit{slack} única};
+  \node[etapa, below=of e2] (e3) {3. Padronização das curvas de custo dos geradores};
+  \node[etapa, below=of e3] (e4) {4. Construção da estrutura de referência (\texttt{build\_ref})};
+  \node[etapa, below=of e4] (e5) {5. Construção do modelo: variáveis, expressões de fluxo e restrições no JuMP};
+  \node[etapa, below=of e5] (e6) {6. Resolução com \texttt{optimize!} e medição do tempo de execução};
+  \node[etapa, below=of e6] (e7) {7. Exportação dos resultados em dois arquivos CSV (barras e ramos)};
+  \draw[->] (e1) -- (e2);
+  \draw[->] (e2) -- (e3);
+  \draw[->] (e3) -- (e4);
+  \draw[->] (e4) -- (e5);
+  \draw[->] (e5) -- (e6);
+  \draw[->] (e6) -- (e7);
+\end{tikzpicture}
+}{
+\Fonte{elaborado pelo autor.}
+}
+\end{figure}
+
+Os elos HVDC, presentes em vários casos de teste, têm um tratamento particular nas formulações baseadas em \textit{PowerModels} e nas \textit{hand-built}: as injeções $(p^{dc}_{ft}, q^{dc}_{ft})$ em cada extremidade são lidas do PWF e \textbf{fixadas} via \verb|JuMP.fix(...; force=true)|. Essa decisão segue a recomendação do CEPEL de tratar elos HVDC como condições de contorno do FP AC: as injeções já vêm pré-especificadas pelo fluxo base e liberá-las apenas amplia o Jacobiano sem trazer informação nova. O retificador recebe $p^g$ negativo e o inversor $p^g$ positivo.
 
 \section{Formulações implementadas}
 \label{sec:formulacoes}
@@ -162,9 +190,9 @@ Para cada caso, todas as seis formulações são executadas com a mesma configur
 Para cada par (caso, formulação), três informações são registradas:
 
 \begin{alineascomnumero}
-    \item \textbf{Status de convergência}: codificado em sete categorias \textemdash \textbf{OK} (LOCALLY\_SOLVED), \textbf{INF} (INFEASIBLE/LOCALLY\_INFEASIBLE), \textbf{ITL} (ITERATION\_LIMIT), \textbf{TIM} (TIME\_LIMIT), \textbf{KIL} (TIMEOUT\_KILLED), \textbf{CRA} (SUBPROCESS\_CRASH), \textbf{INV} (INVALID\_MODEL) e \textbf{ERR} (OTHER\_ERROR);
+    \item \textbf{Status de convergência}: codificado em oito categorias \textemdash \textbf{OK} (LOCALLY\_SOLVED), \textbf{INF} (INFEASIBLE/LOCALLY\_INFEASIBLE), \textbf{ITL} (ITERATION\_LIMIT), \textbf{TIM} (TIME\_LIMIT), \textbf{KIL} (TIMEOUT\_KILLED), \textbf{CRA} (SUBPROCESS\_CRASH), \textbf{INV} (INVALID\_MODEL) e \textbf{ERR} (OTHER\_ERROR);
     \item \textbf{\textit{Cluster} de equivalência numérica}: para cada caso, as formulações que convergiram são particionadas em grupos onde duas formulações estão no mesmo grupo se, para todas as barras, $|\Delta V| \le 10^{-4}$ e $|\Delta \theta| \le 10^{-4}$ \textemdash além de equivalência análoga em $p^g, q^g$ e nos fluxos de ramos. \textit{Clusters} distintos representam soluções numericamente diferentes da mesma rede;
     \item \textbf{Análise barra a barra}: para os casos em que pelo menos uma das referências (14) ou (15) convergiu, são identificadas as barras nas quais as formulações (16)--(19) divergem de \emph{ambas} as referências por mais de $10^{-4}$ em módulo, em $V$ ou $\theta$. Essa análise mostra \emph{onde} as ações de controle deslocam o ponto de operação em relação à referência sem controles.
 \end{alineascomnumero}
 
-Os \textit{scripts} responsáveis por executar a bateria, agregar os resultados e gerar os \textit{relatórios} de convergência e de divergência barra a barra estão em \verb|powerflow/Codes/PF_Formulation/runner/|. As tabelas e análises do \autoref{chap:resultados} são extraídas dos relatórios diários gerados nessa pipeline (vide \verb|short-reports/| no repositório).
+A execução da bateria, a agregação dos resultados e a geração dos relatórios de convergência e de divergência barra a barra são automatizadas por \textit{scripts} auxiliares do repositório do trabalho. As tabelas e análises do \autoref{chap:resultados} são extraídas do relatório consolidado produzido por essa pipeline.
