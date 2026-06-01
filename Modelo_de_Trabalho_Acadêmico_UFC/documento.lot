@@ -1,4 +1,6 @@
 \babel@toc {brazil}{}\relax 
-\contentsline {table}{\numberline {1}{\ignorespaces Progressão das formulações implementadas}}{24}{table.caption.15}%
-\contentsline {table}{\numberline {2}{\ignorespaces Convergência global e \textit {clusters} de equivalência das formulações (14)--(19) na bateria}}{30}{table.caption.16}%
-\contentsline {table}{\numberline {3}{\ignorespaces Divergência barra a barra no caso \texttt {3bus\_DCSC}}}{32}{table.caption.19}%
+\contentsline {table}{\numberline {1}{\ignorespaces Comparação de objetivos entre formulações AC, DC e SOC no \texttt {case5.m}}}{20}{table.caption.14}%
+\contentsline {table}{\numberline {2}{\ignorespaces Progressão das formulações implementadas}}{25}{table.caption.16}%
+\contentsline {table}{\numberline {3}{\ignorespaces Convergência global e \textit {clusters} de equivalência das formulações F0 a F5 na bateria}}{32}{table.caption.17}%
+\contentsline {table}{\numberline {4}{\ignorespaces Divergência barra a barra no caso \texttt {3bus\_DCSC}}}{34}{table.caption.20}%
+\contentsline {table}{\numberline {5}{\ignorespaces Resultados das formulações F0 a F5 sobre os casos reduzidos do PAR/PEL 2027-2031}}{37}{table.caption.22}%

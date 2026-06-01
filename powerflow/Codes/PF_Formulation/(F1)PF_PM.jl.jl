@@ -12,7 +12,7 @@ print("\033c") # Limpa o terminal
 # 0. LEITURA DE DADOS
 # =========================================================================
 println("1. Lendo arquivo PWF...")
-caminho_arquivo = joinpath(@__DIR__, "..", "data", "test_system.pwf")
+caminho_arquivo = joinpath(@__DIR__, "..", "data", "CASO_VER_MAXDIU.PWF")
 
 data = PWF.parse_file(caminho_arquivo)
 base_mva = data["baseMVA"]
@@ -134,17 +134,25 @@ df_linhas = DataFrame(
 perda_p_total = 0.0
 
 # Em vez de ler da solução (que não tem os ramos), lemos do dicionário de dados (topologia original)
+bus_sol = resultado_pm["solution"]["bus"]
+ramos_descartados = 0
 for (l, branch) in data["branch"]
     l_idx = parse(Int, l)
     f_bus = branch["f_bus"]
     t_bus = branch["t_bus"]
 
+    # Pula ramos desativados ou cujos terminais foram removidos por select_largest_component!
+    if get(branch, "br_status", 1) == 0 || !haskey(bus_sol, string(f_bus)) || !haskey(bus_sol, string(t_bus))
+        global ramos_descartados += 1
+        continue
+    end
+
     # 1. Pegamos a tensão e o ângulo das barras DE e PARA já solucionadas pelo PowerModels
-    v_m_f = resultado_pm["solution"]["bus"][string(f_bus)]["vm"]
-    v_a_f = resultado_pm["solution"]["bus"][string(f_bus)]["va"]
-    
-    v_m_t = resultado_pm["solution"]["bus"][string(t_bus)]["vm"]
-    v_a_t = resultado_pm["solution"]["bus"][string(t_bus)]["va"]
+    v_m_f = bus_sol[string(f_bus)]["vm"]
+    v_a_f = bus_sol[string(f_bus)]["va"]
+
+    v_m_t = bus_sol[string(t_bus)]["vm"]
+    v_a_t = bus_sol[string(t_bus)]["va"]
 
     # 2. Extraímos os parâmetros do modelo Pi equivalente da linha (g, b, tap, shunts)
     g, b = PowerModels.calc_branch_y(branch)
@@ -173,6 +181,9 @@ end
 # Ordena o DataFrame pelo ID da Linha
 sort!(df_linhas, :ID_Linha)
 CSV.write("resultados_fluxos_linhas_PM.csv", df_linhas)
+if ramos_descartados > 0
+    println("Ramos descartados (status=0 ou barra fora da maior componente): ", ramos_descartados)
+end
 
 # =========================================================================
 # 4. RESUMO OPERACIONAL E FÍSICO
@@ -193,7 +204,8 @@ println("Geração Ativa Total (MW):   ", round(geracao_p_total * base_mva, digi
 println("Geração Reativa Total (MVAr):", round(geracao_q_total * base_mva, digits=2))
 println("Perdas Ativas Totais (MW):  ", round(perda_p_total * base_mva, digits=2))
 
-
+#=
 for (i, bus) in data["bus"]
     println("Barra $i: Vmin=$(bus["vmin"]), Vmax=$(bus["vmax"])")
 end
+=#

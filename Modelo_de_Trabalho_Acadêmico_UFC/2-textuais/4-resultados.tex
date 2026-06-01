@@ -1,9 +1,9 @@
 \chapter{Resultados}
 \label{chap:resultados}
 
-Este capítulo apresenta e discute os resultados obtidos a partir da execução da bateria de vinte e cinco casos descrita na \autoref{sec:bateria-casos}, sobre as seis formulações implementadas. Os dados aqui exibidos são os do relatório consolidado mais recente da pipeline de comparação, no qual o critério de equivalência numérica entre formulações foi fixado em $|\Delta| \le 10^{-4}$ simultaneamente sobre $V_i$, $\theta_i$, $p^g_k$, $q^g_k$ e os fluxos de ramo.
+Este capítulo apresenta e discute os resultados obtidos a partir da execução da bateria de vinte e sete casos descrita na \autoref{sec:bateria-casos}, sobre as seis formulações implementadas. Os dados aqui exibidos são os do relatório consolidado mais recente da pipeline de comparação, no qual o critério de equivalência numérica entre formulações foi fixado em $|\Delta| \le 10^{-4}$ simultaneamente sobre $V_i$, $\theta_i$, $p^g_k$, $q^g_k$ e os fluxos de ramo.
 
-A \autoref{sec:convergencia} apresenta a tabela global de convergência e de \textit{clusters} de equivalência por caso. A \autoref{sec:analise-barra-barra} aprofunda a análise barra a barra para um conjunto representativo de casos em que ao menos uma referência (14) ou (15) convergiu. A \autoref{sec:discussao} sintetiza as observações, em particular sobre o caso SIN.
+A \autoref{sec:convergencia} apresenta a tabela global de convergência e de \textit{clusters} de equivalência por caso. A \autoref{sec:analise-barra-barra} aprofunda a análise barra a barra para um conjunto representativo de casos em que ao menos uma referência F0 ou F1 convergiu. A \autoref{sec:discussao} sintetiza as observações, em particular sobre o caso SIN.
 
 \section{Convergência global e clusters}
 \label{sec:convergencia}
@@ -12,42 +12,44 @@ A \autoref{tab:conv-global} consolida o status de convergência das seis formula
 
 \begin{table}[!h]
 \captionsetup{width=16cm}
-\Caption{\label{tab:conv-global} Convergência global e \textit{clusters} de equivalência das formulações (14)--(19) na bateria}
+\Caption{\label{tab:conv-global} Convergência global e \textit{clusters} de equivalência das formulações F0 a F5 na bateria}
 \IBGEtab{}{
     \scriptsize
     \begin{tabular}{lccccccll}
         \toprule
-        Caso & (14) & (15) & (16) & (17) & (18) & (19) & Clusters & Observações \\
+        Caso & F0 & F1 & F2 & F3 & F4 & F5 & Clusters & Observações \\
         \midrule \midrule
-        \texttt{01 MAXIMA NOTURNA\_DEZ25} & KIL & INF & KIL & INF & KIL & INF & --- & nenhuma converge \\
-        \texttt{300bus} & INV & OK & OK & OK & OK & OK & $\{15\}\cdot\{16\}\cdot\{17\}\cdot\{18\}\cdot\{19\}$ & 1/6 falha \\
-        \texttt{3bus} & OK & OK & OK & OK & OK & OK & $\{14\}\cdot\{15,16\}\cdot\{17,18,19\}$ &  \\
-        \texttt{3bus\_DBSH} & OK & OK & OK & OK & OK & OK & $\{14\}\cdot\{15,16\}\cdot\{17,18,19\}$ &  \\
-        \texttt{3bus\_DCER} & OK & OK & OK & OK & OK & OK & $\{14\}\cdot\{15,16\}\cdot\{17,18,19\}$ &  \\
-        \texttt{3bus\_DCSC} & OK & OK & OK & OK & OK & OK & $\{14\}\cdot\{15\}\cdot\{16\}\cdot\{17,18,19\}$ &  \\
-        \texttt{3bus\_DCline} & OK & INF & OK & OK & OK & OK & $\{14\}\cdot\{16,17,18,19\}$ & 1/6 falha \\
-        \texttt{3bus\_DSHL} & INF & OK & OK & OK & OK & OK & $\{15\}\cdot\{16\}\cdot\{17,18,19\}$ & 1/6 falha \\
-        \texttt{3bus\_corrections} & ERR & ERR & ERR & ERR & ERR & ERR & --- & nenhuma converge \\
-        \texttt{3bus\_shunt\_fields} & OK & OK & OK & OK & OK & OK & $\{14\}\cdot\{15\}\cdot\{16\}\cdot\{17,18,19\}$ &  \\
-        \texttt{3busfrank} & OK & OK & OK & OK & OK & OK & $\{14\}\cdot\{15,16\}\cdot\{17,18,19\}$ &  \\
-        \texttt{3busfrank\_continuous\_shunt} & OK & OK & OK & OK & OK & OK & $\{14\}\cdot\{15,16\}\cdot\{17,18,19\}$ &  \\
-        \texttt{3busfrank\_qlim} & OK & OK & OK & OK & OK & OK & $\{14\}\cdot\{15\}\cdot\{16\}\cdot\{17,18,19\}$ &  \\
-        \texttt{4busfrank\_vlim} & INF & INF & OK & OK & OK & OK & $\{16\}\cdot\{17,18\}\cdot\{19\}$ & 2/6 falham \\
-        \texttt{500bus} & INF & OK & OK & OK & OK & OK & $\{15\}\cdot\{16\}\cdot\{17,18\}\cdot\{19\}$ & 1/6 falha \\
-        \texttt{5busfrank} & OK & OK & OK & OK & OK & OK & $\{14\}\cdot\{15,16\}\cdot\{17,18,19\}$ &  \\
-        \texttt{5busfrank\_cphs} & OK & OK & OK & OK & OK & OK & $\{14\}\cdot\{15,16\}\cdot\{17,18,19\}$ &  \\
-        \texttt{5busfrank\_csca} & INF & INF & OK & OK & OK & OK & $\{16\}\cdot\{17,18,19\}$ & 2/6 falham \\
-        \texttt{5busfrank\_ctaf} & OK & OK & OK & OK & OK & OK & $\{14\}\cdot\{15,16\}\cdot\{17\}\cdot\{18,19\}$ &  \\
-        \texttt{5busfrank\_ctap} & OK & OK & OK & OK & OK & OK & $\{14\}\cdot\{15,16\}\cdot\{17\}\cdot\{18,19\}$ &  \\
-        \texttt{9bus} & OK & OK & OK & OK & OK & OK & $\{14\}\cdot\{15,16\}\cdot\{17,18,19\}$ &  \\
-        \texttt{9bus\_transformer\_fields} & OK & OK & OK & OK & OK & OK & $\{14\}\cdot\{15,16\}\cdot\{17\}\cdot\{18,19\}$ &  \\
-        \texttt{test\_defaults} & ERR & ERR & ERR & ERR & ERR & ERR & --- & nenhuma converge \\
-        \texttt{test\_line\_shunt} & ERR & ERR & ERR & ERR & ERR & ERR & --- & nenhuma converge \\
-        \texttt{test\_system} & ERR & ERR & OK & OK & OK & OK & $\{16\}\cdot\{17,18,19\}$ & 2/6 falham \\
+        \texttt{01 MAXIMA NOTURNA\_DEZ25} & KIL & INF & KIL & INF & KIL & INF &  & nenhuma converge \\
+        \texttt{300bus} & INV & OK & OK & OK & OK & OK & $\{\text{F1}\}\cdot\{\text{F2}\}\cdot\{\text{F3}\}\cdot\{\text{F4}\}\cdot\{\text{F5}\}$ & 1/6 falha \\
+        \texttt{3bus} & OK & OK & OK & OK & OK & OK & $\{\text{F0}\}\cdot\{\text{F1,F2}\}\cdot\{\text{F3,F4,F5}\}$ &  \\
+        \texttt{3bus\_DBSH} & OK & OK & OK & OK & OK & OK & $\{\text{F0}\}\cdot\{\text{F1,F2}\}\cdot\{\text{F3,F4,F5}\}$ &  \\
+        \texttt{3bus\_DCER} & OK & OK & OK & OK & OK & OK & $\{\text{F0}\}\cdot\{\text{F1,F2}\}\cdot\{\text{F3,F4,F5}\}$ &  \\
+        \texttt{3bus\_DCSC} & OK & OK & OK & OK & OK & OK & $\{\text{F0}\}\cdot\{\text{F1}\}\cdot\{\text{F2}\}\cdot\{\text{F3,F4,F5}\}$ &  \\
+        \texttt{3bus\_DCline} & OK & INF & OK & OK & OK & OK & $\{\text{F0}\}\cdot\{\text{F2,F3,F4,F5}\}$ & 1/6 falha \\
+        \texttt{3bus\_DSHL} & INF & OK & OK & OK & OK & OK & $\{\text{F1}\}\cdot\{\text{F2}\}\cdot\{\text{F3,F4,F5}\}$ & 1/6 falha \\
+        \texttt{3bus\_corrections} & ERR & ERR & ERR & ERR & ERR & ERR &  & nenhuma converge \\
+        \texttt{3bus\_shunt\_fields} & OK & OK & OK & OK & OK & OK & $\{\text{F0}\}\cdot\{\text{F1}\}\cdot\{\text{F2}\}\cdot\{\text{F3,F4,F5}\}$ &  \\
+        \texttt{3busfrank} & OK & OK & OK & OK & OK & OK & $\{\text{F0}\}\cdot\{\text{F1,F2}\}\cdot\{\text{F3,F4,F5}\}$ &  \\
+        \texttt{3busfrank\_continuous\_shunt} & OK & OK & OK & OK & OK & OK & $\{\text{F0}\}\cdot\{\text{F1,F2}\}\cdot\{\text{F3,F4,F5}\}$ &  \\
+        \texttt{3busfrank\_qlim} & OK & OK & OK & OK & OK & OK & $\{\text{F0}\}\cdot\{\text{F1}\}\cdot\{\text{F2}\}\cdot\{\text{F3,F4,F5}\}$ &  \\
+        \texttt{4busfrank\_vlim} & INF & INF & OK & OK & OK & OK & $\{\text{F2}\}\cdot\{\text{F3,F4}\}\cdot\{\text{F5}\}$ & 2/6 falham \\
+        \texttt{500bus} & INF & OK & OK & OK & OK & OK & $\{\text{F1}\}\cdot\{\text{F2}\}\cdot\{\text{F3,F4}\}\cdot\{\text{F5}\}$ & 1/6 falha \\
+        \texttt{5busfrank} & OK & OK & OK & OK & OK & OK & $\{\text{F0}\}\cdot\{\text{F1,F2}\}\cdot\{\text{F3,F4,F5}\}$ &  \\
+        \texttt{caso\_red} & INF$^\ast$ & OK & OK & OK & OK & OK & $\{\text{F1}\}\cdot\{\text{F2}\}\cdot\{\text{F3}\}\cdot\{\text{F4}\}\cdot\{\text{F5}\}$ & 1/6 falha \\
+        \texttt{caso\_red2} & INF & INF & OK & OK & OK & OK & $\{\text{F2}\}\cdot\{\text{F3}\}\cdot\{\text{F4}\}\cdot\{\text{F5}\}$ & 2/6 falham \\
+        \texttt{5busfrank\_cphs} & OK & OK & OK & OK & OK & OK & $\{\text{F0}\}\cdot\{\text{F1,F2}\}\cdot\{\text{F3,F4,F5}\}$ &  \\
+        \texttt{5busfrank\_csca} & INF & INF & OK & OK & OK & OK & $\{\text{F2}\}\cdot\{\text{F3,F4,F5}\}$ & 2/6 falham \\
+        \texttt{5busfrank\_ctaf} & OK & OK & OK & OK & OK & OK & $\{\text{F0}\}\cdot\{\text{F1,F2}\}\cdot\{\text{F3}\}\cdot\{\text{F4,F5}\}$ &  \\
+        \texttt{5busfrank\_ctap} & OK & OK & OK & OK & OK & OK & $\{\text{F0}\}\cdot\{\text{F1,F2}\}\cdot\{\text{F3}\}\cdot\{\text{F4,F5}\}$ &  \\
+        \texttt{9bus} & OK & OK & OK & OK & OK & OK & $\{\text{F0}\}\cdot\{\text{F1,F2}\}\cdot\{\text{F3,F4,F5}\}$ &  \\
+        \texttt{9bus\_transformer\_fields} & OK & OK & OK & OK & OK & OK & $\{\text{F0}\}\cdot\{\text{F1,F2}\}\cdot\{\text{F3}\}\cdot\{\text{F4,F5}\}$ &  \\
+        \texttt{test\_defaults} & ERR & ERR & ERR & ERR & ERR & ERR &  & nenhuma converge \\
+        \texttt{test\_line\_shunt} & ERR & ERR & ERR & ERR & ERR & ERR &  & nenhuma converge \\
+        \texttt{test\_system} & ERR & ERR & OK & OK & OK & OK & $\{\text{F2}\}\cdot\{\text{F3,F4,F5}\}$ & 2/6 falham \\
         \bottomrule
     \end{tabular}
 }{
-    \Fonte{elaborado pelo autor a partir do relatório consolidado da pipeline de comparação.}
+    \Fonte{elaborado pelo autor a partir do relatório consolidado da pipeline de comparação. $^\ast$ Em \texttt{caso\_red}, a formulação F0 encerrou em LOCALLY\_INFEASIBLE no Ipopt; o \textit{script} crashed em seguida na etapa de exportação de fluxos com \textit{key error} sobre uma barra descartada por \texttt{select\_largest\_component!}.}
 }
 \end{table}
 
@@ -64,14 +66,14 @@ A \autoref{tab:conv-global} consolida o status de convergência das seis formula
 
 \begin{figure}[!htb]
 \captionsetup{width=15cm}
-\Caption{\label{fig:heatmap} Mapa de calor da convergência das formulações (14)--(19) na bateria de testes}
+\Caption{\label{fig:heatmap} Mapa de calor da convergência das formulações F0 a F5 na bateria de testes}
 \IBGEtab{}{
 \footnotesize
 \setlength{\tabcolsep}{4.5pt}
 \renewcommand{\arraystretch}{1.2}
 \begin{tabular}{lcccccc}
 \toprule
-Caso & (14) & (15) & (16) & (17) & (18) & (19) \\
+Caso & F0 & F1 & F2 & F3 & F4 & F5 \\
 \midrule
 \texttt{01 MAXIMA NOTURNA} & \stKIL & \stINF & \stKIL & \stINF & \stKIL & \stINF \\
 \texttt{300bus} & \stINV & \stOK & \stOK & \stOK & \stOK & \stOK \\
@@ -89,6 +91,8 @@ Caso & (14) & (15) & (16) & (17) & (18) & (19) \\
 \texttt{4busfrank\_vlim} & \stINF & \stINF & \stOK & \stOK & \stOK & \stOK \\
 \texttt{500bus} & \stINF & \stOK & \stOK & \stOK & \stOK & \stOK \\
 \texttt{5busfrank} & \stOK & \stOK & \stOK & \stOK & \stOK & \stOK \\
+\texttt{caso\_red} & \stINF & \stOK & \stOK & \stOK & \stOK & \stOK \\
+\texttt{caso\_red2} & \stINF & \stINF & \stOK & \stOK & \stOK & \stOK \\
 \texttt{5busfrank\_cphs} & \stOK & \stOK & \stOK & \stOK & \stOK & \stOK \\
 \texttt{5busfrank\_csca} & \stINF & \stINF & \stOK & \stOK & \stOK & \stOK \\
 \texttt{5busfrank\_ctaf} & \stOK & \stOK & \stOK & \stOK & \stOK & \stOK \\
@@ -105,16 +109,16 @@ Caso & (14) & (15) & (16) & (17) & (18) & (19) \\
 }
 \end{figure}
 
-A \autoref{fig:heatmap} resume visualmente esses status. A leitura da \autoref{tab:conv-global} permite extrair três observações imediatas. Em primeiro lugar, das vinte e cinco entradas, as formulações \textit{hand-built} (16)--(19) convergem em vinte casos, contra dezessete da formulação (15) (FP de referência) e quinze da formulação (14) (FPO de referência). A faixa de convergência das formulações \textit{hand-built} é, portanto, estritamente maior que a das referências.
+A \autoref{fig:heatmap} resume visualmente esses status. A leitura da \autoref{tab:conv-global} permite extrair três observações imediatas. Em primeiro lugar, das vinte e sete entradas, as formulações \textit{hand-built} F2 a F5 convergem em vinte e dois casos, contra dezoito da formulação F1 e quinze da formulação F0. A faixa de convergência das formulações \textit{hand-built} é, portanto, estritamente maior que a das referências.
 
-Em segundo lugar, há seis casos em que ao menos uma das formulações \textit{hand-built} converge enquanto ao menos uma das referências falha. Em três deles \textemdash \texttt{4busfrank\_vlim}, \texttt{5busfrank\_csca} e \texttt{test\_system} \textemdash \emph{ambas} as referências falham; nos outros três \textemdash \texttt{300bus} (apenas (14), como INV), \texttt{3bus\_DCline} (apenas (15)) e \texttt{3bus\_DSHL} (apenas (14)) \textemdash apenas uma referência falha. Em todos esses casos, a presença das folgas $s^v, s^q$ no problema \textit{soft-constraint} permite que as formulações \textit{hand-built} encontrem uma solução factível na qual o controle nominal não é estritamente respeitado, mas é minimamente violado \textemdash comportamento que as formulações (14) e (15) não conseguem reproduzir, dado que tratam $V$ e $q^g$ apenas com limites caixa rígidos.
+Em segundo lugar, há oito casos em que ao menos uma das formulações \textit{hand-built} converge enquanto ao menos uma das referências falha. Em quatro deles, a saber, \texttt{4busfrank\_vlim}, \texttt{5busfrank\_csca}, \texttt{test\_system} e \texttt{caso\_red2}, \emph{ambas} as referências falham; nos outros quatro, \texttt{300bus} (apenas F0, como INV), \texttt{3bus\_DCline} (apenas F1), \texttt{3bus\_DSHL} (apenas F0) e \texttt{caso\_red} (apenas F0), apenas uma referência falha. Em todos esses casos, a presença das folgas $s^v, s^q$ no problema \textit{soft-constraint} permite que as formulações \textit{hand-built} encontrem uma solução factível na qual o controle nominal não é estritamente respeitado, mas é minimamente violado. Esse é um comportamento que F0 e F1 não conseguem reproduzir, dado que tratam $V$ e $q^g$ apenas com limites caixa rígidos. O \texttt{caso\_red2}, em particular, é o exemplo mais nítido de toda a bateria: F1 declara infactibilidade em uma solução fisicamente impossível ($V_{\min} = -0{,}431$\,p.u.), enquanto F4 converge com a função objetivo reduzida a $9{,}56 \times 10^{-2}$, com discussão detalhada na \autoref{sec:casos-reduzidos}.
 
 Em terceiro lugar, há três casos em que \emph{nenhuma} formulação converge: o caso SIN (\texttt{01 MAXIMA NOTURNA\_DEZ25}), \texttt{3bus\_corrections} e dois \textit{stress tests} sintéticos. O caso SIN é o mais relevante para a discussão e é tratado em separado na \autoref{sec:discussao}.
 
 \section{Análise barra a barra}
 \label{sec:analise-barra-barra}
 
-A coluna ``Clusters'' da \autoref{tab:conv-global} sintetiza, para cada caso, quais formulações produzem soluções numericamente equivalentes. Um padrão recorrente em casos pequenos é a presença de quatro grupos típicos: $\{14\}$ isolado (porque o FPO altera o despacho e portanto o ponto de operação), $\{15,16\}$ ou $\{15\}\cdot\{16\}$ (FP clássico vs.\ FP com QLIM+VLIM, que coincidem se as folgas saturarem em zero), $\{17\}$ ou $\{17,18\}$ (efeito do CSCA) e $\{18,19\}$ (CTAP, eventualmente coincidente com (19) se DERA não estiver presente).
+A coluna ``Clusters'' da \autoref{tab:conv-global} sintetiza, para cada caso, quais formulações produzem soluções numericamente equivalentes. Um padrão recorrente em casos pequenos é a presença de quatro grupos típicos: $\{\text{F0}\}$ isolado (porque o FPO altera o despacho e portanto o ponto de operação), $\{\text{F1,F2}\}$ ou $\{\text{F1}\}\cdot\{\text{F2}\}$ (F1 vs.\ F2, que coincidem se as folgas saturarem em zero), $\{\text{F3}\}$ ou $\{\text{F3,F4}\}$ (efeito do CSCA) e $\{\text{F4,F5}\}$ (CTAP, eventualmente coincidente com F5 se DERA não estiver presente).
 
 A \autoref{fig:rede-3bus} mostra a topologia da rede pedagógica \texttt{3bus\_DCSC}, e a \autoref{tab:divergencia-3bus} ilustra o agrupamento típico de soluções nessa rede. Para cada barra são listados os valores de $V$ e $\theta$ obtidos por cada formulação que divergiu de \emph{ambas} as referências por mais de $10^{-4}$.
 
@@ -149,20 +153,20 @@ A \autoref{fig:rede-3bus} mostra a topologia da rede pedagógica \texttt{3bus\_D
         \toprule
         Barra & Script & $V$ (p.u.) & $\theta$ (rad) \\
         \midrule \midrule
-        1 & (14) & 1{,}1000 & 0{,}0000 \\
-        1 & (15) & 1{,}0290 & 0{,}0000 \\
-        1 & (16) & 1{,}0352 & 0{,}0000 \\
-        1 & (17--19) & 1{,}0064 & 0{,}0000 \\
+        1 & F0      & 1{,}1000 & 0{,}0000 \\
+        1 & F1      & 1{,}0290 & 0{,}0000 \\
+        1 & F2      & 1{,}0352 & 0{,}0000 \\
+        1 & F3 a F5 & 1{,}0064 & 0{,}0000 \\
         \midrule
-        2 & (14) & 1{,}1000 & $-3{,}9 \times 10^{-10}$ \\
-        2 & (15) & 1{,}0300 & $-7{,}1 \times 10^{-3}$ \\
-        2 & (16) & 1{,}0362 & $-2{,}4 \times 10^{-4}$ \\
-        2 & (17--19) & 1{,}0062 & $-2{,}6 \times 10^{-4}$ \\
+        2 & F0      & 1{,}1000 & $-3{,}9 \times 10^{-10}$ \\
+        2 & F1      & 1{,}0300 & $-7{,}1 \times 10^{-3}$ \\
+        2 & F2      & 1{,}0362 & $-2{,}4 \times 10^{-4}$ \\
+        2 & F3 a F5 & 1{,}0062 & $-2{,}6 \times 10^{-4}$ \\
         \midrule
-        3 & (14) & 1{,}0698 & $-1{,}8 \times 10^{-2}$ \\
-        3 & (15) & 0{,}9970 & $-2{,}5 \times 10^{-2}$ \\
-        3 & (16) & 1{,}0178 & $-1{,}2 \times 10^{-2}$ \\
-        3 & (17--19) & 0{,}9878 & $-1{,}3 \times 10^{-2}$ \\
+        3 & F0      & 1{,}0698 & $-1{,}8 \times 10^{-2}$ \\
+        3 & F1      & 0{,}9970 & $-2{,}5 \times 10^{-2}$ \\
+        3 & F2      & 1{,}0178 & $-1{,}2 \times 10^{-2}$ \\
+        3 & F3 a F5 & 0{,}9878 & $-1{,}3 \times 10^{-2}$ \\
         \bottomrule
     \end{tabular}
 }{
@@ -170,7 +174,7 @@ A \autoref{fig:rede-3bus} mostra a topologia da rede pedagógica \texttt{3bus\_D
 }
 \end{table}
 
-A \autoref{tab:divergencia-3bus} mostra quatro soluções distintas para o mesmo sistema: o FPO (14) eleva todas as tensões a 1,1\,p.u.\ na barra de geração, comportamento típico de um FPO sem custo de tensão; o FP (15) converge para o ponto operacional ``natural'' da rede; a formulação \textit{hand-built} (16) fica próxima desse ponto, mas com uma diferença em $V$ de cerca de 0,006--0,012\,p.u.\ compatível com o efeito da folga $s^v$ na minimização da Equação \eqref{eq:obj-16}; e, finalmente, as formulações (17)--(19), que têm CSCA ativo, deslocam o ponto de operação para tensões consistentemente mais baixas \textemdash isso é o efeito do controle de \textit{shunt} ajustando $b^{sh}_s$ para minimizar o desvio do \textit{setpoint} de $V$ na barra de geração, que neste caso é 1,007\,p.u.\ em vez do nominal 1,03 ou 1,1. A \autoref{fig:perfil-tensao} apresenta esses valores graficamente.
+A \autoref{tab:divergencia-3bus} mostra quatro soluções distintas para o mesmo sistema: F0 eleva todas as tensões a 1,1\,p.u.\ na barra de geração, comportamento típico de um FPO sem custo de tensão; F1 converge para o ponto operacional ``natural'' da rede; F2 fica próxima desse ponto, mas com uma diferença em $V$ de cerca de 0,006--0,012\,p.u.\ compatível com o efeito da folga $s^v$ na minimização da Equação \eqref{eq:obj-16}; e, finalmente, as formulações F3 a F5, que têm CSCA ativo, deslocam o ponto de operação para tensões consistentemente mais baixas. Esse é o efeito do controle de \textit{shunt} ajustando $b^{sh}_s$ para minimizar o desvio do \textit{setpoint} de $V$ na barra de geração, que neste caso é 1,007\,p.u.\ em vez do nominal 1,03 ou 1,1. A \autoref{fig:perfil-tensao} apresenta esses valores graficamente.
 
 \begin{figure}[!htb]
 \Caption{\label{fig:perfil-tensao} Perfil de tensão por barra no caso \texttt{3bus\_DCSC}}
@@ -186,13 +190,13 @@ A \autoref{tab:divergencia-3bus} mostra quatro soluções distintas para o mesmo
   mark size=2.6pt,
 ]
 \addplot+[thick] coordinates {(1,1.1000) (2,1.1000) (3,1.0698)};
-\addlegendentry{(14) --- FPO}
+\addlegendentry{F0}
 \addplot+[thick] coordinates {(1,1.0290) (2,1.0300) (3,0.9970)};
-\addlegendentry{(15) --- FP}
+\addlegendentry{F1}
 \addplot+[thick] coordinates {(1,1.0352) (2,1.0362) (3,1.0178)};
-\addlegendentry{(16) --- QLIM+VLIM}
+\addlegendentry{F2}
 \addplot+[thick] coordinates {(1,1.0064) (2,1.0062) (3,0.9878)};
-\addlegendentry{(17)--(19) --- +CSCA}
+\addlegendentry{F3 a F5}
 \end{axis}
 \end{tikzpicture}
 }{
@@ -200,7 +204,7 @@ A \autoref{tab:divergencia-3bus} mostra quatro soluções distintas para o mesmo
 }
 \end{figure}
 
-Em casos de médio porte, como \texttt{300bus} e \texttt{500bus}, as divergências entre clusters tornam-se mais sistemáticas. O caso \texttt{300bus} apresenta cinco \textit{clusters} distintos $\{15\}\cdot\{16\}\cdot\{17\}\cdot\{18\}\cdot\{19\}$, ou seja, cada formulação produz uma solução numericamente diferente. A análise dos \textit{deltas} em $V$ na bateria mostra que (16)--(19) elevam consistentemente as tensões em relação ao FP (15) em cerca de 0,02--0,05\,p.u.\ \textemdash justamente o efeito esperado da minimização de $(s^v_i)^2$ quando o \textit{setpoint} $V^{ref}_i$ está acima do valor que o FP clássico encontra naturalmente. As tensões de (18) e (19), por sua vez, atingem o limite superior $V^{\max}_i = 1{,}1$\,p.u.\ em várias barras, evidenciando que o CTAP empurra o controle para o limite caixa.
+Em casos de médio porte, como \texttt{300bus} e \texttt{500bus}, as divergências entre clusters tornam-se mais sistemáticas. O caso \texttt{300bus} apresenta cinco \textit{clusters} distintos $\{\text{F1}\}\cdot\{\text{F2}\}\cdot\{\text{F3}\}\cdot\{\text{F4}\}\cdot\{\text{F5}\}$, ou seja, cada formulação produz uma solução numericamente diferente. A análise dos \textit{deltas} em $V$ na bateria mostra que F2 a F5 elevam consistentemente as tensões em relação a F1 em cerca de 0,02--0,05\,p.u., que é justamente o efeito esperado da minimização de $(s^v_i)^2$ quando o \textit{setpoint} $V^{ref}_i$ está acima do valor que o FP clássico encontra naturalmente. As tensões de F4 e F5, por sua vez, atingem o limite superior $V^{\max}_i = 1{,}1$\,p.u.\ em várias barras, evidenciando que o CTAP empurra o controle para o limite caixa.
 
 \section{Discussão}
 \label{sec:discussao}
@@ -211,22 +215,100 @@ Em casos de médio porte, como \texttt{300bus} e \texttt{500bus}, as divergênci
 A leitura cruzada das Tabelas \ref{tab:conv-global} e \ref{tab:divergencia-3bus} confirma o comportamento esperado das quatro ações de controle implementadas:
 
 \begin{alineascomponto}
-    \item \textbf{QLIM + VLIM} (formulação 16): permite recuperar factibilidade em cinco casos nos quais (14) ou (15) declaram infactibilidade, ao custo de pequenas violações dos \textit{setpoints} (folgas residuais);
-    \item \textbf{CSCA} (formulação 17): forma cluster próprio em redes nas quais há bancos \textit{shunt} chaveáveis, ajustando $b^{sh}_s$ para reduzir o desvio em $V$;
-    \item \textbf{CTAP} (formulação 18): forma cluster próprio em redes com transformadores OLTC, frequentemente empurrando $V$ para o limite caixa $V^{\max}$;
-    \item \textbf{DERA} (formulação 19): em redes pedagógicas, produz solução idêntica a (18) na maioria dos casos \textemdash refletindo o fato de que a representação minimalista adotada apenas adiciona injeções fixas, sem decisão de despacho. Em \texttt{4busfrank\_vlim} e \texttt{500bus}, contudo, (19) forma cluster próprio, sinalizando que mesmo a injeção fixa altera o ponto de equilíbrio quando a rede tem margens estreitas.
+    \item \textbf{QLIM + VLIM} (F2): permite recuperar factibilidade em cinco casos nos quais F0 ou F1 declaram infactibilidade, ao custo de pequenas violações dos \textit{setpoints} (folgas residuais);
+    \item \textbf{CSCA} (F3): forma cluster próprio em redes nas quais há bancos \textit{shunt} chaveáveis, ajustando $b^{sh}_s$ para reduzir o desvio em $V$;
+    \item \textbf{CTAP} (F4): forma cluster próprio em redes com transformadores OLTC, frequentemente empurrando $V$ para o limite caixa $V^{\max}$;
+    \item \textbf{DERA} (F5): em redes pedagógicas, produz solução idêntica a F4 na maioria dos casos, refletindo o fato de que a representação minimalista adotada apenas adiciona injeções fixas, sem decisão de despacho. Em \texttt{4busfrank\_vlim} e \texttt{500bus}, contudo, F5 forma cluster próprio, sinalizando que mesmo a injeção fixa altera o ponto de equilíbrio quando a rede tem margens estreitas.
 \end{alineascomponto}
 
 \subsection{O caso SIN}
 \label{subsec:sin}
 
-O caso \texttt{01 MAXIMA NOTURNA\_DEZ25.PWF}, com cerca de 6.000 barras, é o caso de maior interesse prático e o único da bateria em que \emph{todas} as seis formulações falham em convergir dentro do orçamento de \verb|max_iter = 3000| iterações e do tempo limite imposto pelo \textit{wrapper} de execução. Especificamente, (14), (16) e (18) atingem o limite de tempo (status \textbf{KIL}) sem sinalizar infactibilidade, enquanto (15), (17) e (19) terminam em \textbf{INF} (LOCALLY\_INFEASIBLE).
+O caso \texttt{01 MAXIMA NOTURNA\_DEZ25.PWF}, com cerca de 6.000 barras, é o caso de maior interesse prático e o único da bateria em que \emph{todas} as seis formulações falham em convergir dentro do orçamento de \verb|max_iter = 3000| iterações e do tempo limite imposto pelo \textit{wrapper} de execução. Especificamente, F0, F2 e F4 atingem o limite de tempo (status \textbf{KIL}) sem sinalizar infactibilidade, enquanto F1, F3 e F5 terminam em \textbf{INF} (LOCALLY\_INFEASIBLE).
 
-Esse comportamento é coerente com o que se espera de um \textit{snapshot} real do SIN sob máxima noturna: a rede opera em um ponto próximo dos limites de capacidade reativa em várias barras, e a inicialização \textit{flat} (ou a partir do PWF) está suficientemente longe de uma solução factível para que o método de pontos interiores do Ipopt não consiga sair da região de inviabilidade dentro do orçamento permitido. Há indícios, em logs preliminares descartados desta análise, de que uma inicialização baseada na solução de uma formulação mais simples (por exemplo, DC) ou um aumento de \verb|max_iter| para a casa de 10.000 permitiria a convergência \textemdash mas isso fica como trabalho futuro.
+Esse comportamento é coerente com o que se espera de um \textit{snapshot} real do SIN sob máxima noturna: a rede opera em um ponto próximo dos limites de capacidade reativa em várias barras, e a inicialização \textit{flat} (ou a partir do PWF) está suficientemente longe de uma solução factível para que o método de pontos interiores do Ipopt não consiga sair da região de inviabilidade dentro do orçamento permitido. Há indícios, em logs preliminares descartados desta análise, de que uma inicialização baseada na solução de uma formulação mais simples (por exemplo, DC) ou um aumento de \verb|max_iter| para a casa de 10.000 permitiria a convergência, mas isso fica como trabalho futuro.
 
-Vale notar que, mesmo sem convergir, as formulações (14)--(19) sobre o SIN não \emph{quebram} (não há \textbf{CRA} nem \textbf{ERR}): a infraestrutura de leitura PWF, construção da \verb|ref|, montagem do modelo JuMP e chamada ao Ipopt funciona corretamente em escala SIN. O obstáculo está exclusivamente na resolução numérica.
+Vale notar que, mesmo sem convergir, as seis formulações sobre o SIN não \emph{quebram} (não há \textbf{CRA} nem \textbf{ERR}): a infraestrutura de leitura PWF, construção da \verb|ref|, montagem do modelo JuMP e chamada ao Ipopt funciona corretamente em escala SIN. O obstáculo está exclusivamente na resolução numérica.
 
 \subsection{Casos sintéticos com erro de modelo}
 \label{subsec:sinteticos}
 
 Os três casos com status \textbf{ERR} em todas as formulações (\texttt{3bus\_corrections}, \texttt{test\_defaults} e \texttt{test\_line\_shunt}) compartilham a característica de conter campos do PWF que disparam erros no \textit{parser} do \textit{PWF.jl} \emph{antes} da chamada ao \textit{solver}. Não são, portanto, falhas das formulações, mas sim limitações do parser, e estão fora do escopo do trabalho.
+
+\section{Validação adicional: casos reduzidos do SIN}
+\label{sec:casos-reduzidos}
+
+Para complementar a bateria principal, as seis formulações foram também executadas sobre os dois recortes reduzidos do PAR/PEL 2027-2031 (Verão 2027/2028 Máxima Diurna) descritos na \autoref{subsec:reducao-fronteira}. Esses casos têm porte intermediário entre as redes pedagógicas e o \textit{snapshot} SIN integral (\texttt{caso\_red} com 2 599 barras, \texttt{caso\_red2} com 1 033 barras) e representam o regime de rede real do Nordeste em condição de carga elevada, justamente o regime no qual se espera que as ações de controle façam diferença.
+
+A \autoref{tab:reduzidos} resume os resultados das doze rodadas. As métricas reportadas são, para cada par (caso, formulação): status de convergência, tempo interno do Ipopt, valor da função objetivo de penalização de folgas (vazio para F1 e F5, que não a imprimem), e o resumo operacional global (extremos de tensão e totais de geração e perdas), todos em p.u.\ sobre base 100\,MVA.
+
+\begin{table}[!h]
+\captionsetup{width=16cm}
+\Caption{\label{tab:reduzidos} Resultados das formulações F0 a F5 sobre os casos reduzidos do PAR/PEL 2027-2031}
+\IBGEtab{}{
+    \scriptsize
+    \begin{tabular}{cllrrrrrrr}
+        \toprule
+        \# & Caso & Status & $t_{\text{Ipopt}}$ (s) & Objetivo & $V_{\min}$ & $V_{\max}$ & $P^g$ & $Q^g$ & Perdas \\
+        \midrule \midrule
+        F0   & \texttt{caso\_red}  & INF$^\dagger$       & 56{,}1  & $3{,}58{\times}10^{3}$  & n/a     & n/a     & n/a     & n/a       & n/a     \\
+        F1    & \texttt{caso\_red}  & OK                  & 1{,}2   & 0                       & 0{,}943 & 1{,}247 & 34{,}25 & $-16{,}02$ & 6{,}97  \\
+        F2    & \texttt{caso\_red}  & OK                  & 14{,}7  & $9{,}06{\times}10^{4}$  & 0{,}935 & 1{,}226 & 34{,}46 & $-8{,}29$  & 7{,}17  \\
+        F3   & \texttt{caso\_red}  & OK                  & 15{,}0  & $1{,}20{\times}10^{4}$  & 0{,}920 & 1{,}225 & 34{,}55 & $-6{,}19$  & 7{,}27  \\
+        F4  & \texttt{caso\_red}  & OK                  & 180{,}1 & $4{,}78{\times}10^{2}$  & 0{,}499 & 1{,}269 & 34{,}78 & $+8{,}78$  & 7{,}49  \\
+        F5 & \texttt{caso\_red}  & OK                  & 39{,}2  & n/a                     & 0{,}523 & 1{,}269 & 34{,}67 & $+6{,}23$  & 7{,}38  \\
+        \midrule
+        F0   & \texttt{caso\_red2} & INF                 & 7{,}1   & $2{,}87{\times}10^{2}$  & 0{,}950 & 1{,}218 & 2{,}87  & $+0{,}33$  & 1{,}82  \\
+        F1    & \texttt{caso\_red2} & \textbf{INF}        & 7{,}3   & 0                       & \textbf{$-0{,}431$} & 1{,}935 & 5{,}78 & $+3{,}92$ & 8{,}12 \\
+        F2    & \texttt{caso\_red2} & OK                  & 3{,}1   & $4{,}94{\times}10^{2}$  & 0{,}950 & 1{,}231 & 2{,}89  & $+0{,}12$  & 1{,}83  \\
+        F3   & \texttt{caso\_red2} & OK                  & 4{,}0   & $2{,}16{\times}10^{2}$  & 0{,}950 & 1{,}228 & 2{,}90  & $+0{,}17$  & 1{,}84  \\
+        F4  & \texttt{caso\_red2} & OK                  & 125{,}3 & $\mathbf{9{,}56{\times}10^{-2}}$ & 0{,}950 & 1{,}269 & 2{,}86 & $+2{,}40$ & 1{,}80 \\
+        F5 & \texttt{caso\_red2} & OK                  & 5{,}6   & n/a                     & 0{,}950 & 1{,}269 & 2{,}87  & $+2{,}19$  & 1{,}81  \\
+        \bottomrule
+    \end{tabular}
+}{
+    \Fonte{elaborado pelo autor. Todos os valores em p.u.\ sobre base 100\,MVA. Status: \textbf{OK} = LOCALLY\_SOLVED; \textbf{INF} = LOCALLY\_INFEASIBLE. $^\dagger$ Em F0/\texttt{caso\_red} o Ipopt encerrou em LOCALLY\_INFEASIBLE e a etapa subsequente de exportação de fluxos no script falhou com \textit{key error} ao tentar ler tensões de barras descartadas por \texttt{select\_largest\_component!}; trata-se de uma limitação do script F0, corrigível com o mesmo \textit{guard} de chaves já aplicado em F1.}
+}
+\end{table}
+
+Três leituras se destacam:
+
+\begin{alineascomnumero}
+    \item \textbf{O caso \texttt{caso\_red2} é o exemplo mais nítido, em toda a bateria, da utilidade das formulações \textit{hand-built} com controle.} F1 declara infactibilidade em uma solução fisicamente impossível ($V_{\min} = -0{,}431$\,p.u., $V_{\max} = 1{,}935$\,p.u.), enquanto F2 a F5 convergem para tensões dentro da faixa $[0{,}950, 1{,}269]$\,p.u.\ com folgas residuais. Em particular, F4 reduz o valor da função objetivo a $9{,}56 \times 10^{-2}$, valor cerca de cinco mil vezes menor que o de F2 na mesma rede, evidenciando que a combinação CSCA + CTAP atua de forma quase ideal: o ponto de operação encontrado é praticamente compatível com os \textit{setpoints} lidos do PWF, sem necessidade de violação.
+    \item \textbf{A assinatura do CSCA no \texttt{caso\_red} reaparece com clareza.} A geração reativa total salta de $-16{,}02$\,p.u.\ ($-1\,602$\,MVAr de absorção) em F1 para $+8{,}78$\,p.u.\ ($+878$\,MVAr de injeção) em F4, uma variação total de cerca de 2\,480\,MVAr. O salto é compatível com o desligamento ótimo de bancos \textit{shunt} sobrecompensados no recorte: o $b^{sh}_s$ contínuo varre desde valores capacitivos altos (necessários para sustentar tensão sob a configuração nominal de F1) até valores próximos de zero, e isso muda o ponto de equilíbrio reativo da rede.
+    \item \textbf{$V_{\min} = 0{,}499$\,p.u.\ em (18)/\texttt{caso\_red} não é anomalia numérica.} As barras 44084 e 44085 (terminais de máquina da usina São João do Piauí, sem carga ou geração associadas) pertencem ao grupo DGLT 6 do caso, cujos limites de tensão são deliberadamente largos ($V_{\min}^{\,6} = 0{,}40$, $V_{\max}^{\,6} = 1{,}90$). O \textit{solver} respeita os limites caixa, e a ausência de carga ou \textit{setpoint} explícitos nessas barras faz com que o problema seja insensível à tensão local: nada na função objetivo penaliza um $V$ baixo ali. Para uma comparação ``honesta'' do perfil de tensão entre formulações é preciso restringir a comparação aos grupos DGLT com limites estreitos (grupos 0 e 5, ambos $[0{,}95, 1{,}05]$).
+\end{alineascomnumero}
+
+As perdas ativas em \texttt{caso\_red} variam pouco entre formulações (6{,}97 a 7{,}49\,p.u.; 697 a 749\,MW), mantendo-se altas em termos relativos ($\approx 25\%$ da carga ativa do recorte). Essa fração se explica pela presença das impedâncias equivalentes inseridas pela redução de fronteira (cinquenta e seis ramos novos no DLIN), e não por circulação parasita: parte do que aparece como perda no recorte é, na verdade, dissipação real dos caminhos externos do SIN que foram compactados em impedâncias da fronteira. As perdas em \texttt{caso\_red2} são proporcionalmente compatíveis com sua escala (1{,}80 a 1{,}83\,p.u.).
+
+A \autoref{fig:bar-objetivo} compara em escala logarítmica o valor da função objetivo entre (16), (17) e (18) nos dois casos, evidenciando o efeito incremental do CSCA e do CTAP na minimização das violações.
+
+\begin{figure}[!htb]
+\Caption{\label{fig:bar-objetivo} Valor da função objetivo (penalização das folgas) das formulações F2, F3 e F4 sobre os casos reduzidos}
+\IBGEtab{}{
+\begin{tikzpicture}
+\begin{axis}[
+  width=12cm, height=7cm,
+  ybar, bar width=10pt,
+  ymode=log,
+  ylabel={Função objetivo (escala log)},
+  symbolic x coords={F2,F3,F4},
+  xtick=data,
+  enlarge x limits=0.25,
+  legend pos=north east, legend cell align=left,
+  nodes near coords, every node near coord/.append style={font=\scriptsize},
+  ymin=1e-2, ymax=1e6,
+  grid=major, grid style={gray!22},
+]
+\addplot+[fill=blue!30] coordinates {(F2,90597.35) (F3,12022.29) (F4,478.05)};
+\addlegendentry{\texttt{caso\_red}}
+\addplot+[fill=orange!50] coordinates {(F2,493.66) (F3,216.12) (F4,0.0956)};
+\addlegendentry{\texttt{caso\_red2}}
+\end{axis}
+\end{tikzpicture}
+}{
+\Fonte{elaborado pelo autor a partir da \autoref{tab:reduzidos}.}
+}
+\end{figure}
+
+Esses resultados, em conjunto com os da \autoref{sec:convergencia} e os da discussão sobre o caso SIN (\autoref{subsec:sin}), reforçam a hipótese central do trabalho: as formulações \textit{hand-built} F2 a F5 ampliam a faixa de redes em que se obtém um ponto de operação utilizável quando comparadas às referências F0 e F1 baseadas em \textit{PowerModels}, e o ganho cresce com a presença efetiva, na rede, das ações de controle modeladas.

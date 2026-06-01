@@ -1,0 +1,26 @@
+BATCH START Tue May 26 21:51:17 -03 2026
+=== n=14  caso=caso_red.pwf  start=21:51:17 ===
+    -> rc=1 dur=87s outdir=/Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/PF_Formulation/resultados_csv/14/caso_red
+=== n=15  caso=caso_red.pwf  start=21:52:44 ===
+    -> rc=0 dur=28s outdir=/Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/PF_Formulation/resultados_csv/15/caso_red
+=== n=16  caso=caso_red.pwf  start=21:53:12 ===
+    -> rc=0 dur=42s outdir=/Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/PF_Formulation/resultados_csv/16/caso_red
+=== n=17  caso=caso_red.pwf  start=21:53:54 ===
+    -> rc=0 dur=46s outdir=/Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/PF_Formulation/resultados_csv/17/caso_red
+=== n=18  caso=caso_red.pwf  start=21:54:40 ===
+    -> rc=0 dur=211s outdir=/Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/PF_Formulation/resultados_csv/18/caso_red
+=== n=19  caso=caso_red.pwf  start=21:58:11 ===
+    -> rc=0 dur=71s outdir=/Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/PF_Formulation/resultados_csv/19/caso_red
+=== n=14  caso=caso_red2.pwf  start=21:59:22 ===
+    -> rc=0 dur=29s outdir=/Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/PF_Formulation/resultados_csv/14/caso_red2
+=== n=15  caso=caso_red2.pwf  start=21:59:51 ===
+    -> rc=0 dur=27s outdir=/Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/PF_Formulation/resultados_csv/15/caso_red2
+=== n=16  caso=caso_red2.pwf  start=22:00:18 ===
+    -> rc=0 dur=26s outdir=/Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/PF_Formulation/resultados_csv/16/caso_red2
+=== n=17  caso=caso_red2.pwf  start=22:00:44 ===
+    -> rc=0 dur=27s outdir=/Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/PF_Formulation/resultados_csv/17/caso_red2
+=== n=18  caso=caso_red2.pwf  start=22:01:11 ===
+    -> rc=0 dur=148s outdir=/Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/PF_Formulation/resultados_csv/18/caso_red2
+=== n=19  caso=caso_red2.pwf  start=22:03:39 ===
+    -> rc=0 dur=29s outdir=/Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/PF_Formulation/resultados_csv/19/caso_red2
+BATCH END Tue May 26 22:04:08 -03 2026  total=771s

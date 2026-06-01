@@ -1,0 +1,934 @@
+--- patched script (head) ---
+427:arquivo = "/Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/data/caso_red2.pwf"
+--- begin julia output ---
+c1. Lendo arquivo PWF...
+[info | PWF]: Populating defaults
+[warn | PWF]: DC line will not be parsed due to the absence of at least one those sections: DCBA, DCLI, DCNV, DCCV, DELO
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47506. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6791. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8913. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47123. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8975. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47704. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 7069. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 9470. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8938. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8027. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 7977. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8295. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5475. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6057. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8661. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5273. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47505. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6051. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5413. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 45048. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6114. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6016. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47067. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8030. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 48170. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8129. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5127. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 7199. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8894. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6213. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8684. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8144. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 7117. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5473. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 45550. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8376. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 45293. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 48167. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8636. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6776. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6066. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6164. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47509. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5126. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8778. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6129. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6133. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8347. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 44514. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 45377. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8967. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8750. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 7916. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47647. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 44536. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 44864. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 46383. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 48115. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47527. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47340. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5075. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47692. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 7921. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47124. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 7294. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 48169. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8156. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5083. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6742. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6659. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6167. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 7182. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8607. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8912. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6619. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 48116. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6642. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6777. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 44922. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8644. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5938. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8629. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8914. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8749. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47301. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 9491. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8398. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47705. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 7918. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8640. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6166. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8686. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 45335. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6127. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5078. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 46739. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 44487. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5383. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8026. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8031. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6053. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 7118. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 9514. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47070. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8121. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5643. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6145. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8930. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5653. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 7937. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8977. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 7940. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 45553. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47011. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 45123. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 45015. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8309. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8485. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6618. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5855. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8114. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47507. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 45294. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47128. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8765. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47069. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8899. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 7919. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6030. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 46571. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6793. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8798. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 46160. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 46501. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5623. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6751. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5702. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5999. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 48168. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 46572. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6386. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5433. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 46268. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8113. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 46036. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47619. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8029. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 45002. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 48266. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 46550. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6688. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8965. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6550. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8044. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8292. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 46159. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 44503. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8320. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6160. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5073. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5463. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 48257. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 46776. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8442. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6214. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5900. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 48171. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6052. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6042. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 45908. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5613. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8147. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 45083. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47620. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6136. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5263. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6108. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5079. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5243. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5315. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6105. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 48681. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 7944. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 45569. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6693. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47125. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5901. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6678. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8306. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8153. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6150. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 44533. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6035. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6112. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 46035. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 44650. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 44911. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8141. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5170. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 44703. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5968. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8637. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6065. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6215. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8120. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6763. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 44863. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 7109. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 45568. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8414. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47508. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5914. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6768. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 7151. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 7939. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 45477. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5838. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8484. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6031. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5124. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6038. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 45278. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47009. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 45567. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6106. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5913. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47711. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8127. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5472. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 7277. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8099. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 44710. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47066. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47126. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 44515. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8128. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8793. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 48172. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47648. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 45909. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47010. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 7942. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5299. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6165. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 45090. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47525. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6013. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 45910. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 7985. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8939. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 48038. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5213. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6653. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47299. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47703. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6036. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6644. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8299. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6782. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5935. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 7912. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8091. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8968. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 44987. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47008. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 45324. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5439. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 44666. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8045. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8780. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 46420. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5459. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6775. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47068. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5374. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5483. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5044. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 48173. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 44488. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6043. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 9467. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 45536. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8982. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 44490. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 48655. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6636. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6037. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5246. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5916. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 46201. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 46746. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8098. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47526. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5423. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5612. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 44909. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8897. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 44489. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 9499. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 44539. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5320. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8333. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 47513. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 6781. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5453. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 8318. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 5226. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 45211. Adding generator power to load power and changing generator status to off
+[warn | PWF]: Active generator with QMIN = QMAX = 0 found in PQ bus 44555. Adding generator power to load power and changing generator status to off
+[warn | PowerModels]: reversing the orientation of branch 406 (5318, 5176) to be consistent with other parallel branches
+[warn | PowerModels]: reversing the orientation of branch 103 (5222, 5216) to be consistent with other parallel branches
+[warn | PowerModels]: reversing the orientation of branch 523 (5380, 5408) to be consistent with other parallel branches
+[warn | PowerModels]: reversing the orientation of branch 564 (5837, 5271) to be consistent with other parallel branches
+[warn | PowerModels]: reversing the orientation of branch 292 (5411, 7911) to be consistent with other parallel branches
+[warn | PowerModels]: reversing the orientation of branch 445 (5837, 5271) to be consistent with other parallel branches
+-> Ilhas isoladas removidas! Mantendo apenas a rede principal conectada.
+[info | PowerModels]: updated generator 306 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 1 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 54 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 101 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 41 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 65 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 299 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 168 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 159 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 228 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 190 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 227 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 270 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 223 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 88 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 297 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 26 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 289 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 250 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 77 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 230 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 24 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 258 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 204 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 23 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 160 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 149 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 59 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 184 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 43 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 122 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 253 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 302 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 175 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 39 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 143 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 112 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 34 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 293 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 137 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 55 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 323 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 17 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 243 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 318 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 9 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 172 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 12 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 192 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 20 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 292 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 252 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 14 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 167 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 127 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 96 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 123 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 177 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 254 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 300 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 257 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 19 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 179 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 242 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 260 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 239 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 35 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 317 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 197 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 131 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 276 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 316 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 21 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 263 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 83 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 244 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 45 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 295 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 139 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 181 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 85 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 105 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 30 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 3 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 309 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 81 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 296 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 27 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 75 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 50 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 162 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 63 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 303 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 92 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 208 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 214 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 120 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 224 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 87 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 117 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 255 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 178 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 89 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 275 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 176 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 182 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 225 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 195 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 286 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 249 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 161 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 202 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 146 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 142 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 219 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 256 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 291 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 80 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 203 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 308 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 113 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 110 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 322 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 269 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 157 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 57 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 165 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 231 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 173 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 284 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 200 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 171 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 233 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 130 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 273 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 319 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 312 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 15 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 61 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 67 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 247 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 108 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 100 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 46 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 251 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 170 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 151 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 248 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 68 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 56 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 147 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 76 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 186 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 180 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 135 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 262 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 48 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 103 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 32 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 109 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 264 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 320 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 217 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 2 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 183 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 155 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 51 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 53 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 106 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 111 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 141 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 287 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 93 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 213 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 278 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 10 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 265 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 215 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 305 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 154 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 321 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 49 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 218 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 5 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 62 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 196 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 90 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 234 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 205 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 237 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 201 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 311 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 315 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 298 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 164 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 86 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 126 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 152 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 71 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 37 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 226 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 245 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 266 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 268 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 6 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 125 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 98 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 272 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 174 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 187 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 7 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 261 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 194 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 140 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 107 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 102 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 69 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 282 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 97 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 4 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 221 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 235 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 212 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 210 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 13 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 136 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 211 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 134 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 133 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 148 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 240 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 193 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 118 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 283 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 246 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 38 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 188 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 307 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 199 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 116 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 66 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 241 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 301 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 18 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 132 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 29 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 78 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 74 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 119 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 236 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 42 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 33 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 28 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 52 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 121 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 290 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 115 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 314 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 163 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 281 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 58 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 25 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 114 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 166 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 31 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 274 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 206 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 279 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 280 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 313 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 44 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 169 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 129 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 189 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 150 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 259 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 94 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 288 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 99 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 207 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 47 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 73 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 82 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 285 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 310 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 79 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 216 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 84 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 104 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 124 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 238 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 209 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 185 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 267 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 70 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 191 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 8 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 304 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 198 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 64 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 222 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 91 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 60 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 158 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 156 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 229 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 144 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 220 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 22 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 11 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 271 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 277 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 16 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 40 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 72 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 128 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 145 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 36 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 95 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 138 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 294 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 232 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+[info | PowerModels]: updated generator 153 cost function with order 2 to a function of order 3: [0.0, 100.0, 0.0]
+
+******************************************************************************
+This program contains Ipopt, a library for large-scale nonlinear optimization.
+ Ipopt is released as open source code under the Eclipse Public License (EPL).
+         For more information visit https://github.com/coin-or/Ipopt
+******************************************************************************
+
+This is Ipopt version 3.14.4, running with linear solver MUMPS 5.4.1.
+
+Number of nonzeros in equality constraint Jacobian...:    15781
+Number of nonzeros in inequality constraint Jacobian.:      612
+Number of nonzeros in Lagrangian Hessian.............:    43692
+
+Total number of variables............................:     4199
+                     variables with only lower bounds:      316
+                variables with lower and upper bounds:     1438
+                     variables with only upper bounds:        0
+Total number of equality constraints.................:     2305
+Total number of inequality constraints...............:      306
+        inequality constraints with only lower bounds:      153
+   inequality constraints with lower and upper bounds:        0
+        inequality constraints with only upper bounds:      153
+
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+   0  5.2848432e+03 1.01e+02 1.00e+02  -1.0 0.00e+00    -  0.00e+00 0.00e+00   0
+   1  4.5779902e+03 9.99e+01 9.75e+01  -1.0 6.18e+00    -  2.80e-02 1.49e-02f  1
+   2  4.0336766e+03 9.48e+01 8.99e+01  -1.0 3.87e+00    -  8.45e-02 5.11e-02f  1
+   3  4.0815087e+03 9.46e+01 8.97e+01  -1.0 1.41e+01    -  7.93e-03 2.12e-03h  1
+   4  4.6643907e+03 9.31e+01 8.79e+01  -1.0 1.83e+01    -  6.22e-03 1.55e-02h  1
+   5  5.2229412e+03 9.25e+01 8.77e+01  -1.0 1.79e+01    -  9.62e-03 6.74e-03h  1
+   6  1.0977323e+04 8.73e+01 2.12e+02  -1.0 2.16e+01    -  1.20e-02 5.58e-02h  1
+   7  1.1197436e+04 8.71e+01 4.96e+03  -1.0 1.93e+01   2.0 5.99e-02 2.35e-03h  1
+   8  1.3423069e+04 8.52e+01 6.76e+03  -1.0 2.01e+01   2.4 3.02e-02 2.23e-02h  1
+   9  2.0235361e+04 7.92e+01 1.31e+04  -1.0 1.96e+01   1.9 1.74e-01 7.02e-02h  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  10  2.1404108e+04 7.82e+01 3.12e+04  -1.0 1.75e+01   2.4 1.30e-01 1.29e-02h  1
+  11  2.2416024e+04 7.73e+01 3.70e+04  -1.0 1.68e+01   2.8 2.70e-02 1.05e-02h  1
+  12  3.6055958e+04 6.59e+01 4.25e+04  -1.0 1.67e+01   2.3 2.71e-01 1.48e-01h  1
+  13  3.6369639e+04 6.56e+01 3.86e+04  -1.0 1.26e+01   1.8 1.10e-01 4.99e-03h  1
+  14  4.3955792e+04 5.83e+01 3.25e+04  -1.0 1.24e+01   2.3 2.35e-03 1.10e-01h  1
+  15  4.5184562e+04 5.73e+01 5.29e+04  -1.0 1.01e+01   2.7 2.15e-01 1.85e-02h  1
+  16  4.6011949e+04 5.67e+01 4.07e+05  -1.0 9.95e+00   3.1 8.99e-01 9.83e-03h  1
+  17  5.7506322e+04 4.68e+01 3.32e+05  -1.0 9.43e+00   2.6 1.86e-01 1.74e-01h  1
+  18  5.9225610e+04 4.54e+01 1.48e+05  -1.0 6.33e+00   3.1 6.40e-01 3.04e-02h  1
+  19  6.2186228e+04 4.34e+01 1.65e+05  -1.0 5.92e+00   3.5 2.31e-01 4.48e-02h  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  20  6.7398171e+04 3.92e+01 1.54e+05  -1.0 5.49e+00   3.0 7.70e-03 9.58e-02h  1
+  21  6.7522604e+04 3.91e+01 1.54e+05  -1.0 5.22e+00   3.4 5.12e-03 1.75e-03h  1
+  22  7.2226782e+04 3.58e+01 7.66e+04  -1.0 5.43e+00   3.0 8.26e-01 8.52e-02h  1
+  23  7.7031946e+04 3.34e+01 7.24e+04  -1.0 4.88e+00   3.4 7.15e-02 6.79e-02h  1
+  24  8.7106858e+04 2.97e+01 4.22e+04  -1.0 4.46e+00   3.8 7.58e-02 1.10e-01h  1
+  25  8.9747293e+04 2.89e+01 5.45e+05  -1.0 3.85e+00   4.2 2.91e-01 2.64e-02h  1
+  26  9.1656304e+04 2.82e+01 5.34e+05  -1.0 3.85e+00   3.8 5.34e-03 2.43e-02h  1
+  27  1.0352593e+05 2.48e+01 5.96e+05  -1.0 3.86e+00   4.2 2.52e-01 1.22e-01h  1
+  28  1.0449989e+05 2.45e+01 7.84e+05  -1.0 3.38e+00   4.6 7.72e-02 9.77e-03h  1
+  29  1.1521491e+05 2.17e+01 6.93e+05  -1.0 3.44e+00   4.1 1.24e-01 1.18e-01h  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  30  1.3123310e+05 1.81e+01 9.90e+05  -1.0 3.01e+00   4.6 4.08e-01 1.62e-01h  1
+  31  1.4231070e+05 1.62e+01 6.73e+05  -1.0 2.57e+00   4.1 2.69e-01 1.07e-01h  1
+  32  1.4263499e+05 1.61e+01 6.98e+05  -1.0 2.25e+00   4.5 2.39e-01 3.72e-03h  1
+  33  1.6219680e+05 1.25e+01 7.87e+05  -1.0 2.29e+00   4.0 5.31e-03 2.23e-01h  1
+  34  1.6325705e+05 1.24e+01 2.90e+05  -1.0 1.72e+00   4.5 9.87e-01 1.22e-02h  1
+  35  1.8931152e+05 8.68e+00 4.06e+05  -1.0 1.73e+00   4.0 4.17e-02 3.00e-01h  1
+  36  1.9114956e+05 8.45e+00 2.54e+05  -1.0 1.17e+00   4.4 3.66e-01 2.67e-02h  1
+  37  2.3155600e+05 3.01e+00 1.53e+05  -1.0 1.16e+00   3.9 5.39e-01 6.44e-01h  1
+  38  2.2495957e+05 2.38e+00 9.73e+04  -1.0 4.02e-01   3.5 2.62e-01 2.11e-01f  1
+  39  2.2490939e+05 1.24e+00 1.26e+05  -1.0 3.11e-01   3.9 2.27e-01 4.77e-01f  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  40  1.9766420e+05 4.15e-01 1.47e+05  -1.0 1.62e-01   3.4 2.70e-01 6.65e-01f  1
+  41  1.7870119e+05 2.97e-01 1.58e+05  -1.0 1.98e-01   2.9 2.66e-02 2.86e-01f  1
+  42  1.7830343e+05 2.92e-01 8.16e+04  -1.0 8.12e-02   3.4 3.91e-01 1.58e-02f  1
+  43  1.5965494e+05 1.75e-01 8.56e+04  -1.0 1.60e-01   2.9 9.78e-02 4.01e-01f  1
+  44  1.4973889e+05 6.86e-02 1.07e+05  -1.0 6.84e-02   3.3 2.22e-01 6.07e-01f  1
+  45  1.3646820e+05 4.46e-02 7.74e+04  -1.0 1.56e-01   2.8 2.59e-02 3.94e-01f  1
+  46  1.2481910e+05 7.79e-02 4.58e+04  -1.0 6.49e-02   3.3 4.51e-01 1.00e+00f  1
+  47  1.2237180e+05 3.37e-02 3.01e+04  -1.0 2.29e-02   3.7 3.44e-01 7.03e-01f  1
+  48  1.1524169e+05 3.44e-02 2.84e+04  -1.0 5.91e-02   3.2 5.57e-02 7.50e-01f  1
+  49  1.0244302e+05 1.62e-01 1.34e+04  -1.0 1.18e-01   2.7 5.38e-01 9.06e-01f  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  50  1.0042822e+05 8.37e-02 3.55e+03  -1.0 3.99e-02   3.2 7.33e-01 5.27e-01f  1
+  51  9.3833629e+04 9.32e-02 2.46e+03  -1.0 8.91e-02   2.7 3.77e-01 1.00e+00f  1
+  52  8.9117624e+04 6.69e-02 1.42e+03  -1.0 2.59e-01   2.2 4.91e-01 6.79e-01f  1
+  53  8.8336112e+04 3.92e-02 1.63e+02  -1.0 9.01e-02   2.6 1.00e+00 4.20e-01f  1
+  54  8.6094162e+04 3.06e-01 1.79e+01  -1.0 1.26e-01   2.2 1.00e+00 1.00e+00f  1
+  55  8.5453070e+04 9.15e-03 1.79e+01  -1.0 4.71e-02   2.6 1.00e+00 1.00e+00f  1
+  56  8.4240926e+04 6.08e-02 1.90e+01  -1.0 1.50e-01   2.1 1.00e+00 1.00e+00f  1
+  57  8.1333154e+04 3.60e-01 1.87e+01  -1.0 4.45e-01   1.6 1.00e+00 1.00e+00f  1
+  58  8.0421361e+04 1.23e-02 1.75e+01  -1.0 1.56e-01   2.1 1.00e+00 9.88e-01f  1
+  59  7.8379862e+04 2.27e-02 1.08e+03  -1.0 3.14e-01   1.6 1.87e-01 1.00e+00f  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  60  7.7391107e+04 3.35e-03 1.68e+01  -1.0 1.68e-01   2.0 1.00e+00 1.00e+00f  1
+  61  7.4595176e+04 8.31e-02 1.58e+01  -1.0 4.74e-01   1.5 1.00e+00 1.00e+00f  1
+  62  7.3554170e+04 1.28e-02 1.58e+01  -1.0 1.78e-01   1.9 1.00e+00 1.00e+00f  1
+  63  7.0505606e+04 5.40e-01 1.54e+01  -1.0 5.22e-01   1.5 1.00e+00 1.00e+00f  1
+  64  6.3530901e+04 1.53e-01 1.55e+01  -1.0 1.49e+00   1.0 1.00e+00 8.15e-01f  1
+  65  6.0446372e+04 6.13e-02 1.45e+01  -1.0 5.51e-01   1.4 1.00e+00 1.00e+00f  1
+  66  5.1548029e+04 8.31e-01 1.41e+01  -1.0 1.61e+00   0.9 1.00e+00 1.00e+00f  1
+  67  4.0626828e+04 5.17e-01 3.72e+01  -1.0 4.60e+00   0.5 6.28e-01 4.45e-01f  1
+  68  3.0789442e+04 5.26e+00 3.12e+01  -1.0 1.30e+01  -0.0 1.40e-01 1.46e-01f  1
+  69  3.0366759e+04 2.82e+00 2.71e+01  -1.0 1.03e-01   2.2 6.68e-01 1.00e+00f  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  70  2.1305995e+04 2.78e+00 2.67e+01  -1.0 1.09e+02    -  1.78e-02 1.63e-02f  1
+  71  2.0064960e+04 3.79e-01 1.39e+01  -1.0 2.51e-01   1.7 8.94e-01 1.00e+00f  1
+  72  1.9602214e+04 1.70e-02 1.37e+01  -1.0 9.27e-02   2.2 1.00e+00 1.00e+00f  1
+  73  1.9428584e+04 6.81e-04 1.37e+01  -1.0 3.47e-02   2.6 1.00e+00 1.00e+00f  1
+  74  1.8907759e+04 1.04e-02 1.36e+01  -1.0 1.04e-01   2.1 1.00e+00 1.00e+00f  1
+  75  1.8712478e+04 1.28e-03 1.37e+01  -1.0 3.90e-02   2.5 1.00e+00 1.00e+00f  1
+  76  1.8127629e+04 3.10e-02 1.36e+01  -1.0 1.17e-01   2.1 1.00e+00 1.00e+00f  1
+  77  1.7907317e+04 4.41e-03 1.37e+01  -1.0 4.40e-02   2.5 1.00e+00 1.00e+00f  1
+  78  1.7247283e+04 1.25e-01 1.36e+01  -1.0 1.32e-01   2.0 1.00e+00 1.00e+00f  1
+  79  1.6997416e+04 4.92e-03 1.38e+01  -1.0 4.98e-02   2.4 1.00e+00 1.00e+00f  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  80  1.6255405e+04 5.63e-02 1.36e+01  -1.0 1.48e-01   2.0 1.00e+00 1.00e+00f  1
+  81  1.4042139e+04 2.40e-01 1.36e+01  -1.0 4.42e-01   1.5 1.00e+00 1.00e+00f  1
+  82  8.9257102e+03 2.73e-01 1.35e+01  -1.0 1.31e+00   1.0 1.00e+00 7.84e-01f  1
+  83  7.3615431e+03 8.01e-01 1.32e+01  -1.0 3.26e+00   0.5 3.95e-01 9.71e-02f  1
+  84  4.8798014e+03 1.55e+00 1.24e+01  -1.0 1.17e+01    -  8.73e-02 6.35e-02f  1
+  85  3.9512095e+03 1.39e+00 6.68e+01  -1.0 1.66e+00   0.1 6.69e-01 1.17e-01f  1
+  86  2.7329555e+03 1.35e+00 3.65e+01  -1.0 3.12e-01    -  3.45e-01 9.11e-01f  1
+  87  2.8723661e+03 2.36e-01 3.82e+00  -1.0 1.28e-01   1.4 1.00e+00 8.66e-01f  1
+  88  2.8352829e+03 1.71e-01 1.79e+00  -1.0 5.79e-01    -  6.24e-01 3.68e-01f  1
+  89  2.8192905e+03 2.24e+00 3.45e+00  -1.0 3.14e-01    -  1.00e+00 4.94e-01f  2
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+  90  2.8007383e+03 5.52e-01 4.68e-01  -1.0 2.40e-01    -  1.00e+00 1.00e+00h  1
+  91  1.0196668e+03 8.61e-02 1.41e+00  -1.7 8.48e-02   0.9 9.35e-01 1.00e+00f  1
+  92  6.1452810e+02 7.13e-02 4.03e-01  -1.7 1.36e-01    -  1.00e+00 1.00e+00f  1
+  93  5.7565915e+02 3.51e-02 1.99e-03  -1.7 2.92e-02    -  1.00e+00 1.00e+00h  1
+  94  1.3728226e+02 2.48e-02 1.01e+00  -3.8 9.46e-02    -  8.51e-01 9.57e-01f  1
+  95  4.0915559e+01 1.48e-02 6.72e-01  -3.8 1.30e-02   0.4 8.68e-01 1.00e+00f  1
+  96  1.3679753e+01 7.24e-03 7.57e-03  -3.8 8.41e-03  -0.0 1.00e+00 1.00e+00f  1
+  97  6.1532400e+00 1.26e-03 1.24e-03  -3.8 3.77e-03  -0.5 1.00e+00 1.00e+00h  1
+  98  1.4587416e+00 3.49e-03 2.84e-02  -5.7 5.34e-03  -1.0 9.49e-01 1.00e+00f  1
+  99  5.0296461e-01 4.19e-02 3.94e-04  -5.7 1.09e-02  -1.5 1.00e+00 1.00e+00h  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+ 100  2.5286644e-01 1.45e-01 2.11e-01  -5.7 2.22e-02  -2.0 1.00e+00 8.03e-01h  1
+ 101  1.4632050e-01 1.93e-02 2.02e-04  -5.7 6.60e-03  -1.5 1.00e+00 1.00e+00h  1
+ 102  1.0632351e-01 9.23e-02 2.87e-04  -5.7 1.35e-02  -2.0 1.00e+00 1.00e+00h  1
+ 103  8.2451570e-02 1.05e-01 3.21e-04  -5.7 1.42e-02  -2.5 1.00e+00 1.00e+00h  1
+ 104  7.8621554e-02 3.64e-02 2.34e-05  -5.7 1.00e-02  -3.0 1.00e+00 1.00e+00h  1
+ 105  7.9739863e-02 2.63e-03 1.27e-05  -5.7 4.17e-03  -2.5 1.00e+00 1.00e+00h  1
+ 106  7.9297340e-02 9.57e-02 1.10e-05  -5.7 1.70e-02  -3.0 1.00e+00 1.00e+00h  1
+ 107  7.8754411e-02 3.41e-02 6.00e-06  -5.7 2.50e-02  -3.5 1.00e+00 1.00e+00h  1
+ 108  7.8673088e-02 1.73e-03 4.62e-06  -5.7 5.37e-03  -3.1 1.00e+00 1.00e+00h  1
+ 109  7.8594746e-02 4.21e-03 3.46e-06  -5.7 1.19e-02  -3.5 1.00e+00 1.00e+00h  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+ 110  7.8568912e-02 2.88e-04 2.51e-06  -5.7 3.27e-03  -3.1 1.00e+00 1.00e+00h  1
+ 111  7.8531301e-02 1.28e-03 1.60e-06  -5.7 6.26e-03  -3.6 1.00e+00 1.00e+00h  1
+ 112  7.8513731e-02 2.22e-04 1.54e-06  -5.7 2.25e-03  -3.2 1.00e+00 1.00e+00h  1
+ 113  7.8476357e-02 3.49e-03 1.96e-06  -5.7 8.57e-03  -3.6 1.00e+00 1.00e+00h  1
+ 114  7.8442228e-02 1.09e-03 1.95e-06  -5.7 3.22e-03  -3.2 1.00e+00 1.00e+00h  1
+ 115  7.8308553e-02 8.75e-03 5.14e-06  -5.7 2.52e-02  -3.7 1.00e+00 1.00e+00H  1
+ 116  7.8265059e-02 1.84e-03 3.17e-06  -5.7 5.87e-03  -3.3 1.00e+00 1.00e+00h  1
+ 117  7.8178338e-02 6.13e-03 2.10e-06  -5.7 1.27e-02  -3.7 1.00e+00 1.00e+00h  1
+ 118  7.8152449e-02 2.71e-04 1.32e-06  -5.7 2.79e-03  -3.3 1.00e+00 1.00e+00h  1
+ 119  7.8141558e-02 2.05e-03 1.53e-06  -5.7 9.35e-03  -3.8 1.00e+00 1.00e+00h  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+ 120  7.8138713e-02 3.66e-04 1.66e-06  -5.7 3.89e-03  -3.4 1.00e+00 1.00e+00h  1
+ 121  7.8135987e-02 7.06e-03 2.49e-06  -5.7 1.69e-02  -3.8 1.00e+00 1.00e+00h  1
+ 122  7.8134951e-02 1.16e-03 2.53e-06  -5.7 6.70e-03  -3.4 1.00e+00 1.00e+00h  1
+ 123  7.8130945e-02 1.78e-02 3.28e-06  -5.7 2.58e-02  -3.9 1.00e+00 1.00e+00h  1
+ 124  7.8129435e-02 1.55e-03 2.40e-06  -5.7 7.30e-03  -3.5 1.00e+00 1.00e+00h  1
+ 125  7.8124534e-02 8.36e-03 1.79e-06  -5.7 1.68e-02  -3.9 1.00e+00 1.00e+00h  1
+ 126  7.8123062e-02 4.09e-04 1.07e-06  -5.7 3.61e-03  -3.5 1.00e+00 1.00e+00h  1
+ 127  7.8118834e-02 1.37e-03 9.02e-07  -5.7 9.02e-03  -4.0 1.00e+00 1.00e+00h  1
+ 128  7.8116668e-02 2.17e-04 8.97e-07  -5.7 3.36e-03  -3.6 1.00e+00 1.00e+00h  1
+ 129  7.8109322e-02 3.56e-03 1.15e-06  -5.7 1.29e-02  -4.1 1.00e+00 1.00e+00h  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+ 130  7.8104703e-02 4.85e-04 1.12e-06  -5.7 4.79e-03  -3.6 1.00e+00 1.00e+00h  1
+ 131  7.8103028e-02 6.77e-05 1.12e-06  -5.7 1.77e-03  -3.2 1.00e+00 1.00e+00h  1
+ 132  5.7279542e-02 4.14e-02 9.01e-02  -7.0 9.09e-02  -3.7 6.53e-01 3.44e-01h  1
+ 133  3.2701767e-02 3.39e-01 8.13e-02  -7.0 1.40e-01  -3.3 8.83e-01 5.99e-01h  1
+ 134  2.1851737e-02 1.70e-01 7.71e-02  -7.0 3.84e-02  -2.8 1.00e+00 5.48e-01h  1
+ 135  1.8694249e-02 9.98e-02 3.95e-02  -7.0 1.41e-02  -2.4 2.07e-01 4.21e-01h  1
+ 136  1.6488493e-02 4.91e-02 2.98e-02  -7.0 1.68e-02  -2.9 1.00e+00 5.08e-01h  1
+ 137  1.5039891e-02 4.76e-02 5.41e-01  -7.0 6.85e-02  -3.4 7.92e-03 5.09e-01h  1
+ 138  1.3748294e-02 1.67e-02 1.16e-02  -7.0 2.04e-02  -2.9 5.84e-01 1.00e+00f  1
+ 139  1.3563527e-02 1.60e-03 2.32e-05  -7.0 7.34e-03  -2.5 1.00e+00 1.00e+00h  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+ 140  1.3174955e-02 1.59e-02 2.75e-05  -7.0 2.58e-02  -3.0 1.00e+00 1.00e+00h  1
+ 141  1.3043941e-02 1.10e-03 1.85e-05  -7.0 6.69e-03  -2.6 1.00e+00 1.00e+00h  1
+ 142  1.2734249e-02 1.04e-02 1.84e-05  -7.0 2.02e-02  -3.0 1.00e+00 1.00e+00h  1
+ 143  1.2640505e-02 5.88e-04 1.10e-05  -7.0 4.52e-03  -2.6 1.00e+00 1.00e+00h  1
+ 144  1.2404582e-02 5.35e-03 1.13e-05  -7.0 1.34e-02  -3.1 1.00e+00 1.00e+00h  1
+ 145  1.2184368e-02 3.70e-03 9.62e-03  -7.0 2.03e-02  -3.6 1.00e+00 5.18e-01H  1
+ 146  1.2077746e-02 6.48e-04 4.72e-06  -7.0 6.45e-03  -3.1 1.00e+00 1.00e+00f  1
+ 147  1.2027852e-02 6.80e-05 4.54e-06  -7.0 2.31e-03  -2.7 1.00e+00 1.00e+00h  1
+ 148  1.1912555e-02 1.24e-03 3.91e-06  -7.0 5.99e-03  -3.2 1.00e+00 1.00e+00h  1
+ 149  1.1872790e-02 2.30e-04 2.98e-06  -7.0 1.70e-03  -2.8 1.00e+00 1.00e+00h  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+ 150  1.1774921e-02 5.86e-03 3.67e-06  -7.0 6.36e-03  -3.2 1.00e+00 1.00e+00h  1
+ 151  1.1738350e-02 1.06e-03 3.90e-06  -7.0 2.51e-03  -2.8 1.00e+00 1.00e+00h  1
+ 152  1.1645394e-02 2.78e-02 4.98e-06  -7.0 9.87e-03  -3.3 1.00e+00 1.00e+00h  1
+ 153  1.1601680e-02 4.42e-03 5.07e-06  -7.0 3.70e-03  -2.9 1.00e+00 1.00e+00h  1
+ 154  1.1485407e-02 9.28e-02 7.06e-06  -7.0 1.33e-02  -3.3 1.00e+00 1.00e+00h  1
+ 155  1.1421159e-02 9.18e-03 5.66e-06  -7.0 4.71e-03  -2.9 1.00e+00 1.00e+00h  1
+ 156  1.1288359e-02 9.49e-02 6.00e-06  -7.0 1.43e-02  -3.4 1.00e+00 1.00e+00h  1
+ 157  1.1239613e-02 4.19e-03 6.67e-06  -7.0 6.17e-03  -3.0 1.00e+00 1.00e+00h  1
+ 158  1.1173971e-02 1.26e-02 4.26e-06  -7.0 1.09e-02  -3.4 1.00e+00 1.00e+00h  1
+ 159  1.1168743e-02 2.46e-04 2.92e-06  -7.0 2.96e-03  -3.0 1.00e+00 1.00e+00h  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+ 160  1.1143253e-02 3.72e-03 3.75e-06  -7.0 1.11e-02  -3.5 1.00e+00 1.00e+00h  1
+ 161  1.1130681e-02 7.86e-04 4.43e-06  -7.0 5.11e-03  -3.1 1.00e+00 1.00e+00h  1
+ 162  1.1083849e-02 2.75e-02 9.21e-06  -7.0 3.07e-02  -3.5 1.00e+00 1.00e+00h  1
+ 163  1.1039066e-02 3.70e-03 8.47e-06  -7.0 1.13e-02  -3.1 1.00e+00 1.00e+00h  1
+ 164  1.0997440e-02 9.33e-03 2.95e-03  -7.0 3.91e-02  -3.6 1.00e+00 4.13e-01h  2
+ 165  1.0966223e-02 8.50e-03 4.08e-03  -7.0 3.76e-02  -4.1 1.00e+00 2.75e-01h  2
+ 166  1.0936700e-02 3.94e-03 2.63e-06  -7.0 1.17e-02  -3.6 1.00e+00 1.00e+00h  1
+ 167  1.0905291e-02 5.51e-02 2.85e-06  -7.0 4.23e-02  -4.1 1.00e+00 1.00e+00h  1
+ 168  1.0898099e-02 3.25e-03 1.81e-06  -7.0 8.96e-03  -3.7 1.00e+00 1.00e+00h  1
+ 169  1.0881690e-02 1.91e-02 1.76e-06  -7.0 2.60e-02  -4.2 1.00e+00 1.00e+00h  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+ 170  1.0873693e-02 1.30e-03 1.79e-06  -7.0 9.93e-03  -3.7 1.00e+00 1.00e+00h  1
+ 171  1.0840040e-02 3.78e-02 3.53e-06  -7.0 5.19e-02  -4.2 1.00e+00 1.00e+00h  1
+ 172  1.0811433e-02 4.67e-02 7.81e-03  -7.0 1.49e+01  -4.7 1.16e-02 1.82e-03h  2
+ 173  1.0802755e-02 6.51e-04 2.19e-06  -7.0 5.13e-03  -3.4 1.00e+00 1.00e+00h  1
+ 174  1.0770818e-02 8.28e-04 2.21e-06  -7.0 1.55e-02  -3.8 1.00e+00 1.00e+00h  1
+ 175  1.0735967e-02 3.37e-03 2.17e-06  -7.0 4.57e-02  -4.3 1.00e+00 1.00e+00h  1
+ 176  1.0692648e-02 5.29e-03 2.02e-06  -7.0 1.28e-01  -4.8 1.00e+00 1.00e+00h  1
+ 177  1.0681238e-02 5.09e-04 1.97e-06  -7.0 4.67e-02  -4.4 1.00e+00 1.00e+00h  1
+ 178  1.0648690e-02 4.35e-03 1.82e-06  -7.0 1.30e-01  -4.9 1.00e+00 1.00e+00h  1
+ 179  1.0637589e-02 4.32e-04 1.77e-06  -7.0 4.73e-02  -4.4 1.00e+00 1.00e+00h  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+ 180  1.0606992e-02 3.93e-03 1.62e-06  -7.0 1.30e-01  -4.9 1.00e+00 1.00e+00h  1
+ 181  1.0597101e-02 6.67e-04 1.56e-06  -7.0 4.68e-02  -4.5 1.00e+00 1.00e+00h  1
+ 182  1.0593486e-02 9.63e-05 1.53e-06  -7.0 1.73e-02  -4.1 1.00e+00 1.00e+00h  1
+ 183  1.0583072e-02 1.05e-03 1.47e-06  -7.0 4.95e-02  -4.5 1.00e+00 1.00e+00h  1
+ 184  1.0579389e-02 1.39e-04 1.44e-06  -7.0 1.82e-02  -4.1 1.00e+00 1.00e+00h  1
+ 185  1.0568986e-02 1.21e-03 1.36e-06  -7.0 5.19e-02  -4.6 1.00e+00 1.00e+00h  1
+ 186  1.0565370e-02 1.33e-04 1.33e-06  -7.0 1.90e-02  -4.2 1.00e+00 1.00e+00h  1
+ 187  1.0555323e-02 7.92e-04 1.25e-06  -7.0 5.33e-02  -4.6 1.00e+00 1.00e+00h  1
+ 188  1.0551919e-02 6.96e-05 1.21e-06  -7.0 1.94e-02  -4.2 1.00e+00 1.00e+00h  1
+ 189  1.0542605e-02 3.94e-04 1.10e-06  -7.0 5.32e-02  -4.7 1.00e+00 1.00e+00h  1
+iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
+ 190  1.0539530e-02 4.91e-05 1.05e-06  -7.0 1.90e-02  -4.3 1.00e+00 1.00e+00h  1
+
+Number of Iterations....: 190
+
+                                   (scaled)                 (unscaled)
+Objective...............:   1.0539530347372835e-04    1.0539530347372835e-02
+Dual infeasibility......:   1.0528951684387567e-06    1.0528951684387567e-04
+Constraint violation....:   9.8518650786920295e-06    4.9061896950025683e-05
+Variable bound violation:   9.0909090880163360e-09    9.0909090880163360e-09
+Complementarity.........:   9.0909090909196754e-08    9.0909090909196756e-06
+Overall NLP error.......:   9.8518650786920295e-06    1.0528951684387567e-04
+
+
+Number of objective function evaluations             = 206
+Number of objective gradient evaluations             = 191
+Number of equality constraint evaluations            = 206
+Number of inequality constraint evaluations          = 206
+Number of equality constraint Jacobian evaluations   = 191
+Number of inequality constraint Jacobian evaluations = 191
+Number of Lagrangian Hessian evaluations             = 190
+Total seconds in IPOPT                               = 5.604
+
+EXIT: Optimal Solution Found.
+2. Criando variáveis de estado e controle...
+Criando variáveis de Corte de Carga (DERA)...
+3. Montando equações de fluxo de potência (AC Polar)...
+4. Montando balanço nodal (Leis de Kirchhoff)...
+Montando a Função Objetivo...
+5. Resolvendo o Fluxo de Potência Controlado...
+
+
+--- ESTATÍSTICAS DE RESOLUÇÃO ---
+Status da Convergência: LOCALLY_SOLVED
+Tempo interno do Solver (Ipopt): 5.6052 segundos
+Tempo total da execução da função: 7.4879 segundos
+Valor da Função Objetivo: 0.010539530347372835
+
+--- RESUMO OPERACIONAL GLOBAL ---
+Tensão Mínima (pu):         0.95
+Tensão Máxima (pu):         1.2687
+Geração Ativa Total (pu):   2.8742
+Geração Reativa Total (pu): 2.186
+Perdas Ativas (Total pu):   1.8116
+Corte de Carga DERA (pu):   -0.0
+
+--- RESUMO EM UNIDADES REAIS (Base = 100.0 MVA) ---
+Geração Ativa Total (MW):   287.42
+Geração Reativa Total (MVAr):218.6
+Perdas Ativas Totais (MW):  181.16
+Corte de Carga Total (MW):  -0.0
+
+6. Estruturando dados e gerando arquivos CSV...
+-> Arquivos CSV gerados em /Users/gabrielrufinomontenegro/pibic-opf-2025/powerflow/Codes/PF_Formulation/resultados_csv
+--- end julia output ---
+EXIT_CODE=0
+WALL_SECONDS=29

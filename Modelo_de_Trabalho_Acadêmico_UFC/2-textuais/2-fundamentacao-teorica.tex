@@ -94,7 +94,7 @@ O FPO estende o FP transformando $(V_i, \theta_i, p^g_k, q^g_k)$ em variáveis d
 \end{aligned}
 \end{equation}
 
-onde $c_k(\cdot)$ é a curva de custo do gerador $k$ \textemdash em geral quadrática, $c_k(p^g_k) = a_k (p^g_k)^2 + b_k p^g_k + c_k^0$ \textemdash e $s^{\max}_{ij}$ é o limite de aparente do ramo. O ponto a destacar é que o FPO AC, devido à presença das equações \eqref{eq:p-ramo}--\eqref{eq:q-ramo}, é um problema de programação não linear (NLP) \emph{não convexo}, o que abre espaço para múltiplos ótimos locais e exige cuidados na escolha do \textit{solver} e das condições iniciais.
+onde $c_k(\cdot)$ é a curva de custo do gerador $k$, em geral quadrática na forma $c_k(p^g_k) = a_k (p^g_k)^2 + b_k p^g_k + c_k^0$, e $s^{\max}_{ij}$ é o limite de aparente do ramo. O ponto a destacar é que o FPO AC, devido à presença das equações \eqref{eq:p-ramo}--\eqref{eq:q-ramo}, é um problema de programação não linear (NLP) \emph{não convexo}, o que abre espaço para múltiplos ótimos locais e exige cuidados na escolha do \textit{solver} e das condições iniciais.
 
 \subsection{Relaxações do FPO}
 \label{subsec:relaxacoes-fpo}
@@ -102,42 +102,64 @@ onde $c_k(\cdot)$ é a curva de custo do gerador $k$ \textemdash em geral quadr�
 A não convexidade do FPO motivou, ao longo das últimas duas décadas, uma extensa literatura sobre relaxações e aproximações que tornam o problema tratável, com destaque para três famílias \cite{molzahn2019survey}:
 
 \begin{alineascomponto}
-    \item \textbf{Aproximação DC} \textemdash linearização das equações de fluxo sob as hipóteses de tensões próximas a 1\,p.u., ângulos pequenos e perdas desprezíveis. Resulta em um problema de programação linear (LP) de baixíssimo custo computacional, amplamente utilizado em planejamento de longo prazo;
-    \item \textbf{Relaxação SOC} \textemdash reformulação do FPO em termos de variáveis $W_{ij} = V_i V_j \cos(\theta_i - \theta_j)$ e $T_{ij} = V_i V_j \sin(\theta_i - \theta_j)$, na qual as restrições não convexas são substituídas por desigualdades de cone de segunda ordem. É exata em redes radiais e fornece bons \textit{lower bounds} em redes malhadas;
-    \item \textbf{Relaxação SDP} \textemdash reformulação como problema de programação semidefinida sobre a matriz $W = V V^H$, mais apertada que a SOC mas computacionalmente mais cara.
+    \item \textbf{Aproximação DC}: linearização das equações de fluxo sob as hipóteses de tensões próximas a 1\,p.u., ângulos pequenos e perdas desprezíveis. Resulta em um problema de programação linear (LP) de baixíssimo custo computacional, amplamente utilizado em planejamento de longo prazo;
+    \item \textbf{Relaxação SOC}: reformulação do FPO em termos de variáveis $W_{ij} = V_i V_j \cos(\theta_i - \theta_j)$ e $T_{ij} = V_i V_j \sin(\theta_i - \theta_j)$, na qual as restrições não convexas são substituídas por desigualdades de cone de segunda ordem. É exata em redes radiais e fornece bons \textit{lower bounds} em redes malhadas;
+    \item \textbf{Relaxação SDP}: reformulação como problema de programação semidefinida sobre a matriz $W = V V^H$, mais apertada que a SOC mas computacionalmente mais cara.
 \end{alineascomponto}
 
-Embora o presente trabalho não utilize as relaxações DC, SOC ou SDP em sua progressão principal de formulações \textemdash que mantém a formulação AC polar não convexa \textemdash uma comparação isolada entre as três famílias é apresentada em script auxiliar (\textit{CodeComparing.jl}) sobre o caso \texttt{case5.m}, com o objetivo didático de evidenciar o \textit{gap} entre a relaxação e a solução AC.
+Embora o presente trabalho não utilize as relaxações DC, SOC ou SDP em sua progressão principal de formulações, que mantém a formulação AC polar não convexa, uma comparação isolada entre as três famílias é apresentada no \textit{script} auxiliar \texttt{CodeComparing.jl}, disponível em \verb|powerflow/Codes/PowerModels/|, sobre o caso de cinco barras \texttt{case5.m} do \textit{PowerModels.jl}. O objetivo é puramente didático: evidenciar o \textit{gap} existente entre as relaxações e a solução AC exata.
+
+O script resolve o FPO nas três formulações usando o mesmo \textit{solver} (Ipopt) e o mesmo caso de teste, reportando o valor da função objetivo (custo de geração, em US\$/h) em cada caso. Os resultados obtidos foram:
+
+\begin{table}[!htb]
+\captionsetup{width=10cm}
+\Caption{\label{tab:codecomparing} Comparação de objetivos entre formulações AC, DC e SOC no \texttt{case5.m}}
+\IBGEtab{}{
+    \begin{tabular}{llr}
+        \toprule
+        Formulação & Característica & Objetivo (US\$/h) \\
+        \midrule \midrule
+        AC-OPF & Exata, não convexa & 18\,269{,}10 \\
+        DC-OPF & Aproximação linear & 17\,613{,}22 \\
+        SOC-OPF & Relaxação convexa & 15\,051{,}45 \\
+        \bottomrule
+    \end{tabular}
+}{
+    \Fonte{elaborado pelo autor a partir da execução de \texttt{CodeComparing.jl}.}
+}
+\end{table}
+
+A leitura da \autoref{tab:codecomparing} ilustra dois comportamentos fundamentais da teoria de relaxações do FPO. Primeiro, o DC-OPF produz um custo \emph{inferior} ao AC-OPF (17\,613 vs.\ 18\,269 US\$/h): como a aproximação linear ignora as perdas ativas e impõe condições de operação irreais (tensões fixas em 1\,p.u.), o problema DC admite despachos que o AC não admite, resultando em um ótimo \emph{infactível} para a rede real que aparece, na escala de custo, abaixo do ótimo verdadeiro. Segundo, o SOC-OPF fornece um custo ainda menor (15\,051 US\$/h), e isso é teoricamente garantido: a relaxação SOC obtida por elevar as variáveis $V_i V_j \cos\theta_{ij}$ e $V_i V_j \sin\theta_{ij}$ a variáveis independentes com restrições de cone de segunda ordem é uma \emph{relaxação} do problema original, o que significa que seu conjunto factível contém o conjunto do AC-OPF. Todo ponto AC-factível é SOC-factível, mas o recíproco não é verdadeiro; logo, o SOC pode atingir custos menores, constituindo uma \textbf{cota inferior provável} para o AC-OPF. O \textit{gap} entre SOC e AC neste caso é de aproximadamente 18\%, o que é típico em redes malhadas onde a condição de patching não é satisfeita.
 
 \section{Ações de controle do programa ANAREDE}
 \label{sec:acoes-controle}
 
-As formulações clássicas de FP e FPO descritas nas seções anteriores tratam $V_i$, $\theta_i$, $p^g_k$ e $q^g_k$ como variáveis livres dentro de seus limites caixa. A operação real de um SEP, no entanto, envolve um conjunto de \textbf{ações de controle} que se acoplam a essas variáveis e que, no programa ANAREDE \cite{chavarry2024} \textemdash referência da indústria brasileira \textemdash são tratadas por meio de heurísticas e laços iterativos específicos. Este trabalho considera cinco dessas ações, nomeadas a seguir conforme a sigla utilizada nos arquivos PWF.
+As formulações clássicas de FP e FPO descritas nas seções anteriores tratam $V_i$, $\theta_i$, $p^g_k$ e $q^g_k$ como variáveis livres dentro de seus limites caixa. A operação real de um SEP, no entanto, envolve um conjunto de \textbf{ações de controle} que se acoplam a essas variáveis. No programa ANAREDE \cite{chavarry2024}, referência da indústria brasileira, essas ações são tratadas por meio de heurísticas e laços iterativos específicos. Este trabalho considera cinco dessas ações, nomeadas a seguir conforme a sigla utilizada nos arquivos PWF.
 
-\subsection{QLIM \textemdash limites de geração reativa}
+\subsection{QLIM: limites de geração reativa}
 \label{subsec:qlim}
 
 Em uma barra PV, a tensão $V_i$ é mantida em um \textit{setpoint} $V^{ref}_i$ enquanto o gerador associado é capaz de prover a potência reativa necessária. Quando $q^g_k$ atinge $q^{g,\max}_k$ (ou $q^{g,\min}_k$), a barra é convertida em PQ, $q^g_k$ é fixado no limite e $V_i$ passa a flutuar. Esse comportamento de \textit{type-switching} é central para a operação realista, mas é \emph{descontínuo} e, quando codificado diretamente, conflita com solvers NLP suaves como o Ipopt. Uma forma comum de contorná-lo, adotada neste trabalho, é introduzir uma variável de folga $s^q_l$ no balanço reativo da carga e penalizá-la na função objetivo, mantendo $q^g_k$ dentro dos limites caixa originais.
 
-\subsection{VLIM \textemdash limites de magnitude de tensão}
+\subsection{VLIM: limites de magnitude de tensão}
 \label{subsec:vlim}
 
 De forma análoga, o controle VLIM trata $V_i$ como variável dentro dos limites caixa $[V^{\min}_i, V^{\max}_i]$, mas adiciona uma restrição de igualdade entre $V_i$ e o \textit{setpoint} $V^{ref}_i$ por meio de uma variável de folga $s^v_i$, também penalizada. Combinado com QLIM, o par de slacks $(s^v_i, s^q_l)$ implementa, na linguagem do otimizador, a mesma lógica que o ANAREDE expressa no laço de \textit{type-switching}.
 
-\subsection{CSCA \textemdash bancos \textit{shunt} chaveados}
+\subsection{CSCA: bancos \textit{shunt} chaveados}
 \label{subsec:csca}
 
-Os bancos \textit{shunt} (capacitivos ou indutivos) chaveáveis são representados, no PWF, por uma susceptância $b^{sh}_s$ que pode assumir um conjunto discreto de valores entre $b^{sh,\min}_s$ e $b^{sh,\max}_s$. No ANAREDE, o controle CSCA promove o chaveamento dos passos para manter $V_i$ próxima do \textit{setpoint}. Em uma formulação NLP, $b^{sh}_s$ é tipicamente relaxada para variável contínua dentro do intervalo $[b^{sh,\min}_s, b^{sh,\max}_s]$ \textemdash representação que será mantida neste trabalho \textemdash e a discretização posterior é tratada via \textit{rounding} ou em formulação MINLP.
+Os bancos \textit{shunt} (capacitivos ou indutivos) chaveáveis são representados, no PWF, por uma susceptância $b^{sh}_s$ que pode assumir um conjunto discreto de valores entre $b^{sh,\min}_s$ e $b^{sh,\max}_s$. No ANAREDE, o controle CSCA promove o chaveamento dos passos para manter $V_i$ próxima do \textit{setpoint}. Em uma formulação NLP, $b^{sh}_s$ é tipicamente relaxada para variável contínua dentro do intervalo $[b^{sh,\min}_s, b^{sh,\max}_s]$, representação que será mantida neste trabalho, e a discretização posterior é tratada via \textit{rounding} ou em formulação MINLP.
 
-\subsection{CTAP \textemdash \textit{tap} ajustável de transformadores}
+\subsection{CTAP: \textit{tap} ajustável de transformadores}
 \label{subsec:ctap}
 
 Transformadores em carga (\textit{on-load tap-changer}, OLTC) possuem razão de transformação $t_{ij}$ ajustável, em geral para regulação de tensão na barra do lado de baixa. No PWF, $t_{ij}$ é dada com um valor inicial e limites $[t^{\min}_{ij}, t^{\max}_{ij}]$. O controle CTAP é, novamente, discreto na operação real (passos de 0,5\% a 1\%), mas a relaxação contínua é a representação adotada na formulação NLP utilizada neste trabalho, com uma restrição adicional ligando $V_i$ ao \textit{setpoint} via folga.
 
-\subsection{DERA \textemdash agregação de geração distribuída}
+\subsection{DERA: agregação de geração distribuída}
 \label{subsec:dera}
 
-DERA (\textit{Distributed Energy Resource Aggregator}) é a representação ANAREDE para conjuntos de geração distribuída \textemdash tipicamente fotovoltaica ou eólica em distribuição \textemdash agregados em uma barra de transmissão. Cada DERA aporta uma injeção $(p^{der}_d, q^{der}_d)$ que pode ser fixada ou tratada como variável adicional. Neste trabalho, a representação adotada é minimalista: o DERA acrescenta termos de injeção ao balanço de potência da barra hospedeira, sem decisões de despacho próprias.
+DERA (\textit{Distributed Energy Resource Aggregator}) é a representação ANAREDE para conjuntos de geração distribuída (tipicamente fotovoltaica ou eólica em distribuição) agregados em uma barra de transmissão. Cada DERA aporta uma injeção $(p^{der}_d, q^{der}_d)$ que pode ser fixada ou tratada como variável adicional. Neste trabalho, a representação adotada é minimalista: o DERA acrescenta termos de injeção ao balanço de potência da barra hospedeira, sem decisões de despacho próprias.
 
 \subsection{Síntese das ações de controle}
 \label{subsec:sintese-controles}

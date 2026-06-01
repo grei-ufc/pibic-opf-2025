@@ -1,6 +1,7 @@
 \babel@toc {brazil}{}\relax 
 \contentsline {figure}{\numberline {1}{\ignorespaces Modelo $\pi $ de um ramo com transformador}}{17}{figure.caption.13}%
-\contentsline {figure}{\numberline {2}{\ignorespaces Fluxograma do pipeline de execução das formulações}}{24}{figure.caption.14}%
-\contentsline {figure}{\numberline {3}{\ignorespaces Mapa de calor da convergência das formulações (14)--(19) na bateria de testes}}{31}{figure.caption.17}%
-\contentsline {figure}{\numberline {4}{\ignorespaces Topologia da rede-exemplo \texttt {3bus\_DCSC}}}{31}{figure.caption.18}%
-\contentsline {figure}{\numberline {5}{\ignorespaces Perfil de tensão por barra no caso \texttt {3bus\_DCSC}}}{32}{figure.caption.20}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Fluxograma do pipeline de execução das formulações}}{25}{figure.caption.15}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Mapa de calor da convergência das formulações F0 a F5 na bateria de testes}}{33}{figure.caption.18}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Topologia da rede-exemplo \texttt {3bus\_DCSC}}}{34}{figure.caption.19}%
+\contentsline {figure}{\numberline {5}{\ignorespaces Perfil de tensão por barra no caso \texttt {3bus\_DCSC}}}{34}{figure.caption.21}%
+\contentsline {figure}{\numberline {6}{\ignorespaces Valor da função objetivo (penalização das folgas) das formulações F2, F3 e F4 sobre os casos reduzidos}}{38}{figure.caption.23}%

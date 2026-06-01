@@ -380,5 +380,5 @@ end
 # -------------------------------------------------------------
 # EXECUÇÃO PRINCIPAL
 # -------------------------------------------------------------
-arquivo = joinpath(@__DIR__, "..", "data", "4busfrank_vlim.pwf")
+arquivo = joinpath(@__DIR__, "..", "data", "CASO_VER_MAXDIU.PWF")
 resolver_fluxo_controlado(arquivo)
