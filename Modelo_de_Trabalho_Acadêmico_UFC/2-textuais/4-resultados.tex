@@ -8,18 +8,21 @@ A \autoref{sec:convergencia} apresenta a tabela global de convergência e de \te
 \section{Convergência global e clusters}
 \label{sec:convergencia}
 
-A \autoref{tab:conv-global} consolida o status de convergência das seis formulações sobre os vinte e cinco casos da bateria, junto com os \textit{clusters} de equivalência numérica formados entre as formulações que convergiram em cada caso. A notação $\{a,b\}\cdot\{c\}$ indica que as formulações $a$ e $b$ convergiram para uma solução numericamente idêntica ($|\Delta| \le 10^{-4}$), enquanto $c$ convergiu para uma solução distinta. Status: \textbf{OK} = LOCALLY\_SOLVED; \textbf{INF} = INFEASIBLE/LOCALLY\_INFEASIBLE; \textbf{KIL} = TIMEOUT\_KILLED; \textbf{INV} = INVALID\_MODEL; \textbf{ERR} = OTHER\_ERROR.
+A \autoref{tab:conv-global} consolida o status de convergência das seis formulações sobre os vinte e sete casos da bateria, junto com os \textit{clusters} de equivalência numérica formados entre as formulações que convergiram em cada caso. A notação $\{a,b\}\cdot\{c\}$ indica que as formulações $a$ e $b$ convergiram para uma solução numericamente idêntica ($|\Delta| \le 10^{-4}$), enquanto $c$ convergiu para uma solução distinta. Status: \textbf{OK} = LOCALLY\_SOLVED; \textbf{INF} = INFEASIBLE/LOCALLY\_INFEASIBLE; \textbf{KIL} = TIMEOUT\_KILLED; \textbf{INV} = INVALID\_MODEL; \textbf{ERR} = OTHER\_ERROR.
 
-\begin{table}[!h]
-\captionsetup{width=16cm}
+\begin{landscape}
+\begin{table}[!htbp]
+\captionsetup{width=\linewidth}
 \Caption{\label{tab:conv-global} Convergência global e \textit{clusters} de equivalência das formulações F0 a F5 na bateria}
 \IBGEtab{}{
-    \scriptsize
+    \footnotesize
+    \setlength{\tabcolsep}{6pt}
+    \renewcommand{\arraystretch}{1.15}
     \begin{tabular}{lccccccll}
         \toprule
         Caso & F0 & F1 & F2 & F3 & F4 & F5 & Clusters & Observações \\
         \midrule \midrule
-        \texttt{01 MAXIMA NOTURNA\_DEZ25} & KIL & INF & KIL & INF & KIL & INF &  & nenhuma converge \\
+        \texttt{CASO\_VER\_MAXDIU} & KIL & INF & KIL & INF & KIL & INF &  & nenhuma converge \\
         \texttt{300bus} & INV & OK & OK & OK & OK & OK & $\{\text{F1}\}\cdot\{\text{F2}\}\cdot\{\text{F3}\}\cdot\{\text{F4}\}\cdot\{\text{F5}\}$ & 1/6 falha \\
         \texttt{3bus} & OK & OK & OK & OK & OK & OK & $\{\text{F0}\}\cdot\{\text{F1,F2}\}\cdot\{\text{F3,F4,F5}\}$ &  \\
         \texttt{3bus\_DBSH} & OK & OK & OK & OK & OK & OK & $\{\text{F0}\}\cdot\{\text{F1,F2}\}\cdot\{\text{F3,F4,F5}\}$ &  \\
@@ -52,6 +55,7 @@ A \autoref{tab:conv-global} consolida o status de convergência das seis formula
     \Fonte{elaborado pelo autor a partir do relatório consolidado da pipeline de comparação. $^\ast$ Em \texttt{caso\_red}, a formulação F0 encerrou em LOCALLY\_INFEASIBLE no Ipopt; o \textit{script} crashed em seguida na etapa de exportação de fluxos com \textit{key error} sobre uma barra descartada por \texttt{select\_largest\_component!}.}
 }
 \end{table}
+\end{landscape}
 
 \definecolor{statusok}{RGB}{198,239,206}
 \definecolor{statusinf}{RGB}{255,235,156}
@@ -75,7 +79,7 @@ A \autoref{tab:conv-global} consolida o status de convergência das seis formula
 \toprule
 Caso & F0 & F1 & F2 & F3 & F4 & F5 \\
 \midrule
-\texttt{01 MAXIMA NOTURNA} & \stKIL & \stINF & \stKIL & \stINF & \stKIL & \stINF \\
+\texttt{CASO\_VER\_MAXDIU} & \stKIL & \stINF & \stKIL & \stINF & \stKIL & \stINF \\
 \texttt{300bus} & \stINV & \stOK & \stOK & \stOK & \stOK & \stOK \\
 \texttt{3bus} & \stOK & \stOK & \stOK & \stOK & \stOK & \stOK \\
 \texttt{3bus\_DBSH} & \stOK & \stOK & \stOK & \stOK & \stOK & \stOK \\
@@ -109,16 +113,16 @@ Caso & F0 & F1 & F2 & F3 & F4 & F5 \\
 }
 \end{figure}
 
-A \autoref{fig:heatmap} resume visualmente esses status. A leitura da \autoref{tab:conv-global} permite extrair três observações imediatas. Em primeiro lugar, das vinte e sete entradas, as formulações \textit{hand-built} F2 a F5 convergem em vinte e dois casos, contra dezoito da formulação F1 e quinze da formulação F0. A faixa de convergência das formulações \textit{hand-built} é, portanto, estritamente maior que a das referências.
+A \autoref{fig:heatmap} resume visualmente esses status. A leitura da \autoref{tab:conv-global} permite extrair três observações imediatas. Em primeiro lugar, das vinte e sete entradas, as formulações \textit{hand-built} F2 a F5 convergem em vinte e três casos, contra dezoito da formulação F1 e quinze da formulação F0. A faixa de convergência das formulações \textit{hand-built} é, portanto, estritamente maior que a das referências.
 
 Em segundo lugar, há oito casos em que ao menos uma das formulações \textit{hand-built} converge enquanto ao menos uma das referências falha. Em quatro deles, a saber, \texttt{4busfrank\_vlim}, \texttt{5busfrank\_csca}, \texttt{test\_system} e \texttt{caso\_red2}, \emph{ambas} as referências falham; nos outros quatro, \texttt{300bus} (apenas F0, como INV), \texttt{3bus\_DCline} (apenas F1), \texttt{3bus\_DSHL} (apenas F0) e \texttt{caso\_red} (apenas F0), apenas uma referência falha. Em todos esses casos, a presença das folgas $s^v, s^q$ no problema \textit{soft-constraint} permite que as formulações \textit{hand-built} encontrem uma solução factível na qual o controle nominal não é estritamente respeitado, mas é minimamente violado. Esse é um comportamento que F0 e F1 não conseguem reproduzir, dado que tratam $V$ e $q^g$ apenas com limites caixa rígidos. O \texttt{caso\_red2}, em particular, é o exemplo mais nítido de toda a bateria: F1 declara infactibilidade em uma solução fisicamente impossível ($V_{\min} = -0{,}431$\,p.u.), enquanto F4 converge com a função objetivo reduzida a $9{,}56 \times 10^{-2}$, com discussão detalhada na \autoref{sec:casos-reduzidos}.
 
-Em terceiro lugar, há três casos em que \emph{nenhuma} formulação converge: o caso SIN (\texttt{01 MAXIMA NOTURNA\_DEZ25}), \texttt{3bus\_corrections} e dois \textit{stress tests} sintéticos. O caso SIN é o mais relevante para a discussão e é tratado em separado na \autoref{sec:discussao}.
+Em terceiro lugar, há três casos em que \emph{nenhuma} formulação converge: o \textit{snapshot} integral do SIN (\texttt{CASO\_VER\_MAXDIU}), \texttt{3bus\_corrections} e dois \textit{stress tests} sintéticos. O caso SIN é o mais relevante para a discussão e é tratado em separado na \autoref{sec:discussao}.
 
 \section{Análise barra a barra}
 \label{sec:analise-barra-barra}
 
-A coluna ``Clusters'' da \autoref{tab:conv-global} sintetiza, para cada caso, quais formulações produzem soluções numericamente equivalentes. Um padrão recorrente em casos pequenos é a presença de quatro grupos típicos: $\{\text{F0}\}$ isolado (porque o FPO altera o despacho e portanto o ponto de operação), $\{\text{F1,F2}\}$ ou $\{\text{F1}\}\cdot\{\text{F2}\}$ (F1 vs.\ F2, que coincidem se as folgas saturarem em zero), $\{\text{F3}\}$ ou $\{\text{F3,F4}\}$ (efeito do CSCA) e $\{\text{F4,F5}\}$ (CTAP, eventualmente coincidente com F5 se DERA não estiver presente).
+A coluna ``Clusters'' da \autoref{tab:conv-global} sintetiza, para cada caso, quais formulações produzem soluções numericamente equivalentes. Um padrão recorrente em casos pequenos é a presença de quatro grupos típicos: $\{\text{F0}\}$ isolado (porque o FPO altera o despacho e portanto o ponto de operação), $\{\text{F1,F2}\}$ ou $\{\text{F1}\}\cdot\{\text{F2}\}$ (F1 vs.\ F2, que coincidem se as folgas saturarem em zero), $\{\text{F3}\}$ ou $\{\text{F3,F4}\}$ (efeito do CSCA) e $\{\text{F4,F5}\}$ (CTAP, eventualmente coincidente com F5 quando o corte de carga não é acionado pelo \textit{solver}).
 
 A \autoref{fig:rede-3bus} mostra a topologia da rede pedagógica \texttt{3bus\_DCSC}, e a \autoref{tab:divergencia-3bus} ilustra o agrupamento típico de soluções nessa rede. Para cada barra são listados os valores de $V$ e $\theta$ obtidos por cada formulação que divergiu de \emph{ambas} as referências por mais de $10^{-4}$.
 
@@ -218,17 +222,52 @@ A leitura cruzada das Tabelas \ref{tab:conv-global} e \ref{tab:divergencia-3bus}
     \item \textbf{QLIM + VLIM} (F2): permite recuperar factibilidade em cinco casos nos quais F0 ou F1 declaram infactibilidade, ao custo de pequenas violações dos \textit{setpoints} (folgas residuais);
     \item \textbf{CSCA} (F3): forma cluster próprio em redes nas quais há bancos \textit{shunt} chaveáveis, ajustando $b^{sh}_s$ para reduzir o desvio em $V$;
     \item \textbf{CTAP} (F4): forma cluster próprio em redes com transformadores OLTC, frequentemente empurrando $V$ para o limite caixa $V^{\max}$;
-    \item \textbf{DERA} (F5): em redes pedagógicas, produz solução idêntica a F4 na maioria dos casos, refletindo o fato de que a representação minimalista adotada apenas adiciona injeções fixas, sem decisão de despacho. Em \texttt{4busfrank\_vlim} e \texttt{500bus}, contudo, F5 forma cluster próprio, sinalizando que mesmo a injeção fixa altera o ponto de equilíbrio quando a rede tem margens estreitas.
+    \item \textbf{DERA} (F5): em redes pedagógicas, produz solução idêntica a F4 na maioria dos casos, porque o \textit{solver} prefere atender a carga inteira (cortes em zero) sempre que os \textit{slacks} de tensão sozinhos já dão conta de absorver a violação. Em \texttt{4busfrank\_vlim} e \texttt{500bus}, contudo, F5 forma cluster próprio: nesses casos o corte hierárquico é ativado e o ponto de equilíbrio desloca-se em relação ao de F4, em geral nas barras de menor tensão base, onde o peso de corte $w_l = 10^3$ torna a redução de carga competitiva com o aumento das folgas de tensão.
 \end{alineascomponto}
 
 \subsection{O caso SIN}
 \label{subsec:sin}
 
-O caso \texttt{01 MAXIMA NOTURNA\_DEZ25.PWF}, com cerca de 6.000 barras, é o caso de maior interesse prático e o único da bateria em que \emph{todas} as seis formulações falham em convergir dentro do orçamento de \verb|max_iter = 3000| iterações e do tempo limite imposto pelo \textit{wrapper} de execução. Especificamente, F0, F2 e F4 atingem o limite de tempo (status \textbf{KIL}) sem sinalizar infactibilidade, enquanto F1, F3 e F5 terminam em \textbf{INF} (LOCALLY\_INFEASIBLE).
+O caso \texttt{CASO\_VER\_MAXDIU.PWF}, com 13\,338 barras, é o \textit{snapshot} integral do SIN considerado neste trabalho (Verão 2027/2028 Máxima Diurna do ciclo PAR/PEL 2027-2031 do ONS) e é o caso de maior interesse prático e o único da bateria em que \emph{todas} as seis formulações falham em convergir dentro do orçamento de \texttt{max\_iter = 3000} iterações e do tempo limite imposto pelo \textit{wrapper} de execução. Especificamente, F0, F2 e F4 atingem o limite de tempo (status \textbf{KIL}) sem sinalizar infactibilidade, enquanto F1, F3 e F5 terminam em \textbf{INF} (LOCALLY\_INFEASIBLE).
 
-Esse comportamento é coerente com o que se espera de um \textit{snapshot} real do SIN sob máxima noturna: a rede opera em um ponto próximo dos limites de capacidade reativa em várias barras, e a inicialização \textit{flat} (ou a partir do PWF) está suficientemente longe de uma solução factível para que o método de pontos interiores do Ipopt não consiga sair da região de inviabilidade dentro do orçamento permitido. Há indícios, em logs preliminares descartados desta análise, de que uma inicialização baseada na solução de uma formulação mais simples (por exemplo, DC) ou um aumento de \verb|max_iter| para a casa de 10.000 permitiria a convergência, mas isso fica como trabalho futuro.
+Vale notar que, mesmo sem convergir, as seis formulações sobre o SIN não \emph{quebram} (não há \textbf{CRA} nem \textbf{ERR}): a infraestrutura de leitura PWF, construção da \texttt{ref}, montagem do modelo JuMP e chamada ao Ipopt funciona corretamente em escala SIN. O obstáculo está exclusivamente na resolução numérica.
 
-Vale notar que, mesmo sem convergir, as seis formulações sobre o SIN não \emph{quebram} (não há \textbf{CRA} nem \textbf{ERR}): a infraestrutura de leitura PWF, construção da \verb|ref|, montagem do modelo JuMP e chamada ao Ipopt funciona corretamente em escala SIN. O obstáculo está exclusivamente na resolução numérica.
+\subsection{Resultado da formulação auxiliar FDC sobre o SIN}
+\label{subsec:fdc-resultado}
+
+A formulação auxiliar FDC (\autoref{subsec:fdc}), que resolve a aproximação DC do mesmo arquivo \texttt{CASO\_\allowbreak VER\_MAXDIU.PWF} via \texttt{solve\_\allowbreak dc\_pf} do \textit{PowerModels}, converge sem dificuldade sobre o caso SIN. O comportamento é estritamente o oposto das seis formulações AC: o Ipopt encerra em poucas iterações com status \texttt{LOCALLY\_\allowbreak SOLVED}, e os arquivos \texttt{resultados\_\allowbreak barras\_DC.csv} e \texttt{resultados\_\allowbreak fluxos\_\allowbreak linhas\_DC.csv} são gravados com a solução completa. A \autoref{tab:fdc-sin} resume as métricas operacionais agregadas extraídas desses CSVs.
+
+\begin{table}[!htb]
+\captionsetup{width=14cm}
+\Caption{\label{tab:fdc-sin} Resumo da formulação FDC (DC-PF) sobre \texttt{CASO\_VER\_MAXDIU.PWF}}
+\IBGEtab{}{
+    \footnotesize
+    \begin{tabular}{lr}
+        \toprule
+        Métrica & Valor \\
+        \midrule \midrule
+        Status de convergência                                          & \texttt{LOCALLY\_SOLVED} \\
+        Barras retidas pelo \texttt{select\_largest\_component!}        & 13\,283 \\
+        Ramos exportados                                                & 16\,743 \\
+        Geradores com $p^g > 0$                                         & 346 \\
+        Geração ativa total                                             & 709{,}70\,p.u.\ \;($\approx 70{,}97$\,GW) \\
+        Carga ativa total                                               & 695{,}67\,p.u.\ \;($\approx 69{,}57$\,GW) \\
+        Perdas ativas totais                                            & 0\,p.u.\ \;(desprezadas pela aproximação DC) \\
+        Ângulo de barra mínimo                                          & $-165{,}99^\circ$ \\
+        Ângulo de barra máximo                                          & $+176{,}88^\circ$ \\
+        Fluxo ativo máximo de ramo $|p_{ij}|$                           & 99{,}5\,p.u.\ \;($\approx 9{,}95$\,GW) \\
+        \bottomrule
+    \end{tabular}
+}{
+    \Fonte{elaborado pelo autor a partir dos CSVs gerados pela execução de \texttt{(FDC)DC\_PM.jl}. Base de potência: 100\,MVA.}
+}
+\end{table}
+
+Três observações se destacam. \textbf{Primeiro}, a convergência da FDC confirma empiricamente a hipótese formulada acima e na \autoref{sec:trabalhos-futuros} de que o obstáculo das formulações AC sobre o SIN é \emph{numérico}, não estrutural: o problema linearizado da mesma rede, com o mesmo \textit{solver} e \textit{pipeline}, fecha em \texttt{LOCALLY\_SOLVED} dentro de poucas iterações.
+
+\textbf{Segundo}, o gap aparente entre geração ($\approx 70{,}97$\,GW) e carga ($\approx 69{,}57$\,GW) de cerca de $1{,}4$\,GW \emph{não} corresponde a perdas (que são nulas por definição em DC); ele reflete a contribuição dos elos HVDC do SIN (Itaipu, Madeira, Belo Monte), cujas injeções ativas nas barras receptoras não aparecem na coluna \texttt{P\_Geracao} do CSV de barras mas entram no balanço nodal interno do \textit{PowerModels}, somada às pequenas variações absorvidas pela(s) barra(s) \textit{slack}. Esse comportamento é esperado e está documentado nas decisões de modelagem dos elos HVDC adotadas neste trabalho (\autoref{sec:pipeline}).
+
+\textbf{Terceiro}, os ângulos de barra extremos ($\pm$\,$170^\circ$) e os fluxos de ramo da ordem de $9{,}95$\,GW (atingindo $99{,}5$\,p.u.\ em base 100\,MVA) revelam o limite fundamental da própria aproximação DC: as hipóteses $\cos(\Delta\theta) \approx 1$ e $\sin(\Delta\theta) \approx \Delta\theta$ que sustentam a linearização \emph{não valem} em uma solução com diferenças angulares dessa magnitude. A solução DC obtida é matematicamente factível para o sistema linearizado, mas não corresponde a um ponto de operação fisicamente realizável da rede AC. Para que essa solução possa funcionar como \textit{warm-start} efetivo das formulações F2 a F5, será necessário aplicar algum esquema de regularização sobre os ângulos (por exemplo, \textit{clipping} em $\pm 30^\circ$ ou re-escala global) antes de passá-los como \texttt{start} ao JuMP; do contrário, o ponto inicial cairá tão longe da bacia de atração da solução AC quanto o \textit{flat start} atual. Esse é um refinamento natural para um trabalho futuro.
 
 \subsection{Casos sintéticos com erro de modelo}
 \label{subsec:sinteticos}

@@ -9,28 +9,28 @@ Este capítulo descreve o pipeline de software construído para implementar e co
 Toda a implementação foi realizada na linguagem Julia~\cite{bezanson2017julia} (versão 1.x, série estável), escolhida por aliar uma sintaxe de alto nível, voltada para computação científica, a um desempenho computacional comparável ao de linguagens compiladas. O ambiente de pacotes utilizado, definido em \texttt{Project.toml} e \texttt{Manifest.toml} na raiz do repositório, agrega:
 
 \begin{alineascomponto}
-    \item \textit{PWF.jl}: leitura e parsing de arquivos no formato ANAREDE PWF, com extração de estruturas de controle habilitada via \verb|add_control_data = true|;
-    \item \textit{PowerModels.jl}~\cite{coffrin2018powermodels}: construção da estrutura de referência (\verb|build_ref|) sobre os dados parseados e oferta das funções \verb|solve_ac_opf| e \verb|solve_ac_pf| que implementam as duas formulações de referência;
-    \item \textit{JuMP.jl}~\cite{lubin2023jump}: linguagem de modelagem matemática usada para escrever, à mão, as quatro formulações controladas;
+    \item \textit{PWF.jl}: leitura e parsing de arquivos no formato ANAREDE PWF, com extração de estruturas de controle habilitada via \texttt{add\_control\_data = true};
+    \item \textit{PowerModels.jl}~\cite{coffrin2018powermodels}: construção da estrutura de referência (\texttt{build\_ref}) sobre os dados parseados e oferta das funções \texttt{solve\_ac\_opf} e \texttt{solve\_ac\_pf} que implementam as duas formulações de referência;
+    \item \textit{JuMP.jl}~\cite{lubin2023jump}: linguagem de modelagem matemática usada para escrever as quatro formulações controladas;
     \item \textit{Ipopt.jl}~\cite{wachterBiegler2006ipopt}: interface Julia para o \textit{solver} de programação não linear baseado em método de pontos interiores;
     \item \textit{CSV.jl} e \textit{DataFrames.jl}: exportação dos resultados para arquivos CSV.
 \end{alineascomponto}
 
-A escolha do Ipopt como \textit{solver} se justifica por três fatores: (i) é \textit{open-source} e amplamente utilizado em problemas NLP de SEP; (ii) suporta nativamente expressões não lineares no JuMP via \verb|@NLexpression| e \verb|@NLconstraint|; e (iii) é o \textit{solver} adotado por padrão pelo \textit{PowerModels.jl} em suas formulações AC, garantindo uma comparação justa entre as referências e as formulações \textit{hand-built}. As opções utilizadas são \verb|max_iter = 3000|, \verb|tol = 1e-5| e \verb|print_level = 5|. Esses valores foram escolhidos de forma permissiva por causa do porte do caso \textit{01 MAXIMA NOTURNA\_DEZ25} (cerca de doze mil barras), no qual tolerâncias mais apertadas comprometem a convergência.
+A escolha do Ipopt como \textit{solver} se justifica por três fatores: (i) é \textit{open-source} e amplamente utilizado em problemas NLP de SEP; (ii) suporta nativamente expressões não lineares no JuMP via \texttt{@NLexpression} e \texttt{@NLconstraint}; e (iii) é o \textit{solver} adotado por padrão pelo \textit{PowerModels.jl} em suas formulações AC, garantindo uma comparação justa entre as referências e as formulações \textit{hand-built}. As opções utilizadas são \texttt{max\_iter = 3000}, \texttt{tol = 1e-5} e \texttt{print\_level = 5}. Esses valores foram escolhidos de forma permissiva por causa do porte do \textit{snapshot} integral do SIN (\texttt{CASO\_VER\_MAXDIU.PWF} do PAR/PEL 2027-2031, com cerca de treze mil barras), no qual tolerâncias mais apertadas comprometem a convergência.
 
 \section{Pipeline de execução}
 \label{sec:pipeline}
 
-Cada uma das seis formulações está implementada como um \textit{script} Julia auto-contido em \verb|powerflow/Codes/PF_Formulation/|, seguindo a mesma estrutura sequencial:
+Cada uma das seis formulações está implementada como um \textit{script} Julia auto-contido em \texttt{powerflow/Codes/PF\_Formulation/}, seguindo a mesma estrutura sequencial:
 
 \begin{alineascomnumero}
-    \item \textbf{Leitura do PWF}: \verb|PWF.parse_file(caminho; add_control_data = true)| produz um dicionário com a topologia da rede, os dados de gerador, carga e ramo, além das estruturas de controle DOPC/DLIN;
-    \item \textbf{Saneamento topológico}: \verb|PowerModels.select_largest_component!(data)| descarta ilhas isoladas, mantendo apenas a rede principal conectada. Em seguida, se múltiplas barras forem marcadas como referência (\verb|bus_type == 3|), as excedentes são rebaixadas para PV (\verb|bus_type == 2|), preservando uma única barra \textit{slack}. Esse passo é necessário para o caso SIN, em que a leitura inicial pode marcar várias barras como referência;
-    \item \textbf{Padronização de custos}: \verb|standardize_cost_terms!(data, order=2)| garante que todos os geradores tenham curvas de custo quadráticas;
-    \item \textbf{Construção da estrutura de referência}: \verb|ref = PowerModels.build_ref(data)[:it][:pm][:nw][0]| materializa a estrutura indexada usada para iterar sobre barras, geradores, ramos e cargas;
+    \item \textbf{Leitura do PWF}: \texttt{PWF.\allowbreak parse\_file(caminho;\allowbreak\ add\_control\_data = true)} produz um dicionário com a topologia da rede, os dados de gerador, carga e ramo, além das estruturas de controle DOPC/DLIN;
+    \item \textbf{Saneamento topológico}: \texttt{PowerModels.\allowbreak select\_largest\_\allowbreak component!(data)} descarta ilhas isoladas, mantendo apenas a rede principal conectada. Em seguida, se múltiplas barras forem marcadas como referência (\texttt{bus\_type == 3}), as excedentes são rebaixadas para PV (\texttt{bus\_type == 2}), preservando uma única barra \textit{slack}. Esse passo é necessário para o caso SIN, em que a leitura inicial pode marcar várias barras como referência;
+    \item \textbf{Padronização de custos}: \texttt{standardize\_\allowbreak cost\_terms!(data,\allowbreak\ order=2)} garante que todos os geradores tenham curvas de custo quadráticas;
+    \item \textbf{Construção da estrutura de referência}: \texttt{ref = PowerModels.\allowbreak build\_ref(data)\allowbreak [:it]\allowbreak [:pm]\allowbreak [:nw]\allowbreak [0]} materializa a estrutura indexada usada para iterar sobre barras, geradores, ramos e cargas;
     \item \textbf{Construção do modelo}: criação das variáveis, expressões de fluxo e restrições no JuMP, conforme descrito na \autoref{sec:formulacoes};
-    \item \textbf{Resolução}: \verb|optimize!(model)|, com tempo de execução medido por \verb|@elapsed|;
-    \item \textbf{Exportação}: dois arquivos CSV são produzidos em \verb|resultados_csv/|: \verb|resultados_barras_SIN.csv|, com $V_i$, $\theta_i$, $p^g_i$, $q^g_i$, $p^d_i$, $q^d_i$ e os \textit{slacks} de cada barra, e \verb|resultados_fluxos_linhas_SIN.csv|, com $p_{ij}, q_{ij}, p_{ji}, q_{ji}$, perdas e \textit{tap} de cada ramo.
+    \item \textbf{Resolução}: \texttt{optimize!(model)}, com tempo de execução medido por \texttt{@elapsed};
+    \item \textbf{Exportação}: dois arquivos CSV são produzidos em \texttt{resultados\_csv/}: \texttt{resultados\_\allowbreak barras\_SIN.csv}, com $V_i$, $\theta_i$, $p^g_i$, $q^g_i$, $p^d_i$, $q^d_i$ e os \textit{slacks} de cada barra, e \texttt{resultados\_\allowbreak fluxos\_\allowbreak linhas\_SIN.csv}, com $p_{ij}, q_{ij}, p_{ji}, q_{ji}$, perdas e \textit{tap} de cada ramo.
 \end{alineascomnumero}
 
 A \autoref{fig:pipeline} resume graficamente esse fluxo sequencial.
@@ -61,7 +61,7 @@ A \autoref{fig:pipeline} resume graficamente esse fluxo sequencial.
 }
 \end{figure}
 
-Os elos HVDC, presentes em vários casos de teste, têm um tratamento particular nas formulações baseadas em \textit{PowerModels} e nas \textit{hand-built}: as injeções $(p^{dc}_{ft}, q^{dc}_{ft})$ em cada extremidade são lidas do PWF e \textbf{fixadas} via \verb|JuMP.fix(...; force=true)|. Essa decisão segue a recomendação do CEPEL de tratar elos HVDC como condições de contorno do FP AC: as injeções já vêm pré-especificadas pelo fluxo base e liberá-las apenas amplia o Jacobiano sem trazer informação nova. O retificador recebe $p^g$ negativo e o inversor $p^g$ positivo.
+Os elos HVDC, presentes em vários casos de teste, têm um tratamento particular nas formulações baseadas em \textit{PowerModels} e nas \textit{hand-built}: as injeções $(p^{dc}_{ft}, q^{dc}_{ft})$ em cada extremidade são lidas do PWF e \textbf{fixadas} via \texttt{JuMP.\allowbreak fix(...;\allowbreak\ force=true)}. Essa decisão segue a recomendação do CEPEL de tratar elos HVDC como condições de contorno do FP AC: as injeções já vêm pré-especificadas pelo fluxo base e liberá-las apenas amplia o Jacobiano sem trazer informação nova. O retificador recebe $p^g$ negativo e o inversor $p^g$ positivo.
 
 \section{Formulações implementadas}
 \label{sec:formulacoes}
@@ -76,12 +76,12 @@ A progressão de seis formulações é identificada pelas siglas da \autoref{tab
         \toprule
         Sigla & Arquivo & Engine & Tipo & Acrescenta \\
         \midrule \midrule
-        F0 & \texttt{(14)OPF\_PM.jl} & PowerModels & FPO AC & baseline FPO \\
-        F1 & \texttt{(15)PF\_PM.jl.jl} & PowerModels & FP AC & baseline FP \\
-        F2 & \texttt{(16)QLIM+VLIM.jl} & JuMP \textit{hand-built} & FP controlado & QLIM + VLIM \\
-        F3 & \texttt{(17)QLIM+VLIM+CSCA.jl} & JuMP \textit{hand-built} & FP controlado & + CSCA \\
-        F4 & \texttt{(18)QLIM+VLIM+CSCA+CTAP.jl} & JuMP \textit{hand-built} & FP controlado & + CTAP \\
-        F5 & \texttt{(19)+DERA.jl} & JuMP \textit{hand-built} & FP controlado & + DERA \\
+        F0 & \texttt{(F0)OPF\_PM.jl} & PowerModels & FPO AC & baseline FPO \\
+        F1 & \texttt{(F1)PF\_PM.jl.jl} & PowerModels & FP AC & baseline FP \\
+        F2 & \texttt{(F2)QLIM+VLIM.jl} & JuMP \textit{hand-built} & FP controlado & QLIM + VLIM \\
+        F3 & \texttt{(F3)QLIM+VLIM+CSCA.jl} & JuMP \textit{hand-built} & FP controlado & + CSCA \\
+        F4 & \texttt{(F4)QLIM+VLIM+CSCA+CTAP.jl} & JuMP \textit{hand-built} & FP controlado & + CTAP \\
+        F5 & \texttt{(F5)+DERA.jl} & JuMP \textit{hand-built} & FP controlado & + DERA \\
         \bottomrule
     \end{tabular}
 }{
@@ -94,12 +94,12 @@ A progressão é estritamente \emph{aditiva}: cada arquivo numerado parte do ant
 \subsection{Formulação F0: FPO AC de referência}
 \label{subsec:f14}
 
-A formulação F0 é uma chamada direta a \verb|PowerModels.solve_ac_opf(data, optimizer)|, sem reconstrução manual de variáveis ou restrições. O modelo subjacente é exatamente o FPO AC canônico descrito na Equação \eqref{eq:fpo}: minimiza $\sum_k c_k(p^g_k)$ sujeito ao balanço nodal e aos limites caixa em $V$, $p^g$, $q^g$ e $|s_{ij}|$. Esta formulação serve como \textit{baseline} de FPO: não incorpora nenhuma das ações de controle ANAREDE da \autoref{sec:acoes-controle}, mas oferece o ponto de operação economicamente ótimo da rede tal como definido pela literatura clássica.
+A formulação F0 é uma chamada direta a \texttt{PowerModels.\allowbreak solve\_ac\_opf(data,\allowbreak\ optimizer)}, sem reconstrução manual de variáveis ou restrições. O modelo subjacente é exatamente o FPO AC canônico descrito na Equação \eqref{eq:fpo}: minimiza $\sum_k c_k(p^g_k)$ sujeito ao balanço nodal e aos limites caixa em $V$, $p^g$, $q^g$ e $|s_{ij}|$. Esta formulação serve como \textit{baseline} de FPO: não incorpora nenhuma das ações de controle ANAREDE da \autoref{sec:acoes-controle}, mas oferece o ponto de operação economicamente ótimo da rede tal como definido pela literatura clássica.
 
 \subsection{Formulação F1: FP AC clássico}
 \label{subsec:f15}
 
-A formulação F1 é uma chamada a \verb|PowerModels.solve_ac_pf(data, optimizer)|. Diferentemente de F0, não há otimização: a função objetivo é vazia e o problema reduz-se à resolução do sistema algébrico de FP do tipo Newton, com $V$ e $\theta$ como incógnitas em barras PQ, $\theta$ em barras PV e nada em barras \textit{slack}. F1 representa o ponto de operação ``puro'' da rede, sem qualquer otimização de custos ou ação de controle.
+A formulação F1 é uma chamada a \texttt{PowerModels.\allowbreak solve\_ac\_pf(data,\allowbreak\ optimizer)}. Diferentemente de F0, não há otimização: a função objetivo é vazia e o problema reduz-se à resolução do sistema algébrico de FP do tipo Newton, com $V$ e $\theta$ como incógnitas em barras PQ, $\theta$ em barras PV e nada em barras \textit{slack}. F1 representa o ponto de operação ``puro'' da rede, sem qualquer otimização de custos ou ação de controle.
 
 \subsection{Formulação F2: FP controlado QLIM + VLIM}
 \label{subsec:f16}
@@ -111,7 +111,7 @@ A partir de F2, o trabalho abandona o \textit{PowerModels.jl} como motor de reso
 V_i \in [V^{\min}_i, V^{\max}_i], \quad \theta_i \in \mathbb{R}, \quad p^g_k \in [p^{g,\min}_k, p^{g,\max}_k], \quad q^g_k \in [q^{g,\min}_k, q^{g,\max}_k],
 \end{equation}
 
-\noindent inicializadas com os valores do PWF (\verb|start = ref[:bus][i]["vm"]|, etc.). Os fluxos $p_{ij}, q_{ij}$ são definidos como \verb|@NLexpression| sobre as Equações \eqref{eq:p-ramo}--\eqref{eq:q-ramo}, e as Equações \eqref{eq:balanco-p}--\eqref{eq:balanco-q} são impostas via \verb|@NLconstraint|.
+\noindent inicializadas com os valores do PWF (\texttt{start =\allowbreak\ ref[:bus][i]\allowbreak ["vm"]}, etc.). Os fluxos $p_{ij}, q_{ij}$ são definidos como \texttt{@NLexpression} sobre as Equações \eqref{eq:p-ramo}--\eqref{eq:q-ramo}, e as Equações \eqref{eq:balanco-p}--\eqref{eq:balanco-q} são impostas via \texttt{@NLconstraint}.
 
 A novidade de F2 está na introdução das variáveis de folga:
 
@@ -127,7 +127,7 @@ s^v_i \in \mathbb{R}, \;\; \forall i \in \mathcal{N}^{gen}, \qquad s^q_l \in \ma
 V_i = V^{ref}_i + s^v_i, \qquad \forall i \in \mathcal{N}^{gen},
 \end{equation}
 
-\noindent onde $V^{ref}_i$ é o valor de tensão lido do PWF. O slack $s^q_l$ entra subtraindo no balanço reativo da Equação \eqref{eq:balanco-q}, atuando como ``corte de reativo'' quando o gerador associado satura. Em barras \textit{slack}, $\theta_i$ é fixado em zero via \verb|fix(va[i], 0.0; force=true)|. Em geradores \textit{slack}, os limites de $p^g_k$ são removidos para acomodar o balanço global de potência ativa.
+\noindent onde $V^{ref}_i$ é o valor de tensão lido do PWF. O slack $s^q_l$ entra subtraindo no balanço reativo da Equação \eqref{eq:balanco-q}, atuando como ``corte de reativo'' quando o gerador associado satura. Em barras \textit{slack}, $\theta_i$ é fixado em zero via \texttt{fix(va[i],\allowbreak\ 0.0;\allowbreak\ force=true)}. Em geradores \textit{slack}, os limites de $p^g_k$ são removidos para acomodar o balanço global de potência ativa.
 
 A função objetivo é puramente de penalidade quadrática:
 
@@ -148,7 +148,21 @@ A formulação F3 parte de F2 e introduz o controle de bancos \textit{shunt} cha
 b^{sh}_s \in [b^{sh,\min}_s, b^{sh,\max}_s],
 \end{equation}
 
-\noindent e o termo $b^{sh}_s V_i^2$ é adicionado ao balanço reativo da Equação \eqref{eq:balanco-q} na barra $i$ hospedeira. A função objetivo continua sendo a Equação \eqref{eq:obj-16}; nenhum novo termo de penalidade é introduzido, porque $b^{sh}_s$ é uma variável de decisão livre dentro do intervalo, não uma folga. O efeito é que o \textit{solver} ajusta o valor de cada banco \textit{shunt} para minimizar o desvio das tensões em relação aos \textit{setpoints}, exatamente o papel que o CSCA do ANAREDE desempenha por meio de chaveamentos discretos. O caráter discreto do controle real é deixado para uma etapa de discretização posterior, fora do escopo deste trabalho.
+\noindent e o termo $b^{sh}_s V_i^2$ é adicionado ao balanço reativo da Equação \eqref{eq:balanco-q} na barra $i$ hospedeira. Diferentemente de F2, em que o desvio de tensão é tratado por uma única folga de igualdade $s^v_i$ aplicada ao \textit{setpoint}, F3 reorganiza o tratamento de tensão das barras controladas em dois regimes: nas barras cujo intervalo de controle é praticamente um ponto ($|V^{\max}_i - V^{\min}_i| < 10^{-5}$) mantém-se a restrição de igualdade $V_i = V^{ref}_i + s^v_i$; nas demais, a tensão é mantida dentro da faixa $[V^{\min}_i, V^{\max}_i]$ por meio de um par de folgas \emph{unilaterais} não negativas, $s^{v,\downarrow}_i$ no limite inferior e $s^{v,\uparrow}_i$ no superior:
+
+\begin{equation}
+\label{eq:csca-slack-v}
+V_i \ge V^{\min}_i - s^{v,\downarrow}_i, \qquad V_i \le V^{\max}_i + s^{v,\uparrow}_i, \qquad s^{v,\downarrow}_i, s^{v,\uparrow}_i \ge 0.
+\end{equation}
+
+\noindent Além disso, é introduzida uma folga $s^b_s$ que liga $b^{sh}_s$ ao seu valor nominal lido do PWF ($b^{sh}_s = b^{sh,\text{nom}}_s + s^b_s$), penalizada com peso menor. A função objetivo de F3 passa, portanto, a ter quatro blocos:
+
+\begin{equation}
+\label{eq:obj-17}
+\min \;\; \rho \sum_{i \in \mathcal{N}^{ctrl}} \big[(s^v_i)^2 + (s^{v,\uparrow}_i)^2 + (s^{v,\downarrow}_i)^2 \big] \;+\; \rho \sum_{l \in \mathcal{L}} (s^q_l)^2 \;+\; \rho_b \sum_{s \in \mathcal{S}} (s^b_s)^2,
+\end{equation}
+
+\noindent com $\rho = 10^6$ (folgas de tensão e de reativo) e $\rho_b = 10^4$ (folga de \textit{shunt}). O peso menor sobre $s^b_s$ é deliberado: garante que o \textit{solver} prefira ajustar o banco \textit{shunt} dentro de sua faixa a violar os \textit{setpoints} de tensão. O efeito é que o \textit{solver} ajusta o valor de cada banco \textit{shunt} para minimizar o desvio das tensões em relação aos \textit{setpoints}, exatamente o papel que o CSCA do ANAREDE desempenha por meio de chaveamentos discretos. O caráter discreto do controle real é deixado para uma etapa de discretização posterior, fora do escopo deste trabalho.
 
 \subsection{Formulação F4: adiciona CTAP}
 \label{subsec:f18}
@@ -160,12 +174,53 @@ A formulação F4 acrescenta a F3 o controle automático de \textit{tap} de tran
 t_{ij} \in [t^{\min}_{ij}, t^{\max}_{ij}],
 \end{equation}
 
-\noindent e as expressões de fluxo \eqref{eq:p-ramo}--\eqref{eq:q-ramo} são reescritas com $t_{ij}$ no denominador como variável, o que adiciona um fator não linear adicional às equações já não lineares do balanço. Adicionalmente, uma restrição de \textit{setpoint} análoga à Equação \eqref{eq:setpoint-vlim} é imposta na barra controlada pelo \textit{tap}, com sua própria folga $s^t_{ij}$ que é incluída na função objetivo. O resultado é que o \textit{solver} encontra simultaneamente os \textit{taps} e os pontos de operação compatíveis, em uma única resolução NLP. Isso contrasta com o ANAREDE, que itera externamente entre o FP e o ajuste dos \textit{taps}.
+\noindent e as expressões de fluxo \eqref{eq:p-ramo}--\eqref{eq:q-ramo} são reescritas com $t_{ij}$ no denominador como variável, o que adiciona um fator não linear adicional às equações já não lineares do balanço. F4 não introduz novas folgas nem novos termos na função objetivo: a regulação de tensão associada ao \textit{tap} é absorvida pelas mesmas folgas de tensão $s^v_i$, $s^{v,\uparrow}_i$ e $s^{v,\downarrow}_i$ já presentes em F3 (Equação \eqref{eq:obj-17}), agora também sensíveis ao novo grau de liberdade $t_{ij}$. O resultado é que o \textit{solver} encontra simultaneamente os \textit{taps} e os pontos de operação compatíveis, em uma única resolução NLP. Isso contrasta com o ANAREDE, que itera externamente entre o FP e o ajuste dos \textit{taps}.
 
 \subsection{Formulação F5: adiciona DERA}
 \label{subsec:f19}
 
-A formulação F5 acrescenta a F4 os agregadores de geração distribuída. No PWF, cada DERA $d \in \mathcal{D}$ é descrito por uma barra hospedeira $i_d$ e por injeções $(p^{der}_d, q^{der}_d)$ que podem ser fixadas ou tratadas como variáveis. Na implementação adotada, $(p^{der}_d, q^{der}_d)$ são lidas do PWF e adicionadas como termos constantes positivos ao lado direito das Equações \eqref{eq:balanco-p}--\eqref{eq:balanco-q} na barra $i_d$. Não há decisão de despacho própria: o DERA contribui apenas como injeção fixa, refletindo a representação minimalista descrita na \autoref{subsec:dera}. A formulação F5 é, portanto, mais um \textit{hook} de extensibilidade do que uma representação completa de DER ativa.
+A formulação F5 acrescenta a F4 o esquema hierárquico de corte/alívio de carga descrito na \autoref{subsec:dera}. Para cada carga $l \in \mathcal{L}$ são introduzidas duas variáveis de decisão:
+
+\begin{equation}
+\label{eq:dera-vars}
+\Delta p^d_l \in [0, p^d_l], \qquad \Delta q^d_l \in \mathbb{R},
+\end{equation}
+
+\noindent representando, respectivamente, o corte de potência ativa e o corte de potência reativa daquela carga. As duas variáveis ficam acopladas por uma restrição de fator de potência constante:
+
+\begin{equation}
+\label{eq:dera-fp}
+\Delta q^d_l \;=\; \Delta p^d_l \, \frac{q^d_l}{p^d_l}, \qquad \forall l \in \mathcal{L} \text{ com } p^d_l > 10^{-4}.
+\end{equation}
+
+\noindent Cargas com $p^d_l \le 10^{-4}$ (efetivamente nulas) têm $\Delta p^d_l$ e $\Delta q^d_l$ fixados em zero via \texttt{fix(...;\allowbreak\ force=true)}, eliminando-as do problema. Os cortes entram nos balanços nodais ativo e reativo \eqref{eq:balanco-p}--\eqref{eq:balanco-q} subtraindo das demandas nominais: $p^d_l \rightarrow p^d_l - \Delta p^d_l$ e $q^d_l \rightarrow q^d_l - \Delta q^d_l$.
+
+A novidade de F5 na função objetivo é um termo \emph{linear} ponderado pelo nível de tensão da barra hospedeira:
+
+\begin{equation}
+\label{eq:obj-19}
+\min \;\; \underbrace{\rho \!\! \sum_{i \in \mathcal{N}^{ctrl}} \!\! \big[(s^v_i)^2 + (s^{v,\uparrow}_i)^2 + (s^{v,\downarrow}_i)^2 \big] + \rho \sum_{l \in \mathcal{L}} (s^q_l)^2 + \rho_b \sum_{s \in \mathcal{S}} (s^b_s)^2}_{\text{termos herdados de F2--F4}} \;+\; \sum_{l \in \mathcal{L}} w_l \, \Delta p^d_l,
+\end{equation}
+
+\noindent com pesos $w_l$ definidos por faixa de tensão base da barra hospedeira de $l$:
+
+\begin{equation}
+\label{eq:dera-pesos}
+w_l \;=\; \begin{cases}
+10^3, & V^{base}_l < 69\,\text{kV} \quad (\text{subtransmissão e distribuição}), \\
+5 \times 10^3, & 69 \le V^{base}_l \le 230\,\text{kV} \quad (\text{transmissão}), \\
+10^4, & V^{base}_l > 230\,\text{kV} \quad (\text{extra alta tensão, EAT}).
+\end{cases}
+\end{equation}
+
+\noindent Em F5, o coeficiente de penalidade dos \textit{slacks} de tensão é reduzido de $\rho = 10^6$ (valor usado em F2--F4) para $\rho = 10^5$, e $\rho_b = 10^3$, de modo que o termo linear de corte de carga seja efetivamente comparável aos termos quadráticos de \textit{slack}. Com a penalidade original a um milhão, os \textit{slacks} de tensão dominariam a função objetivo e o corte de carga praticamente nunca seria acionado. O efeito esperado da formulação é o seguinte: enquanto o \textit{solver} consegue acomodar todas as restrições de tensão e \textit{setpoints} apenas com os \textit{slacks} $s^v, s^q, s^b$, o corte $\Delta p^d_l$ permanece em zero e F5 reproduz F4. Quando uma carga estaria sendo servida em uma barra cuja tensão violaria intoleravelmente o \textit{setpoint}, o \textit{solver} passa a preferir um corte parcial dessa carga (começando pelas barras de tensão mais baixa, onde $w_l = 10^3$) em vez de aumentar as folgas de tensão (que custam $\rho = 10^5$ ao quadrado). O esquema reproduz, no nível de função objetivo, a hierarquia de prioridade de corte de carga adotada em emergência pelo operador do sistema.
+
+\subsection{Formulação auxiliar FDC: fluxo de potência DC do \textit{PowerModels}}
+\label{subsec:fdc}
+
+Além da progressão principal F0$\rightarrow$F5, foi implementado um \textit{script} auxiliar (\texttt{(FDC).jl}) que resolve o caso integral do SIN sob a \emph{aproximação DC} do \textit{PowerModels} (\texttt{solve\_dc\_pf}), descrita na \autoref{subsec:relaxacoes-fpo}. A motivação dessa formulação isolada é responder a uma pergunta deixada em aberto pela discussão de convergência do caso SIN no \autoref{chap:resultados}: dado que nenhuma das seis formulações AC converge sobre \texttt{CASO\_\allowbreak VER\_MAXDIU.PWF} dentro do limite de iterações, a versão linearizada do mesmo problema é factível?
+
+A FDC herda integralmente o \textit{pipeline} de F0/F1, as entradas e as saídas são as mesmas (PWF, base 100\,MVA), e zera os fluxos reativos e perdas ativas (desprezados por definição). A FDC não substitui nenhuma das seis formulações principais e não é executada sobre a bateria completa: trata-se de uma verificação isolada sobre o caso SIN, cujos resultados são discutidos na \autoref{subsec:fdc-resultado}.
 
 \section{Bateria de casos e critérios de comparação}
 \label{sec:bateria-casos}
@@ -173,15 +228,74 @@ A formulação F5 acrescenta a F4 os agregadores de geração distribuída. No P
 \subsection{Casos de teste}
 \label{subsec:casos-teste}
 
-A bateria de testes utilizada nas comparações do \autoref{chap:resultados} é composta por vinte e sete arquivos PWF localizados em \verb|powerflow/Codes/data/|, agrupados em quatro faixas de porte:
+A bateria de testes utilizada nas comparações do \autoref{chap:resultados} é composta por vinte e sete arquivos PWF localizados em \texttt{powerflow/Codes/data/}, agrupados em cinco faixas de porte: redes pedagógicas, redes de médio porte, um \textit{snapshot} integral do SIN, recortes reduzidos do SIN e casos sintéticos de \textit{stress}. A escolha foi pensada para varrer dois eixos simultaneamente: o porte da rede (de três a 13~338 barras) e a presença explícita de cada uma das ações de controle modeladas neste trabalho.
 
-\begin{alineascomponto}
-    \item \textbf{Redes pedagógicas (3 a 9 barras)}: \texttt{3bus.pwf} e suas variantes (\texttt{3bus\_DBSH}, \texttt{3bus\_DCER}, \texttt{3bus\_DCSC}, \texttt{3bus\_DCline}, \texttt{3bus\_DSHL}, \texttt{3bus\_corrections}, \texttt{3bus\_shunt\_fields}), os \texttt{3busfrank}, \texttt{4busfrank\_vlim}, \texttt{5busfrank} e variantes (\texttt{5busfrank\_cphs}, \texttt{5busfrank\_csca}, \texttt{5busfrank\_ctaf}, \texttt{5busfrank\_ctap}), \texttt{9bus} e \texttt{9bus\_transformer\_fields};
-    \item \textbf{Redes de médio porte}: \texttt{300bus.pwf} (300 barras, baseado no IEEE 300-bus) e \texttt{500bus.pwf};
-    \item \textbf{\textit{Snapshot} do SIN}: \texttt{01 MAXIMA NOTURNA\_DEZ25.PWF}, com cerca de 12.000 barras, representando a condição operativa de máxima noturna do SIN em dezembro de 2025;
-    \item \textbf{Recortes reduzidos do SIN (Nordeste)}: \texttt{caso\_red.pwf} (2 599 barras, recorte completo do Nordeste) e \texttt{caso\_red2.pwf} (1 033 barras, recorte CE + RN + PB), ambos derivados do caso ONS PAR/PEL 2027-2031, Verão 2027/2028 Máxima Diurna (\texttt{CASO\_VER\_MAXDIU.PWF}, 13 338 barras), conforme detalhado na \autoref{subsec:reducao-fronteira};
-    \item \textbf{Casos sintéticos de \textit{stress}}: \texttt{test\_defaults.pwf}, \texttt{test\_line\_shunt.pwf} e \texttt{test\_system.pwf}, projetados para isolar comportamentos específicos do parser e dos controles.
-\end{alineascomponto}
+A convenção de nomenclatura dos arquivos pedagógicos segue o padrão \texttt{<base>\allowbreak\_<sufixo>}, em que \texttt{<base>} indica o número de barras e a família (\texttt{3bus} para a rede triangular clássica de três barras, \texttt{3busfrank}/\allowbreak \texttt{4busfrank}/\allowbreak \texttt{5busfrank} para variantes da família \textit{frank} distribuídas junto ao próprio \textit{PWF.jl} como casos didáticos, \texttt{9bus} para a rede de nove barras de Anderson-Fouad) e \texttt{<sufixo>} indica precisamente o elemento ou controle que foi adicionado à versão base do arquivo. Os sufixos seguem o nome da seção PWF ou da palavra-chave da opção de controle introduzida, conforme detalhado na \autoref{tab:bateria-casos}.
+
+\begin{table}[!htb]
+\captionsetup{width=16cm}
+\Caption{\label{tab:bateria-casos} Bateria de casos de teste: porte e diferença em relação à versão base}
+\IBGEtab{}{
+    \footnotesize
+    \setlength{\tabcolsep}{4pt}
+    \renewcommand{\arraystretch}{1.1}
+    \begin{tabular}{p{4.4cm}rp{9.6cm}}
+        \toprule
+        Arquivo & Barras & Diferença em relação à base / observação \\
+        \midrule \midrule
+        \multicolumn{3}{l}{\textit{Família 3bus} (rede triangular clássica de três barras)} \\
+        \midrule
+        \texttt{3bus.pwf}                & 3      & versão base, apenas seções DBAR, DLIN, DCTE \\
+        \texttt{3bus\_DBSH.pwf}          & 3      & + seção DBSH (banco \textit{shunt} chaveável detalhado) \\
+        \texttt{3bus\_DCER.pwf}          & 3      & + seção DCER (compensador estático de reativos, SVC) \\
+        \texttt{3bus\_DCSC.pwf}          & 3      & + seção DCSC (capacitor série controlável, CSC) \\
+        \texttt{3bus\_DSHL.pwf}          & 3      & + seção DSHL (\textit{shunt} de linha, no terminal de envio ou recepção) \\
+        \texttt{3bus\_DCline.pwf}        & 3      & + elo HVDC completo (seções DELO, DCBA, DCLI, DCNV, DCCV) \\
+        \texttt{3bus\_shunt\_fields.pwf} & 3      & combina simultaneamente DBSH e DCER, exercendo o parser em campos \textit{shunt} concorrentes \\
+        \texttt{3bus\_corrections.pwf}   & 3      & variante com campos numéricos modificados para testar correções de parser; dispara \textbf{ERR} \\
+        \midrule
+        \multicolumn{3}{l}{\textit{Família \textit{frank}} (variantes do livro-texto de Frank)} \\
+        \midrule
+        \texttt{3busfrank.pwf}                     & 3 & versão base sem controles \\
+        \texttt{3busfrank\_continuous\_shunt.pwf}  & 3 & + DBSH com passo contínuo (relaxa a discretização do CSCA) \\
+        \texttt{3busfrank\_qlim.pwf}               & 3 & ativa \textbf{QLIM} na seção DOPC (controle de limite de reativo) \\
+        \texttt{4busfrank\_vlim.pwf}               & 4 & ativa \textbf{VLIM} na seção DOPC (controle de magnitude de tensão) \\
+        \texttt{5busfrank.pwf}                     & 5 & versão base sem controles \\
+        \texttt{5busfrank\_csca.pwf}               & 5 & ativa \textbf{CSCA} na seção DOPC (\textit{shunt} chaveável automático) \\
+        \texttt{5busfrank\_ctap.pwf}               & 5 & ativa \textbf{CTAP} na seção DOPC (\textit{tap} de transformador) \\
+        \texttt{5busfrank\_ctaf.pwf}               & 5 & ativa \textbf{CTAF} na seção DOPC (\textit{tap} de transformador defasador, variante do CTAP) \\
+        \texttt{5busfrank\_cphs.pwf}               & 5 & ativa \textbf{CPHS} na seção DOPC (controle de fase) \\
+        \midrule
+        \multicolumn{3}{l}{\textit{Família 9bus} (Anderson-Fouad)} \\
+        \midrule
+        \texttt{9bus.pwf}                     & 9 & versão base \\
+        \texttt{9bus\_transformer\_fields.pwf}& 9 & + seções DCTR, DGLT e DTPF (campos detalhados de transformador e grupos limite de tensão) \\
+        \midrule
+        \multicolumn{3}{l}{\textit{Redes de médio porte}} \\
+        \midrule
+        \texttt{300bus.pwf}              & 300    & IEEE 300-bus, com múltiplas barras de geração, elos HVDC e bancos \textit{shunt} \\
+        \texttt{500bus.pwf}              & 500    & rede sintética de 500 barras com SVCs e múltiplos OLTC \\
+        \midrule
+        \multicolumn{3}{l}{\textit{Snapshot} integral do SIN} \\
+        \midrule
+        \texttt{CASO\_VER\_MAXDIU.PWF}   & 13\,338 & SIN integral, Verão 2027/2028 Máxima Diurna do PAR/PEL 2027-2031 do ONS \\
+        \midrule
+        \multicolumn{3}{l}{\textit{Recortes reduzidos do SIN (derivados de \texttt{CASO\_VER\_MAXDIU})}} \\
+        \midrule
+        \texttt{caso\_red.pwf}           & 2\,599 & recorte do subsistema Nordeste completo, com 15 barras de fronteira no eixo PI-BA (\autoref{subsec:reducao-fronteira}) \\
+        \texttt{caso\_red2.pwf}          & 1\,033 & recorte ainda mais reduzido (CE + RN + PB) do subsistema acima \\
+        \midrule
+        \multicolumn{3}{l}{\textit{Casos sintéticos de \textit{stress} do parser e dos controles}} \\
+        \midrule
+        \texttt{test\_defaults.pwf}      & 3 & exercita campos opcionais não preenchidos (\textit{defaults}) em quase todas as seções (DBAR, DBSH, DCBA, DELO, etc.) \\
+        \texttt{test\_line\_shunt.pwf}   & 3 & exercita combinações de DBSH e DSHL na mesma linha \\
+        \texttt{test\_system.pwf}        & 3 & cenário sintético mínimo (apenas DBAR e DLIN) usado como sanity check \\
+        \bottomrule
+    \end{tabular}
+}{
+    \Fonte{elaborado pelo autor. ``+'' indica seção adicionada em relação ao arquivo base imediatamente acima da linha; \textbf{negrito} em letras maiúsculas indica palavra-chave ativada na linha de opções do registro DOPC do PWF.}
+}
+\end{table}
 
 Para cada caso, todas as seis formulações são executadas com a mesma configuração de \textit{solver}, a mesma versão do parser \textit{PWF.jl} e a mesma máquina, garantindo a comparabilidade dos tempos e dos status de convergência.
 
@@ -197,7 +311,7 @@ A redução adota um esquema híbrido de fronteira, sem ser uma equivalência ti
     \item para cada par de barras de fronteira que originalmente se conectava pelo lado externo, é inserido um ramo direto na seção DLIN com impedância equivalente ao caminho cortado. No \texttt{caso\_red}, vinte e um ramos físicos foram removidos e cinquenta e seis ramos equivalentes foram inseridos.
 \end{alineascomnumero}
 
-A consequência direta para a análise de resultados é que as perdas ativas dos casos reduzidos incluem a dissipação real nessas impedâncias equivalentes; isto é, parte do que aparece como ``perda'' representa o atrito elétrico dos caminhos externos do SIN, não circulação parasita no recorte. As seções DCSC, DBSH, DCER, DCTR, DGER, DGLT e DGBT do PWF original foram preservadas; as opções de controle CTAP e CPHS foram explicitamente desligadas pela equipe que produziu o recorte (DOPC com \verb|CTAP D CPHS D|), enquanto QLIM, VLIM, CREM e AREG permanecem ativadas. As seções HVDC do SIN original (DELO, DCBA, DCLI, DCNV, DCCV) não aparecem nos recortes, uma vez que os elos Itaipu, Madeira e Belo Monte não estão na região Nordeste.
+A consequência direta para a análise de resultados é que as perdas ativas dos casos reduzidos incluem a dissipação real nessas impedâncias equivalentes; isto é, parte do que aparece como ``perda'' representa o atrito elétrico dos caminhos externos do SIN, não circulação parasita no recorte. As seções DCSC, DBSH, DCER, DCTR, DGER, DGLT e DGBT do PWF original foram preservadas; as opções de controle CTAP e CPHS foram explicitamente desligadas pela equipe que produziu o recorte (DOPC com \texttt{CTAP D CPHS D}), enquanto QLIM, VLIM, CREM e AREG permanecem ativadas. As seções HVDC do SIN original (DELO, DCBA, DCLI, DCNV, DCCV) não aparecem nos recortes, uma vez que os elos Itaipu, Madeira e Belo Monte não estão na região Nordeste.
 
 \subsection{Critérios de comparação}
 \label{subsec:criterios}

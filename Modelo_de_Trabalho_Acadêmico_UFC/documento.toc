@@ -19,47 +19,49 @@
 \contentsline {section}{\numberline {2.3}Fluxo de Potência Ótimo}{18}{section.2.3}%
 \contentsline {subsection}{\numberline {2.3.1}Relaxações do FPO}{19}{subsection.2.3.1}%
 \contentsline {section}{\numberline {2.4}Ações de controle do programa ANAREDE}{21}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}QLIM: limites de geração reativa}{21}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.4.2}VLIM: limites de magnitude de tensão}{21}{subsection.2.4.2}%
-\contentsline {subsection}{\numberline {2.4.3}CSCA: bancos \textit {shunt} chaveados}{21}{subsection.2.4.3}%
-\contentsline {subsection}{\numberline {2.4.4}CTAP: \textit {tap} ajustável de transformadores}{22}{subsection.2.4.4}%
-\contentsline {subsection}{\numberline {2.4.5}DERA: agregação de geração distribuída}{22}{subsection.2.4.5}%
-\contentsline {subsection}{\numberline {2.4.6}Síntese das ações de controle}{22}{subsection.2.4.6}%
+\contentsline {subsection}{\numberline {2.4.1}QLIM: limites de geração reativa}{22}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}VLIM: limites de magnitude de tensão}{22}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}CSCA: bancos \textit {shunt} chaveados}{23}{subsection.2.4.3}%
+\contentsline {subsection}{\numberline {2.4.4}CTAP: \textit {tap} ajustável de transformadores}{24}{subsection.2.4.4}%
+\contentsline {subsection}{\numberline {2.4.5}DERA: esquema hierárquico de corte/alívio de carga}{24}{subsection.2.4.5}%
+\contentsline {subsection}{\numberline {2.4.6}Síntese das ações de controle}{25}{subsection.2.4.6}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {3}\MakeTextUppercase []{Metodologia}}{23}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Ambiente computacional}{23}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Pipeline de execução}{24}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Formulações implementadas}{25}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Formulação F0: FPO AC de referência}{26}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Formulação F1: FP AC clássico}{26}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Formulação F2: FP controlado QLIM + VLIM}{26}{subsection.3.3.3}%
-\contentsline {subsection}{\numberline {3.3.4}Formulação F3: adiciona CSCA}{27}{subsection.3.3.4}%
-\contentsline {subsection}{\numberline {3.3.5}Formulação F4: adiciona CTAP}{27}{subsection.3.3.5}%
-\contentsline {subsection}{\numberline {3.3.6}Formulação F5: adiciona DERA}{28}{subsection.3.3.6}%
-\contentsline {section}{\numberline {3.4}Bateria de casos e critérios de comparação}{28}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}Casos de teste}{28}{subsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.4.2}Recortes reduzidos do SIN: método de fronteira híbrida}{29}{subsection.3.4.2}%
-\contentsline {subsection}{\numberline {3.4.3}Critérios de comparação}{30}{subsection.3.4.3}%
+\contentsline {chapter}{\chapternumberline {3}\MakeTextUppercase []{Metodologia}}{27}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Ambiente computacional}{27}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Pipeline de execução}{28}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Formulações implementadas}{29}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Formulação F0: FPO AC de referência}{30}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Formulação F1: FP AC clássico}{30}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Formulação F2: FP controlado QLIM + VLIM}{30}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}Formulação F3: adiciona CSCA}{31}{subsection.3.3.4}%
+\contentsline {subsection}{\numberline {3.3.5}Formulação F4: adiciona CTAP}{32}{subsection.3.3.5}%
+\contentsline {subsection}{\numberline {3.3.6}Formulação F5: adiciona DERA}{32}{subsection.3.3.6}%
+\contentsline {subsection}{\numberline {3.3.7}Formulação auxiliar FDC: fluxo de potência DC do \textit {PowerModels}}{33}{subsection.3.3.7}%
+\contentsline {section}{\numberline {3.4}Bateria de casos e critérios de comparação}{34}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Casos de teste}{34}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Recortes reduzidos do SIN: método de fronteira híbrida}{35}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Critérios de comparação}{36}{subsection.3.4.3}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {4}\MakeTextUppercase []{Resultados}}{31}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Convergência global e clusters}{31}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Análise barra a barra}{32}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Discussão}{35}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Comportamento típico das ações de controle}{35}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}O caso SIN}{35}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Casos sintéticos com erro de modelo}{36}{subsection.4.3.3}%
-\contentsline {section}{\numberline {4.4}Validação adicional: casos reduzidos do SIN}{36}{section.4.4}%
+\contentsline {chapter}{\chapternumberline {4}\MakeTextUppercase []{Resultados}}{38}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Convergência global e clusters}{38}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Análise barra a barra}{41}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Discussão}{43}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Comportamento típico das ações de controle}{43}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}O caso SIN}{43}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Resultado da formulação auxiliar FDC sobre o SIN}{44}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Casos sintéticos com erro de modelo}{45}{subsection.4.3.4}%
+\contentsline {section}{\numberline {4.4}Validação adicional: casos reduzidos do SIN}{45}{section.4.4}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {5}\MakeTextUppercase []{Conclusões e Trabalhos Futuros}}{39}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Síntese das contribuições}{39}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Limitações}{40}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Trabalhos futuros}{40}{section.5.3}%
+\contentsline {chapter}{\chapternumberline {5}\MakeTextUppercase []{Conclusões e Trabalhos Futuros}}{48}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Síntese das contribuições}{48}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Limitações}{49}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Trabalhos futuros}{49}{section.5.3}%
 \setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
-\contentsline {chapter}{\MakeTextUppercase []{REFER\^ENCIAS}}{42}{section*.26}%
-\contentsline {chapter}{AP\^ENDICES}{43}{section*.26}%
+\contentsline {chapter}{\MakeTextUppercase []{REFER\^ENCIAS}}{51}{section*.29}%
+\contentsline {chapter}{AP\^ENDICES}{52}{section*.29}%
 \renewcommand *{\cftappendixname }{AP\^ENDICE \space }
 \renewcommand *{\cftappendixname }{\bfseries AP\^ENDICE \space }
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
 \setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
 \cftinsert {A}
-\contentsline {appendix}{\chapternumberline {A}\normalfont Trecho da implementação JuMP da formulação F2}{43}{appendix.A}%
+\contentsline {appendix}{\chapternumberline {A}\normalfont Trecho da implementação JuMP da formulação F2}{52}{appendix.A}%
