@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber document"] 1780275024.74568 "document.bcf" "document.bbl" "document" 1780275049.12887 0
-  "document.bcf" 1780275048.99273 107890 3f6ceceb0f66502c392cb2159229abe3 "pdflatex"
-  "references.bib" 1780274955.41288 1808 7b980d840060f3910257c12957ddea96 ""
+["biber document"] 1782785934.59888 "document.bcf" "document.bbl" "document" 1783045672.9205 0
+  "document.bcf" 1783045672.77713 108616 81cb49cb7e4d1924cbdc2face03a2403 "pdflatex"
+  "references.bib" 1782785847.19012 5094 1052683fa69a19aec6f3764682e25c5e ""
   (generated)
   "document.bbl"
   "document.blg"
   (rewritten before read)
-["pdflatex"] 1780275046.13801 "document.tex" "document.pdf" "document" 1780275049.12909 0
+["pdflatex"] 1783045669.64875 "document.tex" "document.pdf" "document" 1783045672.92073 0
   "/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -14,6 +14,7 @@
   "/usr/local/texlive/2026/texmf-dist/fonts/tfm/adobe/helvetic/phvb8t.tfm" 1136768653 6628 34c39492c0adc454c1c199922bba8363 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/tfm/adobe/helvetic/phvbo8r.tfm" 1136768653 4736 423eba67d4e9420ec9df4a8def143b08 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/tfm/adobe/helvetic/phvbo8t.tfm" 1136768653 6880 fe6c7967f27585f6fa9876f3af14edd2 ""
+  "/usr/local/texlive/2026/texmf-dist/fonts/tfm/adobe/helvetic/phvr8c.tfm" 1136768653 1348 c311631dfec4123b7faa7f864709e626 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/tfm/adobe/helvetic/phvr8r.tfm" 1136768653 4712 9ef4d7d106579d4b136e1529e1a4533c ""
   "/usr/local/texlive/2026/texmf-dist/fonts/tfm/adobe/helvetic/phvr8t.tfm" 1136768653 7040 b2bd27e2bfe6f6948cbc3239cae7444f ""
   "/usr/local/texlive/2026/texmf-dist/fonts/tfm/adobe/helvetic/phvrc8t.tfm" 1136768653 16152 ab9d47b69dd04cab59fcf780bd0eed36 ""
@@ -62,6 +63,7 @@
   "/usr/local/texlive/2026/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb" 1136849748 48169 b4fd9d908b9ee8c65d4305ad39071c5e ""
   "/usr/local/texlive/2026/texmf-dist/fonts/vf/adobe/helvetic/phvb8t.vf" 1136768653 2340 0efed6a948c3c37d870e4e7ddb85c7c3 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/vf/adobe/helvetic/phvbo8t.vf" 1136768653 2344 88834f8322177295b0266ecc4b0754c3 ""
+  "/usr/local/texlive/2026/texmf-dist/fonts/vf/adobe/helvetic/phvr8c.vf" 1136768653 3556 570286160ebfdd10d887aaa718e2e64d ""
   "/usr/local/texlive/2026/texmf-dist/fonts/vf/adobe/helvetic/phvr8t.vf" 1136768653 2344 44ff28c9ef2fc97180cd884f900fee71 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/vf/adobe/helvetic/phvrc8t.vf" 1136768653 3612 a448b9c1ed57bed50ea118ae6680e645 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/vf/adobe/helvetic/phvro8t.vf" 1136768653 2348 717f0e01beff9c30c0df4945e471886f ""
@@ -275,6 +277,7 @@
   "/usr/local/texlive/2026/texmf-dist/tex/latex/pgf/utilities/xxcolor.sty" 1601326656 2232 b9a67bccba736ed334b4b1a860a85c6f ""
   "/usr/local/texlive/2026/texmf-dist/tex/latex/psnfss/helvet.sty" 1586716065 1499 de0ad166b701b820e03588a29bb30798 ""
   "/usr/local/texlive/2026/texmf-dist/tex/latex/psnfss/t1phv.fd" 1586716065 1483 47067fbe7c3ffed1ede7aaa7b8549d7a ""
+  "/usr/local/texlive/2026/texmf-dist/tex/latex/psnfss/ts1phv.fd" 1586716065 1181 ec0c641cd2e0fb69a449534a0279b5ca ""
   "/usr/local/texlive/2026/texmf-dist/tex/latex/ragged2e/ragged2e.sty" 1687466457 10085 3dececaeed388e31285c366e124c0c4e ""
   "/usr/local/texlive/2026/texmf-dist/tex/latex/refcount/refcount.sty" 1576624809 9878 9e94e8fa600d95f9c7731bb21dfb67a4 ""
   "/usr/local/texlive/2026/texmf-dist/tex/latex/relsize/relsize.sty" 1369619135 15542 c4cc3164fe24f2f2fbb06eb71b1da4c4 ""
@@ -302,18 +305,19 @@
   "/usr/local/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1777340206 5573038 b99aad5e4898a9034e953632f940512b ""
   "/usr/local/texlive/2026/texmf-var/web2c/pdftex/pdflatex.fmt" 1777340159 3636773 7fa8de579197a7d982a00dde81e65fcc ""
   "/usr/local/texlive/2026/texmf.cnf" 1774209515 577 648cd9f92f9c0eac486f4c71c85cfbbe ""
-  "document.aux" 1780275048.9905 5282 65392c6ecf6040a5967cf84759e52037 "pdflatex"
-  "document.bbl" 1780275040.03928 3425 0569ba84ad75aab7d672babcfe954b85 "biber document"
-  "document.nav" 1780275048.99334 3019 c89c2c866e1b7b7c98b7551da8d232ed "pdflatex"
-  "document.out" 1780275048.99197 708 45def6b43295da3edf795cb44b4600b2 "pdflatex"
-  "document.run.xml" 1780275048.99328 2365 3262ad4593742eb74a00e53e41ee7d95 "pdflatex"
-  "document.tex" 1780274937.72315 23034 82a9cc538f11749e5789319f9a2856a0 ""
-  "document.toc" 1780275048.99336 290 72c603c37286f39d26438a0cc6c9571b "pdflatex"
+  "document.aux" 1783045672.77475 7179 e599cb5e87823cd835cff54734c72d8b "pdflatex"
+  "document.bbl" 1782785935.99507 17695 df5e885b50e2e2ee801f6c20e0de3c4e "biber document"
+  "document.nav" 1783045672.77773 3295 ffc759fec05f9ecf544c89bbf7598f0b "pdflatex"
+  "document.out" 1783045672.77638 708 45def6b43295da3edf795cb44b4600b2 "pdflatex"
+  "document.run.xml" 1783045672.77768 2365 3262ad4593742eb74a00e53e41ee7d95 "pdflatex"
+  "document.tex" 1783045408.20835 25575 23a00beeeef10a2ca4080a960e86a319 ""
+  "document.toc" 1783045672.77775 290 ce9a90f765fa63e5e6678cdc5cf275ed "pdflatex"
   "libs/code_style.tex" 1780285318 1233 829c6112a5c76e7cb3e081451f9d37ab ""
   "libs/emblemufc.pdf" 1780285318 395544 4bfa691307f82e96a09bb8eae3619491 ""
   "libs/logoUFCbackground.png" 1780285318 245592 b608865a4f767c920b451ae5ddbca8ab ""
   "libs/preamble.tex" 1780285318 1172 141701fa8526e449473b805ac31f6e31 ""
   "libs/ufc_format.cls" 1780285318 5407 dcc8c27518cbcb9c355902f4ae786dde ""
+  "relaxacao_aproximacao.png" 1782785673.77484 80722 d5706f66c603604354765aa0a7a051a7 ""
   (generated)
   "document.aux"
   "document.bcf"

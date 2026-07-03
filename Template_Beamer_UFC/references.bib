@@ -1,53 +1,128 @@
-@article{einstein,
-    author = "{Albert Einstein}",
-    title = "{Zur Elektrodynamik bewegter K{\"o}rper}. ({German}) [{On} the electrodynamics of moving bodies]",
-    journal = "{Annalen der Physik}",
-    volume = "{322}",
-    number = "{10}",
-    pages = "{891--921}",
-    year = {1905},
-    DOI = "{http://dx.doi.org/10.1002/andp.19053221004}"
+% =====================================================================
+% Referências da apresentação -- alinhadas ao documento de TCC
+% (Modelo_de_Trabalho_Acadêmico_UFC/3-pos-textuais/referencias.bib)
+% =====================================================================
+
+% ---------------------------------------------------------------------
+% Fundamentação: sistemas de potência
+% ---------------------------------------------------------------------
+@book{vonMeier2006powersystems,
+    author    = {VON MEIER, A.},
+    title     = {Electric power systems: a conceptual introduction},
+    year      = {2006},
+    publisher = {Wiley-IEEE Press},
+    address   = {Hoboken, NJ},
+    isbn      = {978-0-471-17859-0}
 }
 
-@misc{siteufc,
-    author = "{Universidade Federal do Ceará}",
-    title = "{Identidade Visual da UFC}",
-    howpublished = {\url{http://www.ufc.br/}},
-    note = {Online; acessado em 26 de Dezembro de 2020},
-    year={2020},
+@book{gloverSarma2012power,
+    author    = {GLOVER, J. D. and SARMA, M. S. and OVERBYE, T. J.},
+    title     = {Power system analysis and design},
+    edition   = {6},
+    year      = {2012},
+    publisher = {Cengage Learning},
+    address   = {Stamford, CT}
 }
 
-@software{Template_Beamer_UFC,
-  author = {Maurício Moreira Neto},
-  title = {{TemplateBeamerUFC}},
-  url = {https://github.com/maumneto/TemplateBeamerUFC},
-  version = {1.3},
-  year = {2021}
-}
-
+% ---------------------------------------------------------------------
+% FPO e relaxações
+% ---------------------------------------------------------------------
 @article{molzahn2019survey,
-    author = {Daniel K. Molzahn and Ian A. Hiskens},
-    title = {A Survey of Relaxations and Approximations of the Power Flow Equations},
-    journal = {Foundations and Trends in Electric Energy Systems},
-    volume = {4},
-    number = {1--2},
-    pages = {1--221},
-    year = {2019},
-    doi = {10.1561/3100000012}
+    author    = {MOLZAHN, D. K. and HISKENS, I. A.},
+    title     = {A survey of relaxations and approximations of the power flow equations},
+    journal   = {Foundations and Trends in Electric Energy Systems},
+    volume    = {4},
+    number    = {1-2},
+    pages     = {1--221},
+    year      = {2019},
+    publisher = {Now Publishers},
+    doi       = {10.1561/3100000012}
 }
 
-@article{coffrin2018powermodels,
-    author = {Carleton Coffrin and Russell Bent and Kaarthik Sundar and Yeesian Ng and Miles Lubin},
-    title = {{PowerModels.jl}: An Open-Source Framework for Exploring Power Flow Formulations},
-    journal = {Power Systems Computation Conference (PSCC)},
-    year = {2018}
+% ---------------------------------------------------------------------
+% Trabalho relacionado (PWF.jl / ControlPowerFlow.jl)
+% ---------------------------------------------------------------------
+@misc{chavarry2024,
+    author = {CH{\'A}VARRY, I. S.},
+    title  = {{PWF.jl} and {ControlPowerFlow.jl}: Julia packages for performing power flow using {ANAREDE} files},
+    year   = {2024},
+    note   = {Projeto de Gradua{\c{c}}{\~a}o (Engenharia El{\'e}trica) --- Pontif{\'i}cia Universidade Cat{\'o}lica do Rio de Janeiro, Rio de Janeiro}
+}
+
+% ---------------------------------------------------------------------
+% Linguagem, pacotes e solver
+% ---------------------------------------------------------------------
+@article{bezanson2017julia,
+    author    = {BEZANSON, J. and EDELMAN, A. and KARPINSKI, S. and SHAH, V. B.},
+    title     = {Julia: a fresh approach to numerical computing},
+    journal   = {SIAM Review},
+    volume    = {59},
+    number    = {1},
+    pages     = {65--98},
+    year      = {2017},
+    publisher = {SIAM},
+    doi       = {10.1137/141000671}
 }
 
 @article{lubin2023jump,
-    author = {Miles Lubin and Oscar Dowson and Joaquim Dias Garcia and Joey Huchette and Beno{\^\i}t Legat and Juan Pablo Vielma},
-    title = {{JuMP} 1.0: Recent improvements to a modeling language for mathematical optimization},
-    journal = {Mathematical Programming Computation},
-    volume = {15},
-    pages = {581--589},
-    year = {2023}
+    author    = {LUBIN, M. and DOWSON, O. and DIAS GARCIA, J. and HUCHETTE, J. and LEGAT, B. and VIELMA, J. P.},
+    title     = {{JuMP} 1.0: recent improvements to a modeling language for mathematical optimization},
+    journal   = {Mathematical Programming Computation},
+    volume    = {15},
+    pages     = {581--589},
+    year      = {2023},
+    doi       = {10.1007/s12532-023-00239-3}
+}
+
+@inproceedings{coffrin2018powermodels,
+    author    = {COFFRIN, C. and BENT, R. and SUNDAR, K. and NG, Y. and LUBIN, M.},
+    title     = {{PowerModels.jl}: an open-source framework for exploring power flow formulations},
+    booktitle = {2018 Power Systems Computation Conference (PSCC)},
+    publisher = {IEEE},
+    address   = {Dublin, Ireland},
+    year      = {2018},
+    pages     = {1--8},
+    doi       = {10.23919/PSCC.2018.8442948}
+}
+
+@article{wachterBiegler2006ipopt,
+    author    = {W{\"A}CHTER, A. and BIEGLER, L. T.},
+    title     = {On the implementation of an interior-point filter line-search algorithm for large-scale nonlinear programming},
+    journal   = {Mathematical Programming},
+    volume    = {106},
+    number    = {1},
+    pages     = {25--57},
+    year      = {2006},
+    publisher = {Springer},
+    doi       = {10.1007/s10107-004-0559-y}
+}
+
+@misc{pwfjl,
+    author       = {{LAMPSPUC}},
+    title        = {{PWF.jl}: parser de arquivos {ANAREDE} no formato {PWF} em {Julia}},
+    year         = {2024},
+    howpublished = {Dispon{\'i}vel em: \url{https://github.com/LAMPSPUC/PWF.jl}},
+    note         = {Pacote {Julia}, vers{\~a}o 0.1.0. Acesso em: 28 jun. 2026}
+}
+
+% ---------------------------------------------------------------------
+% Software / documentação ANAREDE
+% ---------------------------------------------------------------------
+@manual{cepel2023anarede,
+    author       = {{CENTRO DE PESQUISAS DE ENERGIA EL{\'E}TRICA}},
+    organization = {CEPEL},
+    title        = {Programa ANAREDE: an{\'a}lise de redes el{\'e}tricas},
+    address      = {Rio de Janeiro},
+    year         = {2023}
+}
+
+% ---------------------------------------------------------------------
+% Atribuição do template Beamer
+% ---------------------------------------------------------------------
+@software{Template_Beamer_UFC,
+  author  = {Maurício Moreira Neto},
+  title   = {{TemplateBeamerUFC}},
+  url     = {https://github.com/maumneto/TemplateBeamerUFC},
+  version = {1.3},
+  year    = {2021}
 }

@@ -9,7 +9,7 @@ Este capítulo descreve o pipeline de software construído para implementar e co
 Toda a implementação foi realizada na linguagem Julia~\cite{bezanson2017julia} (versão 1.x, série estável), escolhida por aliar uma sintaxe de alto nível, voltada para computação científica, a um desempenho computacional comparável ao de linguagens compiladas. O ambiente de pacotes utilizado, definido em \texttt{Project.toml} e \texttt{Manifest.toml} na raiz do repositório, agrega:
 
 \begin{alineascomponto}
-    \item \textit{PWF.jl}: leitura e parsing de arquivos no formato ANAREDE PWF, com extração de estruturas de controle habilitada via \texttt{add\_control\_data = true};
+    \item \textit{PWF.jl}~\cite{pwfjl}: leitura e parsing de arquivos no formato ANAREDE PWF, com extração de estruturas de controle habilitada via \texttt{add\_control\_data = true};
     \item \textit{PowerModels.jl}~\cite{coffrin2018powermodels}: construção da estrutura de referência (\texttt{build\_ref}) sobre os dados parseados e oferta das funções \texttt{solve\_ac\_opf} e \texttt{solve\_ac\_pf} que implementam as duas formulações de referência;
     \item \textit{JuMP.jl}~\cite{lubin2023jump}: linguagem de modelagem matemática usada para escrever as quatro formulações controladas;
     \item \textit{Ipopt.jl}~\cite{wachterBiegler2006ipopt}: interface Julia para o \textit{solver} de programação não linear baseado em método de pontos interiores;
@@ -77,7 +77,7 @@ A progressão de seis formulações é identificada pelas siglas da \autoref{tab
         Sigla & Arquivo & Engine & Tipo & Acrescenta \\
         \midrule \midrule
         F0 & \texttt{(F0)OPF\_PM.jl} & PowerModels & FPO AC & baseline FPO \\
-        F1 & \texttt{(F1)PF\_PM.jl.jl} & PowerModels & FP AC & baseline FP \\
+        F1 & \texttt{(F1)PF\_PM.jl} & PowerModels & FP AC & baseline FP \\
         F2 & \texttt{(F2)QLIM+VLIM.jl} & JuMP \textit{hand-built} & FP controlado & QLIM + VLIM \\
         F3 & \texttt{(F3)QLIM+VLIM+CSCA.jl} & JuMP \textit{hand-built} & FP controlado & + CSCA \\
         F4 & \texttt{(F4)QLIM+VLIM+CSCA+CTAP.jl} & JuMP \textit{hand-built} & FP controlado & + CTAP \\

@@ -29,7 +29,7 @@ Construir, validar e comparar uma progressão incremental de formulações de fl
 
 \begin{alineascomponto}
     \item compreender e documentar a formulação matemática do FP e do FPO em coordenadas polares, bem como as principais relaxações disponíveis na literatura;
-    \item utilizar a biblioteca \textit{PWF.jl} para a leitura de arquivos no formato ANAREDE, com extração das estruturas de controle (registros DOPC e DLIN);
+    \item utilizar a biblioteca \textit{PWF.jl}~\cite{pwfjl} para a leitura de arquivos no formato ANAREDE, com extração das estruturas de controle (registros DOPC e DLIN);
     \item implementar duas formulações de referência baseadas em \textit{PowerModels.jl}, uma de FPO completo (\textit{solve\_ac\_opf}) e uma de FP clássico (\textit{solve\_ac\_pf}), para servirem como \textit{baseline} de comparação;
     \item implementar quatro formulações \textit{hand-built} em JuMP que adicionam, sequencialmente, as ações de controle QLIM+VLIM, CSCA, CTAP e DERA, sempre via variáveis de folga penalizadas em uma função objetivo do tipo \textit{soft-constraint};
     \item submeter as seis formulações a uma bateria padronizada de vinte e sete casos de teste, abrangendo redes pedagógicas, redes de médio porte, recortes reduzidos do SIN e o \textit{snapshot} integral do SIN, e analisar o comportamento de convergência, o agrupamento das soluções em \textit{clusters} numericamente equivalentes e os desvios barra a barra em relação às referências.

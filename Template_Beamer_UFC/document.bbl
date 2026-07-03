@@ -19,40 +19,385 @@
 
 \refsection{0}
   \datalist[entry]{none/global//global/global/global}
-    \entry{molzahn2019survey}{article}{}{}
-      \name{author}{2}{}{%
-        {{hash=5bbb0b00a0d69112b0b8f61f3399d8d0}{%
-           family={Molzahn},
-           familyi={M\bibinitperiod},
-           given={Daniel\bibnamedelima K.},
-           giveni={D\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
-        {{hash=e1874de77d978f995679386022d4a872}{%
-           family={Hiskens},
-           familyi={H\bibinitperiod},
-           given={Ian\bibnamedelima A.},
-           giveni={I\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+    \entry{cepel2023anarede}{manual}{}{}
+      \name{author}{1}{}{%
+        {{hash=d22fa96423896c7676e6094349483c71}{%
+           family={{CENTRO DE PESQUISAS DE ENERGIA ELÉTRICA}},
+           familyi={C\bibinitperiod}}}%
       }
-      \strng{namehash}{2195fa7a347fb40ebe21fbde01b6df2b}
-      \strng{fullhash}{2195fa7a347fb40ebe21fbde01b6df2b}
-      \strng{fullhashraw}{2195fa7a347fb40ebe21fbde01b6df2b}
-      \strng{bibnamehash}{2195fa7a347fb40ebe21fbde01b6df2b}
-      \strng{authorbibnamehash}{2195fa7a347fb40ebe21fbde01b6df2b}
-      \strng{authornamehash}{2195fa7a347fb40ebe21fbde01b6df2b}
-      \strng{authorfullhash}{2195fa7a347fb40ebe21fbde01b6df2b}
-      \strng{authorfullhashraw}{2195fa7a347fb40ebe21fbde01b6df2b}
+      \list{location}{1}{%
+        {Rio de Janeiro}%
+      }
+      \list{organization}{1}{%
+        {CEPEL}%
+      }
+      \strng{namehash}{d22fa96423896c7676e6094349483c71}
+      \strng{fullhash}{d22fa96423896c7676e6094349483c71}
+      \strng{fullhashraw}{d22fa96423896c7676e6094349483c71}
+      \strng{bibnamehash}{d22fa96423896c7676e6094349483c71}
+      \strng{authorbibnamehash}{d22fa96423896c7676e6094349483c71}
+      \strng{authornamehash}{d22fa96423896c7676e6094349483c71}
+      \strng{authorfullhash}{d22fa96423896c7676e6094349483c71}
+      \strng{authorfullhashraw}{d22fa96423896c7676e6094349483c71}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
+      \field{title}{Programa ANAREDE: análise de redes elétricas}
+      \field{year}{2023}
+    \endentry
+    \entry{coffrin2018powermodels}{inproceedings}{}{}
+      \name{author}{5}{}{%
+        {{hash=48eeaf929aaff03f73e560202c019983}{%
+           family={COFFRIN},
+           familyi={C\bibinitperiod},
+           given={C.},
+           giveni={C\bibinitperiod}}}%
+        {{hash=1b62ca1b72ca3d81fe52a3604d6499e5}{%
+           family={BENT},
+           familyi={B\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+        {{hash=2756f51d2ef3644cb5e2ac65823eb6e2}{%
+           family={SUNDAR},
+           familyi={S\bibinitperiod},
+           given={K.},
+           giveni={K\bibinitperiod}}}%
+        {{hash=995ac20a632915a9daf37a9098a4bfac}{%
+           family={NG},
+           familyi={N\bibinitperiod},
+           given={Y.},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=d166b335f77a2a5023c1b39d9b4c5986}{%
+           family={LUBIN},
+           familyi={L\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Dublin, Ireland}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{90d922423ef44574f8a3299b49d9b782}
+      \strng{fullhash}{a78ec9b7276226211c5adf8726adcc28}
+      \strng{fullhashraw}{a78ec9b7276226211c5adf8726adcc28}
+      \strng{bibnamehash}{90d922423ef44574f8a3299b49d9b782}
+      \strng{authorbibnamehash}{90d922423ef44574f8a3299b49d9b782}
+      \strng{authornamehash}{90d922423ef44574f8a3299b49d9b782}
+      \strng{authorfullhash}{a78ec9b7276226211c5adf8726adcc28}
+      \strng{authorfullhashraw}{a78ec9b7276226211c5adf8726adcc28}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2018 Power Systems Computation Conference (PSCC)}
+      \field{title}{{PowerModels.jl}: an open-source framework for exploring power flow formulations}
+      \field{year}{2018}
+      \field{pages}{1\bibrangedash 8}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.23919/PSCC.2018.8442948
+      \endverb
+    \endentry
+    \entry{chavarry2024}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=6001006465595daeed7e77a870804a26}{%
+           family={CHÁVARRY},
+           familyi={C\bibinitperiod},
+           given={I.\bibnamedelimi S.},
+           giveni={I\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \strng{namehash}{6001006465595daeed7e77a870804a26}
+      \strng{fullhash}{6001006465595daeed7e77a870804a26}
+      \strng{fullhashraw}{6001006465595daeed7e77a870804a26}
+      \strng{bibnamehash}{6001006465595daeed7e77a870804a26}
+      \strng{authorbibnamehash}{6001006465595daeed7e77a870804a26}
+      \strng{authornamehash}{6001006465595daeed7e77a870804a26}
+      \strng{authorfullhash}{6001006465595daeed7e77a870804a26}
+      \strng{authorfullhashraw}{6001006465595daeed7e77a870804a26}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Projeto de Graduação (Engenharia Elétrica) --- Pontifícia Universidade Católica do Rio de Janeiro, Rio de Janeiro}
+      \field{title}{{PWF.jl} and {ControlPowerFlow.jl}: Julia packages for performing power flow using {ANAREDE} files}
+      \field{year}{2024}
+    \endentry
+    \entry{vonMeier2006powersystems}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=c524123f2edd811978fb55f0a328d00c}{%
+           family={VON\bibnamedelima MEIER},
+           familyi={V\bibinitperiod\bibinitdelim M\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Hoboken, NJ}%
+      }
+      \list{publisher}{1}{%
+        {Wiley-IEEE Press}%
+      }
+      \strng{namehash}{c524123f2edd811978fb55f0a328d00c}
+      \strng{fullhash}{c524123f2edd811978fb55f0a328d00c}
+      \strng{fullhashraw}{c524123f2edd811978fb55f0a328d00c}
+      \strng{bibnamehash}{c524123f2edd811978fb55f0a328d00c}
+      \strng{authorbibnamehash}{c524123f2edd811978fb55f0a328d00c}
+      \strng{authornamehash}{c524123f2edd811978fb55f0a328d00c}
+      \strng{authorfullhash}{c524123f2edd811978fb55f0a328d00c}
+      \strng{authorfullhashraw}{c524123f2edd811978fb55f0a328d00c}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-0-471-17859-0}
+      \field{title}{Electric power systems: a conceptual introduction}
+      \field{year}{2006}
+    \endentry
+    \entry{gloverSarma2012power}{book}{}{}
+      \name{author}{3}{}{%
+        {{hash=55e987c276be42d9c9c65fb6f266c076}{%
+           family={GLOVER},
+           familyi={G\bibinitperiod},
+           given={J.\bibnamedelimi D.},
+           giveni={J\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=ab11ebd5bec36fd05b196d323d706d79}{%
+           family={SARMA},
+           familyi={S\bibinitperiod},
+           given={M.\bibnamedelimi S.},
+           giveni={M\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=3fe3e890e9fad82bbfd43330af0e5f85}{%
+           family={OVERBYE},
+           familyi={O\bibinitperiod},
+           given={T.\bibnamedelimi J.},
+           giveni={T\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Stamford, CT}%
+      }
+      \list{publisher}{1}{%
+        {Cengage Learning}%
+      }
+      \strng{namehash}{5c38d3e9d6af697d4bb80fa09e169809}
+      \strng{fullhash}{5c38d3e9d6af697d4bb80fa09e169809}
+      \strng{fullhashraw}{5c38d3e9d6af697d4bb80fa09e169809}
+      \strng{bibnamehash}{5c38d3e9d6af697d4bb80fa09e169809}
+      \strng{authorbibnamehash}{5c38d3e9d6af697d4bb80fa09e169809}
+      \strng{authornamehash}{5c38d3e9d6af697d4bb80fa09e169809}
+      \strng{authorfullhash}{5c38d3e9d6af697d4bb80fa09e169809}
+      \strng{authorfullhashraw}{5c38d3e9d6af697d4bb80fa09e169809}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{6}
+      \field{title}{Power system analysis and design}
+      \field{year}{2012}
+    \endentry
+    \entry{molzahn2019survey}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=06d532018b6e5ce3bb05fd6964441bb6}{%
+           family={MOLZAHN},
+           familyi={M\bibinitperiod},
+           given={D.\bibnamedelimi K.},
+           giveni={D\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+        {{hash=192a0b8e2b9ded2446be70947e1c5891}{%
+           family={HISKENS},
+           familyi={H\bibinitperiod},
+           given={I.\bibnamedelimi A.},
+           giveni={I\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Now Publishers}%
+      }
+      \strng{namehash}{432d5815cbdeab3f3dbce0f7a516b1a5}
+      \strng{fullhash}{432d5815cbdeab3f3dbce0f7a516b1a5}
+      \strng{fullhashraw}{432d5815cbdeab3f3dbce0f7a516b1a5}
+      \strng{bibnamehash}{432d5815cbdeab3f3dbce0f7a516b1a5}
+      \strng{authorbibnamehash}{432d5815cbdeab3f3dbce0f7a516b1a5}
+      \strng{authornamehash}{432d5815cbdeab3f3dbce0f7a516b1a5}
+      \strng{authorfullhash}{432d5815cbdeab3f3dbce0f7a516b1a5}
+      \strng{authorfullhashraw}{432d5815cbdeab3f3dbce0f7a516b1a5}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
       \field{journaltitle}{Foundations and Trends in Electric Energy Systems}
-      \field{number}{1--2}
-      \field{title}{A Survey of Relaxations and Approximations of the Power Flow Equations}
+      \field{number}{1-2}
+      \field{title}{A survey of relaxations and approximations of the power flow equations}
       \field{volume}{4}
       \field{year}{2019}
       \field{pages}{1\bibrangedash 221}
       \range{pages}{221}
       \verb{doi}
       \verb 10.1561/3100000012
+      \endverb
+    \endentry
+    \entry{bezanson2017julia}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=916e452efac38fea88b4f5993929f208}{%
+           family={BEZANSON},
+           familyi={B\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=74fa94aca432f6ef371551b942846ad2}{%
+           family={EDELMAN},
+           familyi={E\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=f6ef3862d77e184d4ee80bcfd6d8cde2}{%
+           family={KARPINSKI},
+           familyi={K\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod}}}%
+        {{hash=dfcb6ed555ef6932903343f07618c213}{%
+           family={SHAH},
+           familyi={S\bibinitperiod},
+           given={V.\bibnamedelimi B.},
+           giveni={V\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {SIAM}%
+      }
+      \strng{namehash}{c92f5891f220ab3f462dcb57751b0dfe}
+      \strng{fullhash}{7331f669d71279f9f5ed2c48e8661e9f}
+      \strng{fullhashraw}{7331f669d71279f9f5ed2c48e8661e9f}
+      \strng{bibnamehash}{c92f5891f220ab3f462dcb57751b0dfe}
+      \strng{authorbibnamehash}{c92f5891f220ab3f462dcb57751b0dfe}
+      \strng{authornamehash}{c92f5891f220ab3f462dcb57751b0dfe}
+      \strng{authorfullhash}{7331f669d71279f9f5ed2c48e8661e9f}
+      \strng{authorfullhashraw}{7331f669d71279f9f5ed2c48e8661e9f}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{SIAM Review}
+      \field{number}{1}
+      \field{title}{Julia: a fresh approach to numerical computing}
+      \field{volume}{59}
+      \field{year}{2017}
+      \field{pages}{65\bibrangedash 98}
+      \range{pages}{34}
+      \verb{doi}
+      \verb 10.1137/141000671
+      \endverb
+    \endentry
+    \entry{pwfjl}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=6865dc1ff27759168e418c916c8a3ba6}{%
+           family={{LAMPSPUC}},
+           familyi={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{6865dc1ff27759168e418c916c8a3ba6}
+      \strng{fullhash}{6865dc1ff27759168e418c916c8a3ba6}
+      \strng{fullhashraw}{6865dc1ff27759168e418c916c8a3ba6}
+      \strng{bibnamehash}{6865dc1ff27759168e418c916c8a3ba6}
+      \strng{authorbibnamehash}{6865dc1ff27759168e418c916c8a3ba6}
+      \strng{authornamehash}{6865dc1ff27759168e418c916c8a3ba6}
+      \strng{authorfullhash}{6865dc1ff27759168e418c916c8a3ba6}
+      \strng{authorfullhashraw}{6865dc1ff27759168e418c916c8a3ba6}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Disponível em: \url{https://github.com/LAMPSPUC/PWF.jl}}
+      \field{note}{Pacote {Julia}, versão 0.1.0. Acesso em: 28 jun. 2026}
+      \field{title}{{PWF.jl}: parser de arquivos {ANAREDE} no formato {PWF} em {Julia}}
+      \field{year}{2024}
+    \endentry
+    \entry{lubin2023jump}{article}{}{}
+      \name{author}{6}{}{%
+        {{hash=d166b335f77a2a5023c1b39d9b4c5986}{%
+           family={LUBIN},
+           familyi={L\bibinitperiod},
+           given={M.},
+           giveni={M\bibinitperiod}}}%
+        {{hash=24886d29e473d97a4626d707b2edb53c}{%
+           family={DOWSON},
+           familyi={D\bibinitperiod},
+           given={O.},
+           giveni={O\bibinitperiod}}}%
+        {{hash=20c04ebe2206d4c3f33c01006a72b9e5}{%
+           family={DIAS\bibnamedelima GARCIA},
+           familyi={D\bibinitperiod\bibinitdelim G\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=358e5a17cdff2fd0ae0bca94cdebabcc}{%
+           family={HUCHETTE},
+           familyi={H\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod}}}%
+        {{hash=3ee3c88f07f4a5a3f327b89f7c234797}{%
+           family={LEGAT},
+           familyi={L\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+        {{hash=5687c7def47c8ba1f7d130884fb1a5aa}{%
+           family={VIELMA},
+           familyi={V\bibinitperiod},
+           given={J.\bibnamedelimi P.},
+           giveni={J\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+      }
+      \strng{namehash}{61e0eb28d97f02fe34ba33a683d85d6d}
+      \strng{fullhash}{c99bef53b6041cd765955fd558572530}
+      \strng{fullhashraw}{c99bef53b6041cd765955fd558572530}
+      \strng{bibnamehash}{61e0eb28d97f02fe34ba33a683d85d6d}
+      \strng{authorbibnamehash}{61e0eb28d97f02fe34ba33a683d85d6d}
+      \strng{authornamehash}{61e0eb28d97f02fe34ba33a683d85d6d}
+      \strng{authorfullhash}{c99bef53b6041cd765955fd558572530}
+      \strng{authorfullhashraw}{c99bef53b6041cd765955fd558572530}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Mathematical Programming Computation}
+      \field{title}{{JuMP} 1.0: recent improvements to a modeling language for mathematical optimization}
+      \field{volume}{15}
+      \field{year}{2023}
+      \field{pages}{581\bibrangedash 589}
+      \range{pages}{9}
+      \verb{doi}
+      \verb 10.1007/s12532-023-00239-3
+      \endverb
+    \endentry
+    \entry{wachterBiegler2006ipopt}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=0de38cc983d8b2f652e3bfed8bf11cf7}{%
+           family={WÄCHTER},
+           familyi={W\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=a68ccf151a162b07d5a8aa25bb80c2fb}{%
+           family={BIEGLER},
+           familyi={B\bibinitperiod},
+           given={L.\bibnamedelimi T.},
+           giveni={L\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{f8a6231cd0a242d2e61b3686d7c1b4ce}
+      \strng{fullhash}{f8a6231cd0a242d2e61b3686d7c1b4ce}
+      \strng{fullhashraw}{f8a6231cd0a242d2e61b3686d7c1b4ce}
+      \strng{bibnamehash}{f8a6231cd0a242d2e61b3686d7c1b4ce}
+      \strng{authorbibnamehash}{f8a6231cd0a242d2e61b3686d7c1b4ce}
+      \strng{authornamehash}{f8a6231cd0a242d2e61b3686d7c1b4ce}
+      \strng{authorfullhash}{f8a6231cd0a242d2e61b3686d7c1b4ce}
+      \strng{authorfullhashraw}{f8a6231cd0a242d2e61b3686d7c1b4ce}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Mathematical Programming}
+      \field{number}{1}
+      \field{title}{On the implementation of an interior-point filter line-search algorithm for large-scale nonlinear programming}
+      \field{volume}{106}
+      \field{year}{2006}
+      \field{pages}{25\bibrangedash 57}
+      \range{pages}{33}
+      \verb{doi}
+      \verb 10.1007/s10107-004-0559-y
       \endverb
     \endentry
     \entry{Template_Beamer_UFC}{software}{}{}
@@ -71,8 +416,8 @@
       \strng{authornamehash}{fda796de8095435374f144c795d401f9}
       \strng{authorfullhash}{fda796de8095435374f144c795d401f9}
       \strng{authorfullhashraw}{fda796de8095435374f144c795d401f9}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{{TemplateBeamerUFC}}

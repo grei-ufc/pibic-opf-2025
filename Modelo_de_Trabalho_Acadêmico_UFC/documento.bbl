@@ -20,12 +20,10 @@ Rio de Janeiro, 2023.}
 
 \bibitem[CH{\'A}VARRY 2024]{chavarry2024}
 \abntrefinfo{CH{\'A}VARRY}{CH{\'A}VARRY}{2024}
-{CH{\'A}VARRY, I.~S.
-\textbf{Aplica{\c{c}}{\~a}o de a{\c{c}}{\~o}es de controle do programa ANAREDE
-  em formula{\c{c}}{\~o}es de fluxo de pot{\^e}ncia em Julia}.
-Disserta\c{c}\~{a}o (Trabalho de Conclus{\~a}o de Curso (Engenharia
-  El{\'e}trica)) --- Universidade Federal do Cear{\'a}, Centro de Tecnologia,
-  Departamento de Engenharia El{\'e}trica, Fortaleza, 2024.}
+{CH{\'A}VARRY, I.~S. \textbf{{PWF.jl} and {ControlPowerFlow.jl}: Julia packages
+  for performing power flow using {ANAREDE} files}. 2024.
+Projeto de Gradua{\c{c}}{\~a}o (Engenharia El{\'e}trica) --- Pontif{\'i}cia
+  Universidade Cat{\'o}lica do Rio de Janeiro, Rio de Janeiro.}
 
 \bibitem[COFFRIN \textit{et al.} 2018]{coffrin2018powermodels}
 \abntrefinfo{COFFRIN \textit{et al.}}{COFFRIN \textit{et al.}}{2018}
@@ -38,6 +36,12 @@ Disserta\c{c}\~{a}o (Trabalho de Conclus{\~a}o de Curso (Engenharia
 \abntrefinfo{GLOVER \textit{et al.}}{GLOVER \textit{et al.}}{2012}
 {GLOVER, J.~D.; SARMA, M.~S.; OVERBYE, T.~J. \textbf{Power system analysis and
   design}. 6. ed. Stamford, CT: Cengage Learning, 2012.}
+
+\bibitem[{LAMPSPUC} 2024]{pwfjl}
+\abntrefinfo{{LAMPSPUC}}{{LAMPSPUC}}{2024}
+{{LAMPSPUC}. \textbf{{PWF.jl}: parser de arquivos {ANAREDE} no formato {PWF} em
+  {Julia}}. 2024. Dispon{\'i}vel em: \url{https://github.com/LAMPSPUC/PWF.jl}.
+Pacote {Julia}, vers{\~a}o 0.1.0. Acesso em: 28 jun. 2026.}
 
 \bibitem[LUBIN \textit{et al.} 2023]{lubin2023jump}
 \abntrefinfo{LUBIN \textit{et al.}}{LUBIN \textit{et al.}}{2023}

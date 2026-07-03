@@ -1,0 +1,157 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Roteiro de falas da apresentação do TCC                                       %%
+%% Autor: Gabriel Rufino Montenegro                                              %%
+%% Pareado com a apresentação Template_Beamer_UFC/document.pdf                   %%
+%% Duração-alvo: ~22 min (janela 20-25 min)                                      %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage[margin=2.3cm]{geometry}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{parskip}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\definecolor{ufcblue}{RGB}{0,61,124}
+\definecolor{chipbg}{RGB}{224,233,243}
+\definecolor{cue}{RGB}{120,120,120}
+
+\hypersetup{colorlinks=true, linkcolor=ufcblue, urlcolor=ufcblue}
+
+\setlength{\parskip}{0.55em}
+\setlength{\parindent}{0pt}
+
+% Cabeçalho de cada slide: número, título, faixa de tempo
+\newcommand{\slide}[3]{%
+  \bigskip
+  \noindent\colorbox{chipbg}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{%
+    \textbf{\textcolor{ufcblue}{#1}}\,\textbf{#2}\hfill\textbf{\textcolor{ufcblue}{#3}}}}\par
+  \nopagebreak\medskip
+}
+% Indicação cênica (gesto, troca de slide, ênfase) - texto em cinza itálico
+\newcommand{\cue}[1]{{\color{cue}\itshape[#1]}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\small\textcolor{ufcblue}{Roteiro de falas --- TCC}}
+\lhead{\small\textcolor{ufcblue}{Gabriel Rufino Montenegro}}
+\rfoot{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE\bfseries\textcolor{ufcblue}{Roteiro de Falas da Apresentação}}\\[0.3em]
+    {\large Análise comparativa de formulações de Fluxo de Potência Ótimo com ações de controle em JuMP/Julia}\\[0.2em]
+    {\normalsize Gabriel Rufino Montenegro \quad$\bullet$\quad Orientador: Prof.\ Lucas Silveira Melo \quad$\bullet$\quad EE/UFC}
+\end{center}
+
+\rule{\linewidth}{0.6pt}
+
+\textbf{Como usar este roteiro.} Cada bloco abaixo corresponde a um slide da apresentação, na mesma ordem. A faixa de tempo à direita é o \emph{tempo acumulado} ao \emph{final} daquele slide --- use um relógio/cronômetro como guia. As marcações em \cue{cinza itálico} são deixas cênicas (não devem ser lidas). O texto em preto é a fala propriamente dita; não precisa ser decorada palavra por palavra, mas o ritmo foi calibrado para fechar em torno de \textbf{22 minutos} (janela de 20 a 25). Se perceber que está atrasado, os slides de Fundamentação (Fluxo de Potência AC e Ótimo) são os mais comprimíveis.
+
+\medskip
+\textbf{Resumo do tempo:} Abertura 1{,}5 min $\to$ Fundamentação $\sim$5 min $\to$ Metodologia $\sim$4 min $\to$ Resultados $\sim$8 min $\to$ Conclusões e encerramento $\sim$3 min.
+
+%% =====================================================================
+\section*{\textcolor{ufcblue}{Bloco 1 --- Abertura}}
+
+\slide{Slide 1.}{Capa}{0:00 -- 0:45}
+Bom dia a todos. Cumprimento os membros da banca --- professor Raimundo Furtado Sampaio, professor Rafael Castro de Andrade e o engenheiro Mário Sérgio, da Intertechne ---, o meu orientador, professor Lucas Silveira Melo, e os demais presentes. Meu nome é Gabriel Rufino Montenegro e vou apresentar meu Trabalho de Conclusão de Curso, intitulado ``Análise comparativa de formulações de Fluxo de Potência Ótimo com ações de controle em JuMP/Julia''. Em uma frase: eu construí, do zero, uma sequência de seis formulações de fluxo de potência que incorporam, uma a uma, as ações de controle que o operador brasileiro usa na prática, e as testei desde redes de três barras até um retrato completo do Sistema Interligado Nacional.
+
+\slide{Slide 2.}{Sumário}{0:45 -- 1:15}
+A apresentação tem quatro blocos. Primeiro, a motivação e os objetivos --- por que esse problema importa. Depois, a fundamentação teórica: o que é fluxo de potência, fluxo de potência ótimo e quais são as ações de controle. Em seguida, a metodologia, com a arquitetura de software em Julia e a descrição das seis formulações. E, por fim, os resultados sobre a bateria de testes e as conclusões. \cue{avançar para o próximo slide}
+
+%% =====================================================================
+\section*{\textcolor{ufcblue}{Bloco 2 --- Motivação e Objetivos ($\sim$2:45 de bloco)}}
+
+\slide{Slide 3.}{Contexto: operação do SIN}{1:15 -- 2:45}
+A operação de um sistema elétrico de grande porte, como o nosso Sistema Interligado Nacional, não se resume a resolver as equações de fluxo de potência. Ela depende de um conjunto de \textbf{ações de controle} que mantêm o sistema dentro de limites seguros. São cinco que me interessam aqui: o \textbf{QLIM}, que são os limites de geração de potência reativa dos geradores; o \textbf{VLIM}, os limites de magnitude de tensão nas barras; o \textbf{CSCA}, o chaveamento automático de bancos \textit{shunt}, capacitores e reatores; o \textbf{CTAP}, o ajuste automático dos \textit{taps} dos transformadores; e o que eu chamo de \textbf{DERA}, um esquema hierárquico de corte e alívio de carga em emergência. No Brasil, essas ações estão codificadas no programa ANAREDE, do CEPEL, e nos arquivos de dados no formato PWF. O ANAREDE as resolve por meio de heurísticas e laços iterativos próprios. Sem representar esses controles, um ponto de operação calculado em computador pode parecer válido e, ainda assim, estar longe do que o sistema realmente faria --- por exemplo, ignorando que um gerador já saturou seu suporte de reativo, ou que um banco de capacitores precisaria ter sido chaveado. A pergunta que move o trabalho é: \emph{como reproduzir esses controles em uma ferramenta moderna, aberta e transparente?}
+
+\slide{Slide 4.}{Lacuna metodológica}{2:45 -- 4:00}
+E aqui aparece a lacuna. Do lado acadêmico, a referência internacional é o pacote \textit{PowerModels.jl}, escrito em Julia. Ele é excelente: oferece o fluxo de potência ótimo AC e suas relaxações. Mas ele \emph{não} tem suporte nativo às ações de controle do ANAREDE. Havia uma proposta de preencher essa lacuna, o pacote \textit{ControlPowerFlow.jl}; porém, ao longo do trabalho, eu confirmei, em contato direto com o autor e seu orientador, que a versão pública ficou incompleta após uma parceria com uma empresa. Ou seja, não dava para usá-lo como referência de comparação. Diante disso, minha estratégia foi construir as formulações \textbf{do zero}, em JuMP, adicionando os controles um a um, de modo que cada uma pudesse ser comparada contra as duas referências do PowerModels sobre a mesma bateria de casos.
+
+\slide{Slide 5.}{Objetivos}{4:00 -- 5:00}
+O objetivo geral, portanto, foi construir, validar e comparar essa progressão incremental de formulações em JuMP/Julia, sobre o \textit{solver} Ipopt, incorporando as ações de controle do ANAREDE. Entre os objetivos específicos, destaco quatro: documentar a formulação matemática do fluxo de potência em coordenadas polares; usar o pacote \textit{PWF.jl} para ler os arquivos ANAREDE com as estruturas de controle; implementar duas formulações de referência com o PowerModels e quatro formulações próprias em JuMP; e, por fim, submeter as seis a uma bateria padronizada de vinte e sete casos, do três barras ao SIN.
+
+%% =====================================================================
+\section*{\textcolor{ufcblue}{Bloco 3 --- Fundamentação Teórica ($\sim$4:30 de bloco)}}
+
+\slide{Slide 6.}{Fluxo de Potência AC}{5:00 -- 6:15}
+Rapidamente, a base teórica. O fluxo de potência AC é o conjunto de equações de balanço de potência ativa e reativa em cada barra: o que entra de geração, menos o que sai de carga, tem que fechar com o que circula pelos ramos. As barras são classificadas em três tipos: a \textit{slack}, que é a referência de ângulo; as PV, com tensão e potência ativa especificadas; e as PQ, com as potências dadas e tensão e ângulo como incógnitas. O ponto importante para o restante da apresentação é que esse sistema é \textbf{não linear e não convexo} --- ele é tradicionalmente resolvido por Newton-Raphson, e a não convexidade é justamente o que torna o problema difícil em larga escala.
+
+\slide{Slide 7.}{Fluxo de Potência Ótimo e relaxações}{6:15 -- 7:45}
+Quando a esse sistema eu adiciono uma função objetivo --- tipicamente o custo de geração --- e restrições de limites de equipamentos, eu tenho o fluxo de potência \emph{ótimo}. Como ele herda a não convexidade, surgiram na literatura várias relaxações. Há uma distinção conceitual que vale frisar: a aproximação \textbf{DC} lineariza as equações --- ela é rápida, mas \emph{não} dá garantia sobre o ótimo verdadeiro; já as relaxações \textbf{SOC} e \textbf{SDP} são, por construção, garantidas: fornecem uma cota inferior \emph{válida} do custo real. A tabela mostra isso num caso de cinco barras: o DC fica \emph{abaixo} do AC porque ignora perdas e impõe condições irreais; e o SOC fica ainda mais abaixo, com um \textit{gap} de cerca de dezoito por cento, o que é esperado em redes malhadas. Esse estudo é apenas didático --- a progressão principal do trabalho mantém a formulação AC exata.
+
+\slide{Slide 8.}{Ações de controle do ANAREDE}{7:45 -- 9:30}
+Este é o slide conceitualmente central. Eu represento cada controle assim: o \textbf{QLIM e o VLIM} reproduzem a lógica de troca de tipo de barra, PV para PQ, mas em vez de chavear de forma descontínua --- o que atrapalha um \textit{solver} suave como o Ipopt ---, eu uso \textbf{variáveis de folga penalizadas} na função objetivo. O \textbf{CSCA} transforma a susceptância do banco \textit{shunt} numa variável contínua de decisão, dentro de seus limites. O \textbf{CTAP} faz o mesmo com a razão de \textit{tap} do transformador, e reaproveita as folgas de tensão já existentes, sem criar folga nova. E o \textbf{DERA} é um corte hierárquico de carga: o \textit{solver} pode cortar parte da carga ativa de cada barra, mas com penalidade crescente conforme o nível de tensão --- ele corta primeiro onde é mais fácil religar e protege a extra-alta tensão. O fio condutor é que \emph{todos} os controles entram como \textit{soft-constraint}, ou seja, restrições flexíveis penalizadas, evitando os laços descontínuos do ANAREDE. E cada folga tem significado físico claro: a folga de reativo do QLIM, por exemplo, corresponde ao gerador saturando o regulador automático de tensão e travando no limite de capabilidade --- que é exatamente a conversão de barra PV para PQ que o ANAREDE executa no seu laço de troca de tipo.
+
+%% =====================================================================
+\section*{\textcolor{ufcblue}{Bloco 4 --- Metodologia ($\sim$3:45 de bloco)}}
+
+\slide{Slide 9.}{Pipeline de execução}{9:30 -- 10:45}
+Do ponto de vista de software, tudo foi feito em Julia, encadeando quatro pacotes: o \textit{PWF.jl} para ler o arquivo ANAREDE, o \textit{PowerModels.jl} como referência, o \textit{JuMP.jl} para escrever os modelos e o \textit{Ipopt} como \textit{solver} não linear. O \textit{pipeline} tem sete etapas, sempre as mesmas: leitura do PWF já com os dados de controle; um saneamento topológico que mantém só a maior componente conexa e uma única barra de referência; padronização das curvas de custo; construção da estrutura de referência; montagem do modelo no JuMP; resolução; e exportação dos resultados em CSV. Um detalhe de modelagem: os elos de corrente contínua, os HVDC, têm suas injeções \textbf{fixadas} como condição de contorno --- elas já vêm do fluxo base, e liberá-las só aumentaria o problema sem trazer informação.
+
+\slide{Slide 10.}{A progressão F0 $\to$ F5}{10:45 -- 12:00}
+Esta tabela resume as seis formulações. A \textbf{F0} é o fluxo de potência ótimo de referência, do PowerModels; a \textbf{F1} é o fluxo de potência clássico, também do PowerModels. Daí em diante começam as minhas formulações em JuMP: a \textbf{F2} acrescenta QLIM e VLIM; a \textbf{F3} acrescenta o CSCA; a \textbf{F4}, o CTAP; e a \textbf{F5}, o DERA. O ponto-chave é que a progressão é \textbf{estritamente aditiva}: cada formulação parte da anterior e acrescenta um único bloco de variáveis e restrições. Isso tem uma consequência metodológica forte --- se duas formulações consecutivas divergem num resultado, essa divergência é atribuível \emph{exclusivamente} ao novo controle introduzido. É o que me permite isolar o efeito de cada controle.
+
+\slide{Slide 11.}{Como funcionam as folgas penalizadas}{12:00 -- 13:15}
+Para deixar concreto, veja a F2. As variáveis primárias são as de sempre --- tensão, ângulo, potências ---, com os limites lidos do PWF. A novidade são as folgas: uma folga de tensão em cada barra de geração e uma folga de reativo em cada carga. A restrição de \textit{setpoint} diz que a tensão da barra é o valor de referência mais a folga; e a função objetivo minimiza a soma dos quadrados dessas folgas, com um peso alto, de um milhão. A intuição é simples e é o coração do trabalho: \emph{se} o problema é factível respeitando os \textit{setpoints}, a folga fica zero e a solução respeita tudo. \emph{Se não é}, em vez de o \textit{solver} simplesmente declarar ``infactível'', como faz o fluxo clássico, ele encontra a solução que \textbf{viola minimamente} os controles. É essa robustez que vai aparecer nos resultados.
+
+%% =====================================================================
+\section*{\textcolor{ufcblue}{Bloco 5 --- Resultados ($\sim$8:00 de bloco)}}
+
+\slide{Slide 12.}{Bateria de testes --- 27 casos}{13:15 -- 14:15}
+A bateria tem vinte e sete casos, escolhidos para varrer dois eixos: o porte da rede e a presença de cada controle. Há redes pedagógicas de três a nove barras, com variantes que ativam cada seção do PWF; redes de médio porte de trezentas e quinhentas barras; dois recortes reduzidos do Nordeste do SIN, de mil e de dois mil e seiscentas barras, derivados de um caso real do ciclo de planejamento do ONS; o \textit{snapshot} integral do SIN, com mais de treze mil barras; e alguns casos sintéticos de \textit{stress}. O critério para dizer que duas formulações chegaram à ``mesma'' solução é rígido: diferença menor que dez à menos quatro, simultaneamente, em tensão, ângulo, potências e fluxos.
+
+\slide{Slide 13.}{Convergência global}{14:15 -- 15:45}
+E este é o primeiro resultado central. Olhando a faixa de convergência na bateria completa: minhas formulações \textit{hand-built}, da F2 à F5, convergem em \textbf{vinte e três} dos vinte e sete casos. As referências convergem em menos: dezoito para a F1 e quinze para a F0. A tabela colorida mostra uma amostra --- repare nas linhas em amarelo, como o \texttt{4busfrank\_vlim}, o \texttt{5busfrank\_csca} e o \texttt{caso\_red2}: ali as referências declaram infactibilidade, e as formulações controladas convergem. No total, há \textbf{nove} casos em que pelo menos uma referência falha e pelo menos uma das minhas formulações encontra solução. A razão é exatamente aquela das folgas: onde o limite caixa rígido inviabiliza o problema, a folga penalizada recupera um ponto de operação utilizável. E quero ser preciso sobre o que isso significa: não é que minhas formulações sejam ``melhores'' por convergir mais; é que elas respondem a uma pergunta diferente --- em vez de apenas dizer ``infactível'', elas dizem \emph{o quanto} e \emph{onde} o sistema precisaria violar os controles para conseguir operar.
+
+\slide{Slide 14.}{Análise barra a barra --- \textit{clusters}}{15:45 -- 17:00}
+Convergir é uma coisa; \emph{para onde} cada formulação converge é outra. Aqui eu agrupo as soluções em \textit{clusters} de equivalência. Veja a rede de três barras: aparecem quatro soluções distintas. A \textbf{F0}, o ótimo econômico, empurra a tensão para o limite de 1,1 por unidade. A \textbf{F1} dá o ponto operacional ``natural'' da rede. A \textbf{F2} fica perto da F1, com uma folguinha residual. E as \textbf{F3 a F5}, que têm o CSCA ativo, deslocam o ponto para tensões consistentemente mais baixas, porque o controle do banco \textit{shunt} ajusta a susceptância para perseguir o \textit{setpoint}. Ou seja, cada \textit{cluster} é uma assinatura computacional de um controle --- o que serve, inclusive, para detectar regressões em implementações futuras.
+
+\slide{Slide 15.}{Destaque: o \texttt{caso\_red2}}{17:00 -- 18:20}
+Esse caso é o exemplo mais nítido de toda a bateria, e eu gosto de detê-lo aqui. É um recorte real do Nordeste, com mil e trinta e três barras. O fluxo de potência clássico, a F1, declara infactibilidade --- mas repare \emph{como}: ele entrega uma ``solução'' com tensão mínima de \textbf{menos zero vírgula quatro} por unidade e máxima de quase dois por unidade. Isso é fisicamente impossível. Já as formulações controladas, da F2 à F5, convergem para tensões dentro de uma faixa realista. E mais: a F4, que tem CSCA mais CTAP, reduz a função objetivo a cerca de dez à menos dois --- algo como cinco mil vezes menor que a F2. Na prática, a combinação dos dois controles encontra um ponto de operação praticamente compatível com os \textit{setpoints} do arquivo, quase sem violação. É a demonstração concreta de para que servem essas formulações.
+
+\slide{Slide 16.}{O caso SIN integral}{18:20 -- 19:35}
+Agora, o caso de maior interesse prático: o SIN integral, com treze mil trezentas e trinta e oito barras. Aqui eu preciso ser honesto sobre um resultado \emph{negativo}: \textbf{nenhuma} das seis formulações converge dentro do orçamento de três mil iterações e do tempo limite. A F0, a F2 e a F4 estouram o tempo; a F1, a F3 e a F5 terminam em infactibilidade local. Mas há uma leitura importante junto: o sistema \emph{não quebra} --- toda a infraestrutura, leitura do PWF, construção da referência, montagem do modelo e chamada ao Ipopt, funciona corretamente em escala SIN. Não há erro de \textit{parser} nem \textit{crash}. E um ponto importante: minhas formulações \emph{não} partem do zero --- elas já são inicializadas com o ponto de operação convergido pelo próprio ANAREDE, lido do arquivo PWF. Mesmo assim não fecham; e a F1, a referência do PowerModels, partindo do mesmo ponto, também termina infactível. Ou seja, o gargalo não está na inicialização: está na fidelidade do modelo reconstruído --- elos HVDC, intercâmbios de área, controles remotos, múltiplas barras de referência --- e no condicionamento numérico do problema nessa escala. O obstáculo é \textbf{numérico}, não estrutural.
+
+\slide{Slide 17.}{Verificação auxiliar FDC}{19:35 -- 20:50}
+E para comprovar essa hipótese eu fiz uma verificação adicional, que chamo de FDC: resolver o \emph{mesmo} arquivo do SIN, mas na aproximação DC, linear. O resultado é o oposto: ele converge em poucas iterações, com status resolvido. A tabela traz os números agregados --- treze mil barras retidas, cerca de setenta e um gigawatts de geração, perdas nulas por definição. Isso \textbf{confirma} que o obstáculo do AC é numérico, não estrutural: a mesma rede, no mesmo \textit{pipeline}, fecha quando linearizada. Há um porém honesto: os ângulos da solução DC chegam a cento e setenta graus, o que viola as próprias hipóteses da linearização --- então essa solução não é fisicamente realizável e, com tensão um por unidade em todas as barras, ela seria um ponto de partida \emph{pior} que o ponto convergido do ANAREDE que eu já uso. Por isso o valor da FDC é \emph{diagnóstico}: ela confirma que existe solução para a topologia e que o obstáculo do AC é numérico --- o caminho de trabalho futuro é reconciliar o modelo com o do ANAREDE e melhorar o condicionamento, não trocar o ponto de partida.
+
+%% =====================================================================
+\section*{\textcolor{ufcblue}{Bloco 6 --- Conclusões e encerramento ($\sim$3:00 de bloco)}}
+
+\slide{Slide 18.}{Síntese das contribuições}{20:50 -- 22:20}
+Em síntese, três contribuições. A primeira: as formulações controladas ampliam a faixa de convergência --- vinte e três de vinte e sete casos, recuperando soluções factíveis onde as referências falham. A segunda: os \textit{clusters} de equivalência funcionam como uma ``impressão digital'' computacional de cada controle, reproduzindo o comportamento esperado do QLIM, do CSCA, do CTAP e do DERA. E a terceira, que é uma contribuição negativa mas relevante: eu delimitei com clareza a fronteira atual --- nenhuma formulação converge no SIN, mesmo partindo do ponto já convergido pelo ANAREDE, o que mostra exatamente onde a abordagem \textit{soft-constraint} pura precisa de reconciliação de modelo e de melhor condicionamento numérico. Em conjunto, essas três contribuições mostram que a abordagem é robusta nas escalas pedagógica e regional, e mapeiam, com precisão, o que ainda falta para alcançar a escala nacional.
+
+\slide{Slide 19.}{Limitações e trabalhos futuros}{22:20 -- 23:35}
+As principais limitações: o CSCA e o CTAP são tratados como variáveis contínuas, enquanto a operação real é discreta; o DERA é uma versão contínua e suave de um mecanismo que, na realidade, é discreto e emergencial; e os elos HVDC entram com fluxos fixados. Os trabalhos futuros decorrem diretamente disso: primeiro, viabilizar o SIN atacando a causa efetiva --- uma verificação de resíduos alimentando o modelo com a solução do PWF, uma auditoria da tradução PWF para JuMP e o escalonamento progressivo das penalidades por homotopia; segundo, discretizar o CSCA e o CTAP, transformando o problema num MINLP, com os \textit{solvers} que o ecossistema Julia já oferece; e, terceiro, acoplar as minhas formulações ao \textit{ControlPowerFlow.jl} como ferramenta de validação.
+
+\slide{Slide 20.}{Encerramento}{23:35 -- 24:05}
+Com isso eu encerro. O trabalho mostrou que é possível reproduzir, de forma transparente e reprodutível, as ações de controle do ANAREDE em uma ferramenta aberta, e mapeou tanto os ganhos quanto a fronteira numérica atual da abordagem. Agradeço novamente à banca pela atenção e ao professor Lucas pela orientação, e fico à disposição para as perguntas. Muito obrigado.
+
+%% =====================================================================
+\bigskip
+\rule{\linewidth}{0.6pt}
+\section*{\textcolor{ufcblue}{Apêndice --- Perguntas prováveis da banca (preparação)}}
+
+\textbf{1. Por que penalidade quadrática e por que $\rho = 10^6$?} O quadrado mantém a função objetivo suave e diferenciável, ideal para o Ipopt; o valor $10^6$ é alto o bastante para que, havendo solução sem violação, as folgas saturem em zero, mas não tão alto a ponto de degradar o condicionamento numérico. Na F5 eu reduzo para $10^5$ justamente para que o termo de corte de carga se torne competitivo.
+
+\textbf{2. Tratar CSCA/CTAP como contínuos não descaracteriza o controle?} Captura corretamente a \emph{direção} e a \emph{magnitude} da compensação que o operador faria; perde-se só a granularidade discreta dos passos. A discretização via MINLP é o passo seguinte, e está nos trabalhos futuros.
+
+\textbf{3. Por que o SIN não converge se os recortes convergem?} Não é a inicialização: todas as formulações já partem do ponto convergido pelo ANAREDE, lido do PWF --- e mesmo a F1, do PowerModels, partindo desse ponto, termina infactível. A diferença está no que só o caso integral tem: elos HVDC, intercâmbios de área, controles remotos e múltiplas barras de referência, cuja tradução PWF$\to$JuMP precisa ser auditada, além do condicionamento do NLP com penalidade $10^6$ nessa escala. A FDC confirma que o obstáculo é numérico, não estrutural --- por isso as frentes são verificação de resíduos, auditoria da tradução e homotopia das penalidades.
+
+\textbf{4. Qual a diferença essencial para o ANAREDE?} O ANAREDE resolve por laços iterativos externos e chaveamentos discretos; eu resolvo tudo numa única otimização não linear com folgas. Os resultados convergem para o mesmo tipo de ponto de operação, mas com uma formulação explícita e auditável.
+
+\textbf{5. O que é exatamente o DERA neste trabalho?} É um rótulo herdado do nome do \textit{script}. Aqui ele designa um esquema hierárquico de corte de carga, análogo aos Esquemas Regionais de Alívio de Carga do ONS, em que o \textit{solver} corta carga preferencialmente nas barras de menor nível de tensão.
+
+\textbf{6. Por que Julia e não Python/MATLAB?} Pela combinação de sintaxe de alto nível com desempenho de linguagem compilada, e porque o JuMP e o PowerModels.jl, referências em otimização de sistemas de potência, são nativos do ecossistema Julia.
+
+\end{document}

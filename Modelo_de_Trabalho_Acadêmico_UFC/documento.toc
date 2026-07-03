@@ -52,16 +52,16 @@
 \contentsline {subsection}{\numberline {4.3.4}Casos sintéticos com erro de modelo}{45}{subsection.4.3.4}%
 \contentsline {section}{\numberline {4.4}Validação adicional: casos reduzidos do SIN}{45}{section.4.4}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {5}\MakeTextUppercase []{Conclusões e Trabalhos Futuros}}{48}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Síntese das contribuições}{48}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Limitações}{49}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Trabalhos futuros}{49}{section.5.3}%
+\contentsline {chapter}{\chapternumberline {5}\MakeTextUppercase []{Conclusões e Trabalhos Futuros}}{49}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Síntese das contribuições}{49}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Limitações}{50}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Trabalhos futuros}{51}{section.5.3}%
 \setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
-\contentsline {chapter}{\MakeTextUppercase []{REFER\^ENCIAS}}{51}{section*.29}%
-\contentsline {chapter}{AP\^ENDICES}{52}{section*.29}%
+\contentsline {chapter}{\MakeTextUppercase []{REFER\^ENCIAS}}{53}{section*.29}%
+\contentsline {chapter}{AP\^ENDICES}{54}{section*.29}%
 \renewcommand *{\cftappendixname }{AP\^ENDICE \space }
 \renewcommand *{\cftappendixname }{\bfseries AP\^ENDICE \space }
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
 \setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
 \cftinsert {A}
-\contentsline {appendix}{\chapternumberline {A}\normalfont Trecho da implementação JuMP da formulação F2}{52}{appendix.A}%
+\contentsline {appendix}{\chapternumberline {A}\normalfont Trecho da implementação JuMP da formulação F2}{54}{appendix.A}%
