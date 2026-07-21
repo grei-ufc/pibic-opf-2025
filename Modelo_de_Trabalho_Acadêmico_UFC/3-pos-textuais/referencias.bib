@@ -1,11 +1,11 @@
-% Referências do TCC — Análise comparativa de formulações de FPO em JuMP/Julia
+% Referências do TCC — Implementação de uma arquitetura incremental de ações de controle de FPO em linguagem Julia
 
 % =====================================================================
 % LIVROS-TEXTO DE SISTEMAS DE POTÊNCIA
 % =====================================================================
 
 @book{vonMeier2006powersystems,
-    author    = {VON MEIER, A.},
+    author    = {{VON MEIER}, A.},
     title     = {Electric power systems},
     subtitle  = {a conceptual introduction},
     year      = {2006},
@@ -23,6 +23,98 @@
     address   = {Stamford, CT}
 }
 
+@book{kundur1994stability,
+    author    = {KUNDUR, P.},
+    title     = {Power system stability and control},
+    year      = {1994},
+    publisher = {McGraw-Hill},
+    address   = {New York},
+    isbn      = {978-0-07-035958-1}
+}
+
+@book{monticelli1983fluxo,
+    author    = {MONTICELLI, A. J.},
+    title     = {Fluxo de carga em redes de energia el{\'e}trica},
+    year      = {1983},
+    publisher = {Edgard Bl{\"u}cher},
+    address   = {S{\~a}o Paulo}
+}
+
+@book{miller1982reactive,
+    author    = {MILLER, T. J. E.},
+    title     = {Reactive power control in electric systems},
+    year      = {1982},
+    publisher = {John Wiley \& Sons},
+    address   = {New York}
+}
+
+@book{taylor1994voltage,
+    author    = {TAYLOR, C. W.},
+    title     = {Power system voltage stability},
+    year      = {1994},
+    publisher = {McGraw-Hill},
+    address   = {New York}
+}
+
+% =====================================================================
+% NORMAS E PROCEDIMENTOS DO SETOR ELÉTRICO BRASILEIRO
+% =====================================================================
+
+@misc{ons2025sm12,
+    author       = {{OPERADOR NACIONAL DO SISTEMA EL{\'E}TRICO}},
+    organization = {ONS},
+    title        = {Procedimentos de Rede},
+    subtitle     = {Subm{\'o}dulo 1.2 --- Gloss{\'a}rio dos Procedimentos de Rede},
+    address      = {Rio de Janeiro},
+    year         = {2025},
+    howpublished = {Dispon{\'i}vel em: \url{https://www.ons.org.br/paginas/sobre-o-ons/procedimentos-de-rede/vigentes}},
+    note         = {Revis{\~a}o 2025.02, aprovada pelo Despacho ANEEL n{\textordmasculine} 370/2025}
+}
+
+@misc{ons2024sm21,
+    author       = {{OPERADOR NACIONAL DO SISTEMA EL{\'E}TRICO}},
+    organization = {ONS},
+    title        = {Procedimentos de Rede},
+    subtitle     = {Subm{\'o}dulo 2.1 --- Defini{\c{c}}{\~a}o das redes do Sistema Interligado Nacional},
+    address      = {Rio de Janeiro},
+    year         = {2024},
+    howpublished = {Dispon{\'i}vel em: \url{https://www.ons.org.br/paginas/sobre-o-ons/procedimentos-de-rede/vigentes}},
+    note         = {Revis{\~a}o 2024.07, aprovada pelo Despacho ANEEL n{\textordmasculine} 2.080/2024}
+}
+
+@misc{ons2026sm23cr,
+    author       = {{OPERADOR NACIONAL DO SISTEMA EL{\'E}TRICO}},
+    organization = {ONS},
+    title        = {Procedimentos de Rede},
+    subtitle     = {Subm{\'o}dulo 2.3 --- Premissas, crit{\'e}rios e metodologia para estudos el{\'e}tricos: crit{\'e}rios},
+    address      = {Rio de Janeiro},
+    year         = {2026},
+    howpublished = {Dispon{\'i}vel em: \url{https://www.ons.org.br/paginas/sobre-o-ons/procedimentos-de-rede/vigentes}},
+    note         = {Revis{\~a}o 2026.04, aprovada pelo Despacho STD n{\textordmasculine} 1.238/2026}
+}
+
+@misc{ons2026sm23mt,
+    author       = {{OPERADOR NACIONAL DO SISTEMA EL{\'E}TRICO}},
+    organization = {ONS},
+    title        = {Procedimentos de Rede},
+    subtitle     = {Subm{\'o}dulo 2.3 --- Premissas, crit{\'e}rios e metodologia para estudos el{\'e}tricos: metodologia},
+    address      = {Rio de Janeiro},
+    year         = {2026},
+    howpublished = {Dispon{\'i}vel em: \url{https://www.ons.org.br/paginas/sobre-o-ons/procedimentos-de-rede/vigentes}},
+    note         = {Revis{\~a}o 2026.04, aprovada pelo Despacho STD n{\textordmasculine} 1.238/2026}
+}
+
+@misc{ons2022sm72,
+    author       = {{OPERADOR NACIONAL DO SISTEMA EL{\'E}TRICO}},
+    organization = {ONS},
+    title        = {Procedimentos de Rede},
+    subtitle     = {Subm{\'o}dulo 7.2 --- Classifica{\c{c}}{\~a}o de modalidade de opera{\c{c}}{\~a}o de usinas},
+    address      = {Rio de Janeiro},
+    year         = {2022},
+    howpublished = {Dispon{\'i}vel em: \url{https://www.ons.org.br/paginas/sobre-o-ons/procedimentos-de-rede/vigentes}},
+    note         = {Revis{\~a}o 2022.10, aprovada pelo Despacho ANEEL n{\textordmasculine} 2.852/2022}
+}
+
 % =====================================================================
 % FPO E RELAXAÇÕES
 % =====================================================================
@@ -37,6 +129,64 @@
     year      = {2019},
     publisher = {Now Publishers},
     doi       = {10.1561/3100000012}
+}
+
+@article{babiker2025opfreview,
+    author    = {BABIKER, A. and AHMAD, S. S. and AHMED, I. and KHALID, M. and ABIDO, M. A. and AL-ISMAIL, F. S.},
+    title     = {Optimal power flow: a review of state-of-the-art techniques and future perspectives},
+    journal   = {IEEE Access},
+    volume    = {13},
+    pages     = {60012--60039},
+    year      = {2025},
+    publisher = {IEEE},
+    doi       = {10.1109/ACCESS.2025.3556168}
+}
+
+@article{wang2023acopf,
+    author    = {WANG, Z. and YOUNESI, A. and LIU, M. V. and GUO, G. C. and ANDERSON, C. L.},
+    title     = {{AC} optimal power flow in power systems with renewable energy integration: a review of formulations and case studies},
+    journal   = {IEEE Access},
+    volume    = {11},
+    pages     = {102681--102712},
+    year      = {2023},
+    publisher = {IEEE},
+    doi       = {10.1109/ACCESS.2023.3314330}
+}
+
+@article{naderi2021oparf,
+    author    = {NADERI, E. and NARIMANI, H. and POURAKBARI-KASMAEI, M. and CERNA, F. V. and MARZBAND, M. and LEHTONEN, M.},
+    title     = {State-of-the-art of optimal active and reactive power flow: a comprehensive review from various standpoints},
+    journal   = {Processes},
+    volume    = {9},
+    number    = {8},
+    pages     = {1319},
+    year      = {2021},
+    publisher = {MDPI},
+    doi       = {10.3390/pr9081319}
+}
+
+@article{yang2023dnopf,
+    author    = {YANG, C. and SUN, Y. and ZOU, Y. and ZHENG, F. and LIU, S. and ZHAO, B. and WU, M. and CUI, H.},
+    title     = {Optimal power flow in distribution network: a review on problem formulation and optimization methods},
+    journal   = {Energies},
+    volume    = {16},
+    number    = {16},
+    pages     = {5974},
+    year      = {2023},
+    publisher = {MDPI},
+    doi       = {10.3390/en16165974}
+}
+
+@article{yuan2019soc,
+    author    = {YUAN, Z. and HESAMZADEH, M. R.},
+    title     = {Second-order cone {AC} optimal power flow: convex relaxations and feasible solutions},
+    journal   = {Journal of Modern Power Systems and Clean Energy},
+    volume    = {7},
+    number    = {2},
+    pages     = {268--280},
+    year      = {2019},
+    publisher = {Springer},
+    doi       = {10.1007/s40565-018-0456-7}
 }
 
 % =====================================================================
@@ -104,7 +254,7 @@
     title        = {{PWF.jl}: parser de arquivos {ANAREDE} no formato {PWF} em {Julia}},
     year         = {2024},
     howpublished = {Dispon{\'i}vel em: \url{https://github.com/LAMPSPUC/PWF.jl}},
-    note         = {Pacote {Julia}, vers{\~a}o 0.1.0. Acesso em: 28 jun. 2026}
+    note         = {Pacote {Julia}, vers{\~a}o 0.1.0}
 }
 
 % =====================================================================

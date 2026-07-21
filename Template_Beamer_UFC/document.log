@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.4.27)  2 JUL 2026 23:27
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.4.27)  6 JUL 2026 01:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1792,11 +1792,11 @@ Package pdftex.def Info: libs/emblemufc.pdf  used on input line 139.
 File: relaxacao_aproximacao.png Graphic file (type png)
 <use relaxacao_aproximacao.png>
 Package pdftex.def Info: relaxacao_aproximacao.png  used on input line 173.
-(pdftex.def)             Requested size: 208.95485pt x 47.92838pt.
-
-Overfull \vbox (19.3078pt too high) detected at line 173
- []
-
+(pdftex.def)             Requested size: 147.49782pt x 33.83066pt.
+LaTeX Font Info:    Font shape `T1/phv/m/it' in size <8> not available
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 173.
+LaTeX Font Info:    Font shape `T1/phv/m/it' in size <6> not available
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 173.
 File: libs/logoUFCbackground.png Graphic file (type png)
 <use libs/logoUFCbackground.png>
 Package pdftex.def Info: libs/logoUFCbackground.png  used on input line 173.
@@ -1805,7 +1805,7 @@ File: libs/emblemufc.pdf Graphic file (type pdf)
 <use libs/emblemufc.pdf>
 Package pdftex.def Info: libs/emblemufc.pdf  used on input line 173.
 (pdftex.def)             Requested size: 80.3047pt x 23.97987pt.
-[7
+ [7
 
  <./relaxacao_aproximacao.png>]
 LaTeX Font Info:    Font shape `T1/phv/b/it' in size <10> not available
@@ -1823,151 +1823,142 @@ Package pdftex.def Info: libs/emblemufc.pdf  used on input line 198.
 ]
 File: libs/logoUFCbackground.png Graphic file (type png)
 <use libs/logoUFCbackground.png>
-Package pdftex.def Info: libs/logoUFCbackground.png  used on input line 223.
+Package pdftex.def Info: libs/logoUFCbackground.png  used on input line 222.
 (pdftex.def)             Requested size: 619.131pt x 412.21376pt.
 File: libs/emblemufc.pdf Graphic file (type pdf)
 <use libs/emblemufc.pdf>
-Package pdftex.def Info: libs/emblemufc.pdf  used on input line 223.
+Package pdftex.def Info: libs/emblemufc.pdf  used on input line 222.
 (pdftex.def)             Requested size: 80.3047pt x 23.97987pt.
  [9
 
 ]
-LaTeX Font Info:    Font shape `T1/phv/m/it' in size <8> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 245.
-LaTeX Font Info:    Font shape `T1/phv/m/it' in size <6> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 245.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <14.4> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 245.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 244.
 File: libs/logoUFCbackground.png Graphic file (type png)
 <use libs/logoUFCbackground.png>
-Package pdftex.def Info: libs/logoUFCbackground.png  used on input line 245.
+Package pdftex.def Info: libs/logoUFCbackground.png  used on input line 244.
 (pdftex.def)             Requested size: 619.131pt x 412.21376pt.
 File: libs/emblemufc.pdf Graphic file (type pdf)
 <use libs/emblemufc.pdf>
-Package pdftex.def Info: libs/emblemufc.pdf  used on input line 245.
+Package pdftex.def Info: libs/emblemufc.pdf  used on input line 244.
 (pdftex.def)             Requested size: 80.3047pt x 23.97987pt.
  [10
 
 ]
 File: libs/logoUFCbackground.png Graphic file (type png)
 <use libs/logoUFCbackground.png>
-Package pdftex.def Info: libs/logoUFCbackground.png  used on input line 265.
+Package pdftex.def Info: libs/logoUFCbackground.png  used on input line 264.
 (pdftex.def)             Requested size: 619.131pt x 412.21376pt.
 File: libs/emblemufc.pdf Graphic file (type pdf)
 <use libs/emblemufc.pdf>
-Package pdftex.def Info: libs/emblemufc.pdf  used on input line 265.
+Package pdftex.def Info: libs/emblemufc.pdf  used on input line 264.
 (pdftex.def)             Requested size: 80.3047pt x 23.97987pt.
  [11
 
 ]
 File: libs/logoUFCbackground.png Graphic file (type png)
 <use libs/logoUFCbackground.png>
-Package pdftex.def Info: libs/logoUFCbackground.png  used on input line 283.
+Package pdftex.def Info: libs/logoUFCbackground.png  used on input line 282.
 (pdftex.def)             Requested size: 619.131pt x 412.21376pt.
 File: libs/emblemufc.pdf Graphic file (type pdf)
 <use libs/emblemufc.pdf>
-Package pdftex.def Info: libs/emblemufc.pdf  used on input line 283.
+Package pdftex.def Info: libs/emblemufc.pdf  used on input line 282.
 (pdftex.def)             Requested size: 80.3047pt x 23.97987pt.
  [12
 
 ]
 File: libs/logoUFCbackground.png Graphic file (type png)
 <use libs/logoUFCbackground.png>
-Package pdftex.def Info: libs/logoUFCbackground.png  used on input line 315.
+Package pdftex.def Info: libs/logoUFCbackground.png  used on input line 314.
 (pdftex.def)             Requested size: 619.131pt x 412.21376pt.
 File: libs/emblemufc.pdf Graphic file (type pdf)
 <use libs/emblemufc.pdf>
-Package pdftex.def Info: libs/emblemufc.pdf  used on input line 315.
+Package pdftex.def Info: libs/emblemufc.pdf  used on input line 314.
 (pdftex.def)             Requested size: 80.3047pt x 23.97987pt.
  [13
 
 ]
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 346.
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 345.
 File: libs/logoUFCbackground.png Graphic file (type png)
 <use libs/logoUFCbackground.png>
-Package pdftex.def Info: libs/logoUFCbackground.png  used on input line 346.
+Package pdftex.def Info: libs/logoUFCbackground.png  used on input line 345.
 (pdftex.def)             Requested size: 619.131pt x 412.21376pt.
 File: libs/emblemufc.pdf Graphic file (type pdf)
 <use libs/emblemufc.pdf>
-Package pdftex.def Info: libs/emblemufc.pdf  used on input line 346.
+Package pdftex.def Info: libs/emblemufc.pdf  used on input line 345.
 (pdftex.def)             Requested size: 80.3047pt x 23.97987pt.
  [14
 
 ]
 File: libs/logoUFCbackground.png Graphic file (type png)
 <use libs/logoUFCbackground.png>
-Package pdftex.def Info: libs/logoUFCbackground.png  used on input line 372.
+Package pdftex.def Info: libs/logoUFCbackground.png  used on input line 371.
 (pdftex.def)             Requested size: 619.131pt x 412.21376pt.
 File: libs/emblemufc.pdf Graphic file (type pdf)
 <use libs/emblemufc.pdf>
-Package pdftex.def Info: libs/emblemufc.pdf  used on input line 372.
+Package pdftex.def Info: libs/emblemufc.pdf  used on input line 371.
 (pdftex.def)             Requested size: 80.3047pt x 23.97987pt.
  [15
 
 ]
 File: libs/logoUFCbackground.png Graphic file (type png)
 <use libs/logoUFCbackground.png>
-Package pdftex.def Info: libs/logoUFCbackground.png  used on input line 391.
+Package pdftex.def Info: libs/logoUFCbackground.png  used on input line 390.
 (pdftex.def)             Requested size: 619.131pt x 412.21376pt.
 File: libs/emblemufc.pdf Graphic file (type pdf)
 <use libs/emblemufc.pdf>
-Package pdftex.def Info: libs/emblemufc.pdf  used on input line 391.
+Package pdftex.def Info: libs/emblemufc.pdf  used on input line 390.
 (pdftex.def)             Requested size: 80.3047pt x 23.97987pt.
-
-[16
+ [16
 
 ]
 File: libs/logoUFCbackground.png Graphic file (type png)
 <use libs/logoUFCbackground.png>
-Package pdftex.def Info: libs/logoUFCbackground.png  used on input line 426.
+Package pdftex.def Info: libs/logoUFCbackground.png  used on input line 425.
 (pdftex.def)             Requested size: 619.131pt x 412.21376pt.
 File: libs/emblemufc.pdf Graphic file (type pdf)
 <use libs/emblemufc.pdf>
-Package pdftex.def Info: libs/emblemufc.pdf  used on input line 426.
+Package pdftex.def Info: libs/emblemufc.pdf  used on input line 425.
 (pdftex.def)             Requested size: 80.3047pt x 23.97987pt.
  [17
 
 ]
 File: libs/logoUFCbackground.png Graphic file (type png)
 <use libs/logoUFCbackground.png>
-Package pdftex.def Info: libs/logoUFCbackground.png  used on input line 446.
+Package pdftex.def Info: libs/logoUFCbackground.png  used on input line 444.
 (pdftex.def)             Requested size: 619.131pt x 412.21376pt.
 File: libs/emblemufc.pdf Graphic file (type pdf)
 <use libs/emblemufc.pdf>
-Package pdftex.def Info: libs/emblemufc.pdf  used on input line 446.
+Package pdftex.def Info: libs/emblemufc.pdf  used on input line 444.
 (pdftex.def)             Requested size: 80.3047pt x 23.97987pt.
  [18
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 473--473
-[]\T1/phv/b/n/10 (+20) Repositório do tra-ba-lho: 
- []
-
 File: libs/logoUFCbackground.png Graphic file (type png)
 <use libs/logoUFCbackground.png>
-Package pdftex.def Info: libs/logoUFCbackground.png  used on input line 473.
+Package pdftex.def Info: libs/logoUFCbackground.png  used on input line 471.
 (pdftex.def)             Requested size: 619.131pt x 412.21376pt.
 File: libs/emblemufc.pdf Graphic file (type pdf)
 <use libs/emblemufc.pdf>
-Package pdftex.def Info: libs/emblemufc.pdf  used on input line 473.
+Package pdftex.def Info: libs/emblemufc.pdf  used on input line 471.
 (pdftex.def)             Requested size: 80.3047pt x 23.97987pt.
-[19
+ [19
 
 ]
-Overfull \hbox (0.1018pt too wide) in paragraph at lines 481--481
+Overfull \hbox (0.1018pt too wide) in paragraph at lines 479--479
 [][]\T1/phv/m/n/10 (+9) C. COF-FRIN et al.[] ^^P  Power-Mo-dels.jl: an open-sou
 rce fra-mework 
  []
 
 
-Overfull \hbox (0.1121pt too wide) in paragraph at lines 481--481
+Overfull \hbox (0.1121pt too wide) in paragraph at lines 479--479
 [][]\T1/phv/m/n/10 (+15) I. S. CHÁ-VARRY.[] []\T1/phv/b/n/10 (+15) PWF.jl and C
 on-trol-Power-Flow.jl: Ju-lia pac- 
  []
 
 LaTeX Font Info:    Trying to load font information for TS1+phv on input line 4
-81.
+79.
 (/usr/local/texlive/2026/texmf-dist/tex/latex/psnfss/ts1phv.fd
 File: ts1phv.fd 2020/03/25 scalable font definitions for TS1/phv.
 )
@@ -1976,7 +1967,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
-Overfull \hbox (6.28981pt too wide) in paragraph at lines 481--481
+Overfull \hbox (6.28981pt too wide) in paragraph at lines 479--479
 \T1/phv/m/n/10 (-20) 2021. \T1/phv/m/sc/10 (-20) url\T1/phv/m/n/10 (-20) : []$\
 T1/cmtt/m/n/10 https : / / github . com / maumneto / TemplateBeamerUFC$[]\T1/ph
 v/m/n/10 (-20) .[][][]  
@@ -1984,22 +1975,22 @@ v/m/n/10 (-20) .[][][]
 
 File: libs/logoUFCbackground.png Graphic file (type png)
 <use libs/logoUFCbackground.png>
-Package pdftex.def Info: libs/logoUFCbackground.png  used on input line 481.
+Package pdftex.def Info: libs/logoUFCbackground.png  used on input line 479.
 (pdftex.def)             Requested size: 619.131pt x 412.21376pt.
 File: libs/emblemufc.pdf Graphic file (type pdf)
 <use libs/emblemufc.pdf>
-Package pdftex.def Info: libs/emblemufc.pdf  used on input line 481.
+Package pdftex.def Info: libs/emblemufc.pdf  used on input line 479.
 (pdftex.def)             Requested size: 80.3047pt x 23.97987pt.
 [20
 
 ]
 File: libs/logoUFCbackground.png Graphic file (type png)
 <use libs/logoUFCbackground.png>
-Package pdftex.def Info: libs/logoUFCbackground.png  used on input line 481.
+Package pdftex.def Info: libs/logoUFCbackground.png  used on input line 479.
 (pdftex.def)             Requested size: 619.131pt x 412.21376pt.
 File: libs/emblemufc.pdf Graphic file (type pdf)
 <use libs/emblemufc.pdf>
-Package pdftex.def Info: libs/emblemufc.pdf  used on input line 481.
+Package pdftex.def Info: libs/emblemufc.pdf  used on input line 479.
 (pdftex.def)             Requested size: 80.3047pt x 23.97987pt.
  [21
 
@@ -2007,11 +1998,11 @@ Package pdftex.def Info: libs/emblemufc.pdf  used on input line 481.
 ]
 File: libs/logoUFCbackground.png Graphic file (type png)
 <use libs/logoUFCbackground.png>
-Package pdftex.def Info: libs/logoUFCbackground.png  used on input line 481.
+Package pdftex.def Info: libs/logoUFCbackground.png  used on input line 479.
 (pdftex.def)             Requested size: 619.131pt x 412.21376pt.
 File: libs/emblemufc.pdf Graphic file (type pdf)
 <use libs/emblemufc.pdf>
-Package pdftex.def Info: libs/emblemufc.pdf  used on input line 481.
+Package pdftex.def Info: libs/emblemufc.pdf  used on input line 479.
 (pdftex.def)             Requested size: 80.3047pt x 23.97987pt.
  [22
 
@@ -2019,11 +2010,11 @@ Package pdftex.def Info: libs/emblemufc.pdf  used on input line 481.
 ]
 File: libs/logoUFCbackground.png Graphic file (type png)
 <use libs/logoUFCbackground.png>
-Package pdftex.def Info: libs/logoUFCbackground.png  used on input line 500.
+Package pdftex.def Info: libs/logoUFCbackground.png  used on input line 498.
 (pdftex.def)             Requested size: 619.131pt x 412.21376pt.
 File: libs/emblemufc.pdf Graphic file (type pdf)
 <use libs/emblemufc.pdf>
-Package pdftex.def Info: libs/emblemufc.pdf  used on input line 500.
+Package pdftex.def Info: libs/emblemufc.pdf  used on input line 498.
 (pdftex.def)             Requested size: 80.3047pt x 23.97987pt.
  [23
 
@@ -2049,11 +2040,11 @@ Package logreq Info: Writing requests to 'document.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 44319 strings out of 467525
- 878685 string characters out of 5418982
- 1732240 words of memory out of 5000000
- 72176 multiletter control sequences out of 15000+600000
- 716868 words of font info for 261 fonts, out of 8000000 for 9000
+ 44322 strings out of 467525
+ 878616 string characters out of 5418982
+ 1732343 words of memory out of 5000000
+ 72173 multiletter control sequences out of 15000+600000
+ 717090 words of font info for 265 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  142i,19n,137p,1005b,2059s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
@@ -2074,7 +2065,7 @@ e/2026/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb></usr/local/texlive/
 f-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb></usr/local/texlive/2026/texmf-dist
 /fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2026/texmf-dist/fonts/
 type1/urw/helvetic/uhvro8a.pfb>
-Output written on document.pdf (23 pages, 900307 bytes).
+Output written on document.pdf (23 pages, 899010 bytes).
 PDF statistics:
  1772 PDF objects out of 2073 (max. 8388607)
  957 compressed objects within 10 object streams

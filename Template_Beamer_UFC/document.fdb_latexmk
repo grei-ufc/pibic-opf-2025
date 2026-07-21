@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber document"] 1782785934.59888 "document.bcf" "document.bbl" "document" 1783045672.9205 0
-  "document.bcf" 1783045672.77713 108616 81cb49cb7e4d1924cbdc2face03a2403 "pdflatex"
+["biber document"] 1782785934.59888 "document.bcf" "document.bbl" "document" 1783313572.96913 0
+  "document.bcf" 1783313572.82654 108616 81cb49cb7e4d1924cbdc2face03a2403 "pdflatex"
   "references.bib" 1782785847.19012 5094 1052683fa69a19aec6f3764682e25c5e ""
   (generated)
   "document.bbl"
   "document.blg"
   (rewritten before read)
-["pdflatex"] 1783045669.64875 "document.tex" "document.pdf" "document" 1783045672.92073 0
+["pdflatex"] 1783313569.61239 "document.tex" "document.pdf" "document" 1783313572.96936 0
   "/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -305,13 +305,13 @@
   "/usr/local/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1777340206 5573038 b99aad5e4898a9034e953632f940512b ""
   "/usr/local/texlive/2026/texmf-var/web2c/pdftex/pdflatex.fmt" 1777340159 3636773 7fa8de579197a7d982a00dde81e65fcc ""
   "/usr/local/texlive/2026/texmf.cnf" 1774209515 577 648cd9f92f9c0eac486f4c71c85cfbbe ""
-  "document.aux" 1783045672.77475 7179 e599cb5e87823cd835cff54734c72d8b "pdflatex"
+  "document.aux" 1783313572.82412 7179 e599cb5e87823cd835cff54734c72d8b "pdflatex"
   "document.bbl" 1782785935.99507 17695 df5e885b50e2e2ee801f6c20e0de3c4e "biber document"
-  "document.nav" 1783045672.77773 3295 ffc759fec05f9ecf544c89bbf7598f0b "pdflatex"
-  "document.out" 1783045672.77638 708 45def6b43295da3edf795cb44b4600b2 "pdflatex"
-  "document.run.xml" 1783045672.77768 2365 3262ad4593742eb74a00e53e41ee7d95 "pdflatex"
-  "document.tex" 1783045408.20835 25575 23a00beeeef10a2ca4080a960e86a319 ""
-  "document.toc" 1783045672.77775 290 ce9a90f765fa63e5e6678cdc5cf275ed "pdflatex"
+  "document.nav" 1783313572.82752 3295 ffc759fec05f9ecf544c89bbf7598f0b "pdflatex"
+  "document.out" 1783313572.82581 708 45def6b43295da3edf795cb44b4600b2 "pdflatex"
+  "document.run.xml" 1783313572.82746 2365 3262ad4593742eb74a00e53e41ee7d95 "pdflatex"
+  "document.tex" 1783313565.51918 25723 51b98fe85b45ee0150e1fefe9d16f6c9 ""
+  "document.toc" 1783313572.82754 290 ce9a90f765fa63e5e6678cdc5cf275ed "pdflatex"
   "libs/code_style.tex" 1780285318 1233 829c6112a5c76e7cb3e081451f9d37ab ""
   "libs/emblemufc.pdf" 1780285318 395544 4bfa691307f82e96a09bb8eae3619491 ""
   "libs/logoUFCbackground.png" 1780285318 245592 b608865a4f767c920b451ae5ddbca8ab ""

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.4.27)  2 JUL 2026 23:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.4.27)  15 JUL 2026 23:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1956,18 +1956,18 @@ Overfull \hbox (4.56003pt too wide) in paragraph at lines 174--175
 
 [5
 
-] (./1-pre-textuais/resumo.tex
+] (./1-pre-textuais/resumo.tex) [6] (./1-pre-textuais/abstract.tex) [7
+
+]
+(./documento.lof
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmtt' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-) [6{/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.en
-c}] (./1-pre-textuais/abstract.tex) [7
+) [8
 
-]
-(./documento.lof) [8
-
-] (./documento.lot) [9] (./documento.gls) [10]
+{/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}] 
+(./documento.lot) [9] (./documento.gls) [10]
 (./1-pre-textuais/lista-de-simbolos.tex [11
 
 ]) (./documento.toc [12
@@ -1978,52 +1978,53 @@ Cap\'{\i }tulo 1.
 [14
 
 
-] [15]) (./2-textuais/2-fundamentacao-teorica.tex [16]
+] [15]) (./2-textuais/2-fundamentacao-teorica.tex [16] [17]
 Cap\'{\i }tulo 2.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 43.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 43.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 43.
-[17
+[18
 
-] [18]
-<figuras/relaxacao_aproximacao.png, id=300, 608.2725pt x 139.52126pt>
+]
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 52.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 52.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 52.
+ [19] [20] [21]
+<figuras/relaxacao_aproximacao.png, id=366, 608.2725pt x 139.52126pt>
 File: figuras/relaxacao_aproximacao.png Graphic file (type png)
 <use figuras/relaxacao_aproximacao.png>
 Package pdftex.def Info: figuras/relaxacao_aproximacao.png  used on input line 
-110.
+119.
 (pdftex.def)             Requested size: 409.71692pt x 93.98117pt.
 File: figuras/relaxacao_aproximacao.png Graphic file (type png)
 <use figuras/relaxacao_aproximacao.png>
 Package pdftex.def Info: figuras/relaxacao_aproximacao.png  used on input line 
-110.
+119.
 (pdftex.def)             Requested size: 373.24269pt x 85.61452pt.
- [19]
-Overfull \hbox (4.9347pt too wide) in paragraph at lines 119--120
+
+Overfull \hbox (4.9347pt too wide) in paragraph at lines 128--129
 []\T1/ptm/b/n/12 (-20) Relaxação SOC\T1/ptm/m/n/12 (-20) : re-for-mu-la-ção do 
 FPO em ter-mos de va-ri-á-veis $\OML/ztmcm/m/it/12 W[] \OT1/ztmcm/m/n/12 = \OML
 /ztmcm/m/it/12 V[]V[] []\OT1/ztmcm/m/n/12 (\OML/ztmcm/m/it/12 ^^R[] \OMS/ztmcm/
 m/n/12 ^^@
  []
 
-[20 <./figuras/relaxacao_aproximacao.png>]
+[22 <./figuras/relaxacao_aproximacao.png>]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 142.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 151.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 142.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 151.
 
-Underfull \hbox (badness 10000) in paragraph at lines 142--142
+Underfull \hbox (badness 10000) in paragraph at lines 151--151
 [][]|\T1/ptm/m/n/10 (+20) ela-bo-rado pelo au-tor a par-tir da exe-cu-ção de
  []
 
 
-Overfull \hbox (23.46973pt too wide) in paragraph at lines 142--142
+Overfull \hbox (23.46973pt too wide) in paragraph at lines 151--151
 [] [] 
  []
 
-[21] [22] [23] [24]) (./2-textuais/3-metodologia.tex [25] [26]
+[23] [24] [25] [26] [27] [28]) (./2-textuais/3-metodologia.tex [29] [30]
 Cap\'{\i }tulo 3.
 
 Overfull \hbox (24.84004pt too wide) in paragraph at lines 12--13
@@ -2031,7 +2032,7 @@ Overfull \hbox (24.84004pt too wide) in paragraph at lines 12--13
 bi-li-tada via \T1/cmtt/m/n/12 add_control_data
  []
 
-[27
+[31
 
 ]
 Overfull \hbox (0.92784pt too wide) in paragraph at lines 27--28
@@ -2040,96 +2041,96 @@ Overfull \hbox (0.92784pt too wide) in paragraph at lines 27--28
  []
 
 
-Overfull \hbox (5.44539pt too wide) in paragraph at lines 28--29
-[]\T1/ptm/b/n/12 (-20) Saneamento to-po-ló-gico\T1/ptm/m/n/12 (-20) : \T1/cmtt/
-m/n/12 PowerModels.select_largest_component!(data)
+Overfull \hbox (9.26913pt too wide) in paragraph at lines 28--29
+[]\T1/ptm/b/n/12 (-20) Adequação da to-po-lo-gia\T1/ptm/m/n/12 (-20) : \T1/cmtt
+/m/n/12 PowerModels.select_largest_component!(data)
  []
 
 
-Overfull \hbox (17.58902pt too wide) in paragraph at lines 30--31
+Overfull \hbox (17.58902pt too wide) in paragraph at lines 29--30
 []\T1/ptm/b/n/12 (-20) Construção da es-tru-tura de re-fe-rên-cia\T1/ptm/m/n/12
  (-20) : \T1/cmtt/m/n/12 ref = PowerModels.build_ref(data)
  []
 
 
-Overfull \hbox (1.44664pt too wide) in paragraph at lines 32--33
+Overfull \hbox (1.44664pt too wide) in paragraph at lines 31--32
 []\T1/ptm/b/n/12 (-20) Resolução\T1/ptm/m/n/12 (-20) : \T1/cmtt/m/n/12 optimize
 !(model)\T1/ptm/m/n/12 (-20) , com tempo de exe-cu-ção me-dido por \T1/cmtt/m/n
 /12 @elapsed\T1/ptm/m/n/12 (-20) ; 
  []
 
 
-Overfull \hbox (29.00394pt too wide) in paragraph at lines 33--34
+Overfull \hbox (5.95721pt too wide) in paragraph at lines 32--33
 []\T1/ptm/b/n/12 (-20) Exportação\T1/ptm/m/n/12 (-20) : dois ar-qui-vos CSV são
- pro-du-zi-dos em \T1/cmtt/m/n/12 resultados_csv/\T1/ptm/m/n/12 (-20) : \T1/cmt
-t/m/n/12 resultados_
+ pro-du-zi-dos: \T1/cmtt/m/n/12 resultados_barras_SIN.csv\T1/ptm/m/n/12 (-20) ,
+
  []
 
-[28]
-Overfull \hbox (9.57335pt too wide) in paragraph at lines 89--89
+[32]
+Overfull \hbox (6.84348pt too wide) in paragraph at lines 86--86
 [] [] 
  []
 
-[29]
-Overfull \hbox (12.3522pt too wide) in paragraph at lines 102--103
+[33]
+Overfull \hbox (12.3522pt too wide) in paragraph at lines 101--102
 []\T1/ptm/m/n/12 (-20) A for-mu-la-ção F1 é uma cha-mada a \T1/cmtt/m/n/12 Powe
 rModels.solve_ac_pf(data, optimizer)\T1/ptm/m/n/12 (-20) .
  []
 
-[30] [31] [32]
-Overfull \hbox (9.09584pt too wide) in paragraph at lines 221--222
+[34] [35] [36] [37]
+Overfull \hbox (9.09584pt too wide) in paragraph at lines 227--228
 []\T1/ptm/m/n/12 (-20) Além da pro-gres-são prin-ci-pal F0$\OMS/ztmcm/m/n/12 !$
 \T1/ptm/m/n/12 (-20) F5, foi im-ple-men-tado um \T1/ptm/m/it/12 (-20) script \T
 1/ptm/m/n/12 (-20) au-xi-liar (\T1/cmtt/m/n/12 (FDC).jl\T1/ptm/m/n/12 (-20) )
  []
 
-[33]
-Overfull \hbox (32.2696pt too wide) in paragraph at lines 297--297
+[38]
+Overfull \hbox (32.2696pt too wide) in paragraph at lines 303--303
 []|\T1/cmtt/m/n/10 3busfrank_continuous_shunt.pwf| 
  []
 
 
-Overfull \hbox (16.52345pt too wide) in paragraph at lines 297--297
+Overfull \hbox (16.52345pt too wide) in paragraph at lines 303--303
 []|\T1/cmtt/m/n/10 9bus_transformer_fields.pwf| 
  []
 
 
-Overfull \hbox (32.2696pt too wide) in paragraph at lines 297--297
+Overfull \hbox (32.2696pt too wide) in paragraph at lines 303--303
 []|\T1/cmtt/m/n/10 3busfrank_continuous_shunt.pwf| 
  []
 
 
-Overfull \hbox (16.52345pt too wide) in paragraph at lines 297--297
+Overfull \hbox (16.52345pt too wide) in paragraph at lines 303--303
 []|\T1/cmtt/m/n/10 9bus_transformer_fields.pwf| 
  []
 
 
-Overfull \hbox (3.76147pt too wide) in paragraph at lines 297--298
+Overfull \hbox (3.76147pt too wide) in paragraph at lines 303--304
  []$[]$ 
  []
 
-[34] [35]
-Overfull \hbox (7.43002pt too wide) in paragraph at lines 322--323
+[39]
+Overfull \hbox (7.43002pt too wide) in paragraph at lines 328--329
 \T1/ptm/m/n/12 (-20) (SUB-PRO-CESS_CRASH), \T1/ptm/b/n/12 (-20) INV \T1/ptm/m/n
 /12 (-20) (IN-VA-LID_MODEL) e \T1/ptm/b/n/12 (-20) ERR \T1/ptm/m/n/12 (-20) (OT
 HER_ERROR); 
  []
 
-) (./2-textuais/4-resultados.tex [36] [37]
+[40]) (./2-textuais/4-resultados.tex [41] [42]
 Cap\'{\i }tulo 4.
-[38
+[43
 
 ]
 Overfull \hbox (65.33759pt too wide) in paragraph at lines 56--56
 [] [] 
  []
 
-[39]
+[44]
 Overfull \hbox (50.31285pt too wide) in paragraph at lines 113--113
 [] [] 
  []
 
-[40
+[45
 
 
 ]
@@ -2140,7 +2141,7 @@ Overfull \hbox (74.94331pt too wide) in paragraph at lines 178--178
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[41] [42] [43] [44] [45]
+[46] [47] [48] [49] [50]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 310.
 
@@ -2150,7 +2151,7 @@ Overfull \hbox (33.14114pt too wide) in paragraph at lines 310--310
 
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <12> not available
 (Font)              Font shape `T1/cmtt/m/n' tried instead on input line 316.
-[46]
+[51]
 Package pgfplots info on input line 350: Using 'lua backend=false' for axis: ym
 ode=log unsupported (yet).
 Package pgfplots info on input line 350: Using 'lua backend=false' for axis: x 
@@ -2159,15 +2160,20 @@ Package pgfplots info on input line 350: Using 'lua backend=false' for axis: ym
 ode=log unsupported (yet).
 Package pgfplots info on input line 350: Using 'lua backend=false' for axis: x 
 coord trafo unsupported.
-) (./2-textuais/5-conclusao.tex [47] [48]
+) (./2-textuais/5-conclusao.tex [52] [53]
 Cap\'{\i }tulo 5.
-[49
+[54
 
-] [50]) [51] (./documento.bbl [52]
+] [55] [56]) (./documento.bbl [57]
 bibitemlist
-) [53
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 9
+7.
+(/usr/local/texlive/2026/texmf-dist/tex/latex/psnfss/ts1ptm.fd
+File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
+) [58
 
-] (./3-pos-textuais/apendices/apendice-a.tex
+]) [59]
+(./3-pos-textuais/apendices/apendice-a.tex
 \bfseries AP\^ENDICE A.
 
 Overfull \hbox (20.1148pt too wide) in paragraph at lines 9--9
@@ -2187,9 +2193,9 @@ Overfull \hbox (20.1148pt too wide) in paragraph at lines 17--17
 gen][i]["qmax"],[] 
  []
 
-[54
+[60
 
-]) [55]
+]) [61]
 \tf@lof=\write8
 \openout8 = `documento.lof'.
 
@@ -2206,13 +2212,13 @@ L3 programming layer <2020/03/25>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 57248 strings out of 467525
- 1238262 string characters out of 5418982
- 2046751 words of memory out of 5000000
- 84574 multiletter control sequences out of 15000+600000
- 738571 words of font info for 489 fonts, out of 8000000 for 9000
+ 57370 strings out of 467525
+ 1240364 string characters out of 5418982
+ 2047751 words of memory out of 5000000
+ 84652 multiletter control sequences out of 15000+600000
+ 739573 words of font info for 501 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,21n,120p,2679b,2494s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,21n,120p,2777b,2494s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
 ></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
 </usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></
@@ -2230,10 +2236,10 @@ ts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/u
 rw/times/utmbi8a.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/urw/times/
 utmr8a.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/urw/times/utmri8a.pf
 b>
-Output written on documento.pdf (56 pages, 683313 bytes).
+Output written on documento.pdf (62 pages, 703115 bytes).
 PDF statistics:
- 875 PDF objects out of 1000 (max. 8388607)
- 764 compressed objects within 8 object streams
- 181 named destinations out of 1000 (max. 500000)
- 101839 words of extra memory for PDF output out of 106986 (max. 10000000)
+ 1022 PDF objects out of 1200 (max. 8388607)
+ 903 compressed objects within 10 object streams
+ 203 named destinations out of 1000 (max. 500000)
+ 103903 words of extra memory for PDF output out of 106986 (max. 10000000)
 

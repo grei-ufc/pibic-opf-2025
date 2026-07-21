@@ -1,8 +1,8 @@
 \babel@toc {brazil}{}\relax 
-\contentsline {table}{\numberline {1}{\ignorespaces Comparação de objetivos entre formulações AC, DC e SOC no \texttt {case5.m}}}{21}{table.caption.15}%
-\contentsline {table}{\numberline {2}{\ignorespaces Progressão das formulações implementadas}}{29}{table.caption.17}%
-\contentsline {table}{\numberline {3}{\ignorespaces Bateria de casos de teste: porte e diferença em relação à versão base}}{37}{table.caption.18}%
-\contentsline {table}{\numberline {4}{\ignorespaces Convergência global e \textit {clusters} de equivalência das formulações F0 a F5 na bateria}}{39}{table.caption.19}%
-\contentsline {table}{\numberline {5}{\ignorespaces Divergência barra a barra no caso \texttt {3bus\_DCSC}}}{42}{table.caption.22}%
-\contentsline {table}{\numberline {6}{\ignorespaces Resumo da formulação FDC (DC-PF) sobre \texttt {CASO\_VER\_MAXDIU.PWF}}}{44}{table.caption.24}%
-\contentsline {table}{\numberline {7}{\ignorespaces Resultados das formulações F0 a F5 sobre os casos reduzidos do PAR/PEL 2027-2031}}{46}{table.caption.25}%
+\contentsline {table}{\numberline {1}{\ignorespaces Comparação de objetivos entre formulações AC, DC e SOC no \texttt {case5.m}}}{23}{table.caption.15}%
+\contentsline {table}{\numberline {2}{\ignorespaces Progressão das formulações implementadas}}{33}{table.caption.17}%
+\contentsline {table}{\numberline {3}{\ignorespaces Conjunto de casos de teste: porte e diferença em relação à versão base}}{42}{table.caption.18}%
+\contentsline {table}{\numberline {4}{\ignorespaces Convergência global e \textit {clusters} de equivalência das formulações F0 a F5 no conjunto de casos de teste}}{44}{table.caption.19}%
+\contentsline {table}{\numberline {5}{\ignorespaces Divergência barra a barra no caso \texttt {3bus\_DCSC}}}{47}{table.caption.22}%
+\contentsline {table}{\numberline {6}{\ignorespaces Resumo da formulação FDC (DC-PF) sobre \texttt {CASO\_VER\_MAXDIU.PWF}}}{49}{table.caption.24}%
+\contentsline {table}{\numberline {7}{\ignorespaces Resultados das formulações F0 a F5 sobre os casos reduzidos do PAR/PEL 2027-2031}}{51}{table.caption.25}%

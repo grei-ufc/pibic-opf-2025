@@ -1,7 +1,7 @@
 \apendice{Trecho da implementação JuMP da formulação F2}
 \label{ap:A}
 
-A título de ilustração, reproduz-se a seguir o núcleo do \textit{script} \verb|(F2)QLIM+VLIM.jl|, responsável pela construção do modelo JuMP descrito na \autoref{subsec:f16}. O código completo, junto com as demais formulações da progressão F0 a F5, está disponível no repositório do trabalho em \verb|powerflow/Codes/PF_Formulation/|.
+A título de ilustração, reproduz-se a seguir o núcleo do \textit{script} \verb|(F2)QLIM+VLIM.jl|, responsável pela construção do modelo JuMP descrito na \autoref{subsec:f16}. O código completo, junto com as demais formulações da progressão F0 a F5, está disponível no repositório do trabalho.
 
 \begin{verbatim}
 # Variáveis de estado físico
@@ -53,4 +53,4 @@ end
 optimize!(model)
 \end{verbatim}
 
-A leitura do trecho acima permite identificar três blocos sintáticos centrais à abordagem deste trabalho: (i) declaração de variáveis primárias com limites caixa e valores iniciais provenientes do PWF; (ii) introdução das folgas \verb|sl_v| e \verb|sl_d| associadas a VLIM e QLIM; (iii) escrita das equações de fluxo do ramo na forma do modelo $\pi$ com transformador, usando \verb|@NLexpression| do JuMP para registrar o caráter não linear das expressões. As formulações F3 a F5 acrescentam, sucessivamente, blocos análogos para $b^{sh}_s$ (CSCA), $t_{ij}$ (CTAP) e injeções DERA, sem modificar a estrutura geral.
+A leitura do trecho acima permite identificar três blocos sintáticos centrais à abordagem deste trabalho: (i) declaração de variáveis primárias com limites operacionais e valores iniciais provenientes do PWF; (ii) introdução das folgas \verb|sl_v| e \verb|sl_d| associadas, respectivamente, ao QLIM e ao VLIM; (iii) escrita das equações de fluxo do ramo na forma do modelo $\pi$ com transformador, usando \verb|@NLexpression| do JuMP para registrar o caráter não linear das expressões. As formulações F3 a F5 acrescentam, sucessivamente, blocos análogos para $b^{sh}_s$ (CSCA), $t_{ij}$ (CTAP) e injeções DERA, sem modificar a estrutura geral.

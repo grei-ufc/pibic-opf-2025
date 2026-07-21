@@ -5,6 +5,13 @@
 \providecommand{\abntbstabout}[1]{}
 \abntbstabout{v-1.9.7 }
 
+\bibitem[BABIKER \textit{et al.} 2025]{babiker2025opfreview}
+\abntrefinfo{BABIKER \textit{et al.}}{BABIKER \textit{et al.}}{2025}
+{BABIKER, A.; AHMAD, S.~S.; AHMED, I.; KHALID, M.; ABIDO, M.~A.; AL-ISMAIL,
+  F.~S. Optimal power flow: a review of state-of-the-art techniques and future
+  perspectives.
+\textbf{IEEE Access}, IEEE, v.~13, p. 60012--60039, 2025.}
+
 \bibitem[BEZANSON \textit{et al.} 2017]{bezanson2017julia}
 \abntrefinfo{BEZANSON \textit{et al.}}{BEZANSON \textit{et al.}}{2017}
 {BEZANSON, J.; EDELMAN, A.; KARPINSKI, S.; SHAH, V.~B. Julia: a fresh approach
@@ -37,11 +44,17 @@ Projeto de Gradua{\c{c}}{\~a}o (Engenharia El{\'e}trica) --- Pontif{\'i}cia
 {GLOVER, J.~D.; SARMA, M.~S.; OVERBYE, T.~J. \textbf{Power system analysis and
   design}. 6. ed. Stamford, CT: Cengage Learning, 2012.}
 
+\bibitem[KUNDUR 1994]{kundur1994stability}
+\abntrefinfo{KUNDUR}{KUNDUR}{1994}
+{KUNDUR, P. \textbf{Power system stability and control}. New York: McGraw-Hill,
+  1994.
+ISBN 978-0-07-035958-1.}
+
 \bibitem[{LAMPSPUC} 2024]{pwfjl}
 \abntrefinfo{{LAMPSPUC}}{{LAMPSPUC}}{2024}
 {{LAMPSPUC}. \textbf{{PWF.jl}: parser de arquivos {ANAREDE} no formato {PWF} em
   {Julia}}. 2024. Dispon{\'i}vel em: \url{https://github.com/LAMPSPUC/PWF.jl}.
-Pacote {Julia}, vers{\~a}o 0.1.0. Acesso em: 28 jun. 2026.}
+Pacote {Julia}, vers{\~a}o 0.1.0.}
 
 \bibitem[LUBIN \textit{et al.} 2023]{lubin2023jump}
 \abntrefinfo{LUBIN \textit{et al.}}{LUBIN \textit{et al.}}{2023}
@@ -50,11 +63,10 @@ Pacote {Julia}, vers{\~a}o 0.1.0. Acesso em: 28 jun. 2026.}
   optimization.
 \textbf{Mathematical Programming Computation}, v.~15, p. 581--589, 2023.}
 
-\bibitem[MEIER 2006]{vonMeier2006powersystems}
-\abntrefinfo{MEIER}{MEIER}{2006}
-{MEIER, A. V. \textbf{Electric power systems}: a conceptual introduction.
-  Hoboken, NJ: Wiley-IEEE Press, 2006.
-ISBN 978-0-471-17859-0.}
+\bibitem[MILLER 1982]{miller1982reactive}
+\abntrefinfo{MILLER}{MILLER}{1982}
+{MILLER, T. J.~E. \textbf{Reactive power control in electric systems}. New
+  York: John Wiley \& Sons, 1982.}
 
 \bibitem[MOLZAHN e HISKENS 2019]{molzahn2019survey}
 \abntrefinfo{MOLZAHN e HISKENS}{MOLZAHN; HISKENS}{2019}
@@ -63,10 +75,104 @@ ISBN 978-0-471-17859-0.}
 \textbf{Foundations and Trends in Electric Energy Systems}, Now Publishers,
   v.~4, n.~1-2, p. 1--221, 2019.}
 
+\bibitem[MONTICELLI 1983]{monticelli1983fluxo}
+\abntrefinfo{MONTICELLI}{MONTICELLI}{1983}
+{MONTICELLI, A.~J. \textbf{Fluxo de carga em redes de energia el{\'e}trica}.
+  S{\~a}o Paulo: Edgard Bl{\"u}cher, 1983.}
+
+\bibitem[NADERI \textit{et al.} 2021]{naderi2021oparf}
+\abntrefinfo{NADERI \textit{et al.}}{NADERI \textit{et al.}}{2021}
+{NADERI, E.; NARIMANI, H.; POURAKBARI-KASMAEI, M.; CERNA, F.~V.; MARZBAND, M.;
+  LEHTONEN, M. State-of-the-art of optimal active and reactive power flow: a
+  comprehensive review from various standpoints.
+\textbf{Processes}, MDPI, v.~9, n.~8, p.~1319, 2021.}
+
+\bibitem[{OPERADOR NACIONAL DO SISTEMA EL{\'E}TRICO} 2022]{ons2022sm72}
+\abntrefinfo{{OPERADOR NACIONAL DO SISTEMA EL{\'E}TRICO}}{{OPERADOR NACIONAL DO
+  SISTEMA EL{\'E}TRICO}}{2022}
+{{OPERADOR NACIONAL DO SISTEMA EL{\'E}TRICO}. \textbf{Procedimentos de Rede}:
+  Subm{\'o}dulo 7.2 --- classifica{\c{c}}{\~a}o de modalidade de
+  opera{\c{c}}{\~a}o de usinas. Rio de Janeiro, 2022. Dispon{\'i}vel em:
+  \url{https://www.ons.org.br/paginas/sobre-o-ons/procedimentos-de-rede/vigentes}.
+Revis{\~a}o 2022.10, aprovada pelo Despacho ANEEL n{\textordmasculine}
+  2.852/2022.}
+
+\bibitem[{OPERADOR NACIONAL DO SISTEMA EL{\'E}TRICO} 2024]{ons2024sm21}
+\abntrefinfo{{OPERADOR NACIONAL DO SISTEMA EL{\'E}TRICO}}{{OPERADOR NACIONAL DO
+  SISTEMA EL{\'E}TRICO}}{2024}
+{{OPERADOR NACIONAL DO SISTEMA EL{\'E}TRICO}. \textbf{Procedimentos de Rede}:
+  Subm{\'o}dulo 2.1 --- defini{\c{c}}{\~a}o das redes do sistema interligado
+  nacional. Rio de Janeiro, 2024. Dispon{\'i}vel em:
+  \url{https://www.ons.org.br/paginas/sobre-o-ons/procedimentos-de-rede/vigentes}.
+Revis{\~a}o 2024.07, aprovada pelo Despacho ANEEL n{\textordmasculine}
+  2.080/2024.}
+
+\bibitem[{OPERADOR NACIONAL DO SISTEMA EL{\'E}TRICO} 2025]{ons2025sm12}
+\abntrefinfo{{OPERADOR NACIONAL DO SISTEMA EL{\'E}TRICO}}{{OPERADOR NACIONAL DO
+  SISTEMA EL{\'E}TRICO}}{2025}
+{{OPERADOR NACIONAL DO SISTEMA EL{\'E}TRICO}. \textbf{Procedimentos de Rede}:
+  Subm{\'o}dulo 1.2 --- gloss{\'a}rio dos procedimentos de rede. Rio de
+  Janeiro, 2025. Dispon{\'i}vel em:
+  \url{https://www.ons.org.br/paginas/sobre-o-ons/procedimentos-de-rede/vigentes}.
+Revis{\~a}o 2025.02, aprovada pelo Despacho ANEEL n{\textordmasculine}
+  370/2025.}
+
+\bibitem[{OPERADOR NACIONAL DO SISTEMA EL{\'E}TRICO} 2026]{ons2026sm23cr}
+\abntrefinfo{{OPERADOR NACIONAL DO SISTEMA EL{\'E}TRICO}}{{OPERADOR NACIONAL DO
+  SISTEMA EL{\'E}TRICO}}{2026a}
+{{OPERADOR NACIONAL DO SISTEMA EL{\'E}TRICO}. \textbf{Procedimentos de Rede}:
+  Subm{\'o}dulo 2.3 --- premissas, crit{\'e}rios e metodologia para estudos
+  el{\'e}tricos: crit{\'e}rios. Rio de Janeiro, 2026. Dispon{\'i}vel em:
+  \url{https://www.ons.org.br/paginas/sobre-o-ons/procedimentos-de-rede/vigentes}.
+Revis{\~a}o 2026.04, aprovada pelo Despacho STD n{\textordmasculine}
+  1.238/2026.}
+
+\bibitem[{OPERADOR NACIONAL DO SISTEMA EL{\'E}TRICO} 2026]{ons2026sm23mt}
+\abntrefinfo{{OPERADOR NACIONAL DO SISTEMA EL{\'E}TRICO}}{{OPERADOR NACIONAL DO
+  SISTEMA EL{\'E}TRICO}}{2026b}
+{{OPERADOR NACIONAL DO SISTEMA EL{\'E}TRICO}. \textbf{Procedimentos de Rede}:
+  Subm{\'o}dulo 2.3 --- premissas, crit{\'e}rios e metodologia para estudos
+  el{\'e}tricos: metodologia. Rio de Janeiro, 2026. Dispon{\'i}vel em:
+  \url{https://www.ons.org.br/paginas/sobre-o-ons/procedimentos-de-rede/vigentes}.
+Revis{\~a}o 2026.04, aprovada pelo Despacho STD n{\textordmasculine}
+  1.238/2026.}
+
+\bibitem[TAYLOR 1994]{taylor1994voltage}
+\abntrefinfo{TAYLOR}{TAYLOR}{1994}
+{TAYLOR, C.~W. \textbf{Power system voltage stability}. New York: McGraw-Hill,
+  1994.}
+
+\bibitem[{VON MEIER} 2006]{vonMeier2006powersystems}
+\abntrefinfo{{VON MEIER}}{{VON MEIER}}{2006}
+{{VON MEIER}, A. \textbf{Electric power systems}: a conceptual introduction.
+  Hoboken, NJ: Wiley-IEEE Press, 2006.
+ISBN 978-0-471-17859-0.}
+
 \bibitem[W{\"A}CHTER e BIEGLER 2006]{wachterBiegler2006ipopt}
 \abntrefinfo{W{\"A}CHTER e BIEGLER}{W{\"A}CHTER; BIEGLER}{2006}
 {W{\"A}CHTER, A.; BIEGLER, L.~T. On the implementation of an interior-point
   filter line-search algorithm for large-scale nonlinear programming.
 \textbf{Mathematical Programming}, Springer, v.~106, n.~1, p. 25--57, 2006.}
+
+\bibitem[WANG \textit{et al.} 2023]{wang2023acopf}
+\abntrefinfo{WANG \textit{et al.}}{WANG \textit{et al.}}{2023}
+{WANG, Z.; YOUNESI, A.; LIU, M.~V.; GUO, G.~C.; ANDERSON, C.~L. {AC} optimal
+  power flow in power systems with renewable energy integration: a review of
+  formulations and case studies.
+\textbf{IEEE Access}, IEEE, v.~11, p. 102681--102712, 2023.}
+
+\bibitem[YANG \textit{et al.} 2023]{yang2023dnopf}
+\abntrefinfo{YANG \textit{et al.}}{YANG \textit{et al.}}{2023}
+{YANG, C.; SUN, Y.; ZOU, Y.; ZHENG, F.; LIU, S.; ZHAO, B.; WU, M.; CUI, H.
+  Optimal power flow in distribution network: a review on problem formulation
+  and optimization methods.
+\textbf{Energies}, MDPI, v.~16, n.~16, p.~5974, 2023.}
+
+\bibitem[YUAN e HESAMZADEH 2019]{yuan2019soc}
+\abntrefinfo{YUAN e HESAMZADEH}{YUAN; HESAMZADEH}{2019}
+{YUAN, Z.; HESAMZADEH, M.~R. Second-order cone {AC} optimal power flow: convex
+  relaxations and feasible solutions.
+\textbf{Journal of Modern Power Systems and Clean Energy}, Springer, v.~7,
+  n.~2, p. 268--280, 2019.}
 
 \end{thebibliography}

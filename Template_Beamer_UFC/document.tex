@@ -11,7 +11,7 @@
 
 % Título e subtítulo
 \title[FPO com ações de controle em JuMP/Julia]{\Large\textbf{Análise comparativa de formulações de Fluxo de Potência Ótimo com ações de controle em JuMP/Julia}}
-\subtitle{Uma progressão incremental F0 $\rightarrow$ F5 com validação sobre redes pedagógicas e um \textit{snapshot} do SIN}
+\subtitle{Uma progressão incremental F0 $\rightarrow$ F5 com validação sobre redes pedagógicas e um cenário integral do SIN}
 \author{Gabriel Rufino Montenegro}
 \institute[EE/UFC]{
     \normalsize{\email{gabrielrufino@alu.ufc.br}}
@@ -92,7 +92,7 @@
     \end{columns}
 
     \vspace{0.4cm}
-    \successbox{\textbf{Estratégia:} construir do zero, em JuMP, formulações que adicionem os controles ANAREDE um a um, comparáveis às referências PowerModels sobre a mesma bateria de casos.}
+    \successbox{\textbf{Estratégia:} desenvolver desde a concepção, em JuMP, formulações que adicionem os controles ANAREDE um a um, comparáveis às referências PowerModels sobre o mesmo conjunto de casos de teste.}
 \end{frame}
 
 %% ---------------------------------------------------------------------------
@@ -104,10 +104,10 @@
     \begin{exampleblock}{Objetivos específicos}
         \begin{enumerate}
             \item Documentar a formulação matemática do FP/FPO em coordenadas polares.
-            \item Usar \textit{PWF.jl} para leitura de arquivos ANAREDE com estruturas DOPC/DLIN.
+            \item Usar \textit{PWF.jl} para leitura de arquivos ANAREDE com as estruturas de controle.
             \item Implementar \emph{duas} formulações de referência via PowerModels.
-            \item Implementar \emph{quatro} formulações \textit{hand-built} acrescentando QLIM+VLIM, CSCA, CTAP e DERA.
-            \item Submeter as seis formulações a uma bateria de \textbf{27 casos}, do 3 barras ao SIN.
+            \item Implementar \emph{quatro} formulações desenvolvidas manualmente acrescentando QLIM+VLIM, CSCA, CTAP e DERA.
+            \item Submeter as seis formulações a um conjunto de \textbf{27 casos de teste}, do 3 barras ao SIN.
         \end{enumerate}
     \end{exampleblock}
 \end{frame}
@@ -143,7 +143,7 @@
     \textbf{FPO AC canônico:} adicionar custo e restrições aos limites de equipamentos.
     \vspace{-0.1cm}
     \begin{equation*}
-        \min_{V,\theta,p^g,q^g} \sum_{k \in \mathcal{G}} c_k(p^g_k) \quad \text{s.a.} \quad \text{balanço + caixas + } |s_{ij}| \le s^{\max}_{ij}
+        \min_{V,\theta,p^g,q^g} \sum_{k \in \mathcal{G}} c_k(p^g_k) \quad \text{s.a.} \quad \text{balanço + limites operacionais}
     \end{equation*}
 
     \textbf{Relaxações principais} \cite{molzahn2019survey}: aproximação \emph{DC} (LP), relaxação \emph{SOC} (cone), relaxação \emph{SDP} (semidefinida).
@@ -151,12 +151,13 @@
     \vspace{-0.15cm}
     \begin{figure}
         \centering
-        \includegraphics[width=0.68\textwidth]{relaxacao_aproximacao.png}
+        \includegraphics[width=0.48\textwidth]{relaxacao_aproximacao.png}
     \end{figure}
     \vspace{-0.3cm}
 
     \begin{block}{Comparação no \texttt{case5.m} (\texttt{CodeComparing.jl})}
         \centering
+        \footnotesize
         \begin{tabular}{lcc}
             \hline
             \textbf{Formulação} & \textbf{Característica} & \textbf{Objetivo (US\$/h)} \\
@@ -168,7 +169,6 @@
         \end{tabular}
     \end{block}
 
-    \vspace{0.1cm}
     \alertbox{O objetivo SOC é uma \emph{cota inferior válida} do AC -- \textit{gap} $\approx 18\%$ neste caso.}
 \end{frame}
 
@@ -177,7 +177,7 @@
     \begin{columns}
         \begin{column}{0.5\textwidth}
             \begin{block}{QLIM + VLIM}
-                Lógica de \emph{type-switching} PV $\leftrightarrow$ PQ. Implementada por \example{folgas penalizadas} $s^v_i, s^q_l$ no objetivo.
+                Lógica de \emph{type-switching} PV $\leftrightarrow$ PQ. Implementada por \example{folgas penalizadas}: $s^v_i$ no \textit{setpoint} de tensão (QLIM) e $s^q_l$ na demanda reativa (VLIM).
             \end{block}
             \begin{block}{CSCA}
                 Banco \textit{shunt} chaveado $\rightarrow$ $b^{sh}_s \in [b^{sh,\min}, b^{sh,\max}]$ como \emph{variável contínua de decisão}.
@@ -185,7 +185,7 @@
         \end{column}
         \begin{column}{0.5\textwidth}
             \begin{block}{CTAP}
-                \textit{Tap} OLTC $\rightarrow$ razão $t_{ij}$ vira \emph{variável contínua}; reaproveita as folgas de tensão de F3 (não cria folga nova).
+                \textit{Tap} do transformador em carga $\rightarrow$ razão $t_{ij}$ vira \emph{variável contínua}; reaproveita as folgas de tensão de F3 (não cria folga nova).
             \end{block}
             \begin{block}{DERA}
                 Corte hierárquico de carga: $\Delta p^d_l \in [0, p^d_l]$ por barra, penalizado por \emph{nível de tensão} (cortar primeiro onde é mais fácil religar).
@@ -202,16 +202,15 @@
 %% ===========================================================================
 
 %% ---------------------------------------------------------------------------
-\begin{frame}{Pipeline de execução}
+\begin{frame}{Fluxo de execução}
     \begin{exampleblock}{Ambiente Julia~\cite{bezanson2017julia}}
         \texttt{PWF.jl}~\cite{pwfjl} (parser ANAREDE) $+$ \texttt{PowerModels.jl}~\cite{coffrin2018powermodels} (referência) $+$ \texttt{JuMP.jl}~\cite{lubin2023jump} (modelagem) $+$ \texttt{Ipopt.jl}~\cite{wachterBiegler2006ipopt} (\textit{solver} NLP).
     \end{exampleblock}
 
     \vspace{0.1cm}
     \begin{enumerate}
-        \item Leitura PWF com \texttt{add\_control\_data=true} (DOPC/DLIN);
-        \item Saneamento: maior componente conexa + barra \textit{slack} única;
-        \item Padronização das curvas de custo (\texttt{order=2});
+        \item Leitura PWF com \texttt{add\_control\_data=true} (estruturas de controle);
+        \item Adequação da topologia: maior componente conexa + barra \textit{slack} única;
         \item Construção da estrutura de referência (\texttt{build\_ref});
         \item Montagem do modelo JuMP (variáveis, fluxos, restrições);
         \item \texttt{optimize!} com \texttt{max\_iter=3000}, \texttt{tol=1e-5};
@@ -230,12 +229,12 @@
         \hline
         \textbf{Sigla} & \textbf{Motor} & \textbf{Tipo} & \textbf{Acrescenta} \\
         \hline
-        \example{F0} & PowerModels & FPO AC          & \textit{baseline} FPO \\
-        \example{F1} & PowerModels & FP AC           & \textit{baseline} FP \\
-        F2 & JuMP \textit{hand-built} & FP controlado & QLIM + VLIM \\
-        F3 & JuMP \textit{hand-built} & FP controlado & + CSCA \\
-        F4 & JuMP \textit{hand-built} & FP controlado & + CTAP \\
-        F5 & JuMP \textit{hand-built} & FP controlado & + DERA \\
+        \example{F0} & PowerModels & FPO AC          & referência de FPO \\
+        \example{F1} & PowerModels & FP AC           & referência de FP \\
+        F2 & JuMP (manual) & FP controlado & QLIM + VLIM \\
+        F3 & JuMP (manual) & FP controlado & + CSCA \\
+        F4 & JuMP (manual) & FP controlado & + CTAP \\
+        F5 & JuMP (manual) & FP controlado & + DERA \\
         \hline
     \end{tabular}
     \end{center}
@@ -249,8 +248,8 @@
     \textbf{Exemplo de F2 (QLIM + VLIM):}
 
     \begin{itemize}
-        \item Variáveis primárias: $V_i, \theta_i, p^g_k, q^g_k$ com limites caixa do PWF.
-        \item Folgas: $s^v_i$ em cada barra PV, $s^q_l$ em cada carga.
+        \item Variáveis primárias: $V_i, \theta_i, p^g_k, q^g_k$ com limites operacionais do PWF.
+        \item Folgas: $s^v_i$ em cada barra PV (QLIM), $s^q_l$ em cada carga (VLIM).
         \item Restrição de \textit{setpoint}: $V_i = V^{ref}_i + s^v_i$.
         \item Função objetivo \textit{soft-constraint}:
             \begin{equation*}
@@ -269,13 +268,13 @@
 %% ===========================================================================
 
 %% ---------------------------------------------------------------------------
-\begin{frame}{Bateria de testes -- 27 casos}
+\begin{frame}{Conjunto de casos de teste -- 27 casos}
     \begin{itemize}
         \item \textbf{Redes pedagógicas (3--9 barras):} \texttt{3bus}, \texttt{3busfrank}, \texttt{4busfrank\_vlim}, \texttt{5busfrank}, \texttt{9bus} e variantes (\texttt{\_DBSH}, \texttt{\_DCER}, \texttt{\_DCSC}, \texttt{\_DCline}, \texttt{\_csca}, \texttt{\_ctap}, \dots).
         \item \textbf{Médio porte:} \texttt{300bus}, \texttt{500bus}.
         \item \textbf{Recortes do SIN-Nordeste (PAR/PEL 2027--2031):} \texttt{caso\_red} (2\,599 barras), \texttt{caso\_red2} (1\,033 barras).
-        \item \textbf{\textit{Snapshot} integral do SIN:} \texttt{CASO\_VER\_MAXDIU} (13\,338 barras, PAR/PEL 2027--2031, Verão Máx.\ Diurna).
-        \item \textbf{Casos de \textit{stress}:} \texttt{test\_defaults}, \texttt{test\_line\_shunt}, \texttt{test\_system}.
+        \item \textbf{Cenário integral do SIN:} \texttt{CASO\_VER\_MAXDIU} (13\,338 barras, PAR/PEL 2027--2031, Verão Máx.\ Diurna).
+        \item \textbf{Casos de estresse:} \texttt{test\_defaults}, \texttt{test\_line\_shunt}, \texttt{test\_system}.
     \end{itemize}
 
     \vspace{0.3cm}
@@ -288,7 +287,7 @@
 \definecolor{statuskil}{RGB}{255,199,206}
 \definecolor{statusinv}{RGB}{244,176,132}
 
-\begin{frame}{Convergência global -- \emph{hand-built} ganham faixa}
+\begin{frame}{Convergência global -- formulações manuais ampliam a faixa}
     \footnotesize
     \begin{center}
     \renewcommand{\arraystretch}{1.1}
@@ -311,7 +310,7 @@
     \end{center}
 
     \vspace{0.2cm}
-    \successbox{\textbf{F2--F5 convergem em 23 casos}, vs.\ 18 de F1 e 15 de F0 (bateria completa).}
+    \successbox{\textbf{F2--F5 convergem em 23 casos}, vs.\ 18 de F1 e 15 de F0 (conjunto completo de casos).}
 \end{frame}
 
 %% ---------------------------------------------------------------------------
@@ -338,7 +337,7 @@
 
     \vspace{0.2cm}
     \begin{itemize}
-        \item \example{F0}: FPO empurra $V \to 1{,}1$\,p.u.\ (limite caixa).
+        \item \example{F0}: FPO empurra $V \to 1{,}1$\,p.u.\ (limite operacional).
         \item \example{F1}: ponto operacional ``natural'' do FP clássico.
         \item \example{F2}: próximo de F1, com folga $s^v$ residual.
         \item \example{F3--F5}: CSCA ajusta $b^{sh}_s$ $\Rightarrow$ tensões mais baixas.
@@ -374,7 +373,7 @@
 %% ---------------------------------------------------------------------------
 \begin{frame}{O caso SIN integral (\texttt{CASO\_VER\_MAXDIU})}
     \begin{alertblock}{Resultado negativo, mas relevante}
-        \emph{Nenhuma} das seis formulações converge dentro do orçamento (\texttt{max\_iter=3000}, \textit{wall time}):
+        \emph{Nenhuma} das seis formulações converge dentro do orçamento (\texttt{max\_iter=3000} e tempo limite de execução):
         \begin{itemize}
             \item F0, F2, F4 atingem o \textbf{limite de tempo} (KIL);
             \item F1, F3, F5 terminam em \textbf{LOCALLY\_INFEASIBLE}.
@@ -384,7 +383,7 @@
     \vspace{0.2cm}
     \begin{itemize}
         \item As formulações \emph{já partem} do ponto convergido do ANAREDE lido do PWF -- a inicialização \emph{não} é o gargalo.
-        \item Causa provável: fidelidade do modelo NLP reconstruído (HVDC, intercâmbios, controles remotos, múltiplas referências) + condicionamento com $\rho = 10^6$ nessa escala.
+        \item Causa provável: fidelidade do modelo NLP reconstruído (HVDC, controles remotos, múltiplas referências) + condicionamento com $\rho = 10^6$ nessa escala.
         \item \example{Boa notícia:} a infraestrutura (leitura PWF, \texttt{build\_ref}, modelo JuMP, chamada Ipopt) funciona corretamente em escala SIN -- não há \texttt{CRA} nem \texttt{ERR}.
         \item Obstáculo é \emph{numérico}, não estrutural.
     \end{itemize}
@@ -393,7 +392,7 @@
 %% ---------------------------------------------------------------------------
 \begin{frame}{Verificação auxiliar FDC: o mesmo SIN, em DC, converge}
     \begin{exampleblock}{FDC -- fluxo de potência DC (\texttt{solve\_dc\_pf}) sobre \texttt{CASO\_VER\_MAXDIU}}
-        Mesmo \textit{pipeline}, mesmo arquivo, mesma máquina: encerra em \example{\texttt{LOCALLY\_SOLVED}} em poucas iterações.
+        Mesmo fluxo de execução, mesmo arquivo, mesma máquina: encerra em \example{\texttt{LOCALLY\_SOLVED}} em poucas iterações.
     \end{exampleblock}
 
     \begin{columns}
@@ -431,13 +430,12 @@
 
 %% ---------------------------------------------------------------------------
 \begin{frame}{Síntese das contribuições}
-    \begin{exampleblock}{1. Faixa de convergência ampliada}
-        F2--F5 convergem em \emph{23 dos 27 casos}; em 9 casos, encontram solução factível enquanto ao menos uma das referências falha.
+    \begin{exampleblock}{1. Modelo de fluxo de potência com variáveis de controle}
+        Formulação de um fluxo de potência AC em JuMP que incorpora as ações de controle do ANAREDE --- limites de reativo (QLIM) e de tensão (VLIM), shunts chaveáveis (CSCA), taps de transformador (CTAP) e corte de carga (DERA) --- como variáveis de decisão e restrições, resolvido como um único problema de otimização.
     \end{exampleblock}
 
-    \begin{exampleblock}{2. \textit{Fingerprint} computacional dos controles}
-        \textit{Clusters} de equivalência reproduzem o efeito esperado de cada controle:
-        $\{$F1,F2$\}$ quando folgas saturam em zero; $\{$F3,F4$\}$ em redes com CSCA/CTAP ativo; F5 forma cluster próprio só em redes com margem reativa estreita.
+    \begin{exampleblock}{2. Faixa de convergência ampliada}
+        F2--F5 convergem em \emph{23 dos 27 casos}; em 9 casos, encontram solução factível enquanto ao menos uma das referências falha.
     \end{exampleblock}
 
     \begin{alertblock}{3. Fronteira numérica atual}
@@ -460,16 +458,16 @@
         \begin{column}{0.5\textwidth}
             \begin{exampleblock}{Trabalhos futuros}
                 \begin{itemize}
-                    \item Viabilizar SIN: verificação de resíduos, auditoria da tradução PWF$\to$JuMP e homotopia das penalidades $\rho$.
+                    \item Viabilizar SIN: verificação de resíduos, auditoria da tradução PWF$\to$JuMP e aumento gradual das penalidades $\rho$.
                     \item Discretizar CSCA/CTAP $\rightarrow$ MINLP (Juniper/Alpine).
-                    \item Acoplar F2--F5 ao \textit{ControlPowerFlow.jl} como \textit{oracle} de validação.
+                    \item Acoplar F2--F5 ao \textit{ControlPowerFlow.jl} como referência de validação.
                 \end{itemize}
             \end{exampleblock}
         \end{column}
     \end{columns}
 
     \vspace{0.4cm}
-    \simplebox{\textbf{Repositório do trabalho:} \texttt{powerflow/Codes/PF\_Formulation/}}
+    \simplebox{\textbf{Código:} formulações F0--F5 disponíveis no repositório interno do trabalho.}
 \end{frame}
 
 %% ---------------------------------------------------------------------------
