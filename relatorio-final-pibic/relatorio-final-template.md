@@ -16,15 +16,13 @@ o método utilizado apresentará os principais resultados e conclusões.
 
 Os objetivos já foram previamente estabelecidos na elaboração do projeto de
 pesquisa. No entanto, o desenvolvimento da revisão bibliográfica e do trabalho
-experimental pode levar &agrve; modificação destes ou à inclusão de novos
-objetivos. Desta forma, no relatõrio final todos os objetivos devem ser
-esclarecidos. Assim, copie os objetivos descritos no projeto inicial e
-classifique-os escrevendo entre parênteses após os objetivos as letras:
+experimental pode levar a modificação destes ou à inclusão de novos objetivos.
+Desta forma, no relatório final todos os objetivos devem ser esclarecidos.
+Assim, copie os objetivos descritos no projeto inicial e classifique-os
+escrevendo entre parênteses após os objetivos as letras:
 
-(T) – Para objetivo totalmente cumprido;
-(P) – Para objetivo parcialmente cumprido;
-(N) – Para objetivo, não cumprido;
-(O) – Para objetivo novo se existir
+(T) – Para objetivo totalmente cumprido; (P) – Para objetivo parcialmente
+cumprido; (N) – Para objetivo, não cumprido; (O) – Para objetivo novo se existir
 
 ### Resultados
 

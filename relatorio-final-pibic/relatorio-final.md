@@ -74,9 +74,9 @@ subsistema Nordeste (2.599 e 1.033 barras) e o caso integral do Sistema
 Interligado Nacional (13.338 barras). As formulações manuais convergiram em 23
 casos (85,2%), superando o PowerModels (18 em FP e 15 em FPO) e recuperando
 viabilidade em 9 redes críticas onde as referências falharam devido à rigidez de
-limites operacionais. Os resultados comprovam a viabilidade e a superioridade de
-convergência da modelagem por restrições flexíveis para estudos elétricos com
-controles do SIN em ambiente científico aberto.
+limites operacionais. Os resultados comprovam a viabilidade de convergência da
+modelagem por restrições flexíveis para estudos elétricos com controles do SIN
+em ambiente científico aberto.
 
 ## Objetivos Cumpridos
 
@@ -112,40 +112,40 @@ instruções:
    convergência e gaps de otimalidade.
 
 4. **Comparar desempenho em redes-teste IEEE usando a biblioteca pgLib-OPF**:
-   **(P)** _Cumprimento_: Parcialmente cumprido e redirecionado. A comparação
-   inicial em redes IEEE (como o sistema IEEE 300 barras) foi redirecionada para
-   incorporar o formato de dados ANAREDE (.pwf), permitindo avaliar topologias
-   brasileiras reais e casos pedagógicos com controle.
+   **(P)** _Cumprimento_: Objetivo parcialmente cumprido e redirecionado. A
+   comparação inicial em redes IEEE (como o sistema IEEE 300 barras) foi
+   redirecionada para incorporar o formato de dados ANAREDE (.pwf), permitindo
+   avaliar topologias brasileiras reais e casos pedagógicos com controle.
 
 5. **Verificar a robustez das relaxações em cenários com geração renovável
-   intermitente**: **(P)** _Cumprimento_: Parcialmente cumprido e aprofundado na
-   análise dos recortes do subsistema Nordeste (`caso_red` e `caso_red2`),
-   caracterizados pela massiva concentração de geração eólica e solar do ciclo
-   PAR/PEL 2027-2031 do ONS.
+   intermitente**: **(P)** _Cumprimento_: Objetivo parcialmente cumprido e
+   aprofundado na análise dos recortes do subsistema Nordeste (`caso_red` e
+   `caso_red2`), caracterizados pela massiva concentração de geração eólica e
+   solar do ciclo PAR/PEL 2027-2031 do ONS.
 
 **Novos Objetivos Incluídos Durante a Execução (O):**
 
-6. **Implementação de arquitetura incremental de ações de controle em JuMP**:
+1. **Implementação de arquitetura incremental de ações de controle em JuMP**:
    Desenvolver quatro formulações manuais aditivas em JuMP (F2 a F5)
    introduzindo QLIM+VLIM, CSCA, CTAP e DERA via restrições flexíveis
    (_soft-constraints_) com variáveis de folga penalizadas e solver Ipopt.
-   **(O)** _Cumprimento_: Cumprido, constituindo a principal contribuição do
-   Trabalho de Conclusão de Curso (TCC) do aluno.
+   **(O)** _Cumprimento_: Objetivo cumprido, constituindo a principal
+   contribuição do Trabalho de Conclusão de Curso (TCC) do aluno.
 
-7. **Integração de dados operacionais do formato ANAREDE via PWF.jl**:
+2. **Integração de dados operacionais do formato ANAREDE via PWF.jl**:
    Automatizar a leitura e a extração de dados de controle dos registros DOPC e
-   DLIN para estruturas indexadas no Julia. **(O)** _Cumprimento_: Cumprido
-   através de pipeline de leitura e tratamento de topologia.
+   DLIN para estruturas indexadas no Julia. **(O)** _Cumprimento_: Objetivo
+   cumprido através de pipeline de leitura e tratamento de topologia.
 
-8. **Bateria de testes em 27 casos e análise de clusters operativos**: Avaliar
+3. **Bateria de testes em 27 casos e análise de clusters operativos**: Avaliar
    sistematicamente o comportamento de convergência e o particionamento em
    clusters de equivalência em 27 redes, de 3 a 13.338 barras. **(O)**
-   _Cumprimento_: Cumprido.
+   _Cumprimento_: Objetivo cumprido.
 
-9. **Diagnóstico linearizado do SIN integral (FDC)**: Implementar fluxo
+4. **Diagnóstico linearizado do SIN integral (FDC)**: Implementar fluxo
    linearizado DC sobre o cenário integral do SIN (13.338 barras) para avaliar
-   factibilidade topológica. **(O)** _Cumprimento_: Cumprido, confirmando a
-   factibilidade do sistema linearizado.
+   factibilidade topológica. **(O)** _Cumprimento_: Objetivo cumprido,
+   confirmando a factibilidade do sistema linearizado.
 
 ## Resultados
 
@@ -154,11 +154,12 @@ de fluxo de potência (F0 a F5) e da formulação linearizada auxiliar (FDC) sob
 um conjunto padronizado de vinte e sete sistemas no formato PWF. O conjunto
 abrange redes pedagógicas de três a nove barras, sistemas de médio porte (300 e
 500 barras), dois recortes reais do subsistema Nordeste do Sistema Interligado
-Nacional (2.599 e 1.033 barras) e o cenário integral do SIN (13.338 barras). O
-critério de equivalência numérica para agrupamento em _clusters_ operativos foi
-fixado em $|\Delta| \le 10^{-4}$ p.u. simultaneamente sobre magnitude de tensão
-($V$), ângulo de fase ($\theta$), potências geradas ($P^g, Q^g$) e fluxos de
-potência nos ramos.
+Nacional (2.599 e 1.033 barras) e o cenário integral do SIN (13.338 barras).
+
+O critério de equivalência numérica para agrupamento em _clusters_ operativos
+foi fixado em $|\Delta| \le 10^{-4}$ p.u. simultaneamente sobre magnitude de
+tensão ($V$), ângulo de fase ($\theta$), potências geradas ($P^g, Q^g$) e fluxos
+de potência nos ramos.
 
 ### 1. Síntese Global de Convergência
 
@@ -234,20 +235,20 @@ subsistema Nordeste (`caso_red` e `caso_red2`), originados do cenário Verão
 2027/2028 Máxima Diurna do ONS (PAR/PEL 2027-2031). Os valores de geração,
 perdas e função objetivo estão normalizados em base 100 MVA.
 
-| Caso (.pwf)                | Form. | Status | Tempo (s) |    Função Objetivo    | $V_{\min}$ (p.u.) | $V_{\max}$ (p.u.) | $P^g$ (p.u.) | $Q^g$ (p.u.) | Perdas (p.u.) |
-| :------------------------- | :---: | :----: | :-------: | :-------------------: | :---------------: | :---------------: | :----------: | :----------: | :-----------: |
-| `caso_red` (2.599 barras)  |  F0   |  INF*  |   56,1    | $3,58 \times 10^{3}$  |        n/a        |        n/a        |     n/a      |     n/a      |      n/a      |
-|                            |  F1   |   OK   |    1,2    |         0,00          |       0,943       |       1,247       |    34,25     |    -16,02    |     6,97      |
-|                            |  F2   |   OK   |   14,7    | $9,06 \times 10^{4}$  |       0,935       |       1,226       |    34,46     |    -8,29     |     7,17      |
-|                            |  F3   |   OK   |   15,0    | $1,20 \times 10^{4}$  |       0,920       |       1,225       |    34,55     |    -6,19     |     7,27      |
-|                            |  F4   |   OK   |   180,1   | $4,78 \times 10^{2}$  |       0,499       |       1,269       |    34,78     |    +8,78     |     7,49      |
-|                            |  F5   |   OK   |   39,2    |          n/a          |       0,523       |       1,269       |    34,67     |    +6,23     |     7,38      |
-| `caso_red2` (1.033 barras) |  F0   |  INF   |    7,1    | $2,87 \times 10^{2}$  |       0,950       |       1,218       |     2,87     |    +0,33     |     1,82      |
-|                            |  F1   |  INF   |    7,3    |         0,00          |      -0,431       |       1,935       |     5,78     |    +3,92     |     8,12      |
-|                            |  F2   |   OK   |    3,1    | $4,94 \times 10^{2}$  |       0,950       |       1,231       |     2,89     |    +0,12     |     1,83      |
-|                            |  F3   |   OK   |    4,0    | $2,16 \times 10^{2}$  |       0,950       |       1,228       |     2,90     |    +0,17     |     1,84      |
-|                            |  F4   |   OK   |   125,3   | $9,56 \times 10^{-2}$ |       0,950       |       1,269       |     2,86     |    +2,40     |     1,80      |
-|                            |  F5   |   OK   |    5,6    |          n/a          |       0,950       |       1,269       |     2,87     |    +2,19     |     1,81      |
+| Caso (.pwf)              | Form. | Status | Tempo (s) |    Função Objetivo    | $V_{\min}$ (p.u.) | $V_{\max}$ (p.u.) | $P^g$ (p.u.) | $Q^g$ (p.u.) | Perdas (p.u.) |
+| :----------------------- | :---: | :----: | :-------: | :-------------------: | :---------------: | :---------------: | :----------: | :----------: | :-----------: |
+| caso_red (2.599 barras)  |  F0   |  INF*  |   56,1    | $3,58 \times 10^{3}$  |        n/a        |        n/a        |     n/a      |     n/a      |      n/a      |
+|                          |  F1   |   OK   |    1,2    |         0,00          |       0,943       |       1,247       |    34,25     |    -16,02    |     6,97      |
+|                          |  F2   |   OK   |   14,7    | $9,06 \times 10^{4}$  |       0,935       |       1,226       |    34,46     |    -8,29     |     7,17      |
+|                          |  F3   |   OK   |   15,0    | $1,20 \times 10^{4}$  |       0,920       |       1,225       |    34,55     |    -6,19     |     7,27      |
+|                          |  F4   |   OK   |   180,1   | $4,78 \times 10^{2}$  |       0,499       |       1,269       |    34,78     |    +8,78     |     7,49      |
+|                          |  F5   |   OK   |   39,2    |          n/a          |       0,523       |       1,269       |    34,67     |    +6,23     |     7,38      |
+| caso_red2 (1.033 barras) |  F0   |  INF   |    7,1    | $2,87 \times 10^{2}$  |       0,950       |       1,218       |     2,87     |    +0,33     |     1,82      |
+|                          |  F1   |  INF   |    7,3    |         0,00          |      -0,431       |       1,935       |     5,78     |    +3,92     |     8,12      |
+|                          |  F2   |   OK   |    3,1    | $4,94 \times 10^{2}$  |       0,950       |       1,231       |     2,89     |    +0,12     |     1,83      |
+|                          |  F3   |   OK   |    4,0    | $2,16 \times 10^{2}$  |       0,950       |       1,228       |     2,90     |    +0,17     |     1,84      |
+|                          |  F4   |   OK   |   125,3   | $9,56 \times 10^{-2}$ |       0,950       |       1,269       |     2,86     |    +2,40     |     1,80      |
+|                          |  F5   |   OK   |    5,6    |          n/a          |       0,950       |       1,269       |     2,87     |    +2,19     |     1,81      |
 
 _Tabela 3: Desempenho numérico e variáveis operativas agregadas sobre os
 recortes reduzidos do SIN._
@@ -282,7 +283,7 @@ linearizada FDC (`solve_dc_pf`) aplicada sobre o arquivo integral do SIN
 | Perdas ativas de transmissão            | 0,00 p.u. (desprezadas por premissa DC) |
 | Ângulo de fase mínimo ($\theta_{\min}$) | $-165,99^\circ$                         |
 | Ângulo de fase máximo ($\theta_{\max}$) | $+176,88^\circ$                         |
-| Fluxo ativo máximo em ramo ($           | p_{ij}                                  | $)  | 99,50 p.u. ($\approx 9,95$ GW) |
+| Fluxo ativo máximo em ramo ($p_{ij}$)   | 99,50 p.u. ($\approx 9,95$ GW)          |
 
 _Tabela 4: Métricas do fluxo de potência linearizado FDC sobre o cenário SIN de
 13.338 barras._
@@ -318,10 +319,7 @@ sistema.
 
 _Tabela 5: Perfil barra a barra de tensões e ângulos no caso 3bus_DCSC._
 
-Nota: As representações gráficas complementares (fluxograma metodológico, mapa
-de calor de convergência das 27 redes, diagrama unifilar do sistema 3bus_DCSC,
-curvas de perfil de tensão e evolução logarítmica da função objetivo nos casos
-reduzidos) constam documentadas no ANEXO técnico deste relatório.
+
 
 ## Discussão
 
@@ -441,9 +439,9 @@ foram gerados os seguintes produtos técnicos, científicos e tecnológicos:
    - _Orientador_: Prof. Dr. Lucas Silveira Melo
    - _Grau e Instituição_: Engenharia Elétrica, Centro de Tecnologia,
      Universidade Federal do Ceará (UFC), Fortaleza, 2026.
-   - _Descrição_: Monografia acadêmica de graduação completa em LaTeX,
-     documentando a fundamentação teórica, a formulação analítica das seis
-     variantes (F0 a F5), os testes nos 27 casos e a análise do cenário do SIN.
+   - _Descrição_: Monografia acadêmica de graduação completa, documentando a
+     fundamentação teórica, a formulação analítica das seis variantes (F0 a F5),
+     os testes nos 27 casos e a análise do cenário do SIN.
 
 2. **Protótipo de Software e Código-Fonte Aberto**:
    - Suíte computacional modular em linguagem Julia contendo:
@@ -462,31 +460,24 @@ foram gerados os seguintes produtos técnicos, científicos e tecnológicos:
      entre formulações e análises de casos de teste específicos ao longo do
      período de pesquisa.
 
-4. **Apresentação Técnica e Material de Defesa**:
-   - Apresentação completa em formato Beamer LaTeX (`Template_Beamer_UFC`)
-     contendo 50 lâminas técnicas estruturadas, diagramas metodológicos e
-     roteiro detalhado de fala para defesa perante banca examinadora.
-
-5. **Produção Bibliográfica em Elaboração**:
+4. **Produção Bibliográfica em Elaboração**:
    - Artigo técnico-científico em fase final de redação e consolidação para
      submissão a evento científico de referência na área de sistemas de potência
-     (Simpósio Brasileiro de Sistemas Elétricos — SBSE / Congresso Brasileiro de
-     Automática — CBA), abordando a comparação de convergência entre as
-     abordagens JuMP flexíveis e o PowerModels.jl.
+     (Simpósio Brasileiro de Sistemas Elétricos — SBSE), abordando a comparação
+     de convergência entre as abordagens JuMP flexíveis e o PowerModels.jl.
 
 ## Avaliação do Bolsista
 
 O bolsista Gabriel Rufino Montenegro demonstrou excelente desempenho, maturidade
-técnica e dedicação exemplar ao longo de todo o ciclo do projeto PIBIC
-2025/2026. O plano de trabalho foi cumprido em sua totalidade, tendo o estudante
-atingido com elevado rigor científico todas as metas teóricas e práticas
-pactuadas.
+técnica e dedicação ao longo de todo o ciclo do projeto PIBIC 2025/2026. O plano
+de trabalho foi cumprido em sua totalidade, tendo o estudante atingido com
+elevado rigor científico todas as metas teóricas e práticas pactuadas.
 
 Dentre as competências evidenciadas, destacam-se: (i) a sólida apropriação dos
 fundamentos matemáticos do fluxo de potência ótimo e das técnicas de relaxação
 não linear; (ii) o domínio avançado da linguagem Julia e das ferramentas JuMP e
 Ipopt, empregadas na codificação de formulações não convexas de alta
-complexidade; (iii) a notável autonomia e capacidade de resolução de problemas,
+complexidade; (iii) a autonomia e capacidade de resolução de problemas,
 exemplificada pela implementação de um orquestrador automatizado para
 processamento em lote de 27 redes elétricas; e (iv) o diálogo produtivo com
 bases de dados reais do ONS e formulação de análises inovadoras, como o
@@ -494,39 +485,7 @@ diagnóstico linearizado do SIN e a avaliação de recortes com fronteira híbri
 
 O bolsista manteve pontualidade rigorosa nos relatórios periódicos, demonstrou
 proatividade nas discussões de pesquisa e materializou os resultados do projeto
-em seu Trabalho de Conclusão de Curso (TCC), aprovado com louvor e recomendação
-para continuidade em nível de pós-graduação. Diante dos expressivos resultados
-científicos e tecnológicos entregues, a avaliação global do desempenho do
-bolsista é classificada no patamar de excelência máxima (nota 10,0).
-
----
-
-# Anexo: Identificação de Imagens e Figuras Complementares
-
-Conforme instrução do edital, as representações esquemáticas e gráficas citadas
-no corpo deste relatório encontram-se compiladas e disponíveis no documento de
-Trabalho de Conclusão de Curso
-(`Modelo_de_Trabalho_Acadêmico_UFC/documento.pdf`), correspondendo às seguintes
-referências:
-
-- **Figura 1: Fluxograma da Sequência de Execução das Formulações (Pipeline)** —
-  Ilustra as etapas encadeadas de leitura do PWF via PWF.jl, adequação
-  topológica (maior componente conexa e rebaixamento de múltiplas slacks),
-  construção da estrutura de dados indexada (`build_ref`), montagem simbólica
-  das restrições e expressões no JuMP, resolução numérica com Ipopt e exportação
-  para CSV.
-- **Figura 2: Mapa de Calor da Convergência Global** — Representação matricial
-  colorida (verde para OK, amarelo para INF, vermelho para KIL, laranja para INV
-  e cinza para ERR) ilustrando o status das seis formulações nas 27 redes
-  testadas e evidenciando a ampliação da faixa factível nas abordagens F2 a F5.
-- **Figura 3: Diagrama Unifilar da Rede Pedagógica `3bus_DCSC`** — Esquema da
-  rede triangular de três barras com duas barras de geração, uma barra de carga
-  e um elemento DCSC na linha 1-2.
-- **Figura 4: Perfil de Tensão por Barra no Caso `3bus_DCSC`** — Gráfico
-  comparativo de linhas destacando o deslocamento das tensões de F0 (teto de
-  1,10 p.u.), F1 (ponto base), F2 (ajuste fino com QLIM/VLIM) e F3 a F5 (redução
-  de tensão pela atuação do CSCA ajustando a susceptância shunt).
-- **Figura 5: Evolução Logarítmica da Função Objetivo nos Casos Reduzidos** —
-  Gráfico de barras verticais em escala logarítmica demonstrando a redução
-  drástica das folgas de penalização de F2 para F3 e F4 nos recortes `caso_red`
-  e `caso_red2` (atingindo $9,56 \times 10^{-2}$).
+em seu Trabalho de Conclusão de Curso (TCC), aprovado e com recomendação para
+continuidade em nível de pós-graduação. Diante dos resultados científicos e
+tecnológicos entregues, a avaliação global do desempenho do bolsista é
+classificada no patamar de excelência.
